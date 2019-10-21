@@ -1,0 +1,9 @@
+1. ADT Point - 100%
+2. ADT Array - 100%
+3. ADT Array DInamis - 100%
+4. Array Dinamis Pos- TC 17- Total 670/680
+5. Matriks - TC 77- Total 870/880
+6. Mesin Kata - 100%
+7. Queue - TC 16 - Total 170/180
+8. Stack - 100%
+9. List Linier - 100%
