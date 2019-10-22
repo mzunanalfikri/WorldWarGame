@@ -1,6 +1,3 @@
-//Nama  :Muhammad Zunan Alfikri
-//NIM   :13518019
-
 /* Definisi type boolean */
 
 #ifndef _BOOLEAN_h

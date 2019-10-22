@@ -21,8 +21,8 @@
 typedef int IdxType;  /* type indeks */
 typedef int ElType;   /* type elemen tabel */
 typedef struct { 
-  ElType TI[IdxMax+1]; /* memori tempat penyimpan elemen (container) */
-  int Neff; /* >=0, banyaknya elemen efektif */
+	ElType TI[IdxMax+1]; /* memori tempat penyimpan elemen (container) */
+	int Neff; /* >=0, banyaknya elemen efektif */
 } TabInt;
 /* Indeks yang digunakan [IdxMin..IdxMax] */
 /* Jika T adalah TabInt, cara deklarasi dan akses: */
@@ -249,8 +249,8 @@ void AddElUnik (TabInt * T, ElType X);
 /*      dan semua elemennya bernilai unik, tidak terurut */
 /* F.S. Jika tabel belum penuh, menambahkan X sbg elemen terakhir T, 
         jika belum ada elemen yang bernilai X. 
-    Jika sudah ada elemen tabel yang bernilai X maka I.S. = F.S. 
-    dan dituliskan pesan "nilai sudah ada" */
+		Jika sudah ada elemen tabel yang bernilai X maka I.S. = F.S. 
+		dan dituliskan pesan "nilai sudah ada" */
 /* Proses : Cek keunikan dengan sequential search dengan sentinel */
 /*          Kemudian tambahkan elemen jika belum ada */
 
