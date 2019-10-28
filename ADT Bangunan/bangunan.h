@@ -30,7 +30,19 @@ typedef struct {
 } Bangunan;
 
 /* Akses dengan Selektor */
-#define 
+#define Id(B)       (B).Id
+#define Type(B)     (B).Type
+#define Pasukan(B)  (B).Pasukan
+#define Level(B)    (B).Level
+#define A(B)        (B).A
+#define M(B)        (B).M
+#define P(B)        (B).P
+#define Posisi(B)   (B).Posisi
 
+void MakeBangunan (Bangunan * B, char type, POINT P);
+boolean IsNaikLevel (Bangunan B);
+void NaikLevel (Bangunan *B);
+void AddNextTurn (Bangunan * B);
+void PrintBangunan (Bangunan B);
 
 #endif
