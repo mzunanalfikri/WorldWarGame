@@ -7,7 +7,6 @@
 /* Konstruktor : create tabel kosong  */
 void MakeEmpty (TabInt * T){
 	int i;
-    TI(*T) = (Bangunan*)malloc((MaxEl(*T)+1)*sizeof(Bangunan));
     for(i=IdxMin;i<=IdxMax;i++){
 		Level(Elmt(*T,i))=ValUndef;
 	}
@@ -72,6 +71,3 @@ boolean IsFull (TabInt T){
 }
 /* Mengirimkan true jika tabel T penuh, mengirimkan false jika tidak */
 
-
-
-#endif

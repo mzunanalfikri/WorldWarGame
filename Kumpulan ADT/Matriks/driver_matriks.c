@@ -1,4 +1,4 @@
-#include "matriks.c"
+#include "matriks.h"
 #include <stdio.h>
 
 int main ()
@@ -22,10 +22,6 @@ int main ()
     //printf("M2 :\n");
     //TulisMATRIKS(M2);
     //printf("\n");
-
-    Transpose(&M1);
-    TulisMATRIKS(M1);
-    printf("\n");
 
     return 0;
 }
