@@ -8,11 +8,11 @@ boolean IsEmpty (Queue Q)
 {
     return (Head(Q) == 0 && Tail(Q) == 0);
 }
-boolean IsFull (Queue Q)
+boolean IsFullQueue (Queue Q)
 /* Mengirim true jika tabel penampung elemen Q sudah penuh */
-/* yaitu mengandung elemen sebanyak MaxEl */
+/* yaitu mengandung elemen sebanyak MaxElQueue */
 {
-    return ((Head(Q) - Tail(Q) + 1)% MaxEl(Q) == 0 );
+    return ((Head(Q) - Tail(Q) + 1)% MaxElQueue(Q) == 0 );
 }
 int NBElmt (Queue Q)
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika Q kosong. */
@@ -29,7 +29,7 @@ int NBElmt (Queue Q)
         }
         else // head leih besar dari tail
         {
-            return (MaxEl(Q) - (Head(Q) - Tail(Q)) +1);
+            return (MaxElQueue(Q) - (Head(Q) - Tail(Q)) +1);
         }
     }
 }
@@ -39,7 +39,7 @@ void CreateEmpty (Queue * Q, int Max)
 /* I.S. sembarang */
 /* F.S. Sebuah Q kosong terbentuk dan salah satu kondisi sbb: */
 /* Jika alokasi berhasil, Tabel memori dialokasi berukuran Max+1 */
-/* atau : jika alokasi gagal, Q kosong dg MaxEl=0 */
+/* atau : jika alokasi gagal, Q kosong dg MaxElQueue=0 */
 /* Proses : Melakukan alokasi, membuat sebuah Q kosong */
 {
     // Alokasi queue kedalam memori
@@ -48,13 +48,13 @@ void CreateEmpty (Queue * Q, int Max)
     // Mengeset queue yang akan dibuat
     if ((*Q).T != NULL)
     {
-        MaxEl(*Q) = Max;
+        MaxElQueue(*Q) = Max;
         Head(*Q) = 0;
         Tail(*Q) = 0;
     }
     else // Jika alokasi gagal
     {
-        MaxEl(*Q) = 0;
+        MaxElQueue(*Q) = 0;
     }
 }
 
@@ -62,9 +62,9 @@ void CreateEmpty (Queue * Q, int Max)
 void DeAlokasi(Queue * Q)
 /* Proses: Mengembalikan memori Q */
 /* I.S. Q pernah dialokasi */
-/* F.S. Q menjadi tidak terdefinisi lagi, MaxEl(Q) diset 0 */
+/* F.S. Q menjadi tidak terdefinisi lagi, MaxElQueue(Q) diset 0 */
 {
-    MaxEl(*Q) = 0;
+    MaxElQueue(*Q) = 0;
     free((*Q).T);
 }
 
@@ -83,7 +83,7 @@ void Add (Queue * Q, infotype X)
         Tail(*Q) = 1;
         InfoTail(*Q)=X;
     }
-    else if (Tail(*Q) != MaxEl(*Q))
+    else if (Tail(*Q) != MaxElQueue(*Q))
     {
         Tail(*Q)++;
         InfoTail(*Q)=X;
@@ -108,7 +108,7 @@ void Del (Queue * Q, infotype * X)
         Head(*Q)=0;
         Tail(*Q)=0;
     }
-    else if (Head(*Q) != MaxEl(*Q))
+    else if (Head(*Q) != MaxElQueue(*Q))
     {
         Head(*Q)++;
     }
