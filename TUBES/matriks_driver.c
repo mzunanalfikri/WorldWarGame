@@ -15,11 +15,15 @@ int main ()
     //printf("Input M2 :\n");
     //scanf("%d %d",&i,&j);
     //BacaMATRIKS(&M2,i,j);
-
+    Elmt(M1, 1, 1) = 'V';
+    Elmt(M1, 1, 2) = 'F';
     printf("M1 :\n");
     MakeMATRIKS(i,j,&M1);
     TulisMATRIKS(M1);
     printf("\n");
+    printf("%c", Elmt(M1, 1, 1));
+    printf("lalala\n");
+    printf("%c", 'X');
     //printf("M2 :\n");
     //TulisMATRIKS(M2);
     //printf("\n");
