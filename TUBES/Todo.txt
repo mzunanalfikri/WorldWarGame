@@ -1,0 +1,5 @@
+gcc arraydin.c bangunan.c listlinier.c main.c matriks.c point.c queue.c -o main
+
+BUat adt state
+infotype Q diisi apa?
+Adt Player?
