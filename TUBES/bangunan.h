@@ -44,7 +44,7 @@ typedef struct {
 #define Netral(B) (B).Netral
 
 /* ************** Prototype ************** */
-void MakeBangunan (Bangunan * B, char type, POINT P);
+Bangunan MakeBangunan (char type, POINT P);
 /* I.S. Sembarane */
 /* F.S. Membuat sebuah bangunan default level 1 (digunakan pada awal load file) */
 

@@ -2,7 +2,7 @@
 	#include <stdio.h>
 	#include "point.h"
 
-	POINT MakePOINT (float X, float Y)
+	POINT MakePOINT (int X, int Y)
     /* Membentuk sebuah POINT dari komponen-komponennya */
     {
         /* Kamus Lokal */
@@ -24,9 +24,9 @@
     /* F.S. P terdefinisi */
     {
         /* Kamus Lokal */
-        float X,Y;
+        int X,Y;
         /* Algoritma */
-        scanf("%f %f",&X,&Y);
+        scanf("%d %d",&X,&Y);
         *P = MakePOINT(X,Y);
     }
 
@@ -40,7 +40,7 @@
     {
         /* Kamus Lokal */
         /* Algoritma */
-        printf("(%.2f,%.2f)",Absis(P),Ordinat(P));
+        printf("(%d,%d)",Absis(P),Ordinat(P));
 
     }
 
@@ -124,7 +124,7 @@
         return (MakePOINT(Absis(P),Ordinat(P)+1));
     }
 
-    POINT PlusDelta (POINT P, float deltaX, float deltaY)
+    POINT PlusDelta (POINT P, int deltaX, int deltaY)
     /* Mengirim salinan P yang absisnya adalah Absis(P) + deltaX dan ordinatnya adalah Ordinat(P) + deltaY */
     {
         /* Kamus Lokal */
@@ -151,7 +151,7 @@
         }
     }
 
-    float Jarak0 (POINT P)
+    int Jarak0 (POINT P)
     /* Menghitung jarak P ke (0,0) */
     {
         /* Kamus Lokal */
@@ -159,7 +159,7 @@
         return sqrt((Absis(P)*Absis(P)) + (Ordinat(P)*Ordinat(P)));
     }
 
-    float Panjang (POINT P1, POINT P2)
+    int Panjang (POINT P1, POINT P2)
     /* Menghitung panjang garis yang dibentuk P1 dan P2 */
     /* Perhatikanlah bahwa di sini spec fungsi kurang baik sebab menyangkut ADT Garis. */
     /* Tuliskan spec fungsi yang lebih tepat. */
@@ -169,7 +169,7 @@
         return sqrt(((Absis(P1)-Absis(P2))*(Absis(P1)-Absis(P2))) + ((Ordinat(P1)-Ordinat(P2))*(Ordinat(P1)-Ordinat(P2))));
     }
 
-    void Geser (POINT *P, float deltaX, float deltaY)
+    void Geser (POINT *P, int deltaX, int deltaY)
     /* I.S. P terdefinisi */
     /* F.S. P digeser, absisnya sebesar deltaX dan ordinatnya sebesar deltaY */
     {
@@ -213,7 +213,7 @@
         *P = MirrorOf (*P, SbX);
     }
 
-    void Putar (POINT *P, float Sudut)
+    void Putar (POINT *P, int Sudut)
     /* I.S. P terdefinisi */
     /* F.S. P digeser sebesar Sudut derajat dengan sumbu titik (0,0) */
     {

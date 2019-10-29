@@ -5,14 +5,14 @@
 
 /* PROTOTYPE */
 /****************** TEST LIST KOSONG ******************/
-boolean IsEmpty (List L)
+boolean IsEmptyList (List L)
 /* Mengirim true jika list kosong */
 {
     return (First(L)==Nil);
 }
 
 /****************** PEMBUATAN LIST KOSONG ******************/
-void CreateEmpty (List *L)
+void CreateEmptyList (List *L)
 /* I.S. sembarang             */
 /* F.S. Terbentuk list kosong */
 {
@@ -105,7 +105,7 @@ void InsVLast (List *L, infotype X)
     P = Alokasi(X);
     if (P != Nil)
     {
-        if (IsEmpty(*L))
+        if (IsEmptyList(*L))
         {
             Next(P) = First(*L);
             First(*L) = P;
@@ -192,7 +192,7 @@ void InsertLast (List *L, address P)
 {
     address Last;
 
-    if (IsEmpty(*L))
+    if (IsEmptyList(*L))
     {
 		InsertFirst(L,P);
 	}
@@ -311,7 +311,7 @@ void PrintInfo (List L)
 
     printf("[");
 
-    if (!IsEmpty(L))
+    if (!IsEmptyList(L))
     {
         P = First(L);
         while (Next(P) != Nil)
@@ -375,14 +375,14 @@ void Konkat1 (List *L1, List *L2, List *L3)
 {
     address P;
 
-    CreateEmpty(L3);
+    CreateEmptyList(L3);
 
-    while (!IsEmpty(*L1))
+    while (!IsEmptyList(*L1))
     {
 		DelFirst(L1,&P);
 		InsertLast(L3,P);
 	}
-	while (!IsEmpty(*L2))
+	while (!IsEmptyList(*L2))
 	{
 		DelFirst(L2,&P);
 		InsertLast(L3,P);

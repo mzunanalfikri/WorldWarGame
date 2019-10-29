@@ -4,33 +4,35 @@
 #include<math.h>
 
 
-void MakeBangunan (Bangunan * B, char type, POINT P)
+Bangunan MakeBangunan (char type, POINT P)
 /* I.S. Sembarang */
 /* F.S. Membuat sebuah bangunan default level 1 (digunakan pada awal load file) */
 {
-    Level(*B) = 1;
-    Serang(*B) = false;
-    Pertahanan(*B) = false;
-    Type(*B) = type;
-    Posisi(*B) = P;
+    Bangunan B;
+    Level(B) = 1;
+    Serang(B) = false;
+    Pertahanan(B) = false;
+    Type(B) = type;
+    Posisi(B) = P;
     if (type == 'C'){
-        Pasukan(*B) = 40;
-        A(*B) = 10;
-        M(*B) = 40;
+        Pasukan(B) = 40;
+        A(B) = 10;
+        M(B) = 40;
     } else if (type == 'T') {
-        Pasukan(*B) = 30;
-        A(*B) = 5;
-        M(*B) = 20;
-        Pertahanan(*B) = true;
+        Pasukan(B) = 30;
+        A(B) = 5;
+        M(B) = 20;
+        Pertahanan(B) = true;
     } else if (type == 'F') {
-        Pasukan(*B) = 80;
-        A(*B) = 10;
-        M(*B) = 20;
+        Pasukan(B) = 80;
+        A(B) = 10;
+        M(B) = 20;
     } else if (type == 'V'){
-        Pasukan(*B) = 20;
-        A(*B) = 5;
-        M(*B) = 20;
+        Pasukan(B) = 20;
+        A(B) = 5;
+        M(B) = 20;
     }
+    return B;
 }
 
 boolean IsNaikLevel (Bangunan B)
