@@ -11,12 +11,13 @@ int main ()
     /* ALGORITMA */
     printf("Input M1 :\n");
     scanf("%d %d",&i,&j);
-    BacaMATRIKS(&M1,i,j);
+    //BacaMATRIKS(&M1,i,j);
     //printf("Input M2 :\n");
     //scanf("%d %d",&i,&j);
     //BacaMATRIKS(&M2,i,j);
 
     printf("M1 :\n");
+    MakeMATRIKS(i,j,&M1);
     TulisMATRIKS(M1);
     printf("\n");
     //printf("M2 :\n");

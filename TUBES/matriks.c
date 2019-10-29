@@ -112,19 +112,13 @@ void TulisMATRIKS (MATRIKS M)
     }
     printf("\n");
     for(indeks j=GetFirstIdxBrs(M);j<=NBrsEff(M);j++){
-        for(indeks k=GetFirstIdxKol(M);k<=(NKolEff(M)+2);k++){
-            if(k==1){
-                printf("*");
-            }else if (k==(NKolEff(M)+2)){
-                printf("*\n");
-            }else if (k==(NKolEff(M)+1)){
-                printf("%c",Elmt(M,j,k-1));
-            }else{
-                printf("%c ",Elmt(M,j,k-1));
-            }
+        printf("*");
+        for(indeks k=GetFirstIdxKol(M);k<=(NKolEff(M));k++){
+            printf("%c", Elmt(M, j, k));
         }
+        printf("*\n");
     }
-    printf("\n");
+    //printf("\n");
     for(int l=1;l<=NKolEff(M)+2;l++){
         printf("*");
     }
