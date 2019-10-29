@@ -24,9 +24,9 @@ typedef struct
 {
   ElType *TI; /* memori tempat penyimpan elemen (container) */
   int Neff;   /* >=0, banyaknya elemen efektif */
-  int MaxEl;  /* ukuran elemen */
+  int MaxElArray;  /* ukuran elemen */
 } TabInt;
-/* Indeks yang digunakan [IdxMin..MaxEl] */
+/* Indeks yang digunakan [IdxMin..MaxElArray] */
 /* Jika T adalah TabInt, cara deklarasi dan akses: */
 /* Deklarasi : T : TabInt */
 /* Maka cara akses:
@@ -42,26 +42,26 @@ typedef struct
 #define Neff(T) (T).Neff
 #define TI(T) (T).TI
 #define Elmt(T, i) (T).TI[(i)]
-#define MaxEl(T) (T).MaxEl
+#define MaxElArray(T) (T).MaxElArray
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create tabel kosong  */
-void MakeEmptyArray(TabInt *T, int maxel);
-/* I.S. T sembarang, maxel > 0 */
-/* F.S. Terbentuk tabel T kosong dengan kapasitas maxel + 1 */
+void MakeEmptyArray(TabInt *T, int MaxElArray);
+/* I.S. T sembarang, MaxElArray > 0 */
+/* F.S. Terbentuk tabel T kosong dengan kapasitas MaxElArray + 1 */
 
-void Dealokasi(TabInt *T);
+void DealokasiArray(TabInt *T);
 /* I.S. T terdefinisi; */
-/* F.S. TI(T) dikembalikan ke system, MaxEl(T)=0; Neff(T)=0 */
+/* F.S. TI(T) dikembalikan ke system, MaxElArray(T)=0; Neff(T)=0 */
 
 /* ********** SELEKTOR (TAMBAHAN) ********** */
 /* *** Banyaknya elemen *** */
-int NbElmt(TabInt T);
+int NbElmtArray(TabInt T);
 /* Mengirimkan banyaknya elemen efektif tabel */
 /* Mengirimkan nol jika tabel kosong */
 /* *** Daya tampung container *** */
 
-int MaxElement(TabInt T);
+int MaxElArrayement(TabInt T);
 /* Mengirimkan maksimum elemen yang dapat ditampung oleh tabel */
 /* *** Selektor INDEKS *** */
 
@@ -84,11 +84,11 @@ boolean IsIdxEff(TabInt T, IdxType i);
 
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test tabel kosong *** */
-boolean IsEmpty(TabInt T);
+boolean IsEmptyArray(TabInt T);
 /* Mengirimkan true jika tabel T kosong, mengirimkan false jika tidak */
 /* *** Test tabel penuh *** */
 
-boolean IsFull(TabInt T);
+boolean IsFullArray(TabInt T);
 /* Mengirimkan true jika tabel T penuh, mengirimkan false jika tidak */
 
 ElType SumTab(TabInt T);
