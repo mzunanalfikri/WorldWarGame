@@ -60,13 +60,13 @@ IdxType GetLastIdx(TabInt T)
 }
 
 /* ********** Test Indeks yang valid ********** */
-boolean IsIdxValid(TabInt T, IdxType i)
+boolean IsIdxValidArray(TabInt T, IdxType i)
 /* Mengirimkan true jika i adalah indeks yang valid utk ukuran tabel */
 /* yaitu antara indeks yang terdefinisi utk container*/
 {
     return (i>= IdxMin && i<=MaxElArray(T));
 }
-boolean IsIdxEff(TabInt T, IdxType i)
+boolean IsIdxEffArray(TabInt T, IdxType i)
 /* Mengirimkan true jika i adalah indeks yang terdefinisi utk tabel */
 /* yaitu antara FirstIdx(T)..LastIdx(T) */
 {

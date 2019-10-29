@@ -18,7 +18,7 @@ void MakeMATRIKS (int NB, int NK, MATRIKS * M)
     
 }
 /* *** Selektor "DUNIA MATRIKS" *** */
-boolean IsIdxValid (int i, int j)
+boolean IsIdxValidMatriks (int i, int j)
 /* Mengirimkan true jika i, j adalah indeks yang valid untuk matriks apa pun */
 {
     return ((i>=BrsMin) && (i<=BrsMax) && (j>=KolMin) && (j<=KolMax));
@@ -43,7 +43,7 @@ indeks GetLastIdxKol (MATRIKS M)
 {
     return (KolMin + NKolEff(M) - 1);
 }
-boolean IsIdxEff (MATRIKS M, indeks i, indeks j)
+boolean IsIdxEffMatriks (MATRIKS M, indeks i, indeks j)
 /* Mengirimkan true jika i, j adalah indeks efektif bagi M */
 {
     return ((i>0) && (j>0) && (i <= GetLastIdxBrs(M)) && (j <= GetLastIdxKol(M)));
@@ -81,7 +81,7 @@ void BacaMATRIKS (MATRIKS * M, int NB, int NK){
     ElType x;
 
     /* ALGORITMA */
-    if (IsIdxValid(NB,NK))
+    if (IsIdxValidMatriks(NB,NK))
     {
         MakeMATRIKS(NB,NK,M);
         for (i=BrsMin;i<=NB;i++)
