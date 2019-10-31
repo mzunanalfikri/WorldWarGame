@@ -1,5 +1,22 @@
-gcc arraydin.c bangunan.c listlinier.c main.c matriks.c point.c queue.c -o main
+gcc arraydin.c bangunan.c listlinier.c main.c matriks.c point.c queue.c stackt.c -o main
 
 BUat adt state
 infotype Q diisi apa?
 Adt Player?
+
+List ADT :
+1. ADT Point (point biasa)
+2. ADT Array Dinamis Eksplisit (array of bangunan)
+3. ADT matriks (buat cetak peta doang)
+4. ADT Mesin karakter dan mesin kata 
+5. ADT Queue (queue of int di map ke skill)
+6. ADT Stack (stack of state)
+7. ADT Graph
+8. ADT Bangunan (propertinya kyk di spek)
+9. ADT state 
+  Isinya : array bangunan
+           Player 1
+           Player 2
+
+10. ADT Player : 
+    Isinya (Q, List indeks bangunan, Turn (boolean))

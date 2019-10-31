@@ -6,7 +6,18 @@
 #define queue_H
 
 #include "boolean.h"
+/* ======================================
+INTEGER DIPETAKAN KE SKILL :
+1 --> Instant Upgrade
+2 --> shield (BONUS)
+3 --> Extra Turn
+4 --> Attack Up (BONUS)
+5 --> Critical Hit (BONUS)
+6 --> Instant Reinforcement
+7 --> Barrage
 
+
+=========================================== */
 /* Konstanta untuk mendefinisikan addressQ tak terdefinisi */
 
 /* Definisi elemen dan addressQ */
