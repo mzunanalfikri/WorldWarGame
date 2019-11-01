@@ -129,7 +129,3 @@ void GrowTab(TabBangunan *T, int num)
     TI(*T) = (ElType *) realloc(TI(*T), (MaxElArray(*T)+1+num) * sizeof(int));
     MaxElArray(*T) = MaxElArray(*T) + num;
 }
-
-void CopyTab(TabBangunan Tin, TabBangunan * Thsl);
-/* I.S Thsl sembarang */
-/* F.S Terbentuk salinan Tin ke Thsl */

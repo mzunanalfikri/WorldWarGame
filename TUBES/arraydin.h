@@ -109,8 +109,5 @@ void GrowTab(TabBangunan *T, int num);
 /* I.S. Tabel sudah terdefinisi */
 /* F.S. Ukuran tabel bertambah sebanyak num */
 
-void CopyTab(TabBangunan Tin, TabBangunan * Thsl);
-/* I.S Thsl sembarang */
-/* F.S Terbentuk salinan Tin ke Thsl */
 
 #endif
