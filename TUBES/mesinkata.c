@@ -17,8 +17,13 @@ void IgnoreBlank(){
    I.S. : CC sembarang
    F.S. : CC ≠ BLANK */
 
-void STARTKATA(char NamaFile[]);
-/* I.S. : CC sembarang, 'NamaFile' terdefinisi dan ada filenya
+void STARTKATA(char Default[]){
+	START(Default);
+	IgnoreBlank();
+	if (!EOP) {
+		SalinKata(); }
+	}
+/* I.S. : CC sembarang, 'Default' terdefinisi dan ada filenya
    F.S. : CKata adalah kata yang sudah diakuisisi,
           CC karakter pertama sesudah karakter terakhir kata */
 
@@ -82,6 +87,4 @@ int KataToInt(Kata DefKata) {
 	return nilai; }
 
 char CommandToChar(Kata CKata) {
-	int i;
-	i = CKata.Length;
-	return CKata.TabKata[i]; }
+	return CKata.TabKata[1]; }
