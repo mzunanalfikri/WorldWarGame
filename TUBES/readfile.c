@@ -6,6 +6,7 @@
 
 void ReadKonfigurasiFile(State* S){
 	
+	/* KAMUS  */
 	
 	Kata BrsBangunan,KolBangunan,TypeBangunan,JmlBangunan,height,width;
 	/* Kata Status (Untuk keterhubungan bangunan) */
@@ -24,7 +25,12 @@ void ReadKonfigurasiFile(State* S){
 	char konfigurasifile; /* Nama Konfigurasi File (dalam txt) */
 	TabBangunan arrBangunan;
 	
+	
+	/* Kondisi Awal */
 	idxBangunan = -1;
+	
+	/* ALGORITMA */
+	
 	STARTKATA(konfigurasifile);	/* Nama Konfigurasi File (dalam txt) */
 	
 	while (!EOP){
