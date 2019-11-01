@@ -16,7 +16,7 @@ void MakeEmptyArray(TabBangunan *T, int maxel)
 {
     Neff(*T) = 0;
     MaxElArray(*T) = maxel; 
-    TI(*T) = (ElType *) malloc ((maxel+1) * sizeof(int));
+    TI(*T) = (ElTypeArr *) malloc ((maxel+1) * sizeof(int));
 }
 
 void DealokasiArray(TabBangunan *T)
@@ -30,7 +30,7 @@ void DealokasiArray(TabBangunan *T)
 
 /* ********** SELEKTOR (TAMBAHAN) ********** */
 /* *** Banyaknya elemen *** */
-int NbElmtArray(TabBangunan T)
+int NbElmtTabArray(TabBangunan T)
 /* Mengirimkan banyaknya elemen efektif tabel */
 /* Mengirimkan nol jika tabel kosong */
 /* *** Daya tampung container *** */
@@ -99,22 +99,22 @@ void CopyTab(TabBangunan Tin, TabBangunan *Tout)
     Neff(*Tout) = Neff(Tin);
     IdxType i = GetFirstIdx(Tin);
     for (i ; i <= GetLastIdx(Tin) ; i++){
-        Elmt(*Tout, i) = Elmt(Tin, i);
+        ElmtTab(*Tout, i) = ElmtTab(Tin, i);
     }
 }
 
 
 /* ********** MENAMBAH DAN MENGHAPUS ELEMEN DI AKHIR ********** */
 /* *** Menambahkan elemen terakhir *** */
-void AddAsLastEl(TabBangunan *T, ElType X)
+void AddAsLastEl(TabBangunan *T, ElTypeArr X)
 /* Proses: Menambahkan X sebagai elemen terakhir tabel */
 /* I.S. Tabel T boleh kosong, tetapi tidak penuh */
 /* F.S. X adalah elemen terakhir T yang baru */
 {
     if (IsEmptyArray(*T)) {
-        Elmt(*T, GetFirstIdx(*T)) = X;  
+        ElmtTab(*T, GetFirstIdx(*T)) = X;  
     } else {
-        Elmt(*T, GetLastIdx(*T)+1) = X;
+        ElmtTab(*T, GetLastIdx(*T)+1) = X;
     }
     Neff(*T) += 1;
 }
@@ -126,6 +126,6 @@ void GrowTab(TabBangunan *T, int num)
 /* I.S. Tabel sudah terdefinisi */
 /* F.S. Ukuran tabel bertambah sebanyak num */
 {
-    TI(*T) = (ElType *) realloc(TI(*T), (MaxElArray(*T)+1+num) * sizeof(int));
+    TI(*T) = (ElTypeArr *) realloc(TI(*T), (MaxElArray(*T)+1+num) * sizeof(int));
     MaxElArray(*T) = MaxElArray(*T) + num;
 }
