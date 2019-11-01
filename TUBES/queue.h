@@ -15,8 +15,6 @@ INTEGER DIPETAKAN KE SKILL :
 5 --> Critical Hit (BONUS)
 6 --> Instant Reinforcement
 7 --> Barrage
-
-
 =========================================== */
 /* Konstanta untuk mendefinisikan addressQ tak terdefinisi */
 
@@ -74,5 +72,9 @@ void Del (Queue * Q, infotype * X);
 /* I.S. Q tidak mungkin kosong */
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer; 
         Q mungkin kosong */
+
+void CopyQueue (Queue Qin, Queue * Qout);
+/* I.S. Qout Sembarang */
+/* F.S. Terbentuk Qout sama persis dengan Qin */
 
 #endif

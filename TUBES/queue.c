@@ -118,3 +118,7 @@ void Del (Queue * Q, infotype * X)
     }
 }
 
+void CopyQueue (Queue Qin, Queue * Qout);
+/* I.S. Qout Sembarang */
+/* F.S. Terbentuk Qout sama persis dengan Qin */
+

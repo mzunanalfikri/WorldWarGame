@@ -1,3 +1,5 @@
+/* ADT PLAYER UNTUK identitas player */
+
 
 #ifndef PLAYER_H
 #define PLAYER_H
@@ -9,17 +11,19 @@
 typedef struct{
     List ListIdxBangunan;
     Queue QSkill;
-    boolean Turn;
-} PLAYER;
+    boolean Turn; //True if this player on turn
+} Player;
 
 /* *** Selektor *** */
-#define ListIdxBangunan(Player) (Player).ListIdxBangunan
-#define QSkill(Player) (Player).QSkill
-#define Turn(Player) (Player).Turn
+#define ListIdxBangunan(P) (P).ListIdxBangunan
+#define QSkill(P) (P).QSkill
+#define Turn(P) (P).Turn
 
-void MakePlayer(PLAYER *P);
+void MakePlayer(Player *P);
 /* Membentuk Player Kosong yang siap diisi */
 
+void CopyPlayer(Player Pin, Player *Phsl);
+/* assign player Phsl dengan player Pin */
 
 
 #endif
