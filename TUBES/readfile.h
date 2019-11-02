@@ -1,8 +1,8 @@
 /* File: readfile.h */
 /* Definisi Mesin Kata: Model Akuisisi Versi I */
 
-#ifndef __readfile_H__
-#define __readfile_H__
+#ifndef __READFILE_H__
+#define __READFILE_H__
 
 #include "mesinkar.h"
 #include "mesinkata.h"

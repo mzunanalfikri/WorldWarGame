@@ -1,12 +1,11 @@
 /* Pembacaan Konfigurasi File */
 
 #include "readfile.h"
-#include "state.h"
 #include <stdio.h>
 
 void ReadKonfigurasiFile(State* S){
 	
-	/* KAMUS  */
+	/*  KAMUS */
 	
 	Kata BrsBangunan,KolBangunan,TypeBangunan,JmlBangunan,height,width;
 	/* Kata Status (Untuk keterhubungan bangunan) */
@@ -21,17 +20,18 @@ void ReadKonfigurasiFile(State* S){
 	int TinggiPeta,LebarPeta,JumlahBangunan;
 	int i,k,l;
 	/* int j,AttStatus; (Untuk keterhubungan bangunan */
-	int idxBangunan;
-	char konfigurasifile; /* Nama Konfigurasi File (dalam txt) */
+	int idxBangunan; /* Nama Konfigurasi File (dalam txt) */
 	TabBangunan arrBangunan;
 	
 	
 	/* Kondisi Awal */
+	
 	idxBangunan = -1;
 	
-	/* ALGORITMA */
 	
-	STARTKATA(konfigurasifile);	/* Nama Konfigurasi File (dalam txt) */
+	/* ALGORITMA */ 
+	
+	STARTKATA("konfigurasifile.txt");	/* Nama Konfigurasi File (dalam txt) */
 	
 	while (!EOP){
 		CopyKata(&height, CKata);
