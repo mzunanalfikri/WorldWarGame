@@ -1,11 +1,15 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>
-#include "point.h"
-#include "bangunan.h"
 #include "arraydin.h"
+#include "bangunan.h"
 #include "listlinier.h"
+#include "matriks.h"
+#include "player.h"
+#include "point.h"
 #include "queue.h"
+#include "stackt.h"
+#include "state.h"
 
 int main() {
     printf("skuyy");

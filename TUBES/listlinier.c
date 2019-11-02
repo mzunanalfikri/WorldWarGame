@@ -388,3 +388,7 @@ void Konkat1 (List *L1, List *L2, List *L3)
 		InsertLast(L3,P);
 	}
 }
+
+void CopyList(List Lin, List * Lout);
+/* I.S. Lout sembarang */
+/* F.S Terbentuk salinan Lin di Lout */

@@ -12,9 +12,9 @@
 #define KolMax 20
 
 typedef int indeks; /* indeks baris, kolom */
-typedef char ElType; 
+typedef char ElTypeMatriks; 
 typedef struct { 
-	ElType Mem[BrsMax+1][KolMax+1];
+	ElTypeMatriks Mem[BrsMax+1][KolMax+1];
     int NBrsEff; /* banyaknya/ukuran baris yg terdefinisi */
 	int NKolEff; /* banyaknya/ukuran kolom yg terdefinisi */
 } MATRIKS;
@@ -32,7 +32,7 @@ void MakeMATRIKS (int NB, int NK, MATRIKS * M);
 /* *** Selektor *** */
 #define NBrsEff(M) (M).NBrsEff
 #define NKolEff(M) (M).NKolEff
-#define Elmt(M,i,j) (M).Mem[(i)][(j)]
+#define ElmtMatriks(M,i,j) (M).Mem[(i)][(j)]
 
 /* *** Selektor "DUNIA MATRIKS" *** */
 boolean IsIdxValidMatriks (int i, int j);
@@ -49,7 +49,7 @@ indeks GetLastIdxKol (MATRIKS M);
 /* Mengirimkan indeks kolom terbesar M */
 boolean IsIdxEffMatriks (MATRIKS M, indeks i, indeks j);
 /* Mengirimkan true jika i, j adalah indeks efektif bagi M */
-ElType GetElmtDiagonal (MATRIKS M, indeks i);
+ElTypeMatriks GetElmtMatriksDiagonal (MATRIKS M, indeks i);
 /* Mengirimkan elemen M(i,i) */
 
 /* ********** Assignment  MATRIKS ********** */

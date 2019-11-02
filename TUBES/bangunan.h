@@ -44,7 +44,7 @@ typedef struct {
 #define Netral(B) (B).Netral
 
 /* ************** Prototype ************** */
-Bangunan MakeBangunan (char type, POINT P);
+Bangunan MakeBangunanLv1 (char type, POINT P);
 /* I.S. Sembarane */
 /* F.S. Membuat sebuah bangunan default level 1 (digunakan pada awal load file) */
 
@@ -59,6 +59,9 @@ void NaikLevel (Bangunan *B);
 void AddNextTurn (Bangunan * B);
 /* I.S Bangunan terdefinisi */
 /* F.S Bangunan betambah pasukannya sesuai level seteah turn */
+
+void CopyBangunan (Bangunan BIn, Bangunan * BHsl );
+/*Melakukan assignment MHsl dgn MIn */
 
 void PrintBangunan (Bangunan B);
 /* I.S Sembarang */

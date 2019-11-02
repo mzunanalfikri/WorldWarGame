@@ -4,7 +4,7 @@
 #include<math.h>
 
 
-Bangunan MakeBangunan (char type, POINT P)
+Bangunan MakeBangunanLv1 (char type, POINT P)
 /* I.S. Sembarang */
 /* F.S. Membuat sebuah bangunan default level 1 (digunakan pada awal load file) */
 {
@@ -116,6 +116,19 @@ void AddNextTurn (Bangunan * B)
     }
 }
 
+void CopyBangunan (Bangunan BIn, Bangunan * BHsl){
+    Type(*BHsl) = Type(BIn);
+    Pasukan(*BHsl) = Pasukan(BIn);
+    Level(*BHsl) = Level(BIn);
+    A(*BHsl) = A(BIn);
+    M(*BHsl) = M(BIn);
+    Pertahanan(*BHsl) = Pertahanan(BIn);
+    Absis(Posisi(*BHsl)) = Absis(Posisi(BIn));
+    Ordinat(Posisi(*BHsl)) = Ordinat(Posisi(BIn));
+    Serang(*BHsl) = Serang(BIn);
+    Netral(*BHsl) = Netral(BIn); 
+}
+
 void PrintBangunan (Bangunan B)
 /* I.S Sembarang */
 /* F.S Tercetak di layar info bangunannya */
@@ -130,3 +143,4 @@ void PrintBangunan (Bangunan B)
         printf("Village (%d,%d) %d lv. %d\n", Absis(Posisi(B)), Ordinat(Posisi(B)), Pasukan(B), Level(B));
     }
 }
+

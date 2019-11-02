@@ -10,16 +10,16 @@ Muhammd Zunan Alfikri
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create tabel kosong  */
-void MakeEmptyArray(TabInt *T, int maxel)
+void MakeEmptyArray(TabBangunan *T, int maxel)
 /* I.S. T sembarang, maxel > 0 */
 /* F.S. Terbentuk tabel T kosong dengan kapasitas maxel + 1 */
 {
     Neff(*T) = 0;
     MaxElArray(*T) = maxel; 
-    TI(*T) = (ElType *) malloc ((maxel+1) * sizeof(int));
+    TI(*T) = (ElTypeArr *) malloc ((maxel+1) * sizeof(int));
 }
 
-void DealokasiArray(TabInt *T)
+void DealokasiArray(TabBangunan *T)
 /* I.S. T terdefinisi; */
 /* F.S. TI(T) dikembalikan ke system, MaxEl(T)=0; Neff(T)=0 */
 {
@@ -30,7 +30,7 @@ void DealokasiArray(TabInt *T)
 
 /* ********** SELEKTOR (TAMBAHAN) ********** */
 /* *** Banyaknya elemen *** */
-int NbElmtArray(TabInt T)
+int NbElmtTabArray(TabBangunan T)
 /* Mengirimkan banyaknya elemen efektif tabel */
 /* Mengirimkan nol jika tabel kosong */
 /* *** Daya tampung container *** */
@@ -38,21 +38,21 @@ int NbElmtArray(TabInt T)
     return Neff(T);
 }
 
-int MaxElement(TabInt T)
+int MaxElement(TabBangunan T)
 /* Mengirimkan maksimum elemen yang dapat ditampung oleh tabel */
 /* *** Selektor INDEKS *** */
 {
     return MaxElArray(T);
 }
 
-IdxType GetFirstIdx(TabInt T)
+IdxType GetFirstIdx(TabBangunan T)
 /* Prekondisi : Tabel T tidak kosong */
 /* Mengirimkan indeks elemen T pertama */
 {
     return IdxMin;
 }
 
-IdxType GetLastIdx(TabInt T)
+IdxType GetLastIdx(TabBangunan T)
 /* Prekondisi : Tabel T tidak kosong */
 /* Mengirimkan indeks elemen T terakhir */
 {
@@ -60,13 +60,13 @@ IdxType GetLastIdx(TabInt T)
 }
 
 /* ********** Test Indeks yang valid ********** */
-boolean IsIdxValidArray(TabInt T, IdxType i)
+boolean IsIdxValidArray(TabBangunan T, IdxType i)
 /* Mengirimkan true jika i adalah indeks yang valid utk ukuran tabel */
 /* yaitu antara indeks yang terdefinisi utk container*/
 {
     return (i>= IdxMin && i<=MaxElArray(T));
 }
-boolean IsIdxEffArray(TabInt T, IdxType i)
+boolean IsIdxEffArray(TabBangunan T, IdxType i)
 /* Mengirimkan true jika i adalah indeks yang terdefinisi utk tabel */
 /* yaitu antara FirstIdx(T)..LastIdx(T) */
 {
@@ -75,13 +75,13 @@ boolean IsIdxEffArray(TabInt T, IdxType i)
 
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test tabel kosong *** */
-boolean IsEmptyArray(TabInt T)
+boolean IsEmptyArray(TabBangunan T)
 /* Mengirimkan true jika tabel T kosong, mengirimkan false jika tidak */
 /* *** Test tabel penuh *** */
 {
     return (Neff(T) == 0);
 }
-boolean IsFullArray(TabInt T)
+boolean IsFullArray(TabBangunan T)
 /* Mengirimkan true jika tabel T penuh, mengirimkan false jika tidak */
 {
     return (Neff(T) == MaxElArray(T));
@@ -90,7 +90,7 @@ boolean IsFullArray(TabInt T)
 
 
 /* ********** OPERASI LAIN ********** */
-void CopyTab(TabInt Tin, TabInt *Tout)
+void CopyTab(TabBangunan Tin, TabBangunan *Tout)
 /* I.S. Tin terdefinisi tidak kosong, Tout sembarang */
 /* F.S. Tout berisi salinan dari Tin (identik, Neff dan MaxEl sama) */
 /* Proses : Menyalin isi Tin ke Tout */
@@ -99,33 +99,33 @@ void CopyTab(TabInt Tin, TabInt *Tout)
     Neff(*Tout) = Neff(Tin);
     IdxType i = GetFirstIdx(Tin);
     for (i ; i <= GetLastIdx(Tin) ; i++){
-        Elmt(*Tout, i) = Elmt(Tin, i);
+        ElmtTab(*Tout, i) = ElmtTab(Tin, i);
     }
 }
 
 
 /* ********** MENAMBAH DAN MENGHAPUS ELEMEN DI AKHIR ********** */
 /* *** Menambahkan elemen terakhir *** */
-void AddAsLastEl(TabInt *T, ElType X)
+void AddAsLastEl(TabBangunan *T, ElTypeArr X)
 /* Proses: Menambahkan X sebagai elemen terakhir tabel */
 /* I.S. Tabel T boleh kosong, tetapi tidak penuh */
 /* F.S. X adalah elemen terakhir T yang baru */
 {
     if (IsEmptyArray(*T)) {
-        Elmt(*T, GetFirstIdx(*T)) = X;  
+        ElmtTab(*T, GetFirstIdx(*T)) = X;  
     } else {
-        Elmt(*T, GetLastIdx(*T)+1) = X;
+        ElmtTab(*T, GetLastIdx(*T)+1) = X;
     }
     Neff(*T) += 1;
 }
 
 
 /* ********* MENGUBAH UKURAN ARRAY ********* */
-void GrowTab(TabInt *T, int num)
+void GrowTab(TabBangunan *T, int num)
 /* Proses : Menambahkan max element sebanyak num */
 /* I.S. Tabel sudah terdefinisi */
 /* F.S. Ukuran tabel bertambah sebanyak num */
 {
-    TI(*T) = (ElType *) realloc(TI(*T), (MaxElArray(*T)+1+num) * sizeof(int));
+    TI(*T) = (ElTypeArr *) realloc(TI(*T), (MaxElArray(*T)+1+num) * sizeof(int));
     MaxElArray(*T) = MaxElArray(*T) + num;
 }
