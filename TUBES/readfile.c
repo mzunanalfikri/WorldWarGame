@@ -17,7 +17,7 @@ int main(){
 	int i,j,k,l,AttStatus;
 	
 	
-	STARTKATA(readfile.c);
+	STARTKATA();
 	
 	
 	while (!EOP){
@@ -28,11 +28,11 @@ int main(){
 		LebarPeta = KataToInt(width);
 		MakeMATRIKS(TinggiPeta,LebarPeta,&Peta);
 		for (k = 1; k<= LebarPeta; k++) {
-			Elmt(Peta,1,k) = '*'; 
-			Elmt(Peta,TinggiPeta,k) = '*'; }
+			ElmtMatriks(Peta,1,k) = '*'; 
+			ElmtMatriks(Peta,TinggiPeta,k) = '*'; }
 		for (l = 1; l<= TinggiPeta; l++) {
-			Elmt(Peta,l,1) = '*'; 
-			Elmt(Peta,l,LebarPeta) = '*'; }
+			ElmtMatriks(Peta,l,1) = '*'; 
+			ElmtMatriks(Peta,l,LebarPeta) = '*'; }
 		ADVKATA();
 		CopyKata(&JmlBangunan, CKata);
 		JumlahBangunan = KataToInt(JmlBangunan);
@@ -46,7 +46,7 @@ int main(){
 			ADVKATA();
 			CopyKata(&KolBangunan, CKata);
 			Absis(KoordinatBangunan) = KataToInt(KolBangunan);
-			Elmt(Peta,Absis(KoordinatBangunan),Ordinat(KoordinatBangunan)) = CharTypeBangunan;
+			ElmtMatriks(Peta,Absis(KoordinatBangunan),Ordinat(KoordinatBangunan)) = CharTypeBangunan;
 			ADVKATA();
 			if (CharTypeBangunan == 'C') {
 				MakeBangunanLv1(C, KoordinatBangunan); }
