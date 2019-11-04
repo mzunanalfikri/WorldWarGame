@@ -118,7 +118,19 @@ void Del (Queue * Q, infotype * X)
     }
 }
 
-void CopyQueue (Queue Qin, Queue * Qout);
-/* I.S. Qout Sembarang */
-/* F.S. Terbentuk Qout sama persis dengan Qin */
+void CopyQueue (Queue Q1 ,Queue *Q2){
+    Queue Temp;
+    infotype X,Y;
+    CreateEmpty(&Temp,NBElmt(Q1));
+    CreateEmpty(&Q2,NBElmt(Q1));
+    while(!IsEmpty(Q1)){
+        Del(&Q1,&X);
+        Add(&Temp,X);
+    }
+    while(!IsEmpty(Temp)){
+        Del(&Temp,&Y);
+        Add(&Q2,Y);
+    }
+}
+
 

@@ -1,24 +1,41 @@
 /* Pembacaan Konfigurasi File */
 
-#include "mesinkar.h"
-#include "mesinkata.h"
-#include "matriks.h"
-#include "bangunan.h"
+#include "readfile.h"
+#include <stdio.h>
 
-int main(){
+void ReadKonfigurasiFile(State* S){
 	
+	/*  KAMUS */
 	
-	Kata BrsBangunan,KolBangunan,TypeBangunan,JmlBangunan,Status,height,width;
+	Kata BrsBangunan,KolBangunan,TypeBangunan,JmlBangunan,height,width;
+	/* Kata Status (Untuk keterhubungan bangunan) */
 	MATRIKS Peta;
+	Bangunan Castel,Tower,Fort,Village;
 	char CharTypeBangunan;
-	char C,V,T,F;
+	char C = '\0';
+	char V = '\0';
+	char T = '\0';
+	char F = '\0';
 	POINT KoordinatBangunan;
 	int TinggiPeta,LebarPeta,JumlahBangunan;
-	int i,j,k,l,AttStatus;
+	int i,k,l;
+	/* int j,AttStatus; (Untuk keterhubungan bangunan */
+	int idxBangunan; /* Nama Konfigurasi File (dalam txt) */
+	TabBangunan arrBangunan;
 	
 	
+<<<<<<< HEAD
 	STARTKATA();
+=======
+	/* Kondisi Awal */
+>>>>>>> 6c7c20c9a2d2a5ded6b9e2385ed62f87d33f85f8
 	
+	idxBangunan = -1;
+	
+	
+	/* ALGORITMA */ 
+	
+	STARTKATA("konfigurasifile.txt");	/* Nama Konfigurasi File (dalam txt) */
 	
 	while (!EOP){
 		CopyKata(&height, CKata);
@@ -36,6 +53,7 @@ int main(){
 		ADVKATA();
 		CopyKata(&JmlBangunan, CKata);
 		JumlahBangunan = KataToInt(JmlBangunan);
+		MakeEmptyArray(&arrBangunan, JumlahBangunan-1);
 		ADVKATA();
 		for (i = 1; i <= JumlahBangunan; i++) {
 			CopyKata(&TypeBangunan, CKata);
@@ -46,29 +64,37 @@ int main(){
 			ADVKATA();
 			CopyKata(&KolBangunan, CKata);
 			Absis(KoordinatBangunan) = KataToInt(KolBangunan);
-			ElmtMatriks(Peta,Absis(KoordinatBangunan),Ordinat(KoordinatBangunan)) = CharTypeBangunan;
-			ADVKATA();
 			if (CharTypeBangunan == 'C') {
-				MakeBangunanLv1(C, KoordinatBangunan); }
+				Castel = MakeBangunanLv1(C, KoordinatBangunan);
+				idxBangunan++;
+				ElmtTab(arrBangunan,idxBangunan) = Castel; }
 			else if (CharTypeBangunan == 'V') {
-				MakeBangunanLv1(V, KoordinatBangunan); }
+				Village = MakeBangunanLv1(V, KoordinatBangunan); 
+				idxBangunan++;
+				ElmtTab(arrBangunan,idxBangunan) = Village; }
 			else if (CharTypeBangunan == 'F') {
-				MakeBangunanLv1(F, KoordinatBangunan); }
+				Fort = MakeBangunanLv1(F, KoordinatBangunan); 
+				idxBangunan++;
+				ElmtTab(arrBangunan,idxBangunan) = Fort;}
 			else if (CharTypeBangunan == 'T') {
-				MakeBangunanLv1(T, KoordinatBangunan); } }
+				Tower = MakeBangunanLv1(T, KoordinatBangunan); 
+				idxBangunan++;
+				ElmtTab(arrBangunan,idxBangunan) = Tower; }
+			ElmtMatriks(Peta,Absis(KoordinatBangunan),Ordinat(KoordinatBangunan)) = CharTypeBangunan;
+			ADVKATA(); }
+		
+		/* Keterhubungan antar Peta 
 		for (i = 1; i <= JumlahBangunan; i++) {
 			for (j = 1; j <= JumlahBangunan; j++) {
 				CopyKata(&Status, CKata);
 				AttStatus = KataToInt(Status);
 				if (AttOrNot == 0) {
-					/* Tidak Terhubung(Gabisa nyerang) */ }
-				else if (AttOrNot == 1) {
-					/* Terhubung(Bisa nyerang) */ } } 
-				ADVKATA(); }			
+					Tidak Terhubung(Gabisa nyerang)  } 
+			else if (AttOrNot == 1) {
+					 Terhubung(Bisa nyerang) } } 
+			ADVKATA(); }			*/
 	}
-	
 	TulisMATRIKS(Peta);
-	
-	return 0;
+
 	}
 

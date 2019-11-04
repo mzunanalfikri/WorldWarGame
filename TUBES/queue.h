@@ -72,9 +72,8 @@ void Del (Queue * Q, infotype * X);
 /* I.S. Q tidak mungkin kosong */
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer; 
         Q mungkin kosong */
-
-void CopyQueue (Queue Qin, Queue * Qout);
-/* I.S. Qout Sembarang */
-/* F.S. Terbentuk Qout sama persis dengan Qin */
+void CopyQueue (Queue Q1 ,Queue *Q2);
+/* I.S. Q2 Sembarang */
+/* F.S. Terbentuk Q2 sama persis dengan Q1 */
 
 #endif
