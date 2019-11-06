@@ -117,19 +117,21 @@ void Del (Queue * Q, infotype * X)
         Head(*Q) = 1;
     }
 }
-
+void PrintQueue (Queue Q){
+    infotype X;
+    while(!IsEmpty(Q)){
+        Del(&Q,&X);
+        printf("%d ", X);
+    }
+    printf("\n");
+    
+}
 void CopyQueue (Queue Q1 ,Queue *Q2){
-    Queue Temp;
-    infotype X,Y;
-    CreateEmpty(&Temp,NBElmt(Q1));
-    CreateEmpty(&Q2,NBElmt(Q1));
+    infotype X;
+    CreateEmpty(Q2,NBElmt(Q1));
     while(!IsEmpty(Q1)){
         Del(&Q1,&X);
-        Add(&Temp,X);
-    }
-    while(!IsEmpty(Temp)){
-        Del(&Temp,&Y);
-        Add(&Q2,Y);
+        Add(Q2,X);
     }
 }
 

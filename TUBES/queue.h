@@ -75,5 +75,6 @@ void Del (Queue * Q, infotype * X);
 void CopyQueue (Queue Q1 ,Queue *Q2);
 /* I.S. Q2 Sembarang */
 /* F.S. Terbentuk Q2 sama persis dengan Q1 */
+void PrintQueue (Queue Q);
 
 #endif

@@ -56,5 +56,7 @@ void Pop (Stack * S, infotype* X);
 /* Menghapus X dari Stack S. */
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
+void PrintStack(Stack S);
+void CopyStack(Stack Sin, Stack *Sout);
 
 #endif

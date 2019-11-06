@@ -1,4 +1,6 @@
 #include "stackt.h"
+#include "stdio.h"
+#include "stdlib.h"
 
 
 /* *** Konstruktor/Kreator *** */
@@ -41,4 +43,27 @@ void Pop (Stack * S, infotype* X)
 {
     *X = InfoTop(*S);
     Top(*S)--;
+}
+void PrintStack(Stack S){
+    infotype X;
+    while(!IsEmptyStack(S)){
+        Pop(&S,&X);
+        printf("%d " , X);
+    }
+    printf("\n");
+
+}
+void CopyStack(Stack Sin, Stack *Sout){
+    Stack Temp;
+    infotype X,Y;
+    CreateEmptyStack(Sout);
+    CreateEmptyStack(&Temp);
+    while(!IsEmptyStack(Sin)){
+        Pop(&Sin,&X);
+        Push(&Temp,X);
+    }
+    while(!IsEmptyStack(Temp)){
+        Pop(&Temp,&Y);
+        Push(Sout,Y);
+    }
 }

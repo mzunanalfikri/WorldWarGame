@@ -389,6 +389,13 @@ void Konkat1 (List *L1, List *L2, List *L3)
 	}
 }
 
-void CopyList(List Lin, List * Lout);
+void CopyList(List Lin, List * Lout){
+    addresslist P;
+    CreateEmptyList(Lout);
+    while(!IsEmptyList(Lin)){
+        DelFirst(&Lin,&P);
+		InsertLast(Lout,P);
+    }
+}
 /* I.S. Lout sembarang */
 /* F.S Terbentuk salinan Lin di Lout */
