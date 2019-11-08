@@ -9,8 +9,14 @@ int main (){
     Add(&Q,3);
     Add(&Q,4);
     Add(&Q,5);
+    printf("Q awal : \n");
     PrintQueue(Q);
     CopyQueue(Q,&Qc);
+    // Add(&Qc, 44);
+    Add(&Qc, 3);
+    printf("Qc hasil : \n");
     PrintQueue(Qc);
+    printf("Q akhir : \n");
     PrintQueue(Q);
+    // PrintQueue(Qc);
 }

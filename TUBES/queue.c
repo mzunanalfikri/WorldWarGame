@@ -127,10 +127,12 @@ void PrintQueue (Queue Q){
     
 }
 void CopyQueue (Queue Q1 ,Queue *Q2){
+    // printf("ini prosedur copy\n");
     infotype X;
-    CreateEmpty(Q2,NBElmt(Q1));
+    CreateEmpty(Q2,10);
     while(!IsEmpty(Q1)){
         Del(&Q1,&X);
+        // printf("%d  ", X);
         Add(Q2,X);
     }
 }
