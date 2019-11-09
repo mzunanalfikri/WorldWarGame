@@ -389,13 +389,23 @@ void Konkat1 (List *L1, List *L2, List *L3)
 	}
 }
 
-void CopyList(List Lin, List * Lout){
-    addresslist P;
-    CreateEmptyList(Lout);
-    while(!IsEmptyList(Lin)){
-        DelFirst(&Lin,&P);
-		InsertLast(Lout,P);
-    }
-}
+void CopyList(List Lin, List * Lout)
 /* I.S. Lout sembarang */
 /* F.S Terbentuk salinan Lin di Lout */
+{
+    addresslist P;
+    infotype temp;
+    CreateEmptyList(Lout);
+    P = First(Lin);
+    while(P!=NULL){
+        InsVLast(Lout, Info(P));
+        P=Next(P);
+    }
+
+    // while(!IsEmptyList(Lin)){
+    //     DelVFirst(&Lin, &temp);
+    //     InsVLast(Lout, temp);
+    //     //DelFirst(&Lin,&P);
+	// 	//InsertLast(Lout,P);
+    // }
+}
