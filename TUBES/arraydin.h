@@ -91,9 +91,10 @@ boolean IsEmptyArray(TabBangunan T);
 boolean IsFullArray(TabBangunan T);
 /* Mengirimkan true jika tabel T penuh, mengirimkan false jika tidak */
 
-ElTypeArr SumTab(TabBangunan T);
-/* Menghasilkan hasil penjumlahan semua elemen T */
-/* Jika T kosong menghasilkan 0 */
+void CopyTab(TabBangunan Tin, TabBangunan *Tout);
+/* I.S. Tin terdefinisi tidak kosong, Tout sembarang */
+/* F.S. Tout berisi salinan dari Tin (identik, Neff dan MaxEl sama) */
+/* Proses : Menyalin isi Tin ke Tout */
 
 /* ********** MENAMBAH DAN MENGHAPUS ELEMEN DI AKHIR ********** */
 /* *** Menambahkan elemen terakhir *** */

@@ -96,10 +96,14 @@ void CopyTab(TabBangunan Tin, TabBangunan *Tout)
 /* Proses : Menyalin isi Tin ke Tout */
 {
     MakeEmptyArray(Tout, MaxElArray(Tin));
+    printf("lalala\n");
     Neff(*Tout) = Neff(Tin);
     IdxType i = GetFirstIdx(Tin);
+    //PrintBangunan(ElmtTab(Tin, 1));
     for (i ; i <= GetLastIdx(Tin) ; i++){
-        ElmtTab(*Tout, i) = ElmtTab(Tin, i);
+        //ElmtTab(*Tout, i) = ElmtTab(Tin, i);
+        //PrintBangunan(ElmtTab(Tin, i));
+        CopyBangunan(ElmtTab(Tin, i), &ElmtTab(*Tout,i));
     }
 }
 
