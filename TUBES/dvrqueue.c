@@ -16,6 +16,7 @@ int main (){
     Add(&Qc, 3);
     printf("Qc hasil : \n");
     PrintQueue(Qc);
+    PrintQueue(Qc);
     printf("Q akhir : \n");
     PrintQueue(Q);
     // PrintQueue(Qc);

@@ -22,6 +22,9 @@ typedef struct{
 void MakePlayer(Player *P);
 /* Membentuk Player Kosong yang siap diisi */
 
+void PrintPlayer(Player P);
+/* Untuk debugging */
+
 void CopyPlayer(Player Pin, Player *Phsl);
 /* assign player Phsl dengan player Pin */
 

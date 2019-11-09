@@ -323,6 +323,7 @@ void PrintInfo (List L)
     }
 
     printf("]");
+    printf("\n");
 }
 
 int NbElmtList (List L)
