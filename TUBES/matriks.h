@@ -12,12 +12,22 @@
 #define KolMax 20
 
 typedef int indeks; /* indeks baris, kolom */
-typedef char ElTypeMatriks; 
+typedef struct {
+    char tipe;
+    int id;
+} IsiMatriks;
+
+typedef IsiMatriks ElTypeMatriks; 
+
 typedef struct { 
 	ElTypeMatriks Mem[BrsMax+1][KolMax+1];
     int NBrsEff; /* banyaknya/ukuran baris yg terdefinisi */
 	int NKolEff; /* banyaknya/ukuran kolom yg terdefinisi */
 } MATRIKS;
+
+#define Id(S) (S).id
+#define Tipe(S) (S).tipe
+
 /* NBrsEff <= 1 dan NKolEff <= 1 */
 /* Indeks matriks yang digunakan: [BrsMin..BrsMax][KolMin..KolMax] */
 /* Memori matriks yang dipakai selalu di "ujung kiri atas" */

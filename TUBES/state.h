@@ -16,7 +16,7 @@ typedef struct {
 #define Player1(S) (S).Player1
 #define Player2(S) (S).Player2
 
-void MakeState(State *S);
+void MakeState(State *S, int JumlahBangunan);
 /* I.S. State S Sembarang */
 /* F.S State S telah siap diisi */
 

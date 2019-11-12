@@ -1,12 +1,17 @@
 #include "matriks.h"
 #include <stdio.h>
+#include "listlinier.h"
+#include "state.h"
+
+void CetakMatiksWarna(MATRIKS M, State S){
+
+}
 
 int main ()
 {
     /* KAMUS */
     MATRIKS M1,M2,MH;
     indeks i,j;
-    ElType x;
 
     /* ALGORITMA */
     printf("Input M1 :\n");
@@ -18,13 +23,11 @@ int main ()
     
     printf("M1 :\n");
     MakeMATRIKS(i,j,&M1);
-    Elmt(M1, 1, 1) = 'V';
-    Elmt(M1, 1, 2) = 'F';
+    Tipe(ElmtMatriks(M1, 1, 1)) = 'V';
+    Tipe(ElmtMatriks(M1, 1, 2)) = 'F';
     TulisMATRIKS(M1);
-    printf("\n");
-    printf("%c", Elmt(M1, 1, 1));
-    printf("lalala\n");
-    printf("%c", 'X');
+    printf("finish\n");
+    
     //printf("M2 :\n");
     //TulisMATRIKS(M2);
     //printf("\n");

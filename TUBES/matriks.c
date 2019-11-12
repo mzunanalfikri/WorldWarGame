@@ -12,7 +12,7 @@ void MakeMATRIKS (int NB, int NK, MATRIKS * M)
     NKolEff(*M) = NK;
     for(indeks i=BrsMin;i<=NBrsEff(*M);i++){
         for(indeks j=KolMin;j<=NKolEff(*M);j++){
-            ElmtMatriks(*M,i,j) = ' ';
+            Tipe(ElmtMatriks(*M,i,j)) = ' ';
         }
     }
     
@@ -23,16 +23,19 @@ boolean IsIdxValidMatriks (int i, int j)
 {
     return ((i>=BrsMin) && (i<=BrsMax) && (j>=KolMin) && (j<=KolMax));
 }
+
 indeks GetFirstIdxBrs (MATRIKS M)
 /* Mengirimkan indeks baris terkecil M */
 {
     return (BrsMin);
 }
+
 indeks GetFirstIdxKol (MATRIKS M)
 /* Mengirimkan indeks kolom terkecil M */
 {
     return (KolMin);
 }
+
 indeks GetLastIdxBrs (MATRIKS M)
 /* Mengirimkan indeks baris terbesar M */
 {
@@ -43,11 +46,13 @@ indeks GetLastIdxKol (MATRIKS M)
 {
     return (KolMin + NKolEff(M) - 1);
 }
+
 boolean IsIdxEffMatriks (MATRIKS M, indeks i, indeks j)
 /* Mengirimkan true jika i, j adalah indeks efektif bagi M */
 {
     return ((i>0) && (j>0) && (i <= GetLastIdxBrs(M)) && (j <= GetLastIdxKol(M)));
 }
+
 ElTypeMatriks GetElmtMatriksDiagonal (MATRIKS M, indeks i)
 /* Mengirimkan elemen M(i,i) */
 {
@@ -69,7 +74,8 @@ void CopyMATRIKS (MATRIKS MIn, MATRIKS * MHsl)
     {
         for (j=KolMin;j<=NKolEff(*MHsl);j++)
         {
-            ElmtMatriks(*MHsl,i,j) = ElmtMatriks(MIn,i,j);
+            Tipe(ElmtMatriks(*MHsl,i,j)) = Tipe(ElmtMatriks(MIn,i,j));
+            Id(ElmtMatriks(*MHsl,i,j)) = Id(ElmtMatriks(MIn,i,j));
         }
     }
 }
@@ -114,7 +120,7 @@ void TulisMATRIKS (MATRIKS M)
     for(indeks j=GetFirstIdxBrs(M);j<=NBrsEff(M);j++){
         printf("*");
         for(indeks k=GetFirstIdxKol(M);k<=(NKolEff(M));k++){
-            printf("%c", ElmtMatriks(M, j, k));
+            printf("%c", Tipe(ElmtMatriks(M, j, k)));
         }
         printf("*\n");
     }
