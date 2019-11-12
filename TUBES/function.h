@@ -15,16 +15,22 @@
 #include "stackt.h"
 #include "state.h"
 
-state InstantUpgrade (State *S);
 
-state Shield (State *S); //bonus
+/* **** SKILL **** */
+void InstantUpgrade (State *S);
 
-state ExtraTurn (State *S);
+void Shield (State *S); //bonus
 
-state AttackUp (State *S); //bonus
+void ExtraTurn (State *S);
 
-state CriticalHit (State *S);
+void AttackUp (State *S); //bonus
 
-state InstantReinforcement (State *S);
+void CriticalHit (State *S);
 
-state Barrage (State *S);
+void InstantReinforcement (State *S);
+
+void Barrage (State *S);
+
+/* **** ATTACK MECHANISM *** */
+
+#endif
