@@ -14,7 +14,14 @@
 #include "readfile.h"
 #include "stackt.h"
 #include "state.h"
+#include "pcolor.h"
+#include<stdio.h>
+#include<stdlib.h>
 
+
+// Fungsi untuk cetak matriks dengan warna
+void CetakMatiksWarna(MATRIKS M, State S);
+/* Mencetak di layar matriks dengan warnanya */
 
 /* **** SKILL **** */
 void InstantUpgrade (State *S);

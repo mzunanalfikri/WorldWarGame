@@ -55,6 +55,11 @@ addresslist Search (List L, infotype X);
 /* Jika ada, mengirimkan addresslist elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
 
+boolean SearchB (List L, infotype X);
+/* Mencari apakah ada elemen list dengan Info(P)= X */
+/* Jika ada, mengirimkan true. */
+/* Jika tidak ada, mengirimkan false */
+
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
 /*** PENAMBAHAN ELEMEN ***/
 void InsVFirst (List *L, infotype X);

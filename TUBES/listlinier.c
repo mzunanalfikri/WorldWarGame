@@ -77,6 +77,33 @@ addresslist Search (List L, infotype X)
     return P;
 }
 
+boolean SearchB (List L, infotype X)
+/* Mencari apakah ada elemen list dengan Info(P)= X */
+/* Jika ada, mengirimkan true. */
+/* Jika tidak ada, mengirimkan false */
+{
+     // KAMUS LOKAL
+    addresslist P;
+    boolean Found;
+
+    // ALGORITMA
+    P = First(L);
+    Found = false;
+
+    while ((P != NULL) && (!Found))
+    {
+        if (Info(P) == X)
+        {
+            Found = true;
+        }
+        else
+        {
+            P = Next(P);
+        }
+    }
+    return Found;
+}
+
 /****************** PRIMITIF BERDASARKAN NULLAI ******************/
 /*** PENAMBAHAN ELEMEN ***/
 void InsVFirst (List *L, infotype X)
