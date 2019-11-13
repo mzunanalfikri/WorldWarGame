@@ -10,6 +10,9 @@
 #include "queue.h"
 #include "stackt.h"
 #include "state.h"
+#include "graph.h"
+#include "pcolor.h"
+#include "function.h"
 
 int main() {
     printf("skuyy");

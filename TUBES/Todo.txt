@@ -1,4 +1,4 @@
-gcc arraydin.c bangunan.c listlinier.c main.c matriks.c point.c queue.c stackt.c state.c player.c -o main
+gcc arraydin.c bangunan.c listlinier.c main.c matriks.c point.c queue.c stackt.c state.c player.c pcolor.c function.c -o main
 
 BUat adt state
 infotype Q diisi apa?
