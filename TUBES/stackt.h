@@ -6,24 +6,23 @@
 #define stackt_H
 
 #include "boolean.h"
+#include "state.h"
 
-
-#define MaxElStack 100
+#define MaxState 100
 /* Nil adalah stack dengan elemen kosong . */
 /* Karena indeks dalam bhs C dimulai 0 maka tabel dg indeks 0 tidak dipakai */
 
-typedef int infotype;
 typedef int address;   /* indeks tabel */
 
 /* Contoh deklarasi variabel bertype stack dengan ciri TOP : */
 /* Versi I : dengan menyimpan tabel dan alamat top secara eksplisit*/
 typedef struct {
-	infotype T[MaxElStack+1]; /* tabel penyimpan elemen */
+	State T[MaxState +1]; /* tabel penyimpan elemen */
 	address TOP;  /* alamat TOP: elemen puncak */
-} Stack;
+} StackState;
 /* Definisi stack S kosong : S.TOP = Nil */
-/* Elemen yang dipakai menyimpan nilai Stack T[1]..T[MaxElStack] */
-/* Jika S adalah Stack maka akses elemen : */
+/* Elemen yang dipakai menyimpan nilai State T[1]..T[MaxState] */
+/* Jika S adalah StackState maka akses elemen : */
    /* S.T[(S.TOP)] untuk mengakses elemen TOP */
    /* S.TOP adalah alamat elemen TOP */
 
@@ -33,30 +32,31 @@ typedef struct {
 
 /* ************ Prototype ************ */
 /* *** Konstruktor/Kreator *** */
-void CreateEmptyStack (Stack *S);
+void CreateEmptyStackState (StackState *S);
 /* I.S. sembarang; */
-/* F.S. Membuat sebuah stack S yang kosong berkapasitas MaxElStack */
-/* jadi indeksnya antara 1.. MaxElStack+1 karena 0 tidak dipakai */
+/* F.S. Membuat sebuah stack S yang kosong berkapasitas MaxElStackState */
+/* jadi indeksnya antara 1.. MaxElStackState+1 karena 0 tidak dipakai */
 /* Ciri stack kosong : TOP bernilai Nil */
 
 /* ************ Predikat Untuk test keadaan KOLEKSI ************ */
-boolean IsEmptyStack (Stack S);
-/* Mengirim true jika Stack kosong: lihat definisi di atas */
-boolean IsFullStack (Stack S);
+boolean IsEmptyStackState (StackState S);
+/* Mengirim true jika StackState kosong: lihat definisi di atas */
+
+boolean IsFullStackState (StackState S);
 /* Mengirim true jika tabel penampung nilai elemen stack penuh */
 
-/* ************ Menambahkan sebuah elemen ke Stack ************ */
-void Push (Stack * S, infotype X);
-/* Menambahkan X sebagai elemen Stack S. */
+/* ************ Menambahkan sebuah elemen ke StackState ************ */
+void PushState (StackState * S, infotype X);
+/* Menambahkan X sebagai elemen StackState S. */
 /* I.S. S mungkin kosong, tabel penampung elemen stack TIDAK penuh */
 /* F.S. X menjadi TOP yang baru,TOP bertambah 1 */
 
-/* ************ Menghapus sebuah elemen Stack ************ */
-void Pop (Stack * S, infotype* X);
-/* Menghapus X dari Stack S. */
+/* ************ Menghapus sebuah elemen StackState ************ */
+void PopState (StackState * S, infotype* X);
+/* Menghapus X dari StackState S. */
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
-void PrintStack(Stack S);
-void CopyStack(Stack Sin, Stack *Sout);
+
+void CopyStackState(StackState Sin, StackState *Sout);
 
 #endif
