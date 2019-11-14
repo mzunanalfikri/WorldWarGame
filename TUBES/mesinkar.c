@@ -10,7 +10,7 @@ boolean EOP;
 static FILE * pita;
 static int retval;
 
-void START(char Default[]) {
+void START() {
 /* Mesin siap dioperasikan. Pita dengan nama file 'NamaFile' disiapkan untuk dibaca.
    Karakter pertama yang ada pada pita posisinya adalah pada jendela.
    I.S. : 'NamaFile' terdefinisi dan ada filenya
@@ -19,7 +19,7 @@ void START(char Default[]) {
           EndPita=false*/
 
     /* Algoritma */
-    pita = fopen(Default,"r");
+    pita = fopen("konfigurasifile.txt", "r");
     EOP=false;
     ADV();
 }

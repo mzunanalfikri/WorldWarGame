@@ -3,98 +3,91 @@
 #include "readfile.h"
 #include <stdio.h>
 
-void ReadKonfigurasiFile(State* S){
+
+void baca_array_bangunan(TabBangunan *bangunans, int num_of_bangunan, MATRIKS *peta) {
+	// KAMUS
+	int i, bangunan_X, bangunan_Y;
+	char tipe_bangunan;
+
+	// ALGORITMA
 	
-	/*  KAMUS */
-	
-	Kata BrsBangunan,KolBangunan,TypeBangunan,JmlBangunan,height,width;
-	/* Kata Status (Untuk keterhubungan bangunan) */
-	MATRIKS Peta;
-	Bangunan Castel,Tower,Fort,Village;
-	char CharTypeBangunan;
-	char C = '\0';
-	char V = '\0';
-	char T = '\0';
-	char F = '\0';
-	POINT KoordinatBangunan;
-	int TinggiPeta,LebarPeta,JumlahBangunan;
-	int i,k,l;
-	/* int j,AttStatus; (Untuk keterhubungan bangunan */
-	int idxBangunan; /* Nama Konfigurasi File (dalam txt) */
-	TabBangunan arrBangunan;
-	
-	
-<<<<<<< HEAD
-	STARTKATA();
-=======
-	/* Kondisi Awal */
->>>>>>> 6c7c20c9a2d2a5ded6b9e2385ed62f87d33f85f8
-	
-	idxBangunan = -1;
-	
-	
-	/* ALGORITMA */ 
-	
-	STARTKATA("konfigurasifile.txt");	/* Nama Konfigurasi File (dalam txt) */
-	
-	while (!EOP){
-		CopyKata(&height, CKata);
-		TinggiPeta = KataToInt(height);
+	//MakeEmptyArray(bangunans, num_of_bangunan);
+	for (i = 1; i <= num_of_bangunan; i++)
+	{ // Posisi ckata mulai di tipe dari banungan pertama
+		//ADVKATA();
+		tipe_bangunan = CKata.TabKata[1];
+		printf("TIpe bangunan : %c", tipe_bangunan);
 		ADVKATA();
-		CopyKata(&width, CKata);
-		LebarPeta = KataToInt(width);
-		MakeMATRIKS(TinggiPeta,LebarPeta,&Peta);
-		for (k = 1; k<= LebarPeta; k++) {
-			ElmtMatriks(Peta,1,k) = '*'; 
-			ElmtMatriks(Peta,TinggiPeta,k) = '*'; }
-		for (l = 1; l<= TinggiPeta; l++) {
-			ElmtMatriks(Peta,l,1) = '*'; 
-			ElmtMatriks(Peta,l,LebarPeta) = '*'; }
+		bangunan_X = KataToInt(CKata);
 		ADVKATA();
-		CopyKata(&JmlBangunan, CKata);
-		JumlahBangunan = KataToInt(JmlBangunan);
-		MakeEmptyArray(&arrBangunan, JumlahBangunan-1);
-		ADVKATA();
-		for (i = 1; i <= JumlahBangunan; i++) {
-			CopyKata(&TypeBangunan, CKata);
-			CharTypeBangunan = CommandToChar(TypeBangunan);
-			ADVKATA();
-			CopyKata(&BrsBangunan, CKata);
-			Ordinat(KoordinatBangunan) = KataToInt(BrsBangunan);
-			ADVKATA();
-			CopyKata(&KolBangunan, CKata);
-			Absis(KoordinatBangunan) = KataToInt(KolBangunan);
-			if (CharTypeBangunan == 'C') {
-				Castel = MakeBangunanLv1(C, KoordinatBangunan);
-				idxBangunan++;
-				ElmtTab(arrBangunan,idxBangunan) = Castel; }
-			else if (CharTypeBangunan == 'V') {
-				Village = MakeBangunanLv1(V, KoordinatBangunan); 
-				idxBangunan++;
-				ElmtTab(arrBangunan,idxBangunan) = Village; }
-			else if (CharTypeBangunan == 'F') {
-				Fort = MakeBangunanLv1(F, KoordinatBangunan); 
-				idxBangunan++;
-				ElmtTab(arrBangunan,idxBangunan) = Fort;}
-			else if (CharTypeBangunan == 'T') {
-				Tower = MakeBangunanLv1(T, KoordinatBangunan); 
-				idxBangunan++;
-				ElmtTab(arrBangunan,idxBangunan) = Tower; }
-			ElmtMatriks(Peta,Absis(KoordinatBangunan),Ordinat(KoordinatBangunan)) = CharTypeBangunan;
-			ADVKATA(); }
+		bangunan_Y = KataToInt(CKata);
+
+		TulisPOINT(MakePOINT(bangunan_X, bangunan_Y));
+
+		ElmtTab(*bangunans, i) = MakeBangunanLv1(tipe_bangunan, MakePOINT(bangunan_X, bangunan_Y));
+
+		Tipe(ElmtMatriks(*peta, bangunan_X, bangunan_Y)) = tipe_bangunan;
+		Id(ElmtMatriks(*peta, bangunan_X, bangunan_Y)) = i;
 		
-		/* Keterhubungan antar Peta 
-		for (i = 1; i <= JumlahBangunan; i++) {
-			for (j = 1; j <= JumlahBangunan; j++) {
-				CopyKata(&Status, CKata);
-				AttStatus = KataToInt(Status);
-				if (AttOrNot == 0) {
-					Tidak Terhubung(Gabisa nyerang)  } 
-			else if (AttOrNot == 1) {
-					 Terhubung(Bisa nyerang) } } 
-			ADVKATA(); }			*/
+		printf("Bangunan %d : ", i);
+		PrintBangunan(ElmtTab(*bangunans, i));
+		printf("\n");
+		ADVKATA(); // BIKIN CORNER CASE KALO UDAH NYAMPE AKHIR EOF
 	}
-	TulisMATRIKS(Peta);
+	
+}
 
-	}
 
+void ReadKonfigurasiFile(State *S, MATRIKS *M, Graph *G) {
+	// KAMUS
+	int Mat_x, Mat_y, jumlah_bangunan;
+	TabBangunan bangunans;
+
+	// ALGORITMA
+	
+	STARTKATA("konfigurasifile.txt");
+
+	/* MAKE MAP MATRIX */
+	printf("Kata to Int : %d\n",KataToInt(CKata));
+	Mat_x = KataToInt(CKata);
+	
+	ADVKATA();
+	TulisCKata();
+	Mat_y = KataToInt(CKata);
+
+	printf("X is %d, Y is %d\n", Mat_x, Mat_y);
+
+	MakeMATRIKS(Mat_x, Mat_y, M);
+	/* MAKE MAP MATRIX END */
+
+	TulisMATRIKS(*M);
+
+	/* MAKE BANGUNAN ARRAY */
+	ADVKATA();
+
+	jumlah_bangunan = KataToInt(CKata);
+
+	MakeState(S, jumlah_bangunan);
+
+	ADVKATA();
+
+	baca_array_bangunan(&ArrayBangunan(*S), jumlah_bangunan, M);
+
+	InsVFirst(&ListIdxBangunan(Player1(*S)), 1);
+	InsVFirst(&ListIdxBangunan(Player2(*S)), 2);
+
+	Netral(ElmtTab(ArrayBangunan(*S), 1)) = false;
+	Netral(ElmtTab(ArrayBangunan(*S), 2)) = false;
+	/* MAKE BANGUNAN ARRAY END */
+	TulisMATRIKS(*M);
+
+	/* MAKE GRAF */
+	CreateEmptyGraph(G);
+
+	/* MAKE GRAF END */
+
+
+
+
+
+}

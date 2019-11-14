@@ -8,62 +8,83 @@ Kata CKata;
 extern char CC;
 
 
-void IgnoreBlank(){
-	 while ((CC == BLANK) && (!EOP)) {
-	   ADV();
-	   } }
-	   
+void IgnoreBlank()
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : CC sembarang
-   F.S. : CC ≠ BLANK */
+   F.S. : CC ≠ BLANK atau CC = MARK */
+   {
+       while ((CC == BLANK || CC == ENTER) && (CC != MARK)) {
+           ADV();
+       }
 
-void STARTKATA(char Default[]){
-	START(Default);
-	IgnoreBlank();
-	if (!EOP) {
-		SalinKata(); }
-	}
-/* I.S. : CC sembarang, 'Default' terdefinisi dan ada filenya
-   F.S. : CKata adalah kata yang sudah diakuisisi,
+       if (CC == MARK) {
+           EndKata = true;
+       }
+       
+   }
+
+void STARTKATA()
+/* I.S. : CC sembarang
+   F.S. : EndKata = true, dan CC = MARK;
+          atau EndKata = false, CKata adalah kata yang sudah diakuisisi,
           CC karakter pertama sesudah karakter terakhir kata */
+    {
+        START();
+        IgnoreBlank();
 
-void ADVKATA(){
-	if (EOP) {
-		EndKata = true; }
-	else {
-		SalinKata();
-		IgnoreBlank(); } }
+        if (CC == MARK) {
+            EndKata = true;
+        } else {
+            EndKata = false;
+            SalinKata();
+        }
+    }
 
+void ADVKATA()
 /* I.S. : CC adalah karakter pertama kata yang akan diakuisisi
    F.S. : CKata adalah kata terakhir yang sudah diakuisisi,
-          CC karakter pertama sesudah karakter terakhir kata
+          CC adalah karakter pertama dari kata berikutnya, mungkin MARK
+          Jika CC = MARK, EndKata = true.
    Proses : Akuisisi kata menggunakan procedure SalinKata */
+    {
+        IgnoreBlank();
 
-void SalinKata(){
-	int i;
+        if (CC == MARK) {
+            EndKata = true;
+        } else {
+            SalinKata();
+            IgnoreBlank();
+        }
+    }
 
-	i = 1;
-	for (;;) {
-		CKata.TabKata[i] = CC;
-		ADV();
-		if (EOP ||  i == NMax || CC == BLANK ) {
-			break; }
-		else {
-			i++; }
-		}
-	if (i == NMax) {
-		while(CC != BLANK && !EOP) {
-			ADV();
-		}
-	}
-	CKata.Length = i; }
-	
+void SalinKata()
 /* Mengakuisisi kata, menyimpan dalam CKata
    I.S. : CC adalah karakter pertama dari kata
    F.S. : CKata berisi kata yang sudah diakuisisi;
-          CC = BLANK atau EndPita = true;
+          CC = BLANK atau CC = MARK;
           CC adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
+    {
+        // KAMUS
+        int i;
+
+        // ALGORITMA
+        i = 1;
+        
+        while ((CC != MARK) && (CC != BLANK) && (i <= NMax) && (CC != ENTER)) {
+            CKata.TabKata[i] = CC;
+            ADV();
+            i++;    
+        };
+
+        CKata.Length = i-1;
+        //IgnoreBlank();
+
+        //printf("CKata.Len is... %d\n", CKata.Length);
+        
+
+    }
+
 
 void CopyKata(Kata* clone, Kata ori){
 	/* Menyalin kata
@@ -82,9 +103,27 @@ int KataToInt(Kata DefKata) {
 	int nilai,angka;
 	nilai = 0;
 	angka = DefKata.Length;
+	//printf("Defkat alen : %d\n", DefKata.Length);
 	for (i = 1; i<= angka ; i++) {
-		nilai = nilai * 10 + (DefKata.TabKata[i] - '0'); }
+		//printf("NIlai KataToInt now %d\n", nilai);
+		nilai = nilai * 10 + ((DefKata.TabKata[i]) - '0'); }
 	return nilai; }
 
 char CommandToChar(Kata CKata) {
 	return CKata.TabKata[1]; }
+
+
+void TulisCKata() {
+    int i;
+
+    printf("Ckata : ");
+
+    for (i = 1; i <= CKata.Length; i++)
+    {
+        printf("%c", CKata.TabKata[i]);
+    }
+
+	printf("\nEnd Ckata|||");
+
+    printf("\n");
+}
