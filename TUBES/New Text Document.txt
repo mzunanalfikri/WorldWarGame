@@ -1,0 +1,18 @@
+what the fuck is game doing:
+1. Open Menu
+- Start
+- Load
+- Exit
+2. Kalo Start
+-> Buat State Kosong
+-> Baca Konfigurasi file
+-> Sampe Bangunan Pemain Habis:
+   Kalo Giliran Pemain X
+	
+      -> Bertambah Jumlah Pasukan (ada Maksnya)
+      -> Cetak Peta dan State Bangunan Pemain
+      Sampe End_Turn
+      -> Masukin Command
+      -> Cek Efeknya
+      -> Cetak Peta dan State Bangunan Pemain
+      -> Skill Terdepan dan Efeknya

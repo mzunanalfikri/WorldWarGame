@@ -113,6 +113,7 @@ void TulisMATRIKS (MATRIKS M)
 */
 {
     /* KAMUS LOKAL */
+    printf("Start tulis matriks\n");
     for(int i=1;i<=NKolEff(M)+2;i++){
         printf("*");
     }
