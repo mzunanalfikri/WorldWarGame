@@ -65,7 +65,10 @@ char CommandToChar(Kata CKata);
 void TulisCKata();
 /* Untuk Mencetak Ckata */
 
-boolean IsEQCKata(char kata[20]);
+boolean IsEQCKataString(char kata[20]);
 /* mengembalikan true jika kata sama dengan CKata */
+
+boolean IsEQCKataInt(int X);
+/* mengembalikan true jika X sama dengan CKATA */
 
 #endif

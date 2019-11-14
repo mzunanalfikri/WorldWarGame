@@ -140,7 +140,7 @@ void TulisCKata() {
     printf("\n");
 }
 
-boolean IsEQCKata(char kata[20])
+boolean IsEQCKataString(char kata[20])
 /* mengembalikan true jika kata sama dengan CKata */
 {
     for (int i = 1 ; i <= CKata.Length ; i++){
@@ -149,4 +149,11 @@ boolean IsEQCKata(char kata[20])
         }
     }
     return true;
+}
+
+boolean IsEQCKataInt(int X)
+/* mengembalikan true jika X sama dengan CKATA */
+{
+    int y = KataToInt(CKata);
+    return (y == X);
 }

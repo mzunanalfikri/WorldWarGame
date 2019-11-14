@@ -6,7 +6,7 @@ int main() {
     //Kata CKata;
     STARTKATAcmd();
     TulisCKata();
-    if (IsEQCKata("ATTACKu")) printf("trueee");
+    if (IsEQCKataInt(100)) printf("trueee");
     // while (1) {
     //     STARTKATAcmd();
     //     TulisCKata();
