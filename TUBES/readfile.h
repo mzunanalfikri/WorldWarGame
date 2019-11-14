@@ -9,9 +9,10 @@
 #include "matriks.h"
 #include "bangunan.h"
 #include "state.h"
+#include "graph.h"
 
 
-void ReadKonfigurasiFile(State *S);
+void ReadKonfigurasiFile(State* S, MATRIKS* M, Graph* G);
 /* Membaca konfigurasi file yang terdefinisi
 	I.S : Konfigurasi file terdefinisi
 	F.S : Membaca konfigurasi file dan mencetak ke layar kondisi State Awal */

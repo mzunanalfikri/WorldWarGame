@@ -7,13 +7,14 @@
 
 #include "boolean.h"
 
-#define MARK '.'
+//#define MARK '.'
+#define MARK EOF
 /* State Mesin */
 extern char CC;
 extern boolean EOP;
 
 
-void START(char Default[]);
+void START();
 /* Mesin siap dioperasikan. Pita dengan nama file 'Default' disiapkan untuk dibaca.
    Karakter pertama yang ada pada pita posisinya adalah pada jendela.
    I.S. : 'Default' terdefinisi dan ada filenya
