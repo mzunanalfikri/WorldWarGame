@@ -11,8 +11,8 @@ void MakePlayer(Player *P)
 {
     CreateEmptyList(&ListIdxBangunan(*P));
     CreateEmpty(&QSkill(*P), 10);
+    Add(QSkill(*P),1);
     Turn(*P) = false;
-
 }
 
 void PrintPlayer(Player P)

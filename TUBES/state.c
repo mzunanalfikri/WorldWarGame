@@ -1,6 +1,7 @@
 /* Realisasi ADT State */
 
 #include "state.h"
+#include "bangunan.h"
 #include<stdio.h>
 #include<stdlib.h>
 
