@@ -48,16 +48,28 @@ void PopState (StackState * S, State* X)
 }
 
 void CopyStackState(StackState Sin, StackState *Sout){
-    State Temp;
+    StackState Temp;
     State X,Y;
-    CreateEmptyStack(Sout);
-    CreateEmptyStack(&Temp);
-    while(!IsEmptyStack(Sin)){
-        Pop(&Sin,&X);
-        Push(&Temp,X);
+    CreateEmptyStackState(Sout);
+    CreateEmptyStackState(&Temp);
+    while(!IsEmptyStackState(Sin)){
+        PopState(&Sin,&X);
+        PushState(&Temp,X);
     }
-    while(!IsEmptyStack(Temp)){
-        Pop(&Temp,&Y);
-        Push(Sout,Y);
+    while(!IsEmptyStackState(Temp)){
+        PopState(&Temp,&Y);
+        PushState(Sout,Y);
     }
+}
+
+void EndTurnState(StackState* Sin){
+    StackState X;
+    State Final = InfoTop(*Sin);
+    State Temp;
+    CreateEmptyStackState(&X);
+    PushState(&X,Final);
+    while(!IsEmptyStackState(*Sin)){
+        PopState(Sin,&Temp);
+    }
+    PushState(Sin,Final);
 }

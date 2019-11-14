@@ -46,17 +46,18 @@ boolean IsFullStackState (StackState S);
 /* Mengirim true jika tabel penampung nilai elemen stack penuh */
 
 /* ************ Menambahkan sebuah elemen ke StackState ************ */
-void PushState (StackState * S, infotype X);
+void PushState (StackState * S, State X);
 /* Menambahkan X sebagai elemen StackState S. */
 /* I.S. S mungkin kosong, tabel penampung elemen stack TIDAK penuh */
 /* F.S. X menjadi TOP yang baru,TOP bertambah 1 */
 
 /* ************ Menghapus sebuah elemen StackState ************ */
-void PopState (StackState * S, infotype* X);
+void PopState (StackState * S, State* X);
 /* Menghapus X dari StackState S. */
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
 
 void CopyStackState(StackState Sin, StackState *Sout);
 
+void EndTurnState(StackState* Sin);
 #endif
