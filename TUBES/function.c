@@ -36,6 +36,7 @@ berkurang 1 menjadi sisa 2.*/
 void EndTurn (Player *P1, Player *P2){
     Turn(*P1) = false;
     Turn(*P2) = true;
+    //teuinggg
 }
 /*I.S. : turn P1=true*/
 /*F.S. : setelah end_turn, turn P2=true, P1=false*/
@@ -60,7 +61,7 @@ Pemain mendapat skill ini jika pemain baru saja menyerang Tower lawan dan
 jumlah towernya menjadi 3.*/
 
 boolean IsAttackUp (State S){
-    
+
 }
 
 void CriticalHit (State *S){ //bonus
