@@ -40,6 +40,18 @@ void STARTKATA()
         }
     }
 
+void STARTKATAcmd(){
+    STARTcmd();
+        IgnoreBlank();
+
+        if (CC == MARK) {
+            EndKata = true;
+        } else {
+            EndKata = false;
+            SalinKata();
+        }
+}
+
 void ADVKATA()
 /* I.S. : CC adalah karakter pertama kata yang akan diakuisisi
    F.S. : CKata adalah kata terakhir yang sudah diakuisisi,
@@ -123,7 +135,18 @@ void TulisCKata() {
         printf("%c", CKata.TabKata[i]);
     }
 
-	printf("\nEnd Ckata|||");
+	//printf("\nEnd Ckata|||");
 
     printf("\n");
+}
+
+boolean IsEQCKata(char kata[20])
+/* mengembalikan true jika kata sama dengan CKata */
+{
+    for (int i = 1 ; i <= CKata.Length ; i++){
+        if (CKata.TabKata[i] != kata[i-1]){
+            return false;
+        }
+    }
+    return true;
 }

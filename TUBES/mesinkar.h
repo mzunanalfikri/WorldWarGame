@@ -22,6 +22,9 @@ void START();
           Apabila pita langsung sampai terakhir, maka EOP=true; selainnya
           EOP=false*/
 
+void STARTcmd();
+/* membaca file dari stdin */
+
 void ADV();
 /* Pita dimajukan satu karakter.
    I.S. : Karakter pada jendela = CC

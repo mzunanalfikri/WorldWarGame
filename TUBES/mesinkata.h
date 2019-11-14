@@ -29,6 +29,9 @@ void STARTKATA();
    F.S. : CKata adalah kata yang sudah diakuisisi,
           CC karakter pertama sesudah karakter terakhir kata */
 
+void STARTKATAcmd();
+/* membaca kata dari cmd */
+
 void ADVKATA();
 /* I.S. : CC adalah karakter pertama kata yang akan diakuisisi
    F.S. : CKata adalah kata terakhir yang sudah diakuisisi,
@@ -60,5 +63,9 @@ int KataToInt(Kata DefKata);
 char CommandToChar(Kata CKata);
 
 void TulisCKata();
+/* Untuk Mencetak Ckata */
+
+boolean IsEQCKata(char kata[20]);
+/* mengembalikan true jika kata sama dengan CKata */
 
 #endif

@@ -24,6 +24,13 @@ void START() {
     ADV();
 }
 
+void STARTcmd() {
+    /* Algoritma */
+    pita = stdin;
+    EOP=false;
+    ADV();
+}
+
 void ADV() {
 /* Pita dimajukan satu karakter.
    I.S. : Karakter pada jendela = CC
