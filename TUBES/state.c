@@ -15,9 +15,9 @@ void MakeState(State *S, int JumlahBangunan)
 }
 
 void CopyState(State Sin, State * Sout){
-    CopyTab(ArrayBangunan(Sin),ArrayBangunan(*Sout));
-    CopyPlayer(Player1(Sin),Player1(*Sout));
-    CopyPlayer(Player2(Sin),Player2(*Sout));
+    CopyTab(ArrayBangunan(Sin),&ArrayBangunan(*Sout));
+    CopyPlayer(Player1(Sin),&Player1(*Sout));
+    CopyPlayer(Player2(Sin),&Player2(*Sout));
 }
 /* I.S. State Sout sembarang */
 /* F.S. State Sout terisi salinan state Sin */
