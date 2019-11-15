@@ -44,10 +44,33 @@ void DealokasiGraph (addressParent *G)
     free(*G);
 }
 
-addressParent SearchParent (Graph G, infotype X);
+addressParent SearchParent (Graph G, infotype X)
 /* Mencari apakah ada elemen Parent graph dengan InfoParent(G)= X */
 /* Jika ada, mengirimkan addressParent elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
+{
+    // KAMUS LOKAL
+    addressParent P;
+    boolean Found;
+
+    // ALGORITMA
+    P = FirstParent(G);
+    Found = false;
+
+    while ((P != NULL) && (!Found))
+    {
+        if (InfoParent(P) == X)
+        {
+            Found = true;
+        }
+        else
+        {
+            P = NextParent(P);
+        }
+    }
+
+    return P;
+}
 
 void InsVFirstParent (Graph *G, infotype X)
 /* I.S. G mungkin kosong */
