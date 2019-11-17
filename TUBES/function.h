@@ -82,7 +82,11 @@ Pemain mendapat skill ini jika lawan baru saja bertambah bangunannya menjadi
 10 bangunan.*/
 boolean IsBarrage (State SMusuh);
 
+/*START TURN*/ 
+void StartTurn(State *S, MATRIKS Map);
 /* **** ATTACK MECHANISM *** */
+
+void EnterCommad(State S);
 
 
 #endif

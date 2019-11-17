@@ -117,15 +117,32 @@ void Del (Queue * Q, infotype * X)
         Head(*Q) = 1;
     }
 }
-void PrintQueue (Queue Q){
+void PrintQSkill (Queue Q){
     infotype X;
+    printf("Skill Avaible | ");
+    
     while(!IsEmpty(Q)){
         Del(&Q,&X);
-        printf("%d ", X);
+        if (X == 1){
+            printf("InstantUpgrade | ");
+        } else if (X == 2) {
+            printf("Shield | ");
+        } else if (X == 3) {
+            printf("Extra Turn | ");
+        } else if (X == 4){
+            printf("AttackUp | ");
+        } else if (X == 5){
+            printf ("CriticalHit | ");
+        } else if (X == 6) {
+            printf("InstantReinforcement | ");
+        } else if (X == 7) {
+            printf("Barrage");
+        }
     }
     printf("\n");
-    
 }
+
+
 void CopyQueue (Queue Q1 ,Queue *Q2){
     // printf("ini prosedur copy\n");
     infotype X;

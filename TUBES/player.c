@@ -19,7 +19,7 @@ void PrintPlayer(Player P)
 /* Untuk debugging */
 {
     PrintInfo(ListIdxBangunan(P));
-    PrintQueue(QSkill(P));
+    PrintQSkill(QSkill(P));
 }
 
 void CopyPlayer(Player Pin, Player *Phsl)

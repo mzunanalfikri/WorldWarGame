@@ -115,6 +115,45 @@ boolean IsBarrage (State SMusuh){
         return false;
     }
 }
+
+/* START TURN */
+void StartTurn(State *S, MATRIKS Map){
+    Turn(Player1(*S)) = true;
+    CetakMatiksWarna(Map, *S);
+    
+    printf("%s%c", RED, 'P');
+    printf("%s", NORMAL);
+    printf("%s%c", RED, 'L');
+    printf("%s", NORMAL);
+    printf("%s%c", RED, 'A');
+    printf("%s", NORMAL);
+    printf("%s%c", RED, 'Y');
+    printf("%s", NORMAL);
+    printf("%s%c", RED, 'E');
+    printf("%s", NORMAL);
+    printf("%s%c", RED, 'R');
+    printf("%s", NORMAL);
+    printf("%s%c", RED, ' ');
+    printf("%s", NORMAL);
+    printf("%s%c", RED, '1');
+    printf("%s", NORMAL);
+    printf("\n");
+
+    addresslist P;
+    int count;
+    P = First(ListIdxBangunan(Player1(*S)));
+    count = 1;
+    while (P != NULL){
+        printf("%d. ", count);
+        PrintBangunan(ElmtTab(ArrayBangunan(*S), Info(P)));
+        P = Next(P);
+    }
+
+    PrintQSkill(QSkill(Player1(*S)));
+
+
+}
+
 /* **** ATTACK MECHANISM *** */
 
 // Fungsi untuk cetak matriks dengan warna
@@ -146,5 +185,70 @@ void CetakMatiksWarna(MATRIKS M, State S)
     //printf("\n");
     for(int l=1;l<=NKolEff(M)+2;l++){
         printf("*");
+    }
+    printf("\n");
+}
+
+void EnterCommad(State S){
+    if (Turn(Player1(S))){
+        printf("%s%c", RED, 'E');
+        printf("%s", NORMAL);
+        printf("%s%c", RED, 'N');
+        printf("%s", NORMAL);
+        printf("%s%c", RED, 'T');
+        printf("%s", NORMAL);
+        printf("%s%c", RED, 'E');
+        printf("%s", NORMAL);
+        printf("%s%c", RED, 'R');
+        printf("%s", NORMAL);
+        printf(" ");
+        printf("%s%c", RED, 'C');
+        printf("%s", NORMAL);
+        printf("%s%c", RED, 'O');
+        printf("%s", NORMAL);
+        printf("%s%c", RED, 'M');
+        printf("%s", NORMAL);
+        printf("%s%c", RED, 'M');
+        printf("%s", NORMAL);
+        printf("%s%c", RED, 'A');
+        printf("%s", NORMAL);
+        printf("%s%c", RED, 'N');
+        printf("%s", NORMAL);
+        printf("%s%c", RED, 'D');
+        printf("%s", NORMAL);
+        printf(" ");
+        printf("%s%c", RED, ':');
+        printf("%s", NORMAL);
+        printf(" ");
+    } else if (Turn(Player2(S))){
+        printf("%s%c", BLUE, 'E');
+        printf("%s", NORMAL);
+        printf("%s%c", BLUE, 'N');
+        printf("%s", NORMAL);
+        printf("%s%c", BLUE, 'T');
+        printf("%s", NORMAL);
+        printf("%s%c", BLUE, 'E');
+        printf("%s", NORMAL);
+        printf("%s%c", BLUE, 'R');
+        printf("%s", NORMAL);
+        printf(" ");
+        printf("%s%c", BLUE, 'C');
+        printf("%s", NORMAL);
+        printf("%s%c", BLUE, 'O');
+        printf("%s", NORMAL);
+        printf("%s%c", BLUE, 'M');
+        printf("%s", NORMAL);
+        printf("%s%c", BLUE, 'M');
+        printf("%s", NORMAL);
+        printf("%s%c", BLUE, 'A');
+        printf("%s", NORMAL);
+        printf("%s%c", BLUE, 'N');
+        printf("%s", NORMAL);
+        printf("%s%c", BLUE, 'D');
+        printf("%s", NORMAL);
+        printf(" ");
+        printf("%s%c", BLUE, ':');
+        printf("%s", NORMAL);
+        printf(" ");
     }
 }
