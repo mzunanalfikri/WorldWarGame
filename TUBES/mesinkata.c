@@ -40,7 +40,7 @@ void STARTKATA()
         }
     }
 
-void STARTKATAcmd(){
+void ReadCmd(){
     STARTcmd();
         IgnoreBlank();
 

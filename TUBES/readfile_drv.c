@@ -5,12 +5,16 @@
 
 int main() {
     // KAMUS
-    State S;
+    State S, S1;
+    Player P;
     MATRIKS PETAKS;
     Graph HUB;
-
-    // ALGORITMA
+    
+    MakePlayer(&P);
+ 
+    printf("lalala\n");
     ReadKonfigurasiFile(&S, &PETAKS, &HUB);
 
+    PrintAllBangunan(ArrayBangunan(S));
     return 0;
 }

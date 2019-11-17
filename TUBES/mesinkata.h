@@ -29,7 +29,7 @@ void STARTKATA();
    F.S. : CKata adalah kata yang sudah diakuisisi,
           CC karakter pertama sesudah karakter terakhir kata */
 
-void STARTKATAcmd();
+void ReadCmd();
 /* membaca kata dari cmd */
 
 void ADVKATA();

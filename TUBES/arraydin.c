@@ -1,9 +1,3 @@
-/*
-Muhammd Zunan Alfikri
-13518019
-10 September 2019
-*/
-
 #include <stdlib.h>
 #include <stdio.h>
 #include "arraydin.h"
@@ -14,9 +8,9 @@ void MakeEmptyArray(TabBangunan *T, int maxel)
 /* I.S. T sembarang, maxel > 0 */
 /* F.S. Terbentuk tabel T kosong dengan kapasitas maxel + 1 */
 {
-    Neff(*T) = 0;
+    Neff(*T) = maxel;
     MaxElArray(*T) = maxel; 
-    TI(*T) = (ElTypeArr *) malloc ((maxel+1) * sizeof(int));
+    TI(*T) = (ElTypeArr *) malloc ((maxel+1) * sizeof(ElTypeArr));
 }
 
 void DealokasiArray(TabBangunan *T)
@@ -123,13 +117,27 @@ void AddAsLastEl(TabBangunan *T, ElTypeArr X)
     Neff(*T) += 1;
 }
 
-
-/* ********* MENGUBAH UKURAN ARRAY ********* */
-void GrowTab(TabBangunan *T, int num)
-/* Proses : Menambahkan max element sebanyak num */
-/* I.S. Tabel sudah terdefinisi */
-/* F.S. Ukuran tabel bertambah sebanyak num */
+void PrintAllBangunan(TabBangunan B)
 {
-    TI(*T) = (ElTypeArr *) realloc(TI(*T), (MaxElArray(*T)+1+num) * sizeof(int));
-    MaxElArray(*T) = MaxElArray(*T) + num;
+    int pertahanan;
+    int serang;
+    int netral;
+    
+    for (int i = 1 ; i <= GetLastIdx(B) ; i++){
+        if (Pertahanan(ElmtTab(B, i))){
+            pertahanan = 1;
+        } else { pertahanan = 0; }
+        if (Serang(ElmtTab(B, i))){
+            serang = 1;
+        } else { serang = 0; }
+        if (Netral(ElmtTab(B, i))){
+            netral = 1;
+        } else { netral = 0; }
+        printf("%d. %c | (%d,%d) | Pasukan : %d | Level : %d | A : %d | M : %d | Pertahanan : %d | Serang : %d | Netral : %d \n", 
+        i, Type(ElmtTab(B, i)), Absis(Posisi(ElmtTab(B, i))), Ordinat(Posisi(ElmtTab(B, i))), Pasukan(ElmtTab(B, i)), Level(ElmtTab(B, i)),
+        A(ElmtTab(B, i)), M(ElmtTab(B, i)), pertahanan, serang, netral);
+    }
+
 }
+
+

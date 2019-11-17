@@ -15,7 +15,15 @@
 #include "function.h"
 
 int main() {
-    printf("skuyy");
+    // DEKLARASI ADT YANG DIGUNAKAN
+    State S;
+    MATRIKS Map;
+    Graph G;
 
+    ReadKonfigurasiFile(&S, &Map, &G);
+    TulisMATRIKS(Map);
+    PrintAllBangunan(ArrayBangunan(S));
+    PrintInfoGraph(G);
+    printf("done");
     return 0;
 }

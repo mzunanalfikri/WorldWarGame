@@ -17,5 +17,8 @@ void ReadKonfigurasiFile(State* S, MATRIKS* M, Graph* G);
 	I.S : Konfigurasi file terdefinisi
 	F.S : Membaca konfigurasi file dan mencetak ke layar kondisi State Awal */
 
+void baca_array_bangunan(TabBangunan *bangunans, int num_of_bangunan, MATRIKS *peta);
+
+void BacaGraf(Graph * G, int jumlah_bangunan);
 
 #endif

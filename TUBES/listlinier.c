@@ -112,8 +112,8 @@ void InsVFirst (List *L, infotype X)
 /* menambahkan elemen pertama dengan NULLai X jika alokasi berhasil */
 {
     addresslist P;
-
     P = Alokasi(X);
+    //printf("\nlalala33");
     if (P != NULL)
     {
         Next(P) = First(*L);

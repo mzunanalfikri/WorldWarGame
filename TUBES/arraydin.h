@@ -104,11 +104,6 @@ void AddAsLastEl(TabBangunan *T, ElTypeArr X);
 /* F.S. X adalah elemen terakhir T yang baru */
 /* ********** MENGHAPUS ELEMEN ********** */
 
-/* ********* MENGUBAH UKURAN ARRAY ********* */
-void GrowTab(TabBangunan *T, int num);
-/* Proses : Menambahkan max element sebanyak num */
-/* I.S. Tabel sudah terdefinisi */
-/* F.S. Ukuran tabel bertambah sebanyak num */
-
+void PrintAllBangunan(TabBangunan B);
 
 #endif

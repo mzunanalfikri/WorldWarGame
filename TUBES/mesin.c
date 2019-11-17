@@ -4,9 +4,12 @@
 
 int main() {
     //Kata CKata;
-    STARTKATAcmd();
-    TulisCKata();
-    if (IsEQCKataInt(100)) printf("trueee");
+    // while(1){
+        ReadCmd();
+        TulisCKata();
+        if (IsEQCKataInt(100)) printf("trueee");
+    // }
+
     // while (1) {
     //     STARTKATAcmd();
     //     TulisCKata();
