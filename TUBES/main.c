@@ -57,6 +57,7 @@ int main() {
             LevelUp(&S);
         } else if (IsEQCKataString("SKILL")){
             printf("skill \n");
+            Skill(&S, &extraTurn);
         } else if (IsEQCKataString("UNDO")) {
             printf("Undo \n");
         } else if (IsEQCKataString("END_TURN")){
