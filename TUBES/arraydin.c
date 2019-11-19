@@ -90,7 +90,7 @@ void CopyTab(TabBangunan Tin, TabBangunan *Tout)
 /* Proses : Menyalin isi Tin ke Tout */
 {
     MakeEmptyArray(Tout, MaxElArray(Tin));
-    printf("lalala\n");
+    //printf("lalala TAB BANGUNGAN\n");
     Neff(*Tout) = Neff(Tin);
     IdxType i = GetFirstIdx(Tin);
     //PrintBangunan(ElmtTab(Tin, 1));

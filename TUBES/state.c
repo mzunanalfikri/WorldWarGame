@@ -21,3 +21,10 @@ void CopyState(State Sin, State * Sout){
 }
 /* I.S. State Sout sembarang */
 /* F.S. State Sout terisi salinan state Sin */
+
+
+void PrintState(State S){
+    PrintAllBangunan(ArrayBangunan(S));
+    PrintPlayer(Player1(S));
+    PrintPlayer(Player2(S));
+}
