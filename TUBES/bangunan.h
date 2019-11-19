@@ -72,4 +72,9 @@ void PrintBangunan (Bangunan B);
 void PrintTipeBangunan (char C);
 /* I.S. Sembarang */
 /* F.S. Tercetak bangunan sesuai TIpenya */
+
+void IU(Bangunan *B);
+/* I.S. Sembarang */
+/* F.S. Bangunan naik level secara instant */
+
 #endif

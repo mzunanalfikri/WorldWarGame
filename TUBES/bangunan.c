@@ -173,3 +173,12 @@ void PrintTipeBangunan (char C)
         printf("Tower");
     }
 }
+
+void IU(Bangunan *B)
+/* I.S. Sembarang */
+/* F.S. Bangunan naik level secara instant */
+{
+    if (Level(*B) < 4){
+        Level(*B) += 1;
+    }
+}

@@ -15,53 +15,42 @@ INTEGER DIPETAKAN KE SKILL :
 7 --> Barrage, udah di cek nambahh
 =========================================== */
 
-void NambahSkill(State *S){
-    if(Turn(Player1(*S))){
-        if(IsShield(*S)){
-            Add(&QSkill(Player1(*S)),2);
-        }
-        if(IsExtraTurn(*S)){
-            Add(&QSkill(Player1(*S)),3);
-        }
-        if(IsAttackUp(*S)){
-            Add(&QSkill(Player1(*S)),4);
-        }
-        if(IsCriticalHit(*S)){
-            Add(&QSkill(Player1(*S)),5);
-        }
-        if(IsIR(*S)){
-            Add(&QSkill(Player1(*S)),6);
-        }
-        if(IsBarrage(*S)){
-            Add(&QSkill(Player1(*S)),7);
-        }
-    }else if(Turn(Player2(*S))){
-        if(IsShield(*S)){
-            Add(&QSkill(Player2(*S)),2);
-        }
-        if(IsExtraTurn(*S)){
-            Add(&QSkill(Player2(*S)),3);
-        }
-        if(IsAttackUp(*S)){
-            Add(&QSkill(Player2(*S)),4);
-        }
-        if(IsCriticalHit(*S)){
-            Add(&QSkill(Player2(*S)),5);
-        }
-        if(IsIR(*S)){
-            Add(&QSkill(Player2(*S)),6);
-        }
-        if(IsBarrage(*S)){
-            Add(&QSkill(Player2(*S)),7);
-        }
+void Skill(State *S, boolean * ExtraTurn)
+/* untuk memanggil skill skill */
+{
+    int Skil;
+    Player P;
+    P = Player1(*S);
+    if (Turn(Player2(*S))){
+        P = Player2(*S);
+    }
+    Del(&QSkill(P), &Skil);
+    if (Skil == 1){
+        //manggil Instant upgrade
+        InstantUpgrade(S);
+    } else if (Skil == 2) {
+        //manggil shield
+    } else if (Skil == 3) {
+        //manggil extra turn
+        ExtraTurnSkill(S, ExtraTurn);
+    } else if (Skil == 4) {
+        //manggil attack up
+    } else if (Skil == 5) {
+        //manggil Critical hit
+    } else if (Skil == 6) {
+        //manggil instant reinforcement
+        InstantReinforcement(S);
+    } else if (Skil == 7) {
+        //manggil barrage
     }
 }
+
 void InstantUpgrade (State *S){
     addresslist P1,P2;
     if(Turn(Player1(*S))){
         P1 = First(ListIdxBangunan(Player1(*S)));
         while(P1 != NULL){
-            NaikLevel(&(ElmtTab(ArrayBangunan(*S),Info(P1))));
+            IU(&(ElmtTab(ArrayBangunan(*S),Info(P1))));
             P1=Next(P1);
         }
         printf("Your Instant Upgrade Skill has been used\n");
@@ -69,7 +58,7 @@ void InstantUpgrade (State *S){
     }else if (Turn(Player2(*S))){
         P2 = First(ListIdxBangunan(Player2(*S)));
         while(P2 != NULL){
-            NaikLevel(&(ElmtTab(ArrayBangunan(*S),Info(P2))));
+            IU(&(ElmtTab(ArrayBangunan(*S),Info(P2))));
             P2=Next(P2);
         }
         printf("Your Instant Upgrade Skill has been used\n");
@@ -87,13 +76,7 @@ Seluruh bangunan yang dimiliki oleh pemain akan memiliki pertahanan selama 2
 turn lawan. Apabila skill ini digunakan 2 kali berturut-turut, durasi tidak akan
 bertambah, namun menjadi nilai maksimum.
 */
-boolean IsShield (State S){
 
-}
-/*
-Pemain mendapat skill ini jika setelah sebuah lawan menyerang, bangunan pemain
-berkurang 1 menjadi sisa 2.
-*/
 
 void EndTurn (State *S, boolean *ExtraTurn)
 /* kondisi P1 saat ini : P2 turn true, setiap bangunan di P2 bertambah pasukannya */
@@ -173,17 +156,12 @@ void EndTurn (State *S, boolean *ExtraTurn)
      } 
  }
 
-void ExtraTurn (State *S){
-
+void ExtraTurnSkill (State *S, boolean *ExtraTurn){
+    (*ExtraTurn) = true;
+    printf("Extra Turn activated.\n");
 }
 /*Setelah giliran pengaktifan skill ini berakhir, pemain selanjutnya tetap pemain
 yang sama.
-*/
-boolean IsExtraTurn (State S){
-
-}
-/*
-Pemain mendapat skill ini jika Fort pemain tersebut direbut lawan.
 */
 
 void AttackUp (State *S){ //bonus
@@ -194,10 +172,6 @@ Shield) tidak akan mempengaruhi penyerangan.
 Pemain mendapat skill ini jika pemain baru saja menyerang Tower lawan dan
 jumlah towernya menjadi 3.*/
 
-boolean IsAttackUp (State S){
-
-}
-
 void CriticalHit (State *S){ //bonus
 
 }
@@ -207,10 +181,12 @@ efektif sebanyak 2 kali lipat pasukan. Skill ini
 akan menonaktifkan Shield maupun pertahanan bangunan, seperti Attack Up.
 Pemain mendapat skill ini jika lawan baru saja mengaktifkan skill Extra Turn.
 */
-boolean IsCriticalHit (State S){
 
-}
-void InstantReinforcement (State *S){
+void InstantReinforcement (State *S)
+/*
+Seluruh bangunan mendapatkan tambahan 5 pasukan.
+*/
+{
     addresslist P1,P2;
     if(Turn(Player1(*S))){
         P1 = First(ListIdxBangunan(Player1(*S)));
@@ -230,28 +206,8 @@ void InstantReinforcement (State *S){
         printf("All of your building's army have been increased by 5\n");
     }
 }
-/*
-Seluruh bangunan mendapatkan tambahan 5 pasukan.
-*/
 
-boolean IsIR (State S){
-    addresslist P;
-    boolean four = true;
-    P = First(ListIdxBangunan(Player1(S)));
-    while((P != NULL)&&(four==true)){
-        if(Level(ElmtTab(ArrayBangunan(S),Info(P)))!=4){
-            four = false;
-        }
-        else{
-            P=Next(P);
-        }
-    }
-    if(four){
-        return true;
-    }else{
-        return false;
-    }
-}
+
 /*
 Pemain mendapat skill ini di akhir gilirannya bila semua bangunan yang ia miliki
 memiliki level 4.
@@ -263,10 +219,6 @@ void Barrage (State *SMusuh){
 pasukan.
 Pemain mendapat skill ini jika lawan baru saja bertambah bangunannya menjadi
 10 bangunan.*/
-
-boolean IsBarrage (State SMusuh){
-    
-}
 
 
 void StatusPlayer(State S, MATRIKS Map)

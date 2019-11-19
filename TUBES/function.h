@@ -32,7 +32,9 @@ INTEGER DIPETAKAN KE SKILL :
 7 --> Barrage
 =========================================== */
 
-void NambahSkill(State *S);
+void Skill(State *S, boolean * ExtraTurn);
+/* untuk memanggil skill skill */
+
 void InstantUpgrade (State *S);
 /*Seluruh bangunan yang dimiliki pemain akan naik 1 level.
 Pemain tidak akan mendapat skill ini selain dari daftar skill awal.*/
@@ -44,20 +46,16 @@ bertambah, namun menjadi nilai maksimum.
 Pemain mendapat skill ini jika setelah sebuah lawan menyerang, bangunan pemain
 berkurang 1 menjadi sisa 2.*/
 
-boolean IsShield (State S);
-
 void EndTurn (State *S, boolean *ExtraTurn);
 /* kondisi P1 saat ini : P2 turn true, setiap bangunan di P2 bertambah pasukannya */
 /* kondisi P2 saat ini : P1 trun true, setiap bangunan di P1 bertambah pasukannya */
 
 
-void ExtraTurn (State *S);
+void ExtraTurnSkill (State *S, boolean *ExtraTurn);
 /*Setelah giliran pengaktifan skill ini berakhir, pemain selanjutnya tetap pemain
 yang sama.
 Pemain mendapat skill ini jika Fort pemain tersebut direbut lawan.
 */
-
-boolean IsExtraTurn (State S);
 
 void AttackUp (State *S); //bonus
 /*Pada giliran ini, setelah skill ini diaktifkan, pertahanan bangunan musuh (termasuk
@@ -65,7 +63,6 @@ Shield) tidak akan mempengaruhi penyerangan.
 Pemain mendapat skill ini jika pemain baru saja menyerang Tower lawan dan
 jumlah towernya menjadi 3.*/
 
-boolean IsAttackUp (State S);
 
 void CriticalHit (State *S);
 /*Pada giliran ini, setelah skill diaktifkan, jumlah pasukan pada bangunan yang
@@ -74,22 +71,17 @@ efektif sebanyak 2 kali lipat pasukan. Skill ini
 akan menonaktifkan Shield maupun pertahanan bangunan, seperti Attack Up.
 Pemain mendapat skill ini jika lawan baru saja mengaktifkan skill Extra Turn.
 */
-boolean IsCriticalHit (State S);
 
 void InstantReinforcement (State *S);
 /*Seluruh bangunan mendapatkan tambahan 5 pasukan.
 Pemain mendapat skill ini di akhir gilirannya bila semua bangunan yang ia miliki
 memiliki level 4.*/
-boolean IsIR (State S);
 
 void Barrage (State *S);
 /*Jumlah pasukan pada seluruh bangunan musuh akan berkurang sebanyak 10
 pasukan.
 Pemain mendapat skill ini jika lawan baru saja bertambah bangunannya menjadi
 10 bangunan.*/
-
-boolean IsBarrage (State SMusuh);
-
 
 void StatusPlayer(State S, MATRIKS Map);
 /* prosedur untuk menampilkan status player (map, bangunan, skill) */
