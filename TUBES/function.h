@@ -32,6 +32,7 @@ INTEGER DIPETAKAN KE SKILL :
 7 --> Barrage
 =========================================== */
 
+void NambahSkill(State *S);
 void InstantUpgrade (State *S);
 /*Seluruh bangunan yang dimiliki pemain akan naik 1 level.
 Pemain tidak akan mendapat skill ini selain dari daftar skill awal.*/
@@ -42,6 +43,8 @@ turn lawan. Apabila skill ini digunakan 2 kali berturut-turut, durasi tidak akan
 bertambah, namun menjadi nilai maksimum.
 Pemain mendapat skill ini jika setelah sebuah lawan menyerang, bangunan pemain
 berkurang 1 menjadi sisa 2.*/
+
+boolean IsShield (State S);
 
 void EndTurn (State *S);
 /* kondisi P1 saat ini : P2 turn true, setiap bangunan di P2 bertambah pasukannya */
@@ -55,6 +58,7 @@ Pemain mendapat skill ini jika Fort pemain tersebut direbut lawan.
 */
 
 boolean IsExtraTurn (State S);
+
 void AttackUp (State *S); //bonus
 /*Pada giliran ini, setelah skill ini diaktifkan, pertahanan bangunan musuh (termasuk
 Shield) tidak akan mempengaruhi penyerangan.
@@ -70,6 +74,7 @@ efektif sebanyak 2 kali lipat pasukan. Skill ini
 akan menonaktifkan Shield maupun pertahanan bangunan, seperti Attack Up.
 Pemain mendapat skill ini jika lawan baru saja mengaktifkan skill Extra Turn.
 */
+boolean IsCriticalHit (State S);
 
 void InstantReinforcement (State *S);
 /*Seluruh bangunan mendapatkan tambahan 5 pasukan.
