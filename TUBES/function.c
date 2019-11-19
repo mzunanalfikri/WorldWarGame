@@ -15,7 +15,28 @@ INTEGER DIPETAKAN KE SKILL :
 7 --> Barrage
 =========================================== */
 
-
+void NambahSkill(State *S){
+    if(Turn(Player1(*S))){
+        if(IsShield(&S)){
+            Add(&QSkill(Player1(*S)),2);
+        }
+        else if(IsExtraTurn(&S)){
+            Add(&QSkill(Player1(*S)),3);
+        }
+        else if(IsAttackUp(&S)){
+            Add(&QSkill(Player1(*S)),4);
+        }
+        else if(IsCriticalHit(&S)){
+            Add(&QSkill(Player1(*S)),5);
+        }
+        else if(IsIR(&S)){
+            Add(&QSkill(Player1(*S)),6);
+        }
+        else if(IsBarrage($S)){
+            Add(&QSkill(Player1(*S)),7);
+        }
+    }
+}
 void InstantUpgrade (State *S){
     for(int i=1;i<=NbElmtTabArray(ArrayBangunan(*S));i++){
         NaikLevel(&ElmtTab((ArrayBangunan(*S)),i));
@@ -32,32 +53,34 @@ turn lawan. Apabila skill ini digunakan 2 kali berturut-turut, durasi tidak akan
 bertambah, namun menjadi nilai maksimum.
 Pemain mendapat skill ini jika setelah sebuah lawan menyerang, bangunan pemain
 berkurang 1 menjadi sisa 2.*/
+boolean IsShield (State S){
 
+}
 void EndTurn (State *S)
 /* kondisi P1 saat ini : P2 turn true, setiap bangunan di P2 bertambah pasukannya */
 /* kondisi P2 saat ini : P1 trun true, setiap bangunan di P1 bertambah pasukannya */
- {
-     addresslist P;
-     if (Turn(Player1(*S))){
-         Turn(Player1(*S)) = false;
-         Turn(Player2(*S)) = true;
-         P = First(ListIdxBangunan(Player2(*S)));
-         while (P != NULL){
-             AddNextTurn(&ElmtTab(ArrayBangunan(*S), Info(P)));
-             P = Next(P);
-         }
-         printf("Player 2's Turn !\n");
-     } else if (Turn(Player2(*S))) {
-         Turn(Player2(*S)) = false;
-         Turn(Player1(*S)) = true;
-         P = First(ListIdxBangunan(Player1(*S)));
-         while (P != NULL){
-             AddNextTurn(&ElmtTab(ArrayBangunan(*S), Info(P)));
-             P = Next(P);
-         }
-         printf("Player 1's Turn !\n");
-     } 
- }
+{
+    addresslist P;
+    if (Turn(Player1(*S))){
+        Turn(Player1(*S)) = false;
+        Turn(Player2(*S)) = true;
+        P = First(ListIdxBangunan(Player2(*S)));
+        while (P != NULL){
+            AddNextTurn(&ElmtTab(ArrayBangunan(*S), Info(P)));
+            P = Next(P);
+        }
+        printf("Player 2's Turn !\n");
+    } else if (Turn(Player2(*S))) {
+        Turn(Player2(*S)) = false;
+        Turn(Player1(*S)) = true;
+        P = First(ListIdxBangunan(Player1(*S)));
+        while (P != NULL){
+            AddNextTurn(&ElmtTab(ArrayBangunan(*S), Info(P)));
+            P = Next(P);
+        }
+        printf("Player 1's Turn !\n");
+    } 
+}
 
 void ExtraTurn (State *S){
 
@@ -91,7 +114,9 @@ efektif sebanyak 2 kali lipat pasukan. Skill ini
 akan menonaktifkan Shield maupun pertahanan bangunan, seperti Attack Up.
 Pemain mendapat skill ini jika lawan baru saja mengaktifkan skill Extra Turn.
 */
+boolean IsCriticalHit (State S){
 
+}
 void InstantReinforcement (State *S){
     for(int i=1;i<=NbElmtTabArray(ArrayBangunan(*S));i++){
         Pasukan(ElmtTab((ArrayBangunan(*S)),i))+=5;
