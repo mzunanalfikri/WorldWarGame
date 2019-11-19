@@ -101,33 +101,53 @@ void EndTurn (State *S)
  {
      addresslist P;
      if (Turn(Player1(*S))){
-         Turn(Player1(*S)) = false;
-         Turn(Player2(*S)) = true;
+         
          P = First(ListIdxBangunan(Player2(*S)));
+         if (*ExtraTurn) {
+             P = First(ListIdxBangunan(Player1(*S)));
+             (*ExtraTurn) = false;
+         } else {
+            Turn(Player1(*S)) = false;
+            Turn(Player2(*S)) = true;
+         }
          while (P != NULL){
              AddNextTurn(&ElmtTab(ArrayBangunan(*S), Info(P)));
              P = Next(P);
          }
          //ingetin update nge false in serang di bangunannya
          //sama move juga
-         printf("\n");
-         printf("===================================\n");
-         printf("======== Player 2's Turn ! ========\n");
-         printf("===================================\n");
-         printf("\n");
+        if (*ExtraTurn){
+            printf("Extra Turn Activated, Player 1's Turn!\n ");
+        } else {
+            printf("\n");
+            printf("===================================\n");
+            printf("======== Player 2's Turn ! ========\n");
+            printf("===================================\n");
+            printf("\n");
+        }
      } else if (Turn(Player2(*S))) {
-         Turn(Player2(*S)) = false;
-         Turn(Player1(*S)) = true;
+         
          P = First(ListIdxBangunan(Player1(*S)));
+         if (*ExtraTurn){
+             P = First(ListIdxBangunan(Player2(*S)));
+             (*ExtraTurn) = false;
+         } else {
+            Turn(Player2(*S)) = false;
+            Turn(Player1(*S)) = true;
+         }
          while (P != NULL){
              AddNextTurn(&ElmtTab(ArrayBangunan(*S), Info(P)));
              P = Next(P);
          }
-         printf("\n");
-         printf("===================================\n");
-         printf("======== Player 1's Turn ! ========\n");
-         printf("===================================\n");
-         printf("\n");
+         if (*ExtraTurn){
+            printf("Extra Turn Activated, Player 2's Turn!\n ");
+        } else {
+            printf("\n");
+            printf("===================================\n");
+            printf("======== Player 1's Turn ! ========\n");
+            printf("===================================\n");
+            printf("\n");
+        }
      } 
  }
 
@@ -549,6 +569,7 @@ void MovePasukaB1B2(State *S, int pendonor, int penerima)
         ReadCmd();
         x = KataToInt(CKata);
     }
+    Move(ElmtTab(ArrayBangunan(*S), pendonor)) = true;
     Pasukan(ElmtTab(ArrayBangunan(*S), pendonor)) = Pasukan(ElmtTab(ArrayBangunan(*S), pendonor)) - x;
     Pasukan(ElmtTab(ArrayBangunan(*S), penerima)) = Pasukan(ElmtTab(ArrayBangunan(*S), penerima)) + x;
     printf("%d Pasukan dari ", x);
@@ -585,4 +606,164 @@ void MovePasukan(State *S, Graph G)
         }
     }
 }
+
+/**************/
+/*   ATTACK   */
+/**************/
+void ChooseBangunanPlayerAttack(State S, Graph G, int *serang, int *defend, boolean player1)
+/* F.S. serang menjadi indeks bangunan penyerang, defend menjadi indeks bangunan
+        yang bertahan */
+{
+    int att[31];
+    int def[31];
+    int temp;
+
+    //Pilih bangunan pendonor
+    printf("Daftar Bangunan : \n");
+    addresslist P;
+    int count;
+
+    P = First(ListIdxBangunan(Player2(S)));
+    if (player1){
+        P = First(ListIdxBangunan(Player1(S)));
+    }
+    count = 1;
+    while (P != NULL){
+        if (!Serang(ElmtTab(ArrayBangunan(S), Info(P)))) {
+            printf("%d. ", count);
+            PrintBangunan(ElmtTab(ArrayBangunan(S), Info(P)));
+            att[count] = Info(P);
+            count++;
+        }
+        P = Next(P);
+    }
+    if (count == 1){
+        printf("Tidak ada bangunan yang bisa Attack. \n");
+        *serang = 0;
+    } else {
+        printf("Bangunan yang digunakan untuk menyerang : ");
+        //scanf("%d", &temp);
+        ReadCmd();
+        temp = KataToInt(CKata);
+        while (temp >= count || temp <= 0){
+            printf ("Masukan salah, Bangunan yang digunakan untuk menyerang :");
+            //scanf("%d", &temp);
+            ReadCmd();
+            temp = KataToInt(CKata);
+        }
+        *serang = att[temp];
+
+        //Pilih bangunan penerima
+        printf("Daftar bangunan yang dapat diserang : \n");
+        List L;
+        L = (ListIdxBangunan(Player2(S)));
+        if (player1){
+            L = (ListIdxBangunan(Player1(S)));
+        }
         
+        P = First(Child(SearchParent(G, *serang)));
+        count = 1;
+        while (P != NULL){
+            if (!SearchB(L, Info(P))) {
+                printf("%d. ", count);
+                PrintBangunan(ElmtTab(ArrayBangunan(S), Info(P)));
+                def[count] = Info(P);
+                count++;
+            }
+            P = Next(P);
+        }
+        if (count == 1){
+            printf("Tidak ada bangunan yang diserang.\n");
+            *defend = 0;
+        } else {
+            printf("Bangunan yang diserang: ");
+            //scanf("%d", &temp);
+            ReadCmd();
+            temp = KataToInt(CKata);
+            while (temp >= count || temp <= 0){
+                printf ("Masukan salah, Bangunan yang diserang: ");
+                //scanf("%d", &temp);
+                ReadCmd();
+                temp = KataToInt(CKata);
+            }
+            *defend = def[temp];
+        }
+    }
+}
+
+void PreAttack(State *S, int serang, int defend)
+/* prosedur transisi untuk attack */
+{
+    int x;
+    printf("Jumlah pasukan : ");
+    ReadCmd();
+    x = KataToInt(CKata);
+    while (Pasukan(ElmtTab(ArrayBangunan(*S), serang)) < x || x < 0) {
+        printf("Jumlah pasukan tidak valid, masukkan pasukan lagi : ");
+        ReadCmd();
+        x = KataToInt(CKata);
+    }
+    if (Pertahanan(ElmtTab(ArrayBangunan(*S), defend))){
+        printf("lawan ada pertahanan \n");
+        if (x >= Pasukan(ElmtTab(ArrayBangunan(*S), defend))*4/3){
+            Pasukan(ElmtTab(ArrayBangunan(*S), serang)) -= x;
+            Pasukan(ElmtTab(ArrayBangunan(*S), defend)) = x - Pasukan(ElmtTab(ArrayBangunan(*S), defend))*4/3;
+            Netral(ElmtTab(ArrayBangunan(*S), defend)) = false;
+            if (Turn(Player1(*S))){
+                DelP(&ListIdxBangunan(Player2(*S)), defend);
+                InsVFirst(&ListIdxBangunan(Player1(*S)), defend);
+            } else if (Turn(Player2(*S))) {
+                DelP(&ListIdxBangunan(Player1(*S)), defend);
+                InsVFirst(&ListIdxBangunan(Player2(*S)), defend);
+            }
+        } else {
+            Pasukan(ElmtTab(ArrayBangunan(*S), serang)) -= x;
+            Pasukan(ElmtTab(ArrayBangunan(*S), defend)) -= x*3/4;
+            printf("Bangunan gagal direbut. \n");
+        }
+    } else {
+        printf("lawan ngga ada pertahanan\n");
+        if (x >= Pasukan(ElmtTab(ArrayBangunan(*S), defend))){
+            Pasukan(ElmtTab(ArrayBangunan(*S), serang)) -= x;
+            Pasukan(ElmtTab(ArrayBangunan(*S), defend)) = x - Pasukan(ElmtTab(ArrayBangunan(*S), defend));
+            Netral(ElmtTab(ArrayBangunan(*S), defend)) = false;
+            if (Turn(Player1(*S))){
+                DelP(&ListIdxBangunan(Player2(*S)), defend);
+                InsVFirst(&ListIdxBangunan(Player1(*S)), defend);
+            } else if (Turn(Player2(*S))) {
+                DelP(&ListIdxBangunan(Player1(*S)), defend);
+                InsVFirst(&ListIdxBangunan(Player2(*S)), defend);
+            }
+        } else {
+            Pasukan(ElmtTab(ArrayBangunan(*S), serang)) -= x;
+            Pasukan(ElmtTab(ArrayBangunan(*S), defend)) -= x;
+            printf("Bangunan gagal direbut. \n");
+        }
+    }
+    Serang(ElmtTab(ArrayBangunan(*S), serang)) = true;
+}
+
+void Attack(State *S, Graph G)
+/* Procedure untuk memindahkan pasukan dari bangunan satu ke lainnya */
+{
+    int attack;
+    int defend;
+    if (Turn(Player1(*S))) {
+        ChooseBangunanPlayerAttack(*S, G, &attack, &defend, true );
+        printf("attack  : %d | defend : %d \n", attack, defend);
+        if (attack == 0 || defend == 0){
+            printf("Attack gagal.\n");
+        } else {
+            PreAttack(S, attack, defend);
+        }
+        //printf(" x : %d\n", x);
+    } else if (Turn(Player2(*S))) {
+        ChooseBangunanPlayerAttack(*S, G, &attack, &defend, false );
+        printf("attack  : %d | defend : %d \n", attack, defend);
+        if (attack == 0 || defend == 0){
+            printf("Attack gagal.\n");
+        } else {
+           PreAttack(S, attack, defend);
+        }
+    }
+}

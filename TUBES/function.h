@@ -46,7 +46,7 @@ berkurang 1 menjadi sisa 2.*/
 
 boolean IsShield (State S);
 
-void EndTurn (State *S);
+void EndTurn (State *S, boolean *ExtraTurn);
 /* kondisi P1 saat ini : P2 turn true, setiap bangunan di P2 bertambah pasukannya */
 /* kondisi P2 saat ini : P1 trun true, setiap bangunan di P1 bertambah pasukannya */
 
@@ -120,6 +120,19 @@ void MovePasukaB1B2(State *S, int pendonor, int penerima);
 /* Fungsi transisi untuk move pasukan */
 
 void MovePasukan(State *S, Graph G);
+/* Procedure untuk memindahkan pasukan dari bangunan satu ke lainnya */
+
+/**************/
+/*   ATTACK   */
+/**************/
+void ChooseBangunanPlayerAttack(State S, Graph G, int *serang, int *defend, boolean player1);
+/* F.S. serang menjadi indeks bangunan penyerang, defend menjadi indeks bangunan
+        yang bertahan */
+
+void PreAttack(State *S, int serang, int defend);
+/* prosedur transisi untuk attack */
+
+void Attack(State *S, Graph G);
 /* Procedure untuk memindahkan pasukan dari bangunan satu ke lainnya */
 
 #endif
