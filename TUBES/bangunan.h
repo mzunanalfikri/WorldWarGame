@@ -67,4 +67,7 @@ void PrintBangunan (Bangunan B);
 /* I.S Sembarang */
 /* F.S Tercetak di layar info bangunannya */
 
+void PrintTipeBangunan (char C);
+/* I.S. Sembarang */
+/* F.S. Tercetak bangunan sesuai TIpenya */
 #endif

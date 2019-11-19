@@ -59,28 +59,30 @@ boolean IsShield (State S){
 void EndTurn (State *S)
 /* kondisi P1 saat ini : P2 turn true, setiap bangunan di P2 bertambah pasukannya */
 /* kondisi P2 saat ini : P1 trun true, setiap bangunan di P1 bertambah pasukannya */
-{
-    addresslist P;
-    if (Turn(Player1(*S))){
-        Turn(Player1(*S)) = false;
-        Turn(Player2(*S)) = true;
-        P = First(ListIdxBangunan(Player2(*S)));
-        while (P != NULL){
-            AddNextTurn(&ElmtTab(ArrayBangunan(*S), Info(P)));
-            P = Next(P);
-        }
-        printf("Player 2's Turn !\n");
-    } else if (Turn(Player2(*S))) {
-        Turn(Player2(*S)) = false;
-        Turn(Player1(*S)) = true;
-        P = First(ListIdxBangunan(Player1(*S)));
-        while (P != NULL){
-            AddNextTurn(&ElmtTab(ArrayBangunan(*S), Info(P)));
-            P = Next(P);
-        }
-        printf("Player 1's Turn !\n");
-    } 
-}
+ {
+     addresslist P;
+     if (Turn(Player1(*S))){
+         Turn(Player1(*S)) = false;
+         Turn(Player2(*S)) = true;
+         P = First(ListIdxBangunan(Player2(*S)));
+         while (P != NULL){
+             AddNextTurn(&ElmtTab(ArrayBangunan(*S), Info(P)));
+             P = Next(P);
+         }
+         //ingetin update nge false in serang di bangunannya
+         //sama move juga
+         printf("Player 2's Turn !\n");
+     } else if (Turn(Player2(*S))) {
+         Turn(Player2(*S)) = false;
+         Turn(Player1(*S)) = true;
+         P = First(ListIdxBangunan(Player1(*S)));
+         while (P != NULL){
+             AddNextTurn(&ElmtTab(ArrayBangunan(*S), Info(P)));
+             P = Next(P);
+         }
+         printf("Player 1's Turn !\n");
+     } 
+ }
 
 void ExtraTurn (State *S){
 
