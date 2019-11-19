@@ -30,6 +30,7 @@ typedef struct {
     POINT Posisi;
     boolean Serang;
     boolean Netral;
+    boolean Move;
 } Bangunan;
 
 /* Akses dengan Selektor */
@@ -42,6 +43,7 @@ typedef struct {
 #define Posisi(B) (B).Posisi
 #define Serang(B) (B).Serang
 #define Netral(B) (B).Netral
+#define Move(B) (B).Move
 
 /* ************** Prototype ************** */
 Bangunan MakeBangunanLv1 (char type, POINT P);

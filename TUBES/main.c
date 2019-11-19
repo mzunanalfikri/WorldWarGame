@@ -41,7 +41,7 @@ int main() {
             EndTurn(&S);
             StatusPlayer(S,Map);
         } else if (IsEQCKataString("MOVE")){
-            printf("MOVE \n");
+            MovePasukan(&S, G);
         } else if (IsEQCKataString("EXIT")){
             endgame = true;
         } else if (IsEQCKataString("MAP")){
@@ -50,6 +50,10 @@ int main() {
             PrintAllBangunan(ArrayBangunan(S));
         } else if (IsEQCKataString("STATUS")) {
             StatusPlayer(S, Map);
+        } else if (IsEQCKataString("HELP")){
+            printf("tampilin help");
+        } else if (IsEQCKataString("PRINT_GRAPH")) {
+            PrintInfoGraph(G);
         }
         // disini lakukan pengecekan skiil bertamah
         //cek juga ada yang kalah atau enggak

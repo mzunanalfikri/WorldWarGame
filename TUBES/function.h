@@ -104,7 +104,7 @@ void EnterCommad(State S);
 /************/
 /* LEVEL UP */
 /************/
-void ChooseBangunanPlayer(State S, int *x, boolean player1);
+void ChooseBangunanPlayerLevelUp(State S, int *x, boolean player1);
 /* F.S. X menjadi indeks bangunan yang dipilih pemain */
 
 void LevelUp(State * S);
@@ -113,4 +113,13 @@ void LevelUp(State * S);
 /************/
 /*   MOVE   */
 /************/
+void ChooseBangunanPlayerMove(State S, Graph G, int *pendonor, int *penerima, boolean player1);
+/* F.S. pendonor menjadi indeks bangunan yang mengirim, penerima menjadi bangunan yang 
+        dipilih */
+void MovePasukaB1B2(State *S, int pendonor, int penerima);
+/* Fungsi transisi untuk move pasukan */
+
+void MovePasukan(State *S, Graph G);
+/* Procedure untuk memindahkan pasukan dari bangunan satu ke lainnya */
+
 #endif

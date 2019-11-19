@@ -162,3 +162,14 @@ void PrintInfoGraph (Graph G)
         printf("graph kosong");
     }
 }
+
+boolean IsTerhubung (Graph G, int Bangunan1, int Bangunan2)
+/* Mengembalikan true jika bangunan 1 dan bangunan 2 terhubung */
+{
+    addressParent P;
+    List L;
+
+    P = SearchParent(G, Bangunan1);
+    L = Child(P);
+    return (SearchB(L, Bangunan2));    
+}

@@ -80,6 +80,8 @@ void PrintInfoGraph (Graph G);
 /* F.S. Jika list tidak kosong, isi graph dicetak dgn format: infoparent : [child] */
 /* Jika list kosong : menulis [] */
 
+boolean IsTerhubung (Graph G, int Bangunan1, int Bangunan2);
+/* Mengembalikan true jika bangunan 1 dan bangunan 2 terhubung */
 
 
 #endif
