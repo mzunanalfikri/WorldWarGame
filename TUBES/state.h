@@ -28,4 +28,6 @@ void CopyState(State Sin, State * Sout);
 
 //push
 
+void PrintState(State S);
+
 #endif

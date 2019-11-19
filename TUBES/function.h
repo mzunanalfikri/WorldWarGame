@@ -72,6 +72,8 @@ akan menonaktifkan Shield maupun pertahanan bangunan, seperti Attack Up.
 Pemain mendapat skill ini jika lawan baru saja mengaktifkan skill Extra Turn.
 */
 
+void AddIR (State *S);
+
 void InstantReinforcement (State *S);
 /*Seluruh bangunan mendapatkan tambahan 5 pasukan.
 Pemain mendapat skill ini di akhir gilirannya bila semua bangunan yang ia miliki

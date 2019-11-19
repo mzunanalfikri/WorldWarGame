@@ -58,16 +58,16 @@ void InstantUpgrade (State *S){
             IU(&(ElmtTab(ArrayBangunan(*S),Info(P1))));
             P1=Next(P1);
         }
-        printf("Your Instant Upgrade Skill has been used\n");
-        printf("All of your building's level have been upgraded\n");
+        printf("Your Instant Upgrade Skill has been used.\n");
+        printf("All of your building's level have been upgraded!\n");
     }else if (Turn(Player2(*S))){
         P2 = First(ListIdxBangunan(Player2(*S)));
         while(P2 != NULL){
             IU(&(ElmtTab(ArrayBangunan(*S),Info(P2))));
             P2=Next(P2);
         }
-        printf("Your Instant Upgrade Skill has been used\n");
-        printf("All of your building's level have been upgraded\n");
+        printf("Your Instant Upgrade Skill has been used.\n");
+        printf("All of your building's level have been upgraded!\n");
     }
     AddIR(*S);
 }
@@ -227,6 +227,32 @@ void AddIR(State *S){
         }
     }
 }
+
+void AddIR (State *S){
+    addresslist P;
+    boolean four = true;
+    P = First(ListIdxBangunan(Player1(*S)));
+    if (Turn(Player2(*S))){
+        P = First(ListIdxBangunan(Player2(*S)));
+    }
+    while((P != NULL)&&(four==true)){
+        if(Level(ElmtTab(ArrayBangunan(*S),Info(P)))!=4){
+            four = false;
+        }
+        else{
+            P=Next(P);
+        }
+    }
+    if(four){
+        if (Turn(Player1(*S))){
+            Add(&QSkill(Player1(*S)), 6);
+        } else if (Turn(Player2(*S))) {
+            Add(&QSkill(Player2(*S)), 6);
+        }
+        printf("kamu dapat IR");
+    }
+}
+
 
 void InstantReinforcement (State *S)
 /*
@@ -786,7 +812,7 @@ void PreAttack(State *S, int serang, int defend)
     if (akuisisi){
         if (Turn(Player1(*S))){
             //Cek dapet extra turn
-            if (Type(ElmtTab(ArrayBangunan(*S), defend)) == 'F' ){
+            if (Type(ElmtTab(ArrayBangunan(*S), defend)) == 'F' && SearchB(ListIdxBangunan(Player2(*S)),defend)){
                 Add(&QSkill(Player2(*S)), 3);
                 printf("Player 2 mendapatkan Skill Extra Turn \n");
             }
@@ -801,7 +827,7 @@ void PreAttack(State *S, int serang, int defend)
             }
         } else if(Turn(Player2(*S))) {
             //Cek dapet extra turn
-            if (Type(ElmtTab(ArrayBangunan(*S), defend)) == 'F' ){
+            if (Type(ElmtTab(ArrayBangunan(*S), defend)) == 'F' && SearchB(ListIdxBangunan(Player1(*S)),defend) ){
                 Add(&QSkill(Player1(*S)), 3);
                 printf("Player 1 mendapatkan Skill Extra Turn \n");
             }

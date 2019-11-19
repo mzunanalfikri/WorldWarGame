@@ -20,6 +20,7 @@ void PrintPlayer(Player P)
 {
     PrintInfo(ListIdxBangunan(P));
     PrintQSkill(QSkill(P));
+    //printf("Is player's turn? %s\n", (Turn(P)) ? "Yes" : "No");
 }
 
 void CopyPlayer(Player Pin, Player *Phsl)
