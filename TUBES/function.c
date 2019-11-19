@@ -8,11 +8,11 @@
 INTEGER DIPETAKAN KE SKILL :
 1 --> Instant Upgrade
 2 --> shield (BONUS)
-3 --> Extra Turn
+3 --> Extra Turn , udah di cek nambah
 4 --> Attack Up (BONUS)
 5 --> Critical Hit (BONUS)
-6 --> Instant Reinforcement
-7 --> Barrage
+6 --> Instant Reinforcement, udah di cekk nambahh
+7 --> Barrage, udah di cek nambahh
 =========================================== */
 
 // void NambahSkill(State *S){
@@ -95,6 +95,8 @@ void EndTurn (State *S, boolean * ExtraTurn)
 /* kondisi P2 saat ini : P1 trun true, setiap bangunan di P1 bertambah pasukannya */
  {
      addresslist P;
+     boolean IR;
+     IR = true;
      if (Turn(Player1(*S))){
          
          P = First(ListIdxBangunan(Player2(*S)));
@@ -108,6 +110,16 @@ void EndTurn (State *S, boolean * ExtraTurn)
          while (P != NULL){
              AddNextTurn(&ElmtTab(ArrayBangunan(*S), Info(P)));
              P = Next(P);
+             Serang(ElmtTab(ArrayBangunan(*S), Info(P))) = false;
+             Move(ElmtTab(ArrayBangunan(*S), Info(P))) = false;
+             //cek penambahan instant reinforcement
+             if (Level(ElmtTab(ArrayBangunan(*S), Info(P))) != 4){
+                 IR = false;
+             }
+         }
+         //menambahkan instant reinforcement
+         if (IR){
+             Add(&QSkill(Player1(*S)), 6);
          }
          //ingetin update nge false in serang di bangunannya
          //sama move juga
@@ -133,6 +145,16 @@ void EndTurn (State *S, boolean * ExtraTurn)
          while (P != NULL){
              AddNextTurn(&ElmtTab(ArrayBangunan(*S), Info(P)));
              P = Next(P);
+             Serang(ElmtTab(ArrayBangunan(*S), Info(P))) = false;
+             Move(ElmtTab(ArrayBangunan(*S), Info(P))) = false;
+             //cek penambahan instant reinforcement
+             if (Level(ElmtTab(ArrayBangunan(*S), Info(P))) != 4){
+                 IR = false;
+             }
+         }
+         //menambahkan instant reinforcement
+         if (IR){
+             Add(&QSkill(Player2(*S)), 6);
          }
          if (*ExtraTurn){
             printf("Extra Turn Activated, Player 2's Turn!\n ");
@@ -689,6 +711,8 @@ void ChooseBangunanPlayerAttack(State S, Graph G, int *serang, int *defend, bool
 void PreAttack(State *S, int serang, int defend)
 /* prosedur transisi untuk attack */
 {
+    boolean akuisisi;
+    akuisisi = false;
     int x;
     printf("Jumlah pasukan : ");
     ReadCmd();
@@ -711,6 +735,7 @@ void PreAttack(State *S, int serang, int defend)
                 DelP(&ListIdxBangunan(Player1(*S)), defend);
                 InsVFirst(&ListIdxBangunan(Player2(*S)), defend);
             }
+            akuisisi = true;
         } else {
             Pasukan(ElmtTab(ArrayBangunan(*S), serang)) -= x;
             Pasukan(ElmtTab(ArrayBangunan(*S), defend)) -= x*3/4;
@@ -729,6 +754,7 @@ void PreAttack(State *S, int serang, int defend)
                 DelP(&ListIdxBangunan(Player1(*S)), defend);
                 InsVFirst(&ListIdxBangunan(Player2(*S)), defend);
             }
+            akuisisi = true;
         } else {
             Pasukan(ElmtTab(ArrayBangunan(*S), serang)) -= x;
             Pasukan(ElmtTab(ArrayBangunan(*S), defend)) -= x;
@@ -736,6 +762,32 @@ void PreAttack(State *S, int serang, int defend)
         }
     }
     Serang(ElmtTab(ArrayBangunan(*S), serang)) = true;
+    //pengecekan penambahan skill
+    if (akuisisi){
+        if (Turn(Player1(*S))){
+            //Cek dapet extra turn
+            if (Type(ElmtTab(ArrayBangunan(*S), defend)) == 'F' ){
+                Add(&QSkill(Player2(*S)), 3);
+                printf("Player 2 mendapatkan Skill Extra Turn \n");
+            }
+            //cek dapet barrage
+            if (NbElmtList(ListIdxBangunan(Player1(*S))) == 10){
+                Add(&QSkill(Player2(*S)), 7);
+                printf("Player 2 mendatapkan Skill Barrage \n");
+            }
+        } else if(Turn(Player2(*S))) {
+            //Cek dapet extra turn
+            if (Type(ElmtTab(ArrayBangunan(*S), defend)) == 'F' ){
+                Add(&QSkill(Player1(*S)), 3);
+                printf("Player 1 mendapatkan Skill Extra Turn \n");
+            }
+            //cek dapet barrage
+            if (NbElmtList(ListIdxBangunan(Player2(*S))) == 10){
+                Add(&QSkill(Player1(*S)), 7);
+                printf("Player 1 mendatapkan Skill Barrage \n");
+            }
+        }
+    }
 }
 
 void Attack(State *S, Graph G)
