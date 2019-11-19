@@ -47,65 +47,72 @@ void NaikLevel (Bangunan *B)
 /* F.S Bangunan naik 1 level dengan pertambahan 
         pasukan sesuai dengan levelnya */
 {
-    if (Type(*B) == 'C'){
-        if (Level(*B) == 1) {
-            Pasukan(*B) = Pasukan(*B) - M(*B)/2;
-            A(*B) = 15;
-            M(*B) = 60;
-        } else if (Level(*B) == 2) {
-            Pasukan(*B) = Pasukan(*B) - M(*B)/2;
-            A(*B) = 20;
-            M(*B) = 80;
-        } else if (Level(*B) == 3) {
-            Pasukan(*B) = Pasukan(*B) - M(*B)/2;
-            A(*B) = 25;
-            M(*B) = 100;
+    if (IsNaikLevel(*B)){
+        if (Type(*B) == 'C'){
+            if (Level(*B) == 1) {
+                Pasukan(*B) = Pasukan(*B) - M(*B)/2;
+                A(*B) = 15;
+                M(*B) = 60;
+            } else if (Level(*B) == 2) {
+                Pasukan(*B) = Pasukan(*B) - M(*B)/2;
+                A(*B) = 20;
+                M(*B) = 80;
+            } else if (Level(*B) == 3) {
+                Pasukan(*B) = Pasukan(*B) - M(*B)/2;
+                A(*B) = 25;
+                M(*B) = 100;
+            }
+        } else if (Type(*B) == 'T'){
+            if (Level(*B) == 1) {
+                Pasukan(*B) = Pasukan(*B) - M(*B)/2;
+                A(*B) = 10;
+                M(*B) = 30;
+            } else if (Level(*B) == 2) {
+                Pasukan(*B) = Pasukan(*B) - M(*B)/2;
+                A(*B) = 20;
+                M(*B) = 40;
+            } else if (Level(*B) == 3) {
+                Pasukan(*B) = Pasukan(*B) - M(*B)/2;
+                A(*B) = 30;
+                M(*B) = 50;
+            }
+        } else if (Type(*B) == 'F'){
+            if (Level(*B) == 1) {
+                Pasukan(*B) = Pasukan(*B) - M(*B)/2;
+                A(*B) = 20;
+                M(*B) = 40;
+            } else if (Level(*B) == 2) {
+                Pasukan(*B) = Pasukan(*B) - M(*B)/2;
+                A(*B) = 30;
+                M(*B) = 60;
+                Pertahanan(*B) = true;
+            } else if (Level(*B) == 3) {
+                Pasukan(*B) = Pasukan(*B) - M(*B)/2;
+                A(*B) = 40;
+                M(*B) = 80;
+            }
+        } else if (Type(*B) == 'V'){
+            if (Level(*B) == 1) {
+                Pasukan(*B) = Pasukan(*B) - M(*B)/2;
+                A(*B) = 10;
+                M(*B) = 30;
+            } else if (Level(*B) == 2) {
+                Pasukan(*B) = Pasukan(*B) - M(*B)/2;
+                A(*B) = 15;
+                M(*B) = 40;
+            } else if (Level(*B) == 3) {
+                Pasukan(*B) = Pasukan(*B) - M(*B)/2;
+                A(*B) = 20;
+                M(*B) = 50;
+            }
         }
-    } else if (Type(*B) == 'T'){
-        if (Level(*B) == 1) {
-            Pasukan(*B) = Pasukan(*B) - M(*B)/2;
-            A(*B) = 10;
-            M(*B) = 30;
-        } else if (Level(*B) == 2) {
-            Pasukan(*B) = Pasukan(*B) - M(*B)/2;
-            A(*B) = 20;
-            M(*B) = 40;
-        } else if (Level(*B) == 3) {
-            Pasukan(*B) = Pasukan(*B) - M(*B)/2;
-            A(*B) = 30;
-            M(*B) = 50;
-        }
-    } else if (Type(*B) == 'F'){
-        if (Level(*B) == 1) {
-            Pasukan(*B) = Pasukan(*B) - M(*B)/2;
-            A(*B) = 20;
-            M(*B) = 40;
-        } else if (Level(*B) == 2) {
-            Pasukan(*B) = Pasukan(*B) - M(*B)/2;
-            A(*B) = 30;
-            M(*B) = 60;
-            Pertahanan(*B) = true;
-        } else if (Level(*B) == 3) {
-            Pasukan(*B) = Pasukan(*B) - M(*B)/2;
-            A(*B) = 40;
-            M(*B) = 80;
-        }
-    } else if (Type(*B) == 'V'){
-        if (Level(*B) == 1) {
-            Pasukan(*B) = Pasukan(*B) - M(*B)/2;
-            A(*B) = 10;
-            M(*B) = 30;
-        } else if (Level(*B) == 2) {
-            Pasukan(*B) = Pasukan(*B) - M(*B)/2;
-            A(*B) = 15;
-            M(*B) = 40;
-        } else if (Level(*B) == 3) {
-            Pasukan(*B) = Pasukan(*B) - M(*B)/2;
-            A(*B) = 20;
-            M(*B) = 50;
-        }
+        Level(*B)+=1;
+        printf("Level Bangunanmu meningkat menjadi %d !\n", Level(*B));
+    } else if (Level(*B) == 4){
+        printf("Level Bangunan sudah maksimal !\n");
+    } else {
+        printf("Pasukkan tidak cukup untuk naik level.\n");
     }
-    Level(*B)+=1;
 }
 
 void AddNextTurn (Bangunan * B)

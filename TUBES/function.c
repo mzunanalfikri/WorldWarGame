@@ -33,13 +33,31 @@ bertambah, namun menjadi nilai maksimum.
 Pemain mendapat skill ini jika setelah sebuah lawan menyerang, bangunan pemain
 berkurang 1 menjadi sisa 2.*/
 
-void EndTurn (Player *P1, Player *P2){
-    Turn(*P1) = false;
-    Turn(*P2) = true;
-    //teuinggg
-}
-/*I.S. : turn P1=true*/
-/*F.S. : setelah end_turn, turn P2=true, P1=false*/
+void EndTurn (State *S)
+/* kondisi P1 saat ini : P2 turn true, setiap bangunan di P2 bertambah pasukannya */
+/* kondisi P2 saat ini : P1 trun true, setiap bangunan di P1 bertambah pasukannya */
+ {
+     addresslist P;
+     if (Turn(Player1(*S))){
+         Turn(Player1(*S)) = false;
+         Turn(Player2(*S)) = true;
+         P = First(ListIdxBangunan(Player2(*S)));
+         while (P != NULL){
+             AddNextTurn(&ElmtTab(ArrayBangunan(*S), Info(P)));
+             P = Next(P);
+         }
+         printf("Player 2's Turn !\n");
+     } else if (Turn(Player2(*S))) {
+         Turn(Player2(*S)) = false;
+         Turn(Player1(*S)) = true;
+         P = First(ListIdxBangunan(Player1(*S)));
+         while (P != NULL){
+             AddNextTurn(&ElmtTab(ArrayBangunan(*S), Info(P)));
+             P = Next(P);
+         }
+         printf("Player 1's Turn !\n");
+     } 
+ }
 
 void ExtraTurn (State *S){
 
@@ -116,44 +134,80 @@ boolean IsBarrage (State SMusuh){
     }
 }
 
-/* START TURN */
-void StartTurn(State *S, MATRIKS Map){
-    Turn(Player1(*S)) = true;
-    CetakMatiksWarna(Map, *S);
-    
-    printf("%s%c", RED, 'P');
-    printf("%s", NORMAL);
-    printf("%s%c", RED, 'L');
-    printf("%s", NORMAL);
-    printf("%s%c", RED, 'A');
-    printf("%s", NORMAL);
-    printf("%s%c", RED, 'Y');
-    printf("%s", NORMAL);
-    printf("%s%c", RED, 'E');
-    printf("%s", NORMAL);
-    printf("%s%c", RED, 'R');
-    printf("%s", NORMAL);
-    printf("%s%c", RED, ' ');
-    printf("%s", NORMAL);
-    printf("%s%c", RED, '1');
-    printf("%s", NORMAL);
-    printf("\n");
 
-    addresslist P;
-    int count;
-    P = First(ListIdxBangunan(Player1(*S)));
-    count = 1;
-    while (P != NULL){
-        printf("%d. ", count);
-        PrintBangunan(ElmtTab(ArrayBangunan(*S), Info(P)));
-        P = Next(P);
+void StatusPlayer(State S, MATRIKS Map)
+/* prosedur untuk menampilkan status player (map, bangunan, skill) */
+{
+    if (Turn(Player1(S))){
+        CetakMatiksWarna(Map, S);
+        
+        printf("%s%c", RED, 'P');
+        printf("%s", NORMAL);
+        printf("%s%c", RED, 'L');
+        printf("%s", NORMAL);
+        printf("%s%c", RED, 'A');
+        printf("%s", NORMAL);
+        printf("%s%c", RED, 'Y');
+        printf("%s", NORMAL);
+        printf("%s%c", RED, 'E');
+        printf("%s", NORMAL);
+        printf("%s%c", RED, 'R');
+        printf("%s", NORMAL);
+        printf("%s%c", RED, ' ');
+        printf("%s", NORMAL);
+        printf("%s%c", RED, '1');
+        printf("%s", NORMAL);
+        printf("\n");
+
+        printf("Daftar Bangunan : \n");
+        addresslist P;
+        int count;
+        P = First(ListIdxBangunan(Player1(S)));
+        count = 1;
+        while (P != NULL){
+            printf("%d. ", count);
+            PrintBangunan(ElmtTab(ArrayBangunan(S), Info(P)));
+            P = Next(P);
+            count++;
+        }
+
+        PrintQSkill(QSkill(Player1(S)));
+    } else if (Turn(Player2(S))) {
+        CetakMatiksWarna(Map, S);
+        
+        printf("%s%c", BLUE, 'P');
+        printf("%s", NORMAL);
+        printf("%s%c", BLUE, 'L');
+        printf("%s", NORMAL);
+        printf("%s%c", BLUE, 'A');
+        printf("%s", NORMAL);
+        printf("%s%c", BLUE, 'Y');
+        printf("%s", NORMAL);
+        printf("%s%c", BLUE, 'E');
+        printf("%s", NORMAL);
+        printf("%s%c", BLUE, 'R');
+        printf("%s", NORMAL);
+        printf("%s%c", BLUE, ' ');
+        printf("%s", NORMAL);
+        printf("%s%c", BLUE, '2');
+        printf("%s", NORMAL);
+        printf("\n");
+
+        printf("Daftar Bangunan : \n");
+        addresslist P;
+        int count;
+        P = First(ListIdxBangunan(Player2(S)));
+        count = 1;
+        while (P != NULL){
+            printf("%d. ", count);
+            PrintBangunan(ElmtTab(ArrayBangunan(S), Info(P)));
+            P = Next(P);
+            count++;
+        }
+
+        PrintQSkill(QSkill(Player2(S)));
     }
-
-    PrintQSkill(QSkill(Player1(*S)));
-
-
 }
-
 /* **** ATTACK MECHANISM *** */
 
 // Fungsi untuk cetak matriks dengan warna
@@ -189,7 +243,9 @@ void CetakMatiksWarna(MATRIKS M, State S)
     printf("\n");
 }
 
-void EnterCommad(State S){
+void EnterCommad(State S)
+/* prosedur untuk mencetak warna enter command sesuai playar */
+{
     if (Turn(Player1(S))){
         printf("%s%c", RED, 'E');
         printf("%s", NORMAL);
@@ -251,4 +307,54 @@ void EnterCommad(State S){
         printf("%s", NORMAL);
         printf(" ");
     }
+}
+
+/************/
+/* LEVEL UP */
+/************/
+void ChooseBangunanPlayer(State S, int * x, boolean player1)
+/* F.S. X menjadi indeks bangunan yang dipilih pemain */
+{
+    int temp;
+    int indeks[30];
+    printf("Daftar Bangunan : \n");
+    addresslist P;
+    int count;
+
+    P = First(ListIdxBangunan(Player2(S)));
+    if (player1){
+        P = First(ListIdxBangunan(Player1(S)));
+    }
+    count = 1;
+    while (P != NULL){
+        printf("%d. ", count);
+        PrintBangunan(ElmtTab(ArrayBangunan(S), Info(P)));
+        indeks[count] = Info(P);
+        P = Next(P);
+        count++;
+    }
+    printf("Bangunan yang akan dinaikkan levelnya : ");
+    scanf("%d", &temp);
+    while (temp >= count){
+        printf ("Masukan salah, Bangunan yang akan dinaikkan levelnya :");
+        scanf("%d", &temp);
+    }
+    *x = indeks[temp];
+}
+
+
+
+void LevelUp(State * S)
+/* Procedure untuk level up */
+{
+    int x;
+    if (Turn(Player1(*S))) {
+        ChooseBangunanPlayer(*S, &x, true);
+        //printf(" x : %d\n", x);
+        NaikLevel(&ElmtTab(ArrayBangunan(*S), x));
+    } else if (Turn(Player2(*S))) {
+        ChooseBangunanPlayer(*S, &x, false);
+        NaikLevel(&ElmtTab(ArrayBangunan(*S), x));
+    }
+    
 }

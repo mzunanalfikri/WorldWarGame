@@ -23,7 +23,8 @@ int main() {
 
     endgame = false;
     ReadKonfigurasiFile(&S, &Map, &G);
-    StartTurn(&S, Map);
+    Turn(Player1(S)) = true;
+    StatusPlayer(S, Map);
 
     while (!endgame){
         EnterCommad(S);
@@ -31,13 +32,14 @@ int main() {
         if (IsEQCKataString("ATTACK")){
             printf("menampilkan attack mechanism\n");
         } else if (IsEQCKataString("LEVEL_UP")){
-            printf("levelup mechanism\n");
+            LevelUp(&S);
         } else if (IsEQCKataString("SKILL")){
             printf("skill \n");
         } else if (IsEQCKataString("UNDO")) {
             printf("Undo \n");
         } else if (IsEQCKataString("END_TURN")){
-            printf("end turn \n");
+            EndTurn(&S);
+            StatusPlayer(S,Map);
         } else if (IsEQCKataString("MOVE")){
             printf("MOVE \n");
         } else if (IsEQCKataString("EXIT")){
@@ -46,6 +48,8 @@ int main() {
             CetakMatiksWarna(Map, S);
         } else if(IsEQCKataString("PRINT_ALL_BANGUNAN")){
             PrintAllBangunan(ArrayBangunan(S));
+        } else if (IsEQCKataString("STATUS")) {
+            StatusPlayer(S, Map);
         }
         // disini lakukan pengecekan skiil bertamah
         //cek juga ada yang kalah atau enggak
