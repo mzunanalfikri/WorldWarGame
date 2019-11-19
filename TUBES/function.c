@@ -20,26 +20,60 @@ void NambahSkill(State *S){
         if(IsShield(*S)){
             Add(&QSkill(Player1(*S)),2);
         }
-        else if(IsExtraTurn(*S)){
+        if(IsExtraTurn(*S)){
             Add(&QSkill(Player1(*S)),3);
         }
-        else if(IsAttackUp(*S)){
+        if(IsAttackUp(*S)){
             Add(&QSkill(Player1(*S)),4);
         }
-        else if(IsCriticalHit(*S)){
+        if(IsCriticalHit(*S)){
             Add(&QSkill(Player1(*S)),5);
         }
-        else if(IsIR(*S)){
+        if(IsIR(*S)){
             Add(&QSkill(Player1(*S)),6);
         }
-        else if(IsBarrage(*S)){
+        if(IsBarrage(*S)){
             Add(&QSkill(Player1(*S)),7);
+        }
+    }else if(Turn(Player2(*S))){
+        if(IsShield(*S)){
+            Add(&QSkill(Player2(*S)),2);
+        }
+        if(IsExtraTurn(*S)){
+            Add(&QSkill(Player2(*S)),3);
+        }
+        if(IsAttackUp(*S)){
+            Add(&QSkill(Player2(*S)),4);
+        }
+        if(IsCriticalHit(*S)){
+            Add(&QSkill(Player2(*S)),5);
+        }
+        if(IsIR(*S)){
+            Add(&QSkill(Player2(*S)),6);
+        }
+        if(IsBarrage(*S)){
+            Add(&QSkill(Player2(*S)),7);
         }
     }
 }
 void InstantUpgrade (State *S){
-    for(int i=1;i<=NbElmtTabArray(ArrayBangunan(*S));i++){
-        NaikLevel(&ElmtTab((ArrayBangunan(*S)),i));
+    addresslist P1,P2;
+    if(Turn(Player1(*S))){
+        P1 = First(ListIdxBangunan(Player1(*S)));
+        while(P1 != NULL){
+            NaikLevel(ElmtTab(ArrayBangunan(*S),Info(P1));
+            P1=Next(ListIdxBangunan(Player1(*S)));
+        }
+        printf("Your Instant Upgrade Skill has been used\n");
+        printf("All of your building's level have been upgraded\n");
+    }else i (Turn(Player2(*S))){
+        P2 = First(ListIdxBangunan(Player2(*S)));
+        while(P2 != NULL){
+            NaikLevel(ElmtTab(ArrayBangunan(*S),Info(P2));
+            P2=Next(ListIdxBangunan(Player2(*S)));
+        }
+        printf("Your Instant Upgrade Skill has been used\n");
+        printf("All of your building's level have been upgraded\n");
     }
 }
 /*Seluruh bangunan yang dimiliki pemain akan naik 1 level.
@@ -48,11 +82,11 @@ Pemain tidak akan mendapat skill ini selain dari daftar skill awal.*/
 void Shield (State *S){ //bonus
 
 }
-/*Seluruh bangunan yang dimiliki oleh pemain akan memiliki pertahanan selama 2
+/*
+Seluruh bangunan yang dimiliki oleh pemain akan memiliki pertahanan selama 2
 turn lawan. Apabila skill ini digunakan 2 kali berturut-turut, durasi tidak akan
 bertambah, namun menjadi nilai maksimum.
-Pemain mendapat skill ini jika setelah sebuah lawan menyerang, bangunan pemain
-berkurang 1 menjadi sisa 2.*/
+*/
 boolean IsShield (State S){
 
 }
@@ -97,11 +131,13 @@ void ExtraTurn (State *S){
 }
 /*Setelah giliran pengaktifan skill ini berakhir, pemain selanjutnya tetap pemain
 yang sama.
-Pemain mendapat skill ini jika Fort pemain tersebut direbut lawan.
 */
-boolean IsExtraTurn (State S){
+boolean IsExtraTurn (State S, StackState St){
 
 }
+/*
+Pemain mendapat skill ini jika Fort pemain tersebut direbut lawan.
+*/
 
 void AttackUp (State *S){ //bonus
 
@@ -128,20 +164,39 @@ boolean IsCriticalHit (State S){
 
 }
 void InstantReinforcement (State *S){
-    for(int i=1;i<=NbElmtTabArray(ArrayBangunan(*S));i++){
-        Pasukan(ElmtTab((ArrayBangunan(*S)),i))+=5;
+    addresslist P1,P2;
+    if(Turn(Player1(*S))){
+        P1 = First(ListIdxBangunan(Player1(*S)));
+        while(P1 != NULL){
+            Pasukan(ElmtTab(ArrayBangunan(*S),Info(P1))+=5;
+            P1=Next(ListIdxBangunan(Player1(*S)));
+        }
+        printf("Your Instant Reinforcement Skill has been used\n");
+        printf("All of your building's army have been increased by 5\n");
+    }else i (Turn(Player2(*S))){
+        P2 = First(ListIdxBangunan(Player2(*S)));
+        while(P2 != NULL){
+            Pasukan(ElmtTab(ArrayBangunan(*S),Info(P2))+=5;
+            P2=Next(ListIdxBangunan(Player2(*S)));
+        }
+        printf("Your Instant Reinforcement Skill has been used\n");
+        printf("All of your building's army have been increased by 5\n");
     }
 }
-/*Seluruh bangunan mendapatkan tambahan 5 pasukan.
-Pemain mendapat skill ini di akhir gilirannya bila semua bangunan yang ia miliki
-memiliki level 4.*/
+/*
+Seluruh bangunan mendapatkan tambahan 5 pasukan.
+*/
 
 boolean IsIR (State S){
+    addresslist P;
     boolean four = true;
-    for(int i=1;i<=NbElmtTabArray(ArrayBangunan(S));i++){
-        if(Level(ElmtTab((ArrayBangunan(S)),i))!=4){
+    P = First(ListIdxBangunan(Player1(*S)));
+    while((P != NULL)&&(four==true)){
+        if(Level(ElmtTab(ArrayBangunan(*S),Info(P1))!=4){
             four = false;
-            break;
+        }
+        else{
+            P=Next(ListIdxBangunan(Player1(*S)));
         }
     }
     if(four){
@@ -150,11 +205,12 @@ boolean IsIR (State S){
         return false;
     }
 }
-
+/*
+Pemain mendapat skill ini di akhir gilirannya bila semua bangunan yang ia miliki
+memiliki level 4.
+*/
 void Barrage (State *SMusuh){
-    for(int i=1;i<=NbElmtTabArray(ArrayBangunan(*SMusuh));i++){
-        Pasukan(ElmtTab((ArrayBangunan(*SMusuh)),i))-=10;
-    }
+    
 }
 /*Jumlah pasukan pada seluruh bangunan musuh akan berkurang sebanyak 10
 pasukan.
@@ -162,11 +218,7 @@ Pemain mendapat skill ini jika lawan baru saja bertambah bangunannya menjadi
 10 bangunan.*/
 
 boolean IsBarrage (State SMusuh){
-    if(NbElmtTabArray(ArrayBangunan(SMusuh))==10){
-        return true;
-    }else{
-        return false;
-    }
+    
 }
 
 
