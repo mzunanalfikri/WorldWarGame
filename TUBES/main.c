@@ -47,6 +47,15 @@ int main() {
     Turn(Player1(S)) = true;
     StatusPlayer(S, Map);
 
+    //DEBUG
+    // addresslist P;
+    // P = First(ListIdxBangunan(Player2(S)));
+    // while (P != NULL){
+    //          printf("lalala\n");
+    //         printf("info p : %d\n", Info(P));
+    //         P = Next(P);
+    //      }
+
     while (!endgame){
         EnterCommad(S);
         ReadCmd();
@@ -61,6 +70,7 @@ int main() {
         } else if (IsEQCKataString("UNDO")) {
             printf("Undo \n");
         } else if (IsEQCKataString("END_TURN")){
+            AddIR(&S);
             EndTurn(&S, &extraTurn);
             StatusPlayer(S,Map);
         } else if (IsEQCKataString("MOVE")){

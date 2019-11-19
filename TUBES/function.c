@@ -88,10 +88,7 @@ void EndTurn (State *S, boolean *ExtraTurn)
 /* kondisi P2 saat ini : P1 trun true, setiap bangunan di P1 bertambah pasukannya */
  {
      addresslist P;
-     boolean IR;
-     IR = true;
      if (Turn(Player1(*S))){
-         printf("lalala\n");
          P = First(ListIdxBangunan(Player2(*S)));
          if (*ExtraTurn) {
              P = First(ListIdxBangunan(Player1(*S)));
@@ -100,22 +97,11 @@ void EndTurn (State *S, boolean *ExtraTurn)
             Turn(Player1(*S)) = false;
             Turn(Player2(*S)) = true;
          }
-         printf("lalala\n");
          while (P != NULL){
-             printf("lalala\n");
              AddNextTurn(&ElmtTab(ArrayBangunan(*S), Info(P)));
-            P = Next(P);
              Serang(ElmtTab(ArrayBangunan(*S), Info(P))) = false;
              Move(ElmtTab(ArrayBangunan(*S), Info(P))) = false;
-             //cek penambahan instant reinforcement
-             if (Level(ElmtTab(ArrayBangunan(*S), Info(P))) != 4){
-                 IR = false;
-             }
-         }
-         printf("lalala\n");
-         //menambahkan instant reinforcement
-         if (IR){
-             Add(&QSkill(Player1(*S)), 6);
+             P = Next(P);
          }
          //ingetin update nge false in serang di bangunannya
          //sama move juga
@@ -140,17 +126,9 @@ void EndTurn (State *S, boolean *ExtraTurn)
          }
          while (P != NULL){
              AddNextTurn(&ElmtTab(ArrayBangunan(*S), Info(P)));
-             P = Next(P);
              Serang(ElmtTab(ArrayBangunan(*S), Info(P))) = false;
              Move(ElmtTab(ArrayBangunan(*S), Info(P))) = false;
-             //cek penambahan instant reinforcement
-             if (Level(ElmtTab(ArrayBangunan(*S), Info(P))) != 4){
-                 IR = false;
-             }
-         }
-         //menambahkan instant reinforcement
-         if (IR){
-             Add(&QSkill(Player2(*S)), 6);
+             P = Next(P);
          }
          if (*ExtraTurn){
             printf("Extra Turn Activated, Player 2's Turn!\n ");
@@ -189,6 +167,31 @@ efektif sebanyak 2 kali lipat pasukan. Skill ini
 akan menonaktifkan Shield maupun pertahanan bangunan, seperti Attack Up.
 Pemain mendapat skill ini jika lawan baru saja mengaktifkan skill Extra Turn.
 */
+
+void AddIR (State *S){
+    addresslist P;
+    boolean four = true;
+    P = First(ListIdxBangunan(Player1(*S)));
+    if (Turn(Player2(*S))){
+        P = First(ListIdxBangunan(Player2(*S)));
+    }
+    while((P != NULL)&&(four==true)){
+        if(Level(ElmtTab(ArrayBangunan(*S),Info(P)))!=4){
+            four = false;
+        }
+        else{
+            P=Next(P);
+        }
+    }
+    if(four){
+        if (Turn(Player1(*S))){
+            Add(&QSkill(Player1(*S)), 6);
+        } else if (Turn(Player2(*S))) {
+            Add(&QSkill(Player2(*S)), 6);
+        }
+        printf("kamu dapat IR");
+    }
+}
 
 void InstantReinforcement (State *S)
 /*
@@ -731,7 +734,7 @@ void PreAttack(State *S, int serang, int defend)
     if (akuisisi){
         if (Turn(Player1(*S))){
             //Cek dapet extra turn
-            if (Type(ElmtTab(ArrayBangunan(*S), defend)) == 'F' ){
+            if (Type(ElmtTab(ArrayBangunan(*S), defend)) == 'F' && SearchB(ListIdxBangunan(Player2(*S)),defend)){
                 Add(&QSkill(Player2(*S)), 3);
                 printf("Player 2 mendapatkan Skill Extra Turn \n");
             }
@@ -742,7 +745,7 @@ void PreAttack(State *S, int serang, int defend)
             }
         } else if(Turn(Player2(*S))) {
             //Cek dapet extra turn
-            if (Type(ElmtTab(ArrayBangunan(*S), defend)) == 'F' ){
+            if (Type(ElmtTab(ArrayBangunan(*S), defend)) == 'F' && SearchB(ListIdxBangunan(Player1(*S)),defend) ){
                 Add(&QSkill(Player1(*S)), 3);
                 printf("Player 1 mendapatkan Skill Extra Turn \n");
             }
