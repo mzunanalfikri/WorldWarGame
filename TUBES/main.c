@@ -34,6 +34,7 @@ int main() {
         ReadCmd();
         if (IsEQCKataString("ATTACK")){
             printf("menampilkan attack mechanism\n");
+            Attack(&S, G);
         } else if (IsEQCKataString("LEVEL_UP")){
             LevelUp(&S);
         } else if (IsEQCKataString("SKILL")){
@@ -41,7 +42,7 @@ int main() {
         } else if (IsEQCKataString("UNDO")) {
             printf("Undo \n");
         } else if (IsEQCKataString("END_TURN")){
-            EndTurn(&S, extraTurn);
+            EndTurn(&S, &extraTurn);
             StatusPlayer(S,Map);
         } else if (IsEQCKataString("MOVE")){
             MovePasukan(&S, G);
