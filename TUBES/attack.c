@@ -6,12 +6,20 @@
 #include "state.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "boolean.h"
 
-
-
-
-
-void Attack(State *S){
+boolean IsPunyaHubungan(Graph G1,int Bangunan1,TabBangunan T2) {
+	int j = 1;
+	while(j <= NbElmtTabArray(T2)){
+		if (IsTerhubung(G1,Bangunan1,j)) {
+			return true; }
+		else {
+			j++; } } 
+	if (j > NbElmtTabArray(T2)) {
+		return false; }
+}
+		
+void Attack(State *S,Graph G){
 	int i = 1;
 	int j = 1;
 	int k = 1;
@@ -48,43 +56,52 @@ void Attack(State *S){
 	
 	/* PRE - ATTACK */ 
 		
-			
 	printf("Bangunan yang digunakan untuk menyerang: ");
 	scanf("%d",&X);
 	BangunanAtt = ElmtTab(T1,arrayAtt[X]);
-	printf("Daftar bangunan yang dapat diserang: \n");
-	while (j<NbElmtTabArray(T1)) {
-		if (ElmtTab(T1,j) == /* berhubungan dalam graph dengan bangunan X */) {
-			printf("%d. ",i);
-			PrintBangunan(ElmtTab(T1,j));
-			array_target[k] = j;
-			printf("\n");
-			i++; 
-			j++;
-			k++;	}
-		else {
-			j++; } }
-	printf("Bangunan yang diserang: ");
-	scanf("%d",&Y);
-	BangunanDef = ElmtTab(T1,array_target[Y]);
-	printf("Jumlah pasukan : ");
-	scanf("%d",&jml_pasukan);
-	pasukan_for_att = jml_pasukan;
-	
-	/* PROCESS SELAMA ATTACK BERLANGSUNG */
-	
-	if (pasukan_for_att >= Pasukan(BangunanDef)) {
-		InsVLast(&ListIdxBangunan(P1),array_target[Y]); 
-		Level(BangunanDef) = 1;
-		Pasukan(BangunanDef) = Pasukan(BangunanAtt) - pasukan_for_att;
-		if (Pertahanan(BangunanDef)) {
-			Pasukan(BangunanDef) = (0.75*pasukan_for_att)-pasukan_deff; }
-		else {
-			Pasukan(BangunanDef) = pasukan_for_att-pasukan_deff; } }
-	else if (pasukan_for_att < Pasukan(BangunanDef)) {
-		Pasukan(BangunanDef) = Pasukan(BangunanDef) - pasukan_for_att; } 
-	
+	if (IsPunyaHubungan(G,arrayAtt[X],T1)) {
+		printf("Daftar bangunan yang dapat diserang: \n");
+		while (j < NbElmtTabArray(T1)) {
+			if (IsTerhubung(G,arrayAtt[X],j)) {
+				printf("%d. ",i);
+				PrintBangunan(ElmtTab(T1,j));
+				array_target[k] = j;
+				printf("\n"); 
+				i++; 
+				j++;
+				k++;	}
+			else {
+				j++; } }
+		printf("Bangunan yang diserang: ");
+		scanf("%d",&Y);
+		BangunanDef = ElmtTab(T1,array_target[Y]);
+		printf("Jumlah pasukan : ");
+		scanf("%d",&jml_pasukan);
+		pasukan_for_att = jml_pasukan; 
+		
+		/* PROCESS SELAMA ATTACK BERLANGSUNG */
+		
+		if (pasukan_for_att >= Pasukan(BangunanDef)) {
+			Level(BangunanDef) = 1;
+			InsVLast(&ListIdxBangunan(P1),array_target[Y]); /* Berganti Kepemilikan */
+			Pasukan(BangunanAtt) = Pasukan(BangunanAtt) - pasukan_for_att;
+			Serang(BangunanAtt) = true;
+			if (Pertahanan(BangunanDef)) {
+				Pasukan(BangunanDef) = (0.75*pasukan_for_att)-pasukan_deff; }
+			else {
+				Pasukan(BangunanDef) = pasukan_for_att-pasukan_deff; } 
+				printf("Bangunan menjadi milikmu! "); }
+		else if ((pasukan_for_att) < Pasukan(BangunanDef)) {
+			Serang(BangunanAtt) = true;
+			Pasukan(BangunanDef) = Pasukan(BangunanDef) - pasukan_for_att; 
+			printf("Bangunan gagal direbut. "); } 
+		}
+			
+	/* Apabila BangunanAtt tidak memiliki keterhubungan sama sekali dengan bangunan lain */		
+	else {
+		printf("Tidak ada bangunan yang dapat diserang"); }
 
+	
 
 }
 
