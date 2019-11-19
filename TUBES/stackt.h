@@ -60,4 +60,7 @@ void PopState (StackState * S, State* X);
 void CopyStackState(StackState Sin, StackState *Sout);
 
 void EndTurnState(StackState* Sin);
+
+void Undo(StackState *S);
+
 #endif

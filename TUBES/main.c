@@ -35,6 +35,7 @@
 int main() {
     // DEKLARASI ADT YANG DIGUNAKAN
     State S;
+    StackState SStacks;
     MATRIKS Map;
     Graph G;
     
@@ -45,6 +46,7 @@ int main() {
     endgame = false;
     ReadKonfigurasiFile(&S, &Map, &G);
     Turn(Player1(S)) = true;
+    PushState(&SStacks, S);
     StatusPlayer(S, Map);
 
     //DEBUG
@@ -62,19 +64,26 @@ int main() {
         if (IsEQCKataString("ATTACK")){
             printf("menampilkan attack mechanism\n");
             Attack(&S, G);
+            PushState(&SStacks, S);
         } else if (IsEQCKataString("LEVEL_UP")){
             LevelUp(&S);
+            PushState(&SStacks, S);
         } else if (IsEQCKataString("SKILL")){
             printf("skill \n");
             Skill(&S, &extraTurn);
+            PushState(&SStacks, S);
         } else if (IsEQCKataString("UNDO")) {
             printf("Undo \n");
+            Undo(&SStacks);
+            CopyState(InfoTop(SStacks), &S);
         } else if (IsEQCKataString("END_TURN")){
             AddIR(&S);
             EndTurn(&S, &extraTurn);
             StatusPlayer(S,Map);
+            EndTurnState(&SStacks);
         } else if (IsEQCKataString("MOVE")){
             MovePasukan(&S, G);
+            PushState(&SStacks, S);
         } else if (IsEQCKataString("EXIT")){
             endgame = true;
         } else if (IsEQCKataString("MAP")){

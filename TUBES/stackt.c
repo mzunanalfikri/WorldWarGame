@@ -33,8 +33,14 @@ void PushState (StackState * S, State X)
 /* I.S. S mungkin kosong, tabel penampung elemen stack TIDAK penuh */
 /* F.S. X menjadi TOP yang baru,TOP bertambah 1 */
 {
-        Top(*S)++;
-        InfoTop(*S) = X;
+    // KAMUS
+    State NeoState;
+
+    // ALGORITMA
+    MakeState(&NeoState, MaxElArray(ArrayBangunan(X)));
+    CopyState(X, &NeoState);
+    Top(*S)++;
+    InfoTop(*S) = NeoState;
 }
 
 /* ************ Menghapus sebuah elemen Stack ************ */
@@ -72,4 +78,22 @@ void EndTurnState(StackState* Sin){
         PopState(Sin,&Temp);
     }
     PushState(Sin,Final);
+}
+
+void Undo(StackState *S){
+    StackState STemp;
+    State XTemp;
+
+    CreateEmptyStackState(&STemp);
+    CopyStackState(*S, &STemp);
+    PopState(&STemp, &XTemp);
+
+    //printf("Original stack is empty??? %s\n", (IsEmptyStackState(*S)? "YES" : "Thankfully not"));
+
+    if (IsEmptyStackState(STemp)) {
+        printf("You cannot undo past the point before your turn started.\n");
+    } else {
+        CopyStackState(STemp, S);
+        printf("Your previous action has been undone.\n");
+    }
 }
