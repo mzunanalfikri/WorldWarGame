@@ -61,16 +61,16 @@ void InstantUpgrade (State *S){
     if(Turn(Player1(*S))){
         P1 = First(ListIdxBangunan(Player1(*S)));
         while(P1 != NULL){
-            NaikLevel(ElmtTab(ArrayBangunan(*S),Info(P1));
-            P1=Next(ListIdxBangunan(Player1(*S)));
+            NaikLevel(&(ElmtTab(ArrayBangunan(*S),Info(P1))));
+            P1=Next(P1);
         }
         printf("Your Instant Upgrade Skill has been used\n");
         printf("All of your building's level have been upgraded\n");
-    }else i (Turn(Player2(*S))){
+    }else if (Turn(Player2(*S))){
         P2 = First(ListIdxBangunan(Player2(*S)));
         while(P2 != NULL){
-            NaikLevel(ElmtTab(ArrayBangunan(*S),Info(P2));
-            P2=Next(ListIdxBangunan(Player2(*S)));
+            NaikLevel(&(ElmtTab(ArrayBangunan(*S),Info(P2))));
+            P2=Next(P2);
         }
         printf("Your Instant Upgrade Skill has been used\n");
         printf("All of your building's level have been upgraded\n");
@@ -137,7 +137,7 @@ void ExtraTurn (State *S){
 /*Setelah giliran pengaktifan skill ini berakhir, pemain selanjutnya tetap pemain
 yang sama.
 */
-boolean IsExtraTurn (State S, StackState St){
+boolean IsExtraTurn (State S){
 
 }
 /*
@@ -173,16 +173,16 @@ void InstantReinforcement (State *S){
     if(Turn(Player1(*S))){
         P1 = First(ListIdxBangunan(Player1(*S)));
         while(P1 != NULL){
-            Pasukan(ElmtTab(ArrayBangunan(*S),Info(P1))+=5;
-            P1=Next(ListIdxBangunan(Player1(*S)));
+            Pasukan(ElmtTab(ArrayBangunan(*S),Info(P1)))+=5;
+            P1=Next(P1);
         }
         printf("Your Instant Reinforcement Skill has been used\n");
         printf("All of your building's army have been increased by 5\n");
-    }else i (Turn(Player2(*S))){
+    }else if (Turn(Player2(*S))){
         P2 = First(ListIdxBangunan(Player2(*S)));
         while(P2 != NULL){
-            Pasukan(ElmtTab(ArrayBangunan(*S),Info(P2))+=5;
-            P2=Next(ListIdxBangunan(Player2(*S)));
+            Pasukan(ElmtTab(ArrayBangunan(*S),Info(P2)))+=5;
+            P2=Next(P2);
         }
         printf("Your Instant Reinforcement Skill has been used\n");
         printf("All of your building's army have been increased by 5\n");
@@ -195,13 +195,13 @@ Seluruh bangunan mendapatkan tambahan 5 pasukan.
 boolean IsIR (State S){
     addresslist P;
     boolean four = true;
-    P = First(ListIdxBangunan(Player1(*S)));
+    P = First(ListIdxBangunan(Player1(S)));
     while((P != NULL)&&(four==true)){
-        if(Level(ElmtTab(ArrayBangunan(*S),Info(P1))!=4){
+        if(Level(ElmtTab(ArrayBangunan(S),Info(P)))!=4){
             four = false;
         }
         else{
-            P=Next(ListIdxBangunan(Player1(*S)));
+            P=Next(P);
         }
     }
     if(four){
