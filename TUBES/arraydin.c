@@ -122,6 +122,7 @@ void PrintAllBangunan(TabBangunan B)
     int pertahanan;
     int serang;
     int netral;
+    int move;
     
     for (int i = 1 ; i <= GetLastIdx(B) ; i++){
         if (Pertahanan(ElmtTab(B, i))){
@@ -133,9 +134,12 @@ void PrintAllBangunan(TabBangunan B)
         if (Netral(ElmtTab(B, i))){
             netral = 1;
         } else { netral = 0; }
-        printf("%d. %c | (%d,%d) | Pasukan : %d | Level : %d | A : %d | M : %d | Pertahanan : %d | Serang : %d | Netral : %d \n", 
+        if (Move(ElmtTab(B, i))){
+            move = 1;
+        } else { move = 0; }
+        printf("%d. %c | (%d,%d) | Pasukan : %d | Level : %d | A : %d | M : %d | Pertahanan : %d | Serang : %d | Netral : %d | Move : %d \n", 
         i, Type(ElmtTab(B, i)), Absis(Posisi(ElmtTab(B, i))), Ordinat(Posisi(ElmtTab(B, i))), Pasukan(ElmtTab(B, i)), Level(ElmtTab(B, i)),
-        A(ElmtTab(B, i)), M(ElmtTab(B, i)), pertahanan, serang, netral);
+        A(ElmtTab(B, i)), M(ElmtTab(B, i)), pertahanan, serang, netral, move);
     }
 
 }

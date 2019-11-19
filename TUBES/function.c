@@ -48,7 +48,11 @@ void EndTurn (State *S)
          }
          //ingetin update nge false in serang di bangunannya
          //sama move juga
-         printf("Player 2's Turn !\n");
+         printf("\n");
+         printf("===================================\n");
+         printf("======== Player 2's Turn ! ========\n");
+         printf("===================================\n");
+         printf("\n");
      } else if (Turn(Player2(*S))) {
          Turn(Player2(*S)) = false;
          Turn(Player1(*S)) = true;
@@ -57,7 +61,11 @@ void EndTurn (State *S)
              AddNextTurn(&ElmtTab(ArrayBangunan(*S), Info(P)));
              P = Next(P);
          }
-         printf("Player 1's Turn !\n");
+         printf("\n");
+         printf("===================================\n");
+         printf("======== Player 1's Turn ! ========\n");
+         printf("===================================\n");
+         printf("\n");
      } 
  }
 
@@ -314,11 +322,11 @@ void EnterCommad(State S)
 /************/
 /* LEVEL UP */
 /************/
-void ChooseBangunanPlayer(State S, int * x, boolean player1)
+void ChooseBangunanPlayerLevelUp(State S, int * x, boolean player1)
 /* F.S. X menjadi indeks bangunan yang dipilih pemain */
 {
     int temp;
-    int indeks[30];
+    int indeks[31];
     printf("Daftar Bangunan : \n");
     addresslist P;
     int count;
@@ -336,10 +344,14 @@ void ChooseBangunanPlayer(State S, int * x, boolean player1)
         count++;
     }
     printf("Bangunan yang akan dinaikkan levelnya : ");
-    scanf("%d", &temp);
+    //scanf("%d", &temp);
+    ReadCmd();
+    temp = KataToInt(CKata);
     while (temp >= count){
         printf ("Masukan salah, Bangunan yang akan dinaikkan levelnya :");
-        scanf("%d", &temp);
+        //scanf("%d", &temp);
+        ReadCmd();
+        temp = KataToInt(CKata);
     }
     *x = indeks[temp];
 }
@@ -351,12 +363,144 @@ void LevelUp(State * S)
 {
     int x;
     if (Turn(Player1(*S))) {
-        ChooseBangunanPlayer(*S, &x, true);
+        ChooseBangunanPlayerLevelUp(*S, &x, true);
         //printf(" x : %d\n", x);
         NaikLevel(&ElmtTab(ArrayBangunan(*S), x));
     } else if (Turn(Player2(*S))) {
-        ChooseBangunanPlayer(*S, &x, false);
+        ChooseBangunanPlayerLevelUp(*S, &x, false);
         NaikLevel(&ElmtTab(ArrayBangunan(*S), x));
     }
     
 }
+
+/************/
+/*   MOVE   */
+/************/
+void ChooseBangunanPlayerMove(State S,Graph G, int *pendonor, int*penerima, boolean player1)
+/* F.S. pendonor menjadi indeks bangunan yang mengirim, penerima menjadi bangunan yang 
+        dipilih */
+{
+    int donor[31];
+    int terima[31];
+    int temp;
+
+    //Pilih bangunan pendonor
+    printf("Daftar Bangunan : \n");
+    addresslist P;
+    int count;
+
+    P = First(ListIdxBangunan(Player2(S)));
+    if (player1){
+        P = First(ListIdxBangunan(Player1(S)));
+    }
+    count = 1;
+    while (P != NULL){
+        if (!Move(ElmtTab(ArrayBangunan(S), Info(P)))) {
+            printf("%d. ", count);
+            PrintBangunan(ElmtTab(ArrayBangunan(S), Info(P)));
+            donor[count] = Info(P);
+            count++;
+        }
+        P = Next(P);
+    }
+    if (count == 1){
+        printf("Tidak ada pasukan yang bisa di move. \n");
+        *pendonor = 0;
+    } else {
+        printf("Pilih bangunan : ");
+        //scanf("%d", &temp);
+        ReadCmd();
+        temp = KataToInt(CKata);
+        while (temp >= count || temp <= 0){
+            printf ("Masukan salah, Bangunan yang akan dinaikkan levelnya :");
+            //scanf("%d", &temp);
+            ReadCmd();
+            temp = KataToInt(CKata);
+        }
+        *pendonor = donor[temp];
+
+        //Pilih bangunan penerima
+        printf("Daftar bangunan terdekat : \n");
+        P = First(ListIdxBangunan(Player2(S)));
+        if (player1){
+            P = First(ListIdxBangunan(Player1(S)));
+        }
+        count = 1;
+        while (P != NULL){
+            if (IsTerhubung(G, *pendonor, Info(P))) {
+                printf("%d. ", count);
+                PrintBangunan(ElmtTab(ArrayBangunan(S), Info(P)));
+                terima[count] = Info(P);
+                count++;
+            }
+            P = Next(P);
+        }
+        if (count == 1){
+            printf("Tidak ada bangunan terdekat.\n");
+            *penerima = 0;
+        } else {
+            printf("Bangunan yang akan menerima : ");
+            //scanf("%d", &temp);
+            ReadCmd();
+            temp = KataToInt(CKata);
+            while (temp >= count || temp <= 0){
+                printf ("Masukan salah, Bangunan yang akan dinaikkan levelnya :");
+                //scanf("%d", &temp);
+                ReadCmd();
+                temp = KataToInt(CKata);
+            }
+            *penerima = terima[temp];
+        }
+    }
+    //cek list player, Terhubung(pendonor, bangunan yang ada di list), if true, tampilkan
+}
+
+void MovePasukaB1B2(State *S, int pendonor, int penerima)
+/* Fungsi transisi untuk move pasukan */
+{
+    int x;
+    printf("Jumlah pasukan : ");
+    ReadCmd();
+    x = KataToInt(CKata);
+    while (Pasukan(ElmtTab(ArrayBangunan(*S), pendonor)) < x) {
+        printf("Jumlah pasukan tidak valid, masukkan pasukan lagi : ");
+        ReadCmd();
+        x = KataToInt(CKata);
+    }
+    Pasukan(ElmtTab(ArrayBangunan(*S), pendonor)) = Pasukan(ElmtTab(ArrayBangunan(*S), pendonor)) - x;
+    Pasukan(ElmtTab(ArrayBangunan(*S), penerima)) = Pasukan(ElmtTab(ArrayBangunan(*S), penerima)) + x;
+    printf("%d Pasukan dari ", x);
+    PrintTipeBangunan(Type(ElmtTab(ArrayBangunan(*S), pendonor)));
+    printf(" ");
+    TulisPOINT(Posisi(ElmtTab(ArrayBangunan(*S), pendonor)));
+    printf(" telah berpindah ke ");
+    PrintTipeBangunan(Type(ElmtTab(ArrayBangunan(*S), penerima)));
+    printf(" ");
+    TulisPOINT(Posisi(ElmtTab(ArrayBangunan(*S), penerima)));
+    printf("\n");
+}
+
+void MovePasukan(State *S, Graph G)
+/* Procedure untuk memindahkan pasukan dari bangunan satu ke lainnya */
+{
+    int pendonor;
+    int penerima;
+    if (Turn(Player1(*S))) {
+        ChooseBangunanPlayerMove(*S, G, &pendonor, &penerima, true );
+        printf("pendonor  : %d | penerima : %d \n", pendonor, penerima);
+        if (pendonor == 0 || penerima == 0){
+            printf("Move gagal.\n");
+        } else {
+            MovePasukaB1B2(S, pendonor, penerima);
+        }
+        //printf(" x : %d\n", x);
+    } else if (Turn(Player2(*S))) {
+        ChooseBangunanPlayerMove(*S, G, &pendonor, &penerima, false );
+        if (pendonor == 0 || penerima == 0){
+            printf("Move gagal.\n");
+        } else {
+            MovePasukaB1B2(S, pendonor, penerima);
+        }
+    }
+}
+        
