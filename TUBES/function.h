@@ -99,7 +99,7 @@ void EnterCommad(State S);
 /************/
 /* LEVEL UP */
 /************/
-void ChooseBangunanPlayer(State S, int *x);
+void ChooseBangunanPlayer(State S, int *x, boolean player1);
 /* F.S. X menjadi indeks bangunan yang dipilih pemain */
 
 void LevelUp(State * S);

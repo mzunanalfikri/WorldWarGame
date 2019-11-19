@@ -107,11 +107,17 @@ void NaikLevel (Bangunan *B)
             }
         }
         Level(*B)+=1;
-        printf("Level Bangunanmu meningkat menjadi %d !\n", Level(*B));
+        printf("Level ");
+        PrintTipeBangunan(Type(*B));
+        printf("-mu meningkat menjadi %d !\n", Level(*B));
     } else if (Level(*B) == 4){
-        printf("Level Bangunan sudah maksimal !\n");
+        printf("Level ");
+        PrintTipeBangunan(Type(*B));
+        printf(" sudah maksimal !\n");
     } else {
-        printf("Pasukkan tidak cukup untuk naik level.\n");
+        printf("Jumlah Pasukkan ");
+        PrintTipeBangunan(Type(*B));
+        printf(" tidak cukup untuk naik level.\n");
     }
 }
 
@@ -152,3 +158,17 @@ void PrintBangunan (Bangunan B)
     }
 }
 
+void PrintTipeBangunan (char C)
+/* I.S. Sembarang */
+/* F.S. Tercetak bangunan sesuai TIpenya */
+{
+    if (C == 'C'){
+        printf("Castle");
+    } else if (C == 'V') {
+        printf("Village");
+    } else if (C == 'F') {
+        printf("Fort");
+    } else if (C == 'T'){
+        printf("Tower");
+    }
+}

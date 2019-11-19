@@ -46,6 +46,8 @@ void EndTurn (State *S)
              AddNextTurn(&ElmtTab(ArrayBangunan(*S), Info(P)));
              P = Next(P);
          }
+         //ingetin update nge false in serang di bangunannya
+         //sama move juga
          printf("Player 2's Turn !\n");
      } else if (Turn(Player2(*S))) {
          Turn(Player2(*S)) = false;
