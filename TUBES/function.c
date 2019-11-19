@@ -20,11 +20,15 @@ void Skill(State *S, boolean * ExtraTurn)
 {
     int Skil;
     Player P;
-    P = Player1(*S);
-    if (Turn(Player2(*S))){
-        P = Player2(*S);
+    // P = Player1(*S);
+    // if (Turn(Player2(*S))){
+    //     P = Player2(*S);
+    // }
+    if (Turn(Player1(*S))){
+        Del(&QSkill(Player1(*S)), &Skil);
+    } else if (Turn(Player2(*S))){
+        Del(&QSkill(Player2(*S)), &Skil);
     }
-    Del(&QSkill(P), &Skil);
     if (Skil == 1){
         //manggil Instant upgrade
         InstantUpgrade(S);
@@ -43,6 +47,7 @@ void Skill(State *S, boolean * ExtraTurn)
     } else if (Skil == 7) {
         //manggil barrage
     }
+    //skill dipanggil kosongin stack state
 }
 
 void InstantUpgrade (State *S){
@@ -86,7 +91,7 @@ void EndTurn (State *S, boolean *ExtraTurn)
      boolean IR;
      IR = true;
      if (Turn(Player1(*S))){
-         
+         printf("lalala\n");
          P = First(ListIdxBangunan(Player2(*S)));
          if (*ExtraTurn) {
              P = First(ListIdxBangunan(Player1(*S)));
@@ -95,9 +100,11 @@ void EndTurn (State *S, boolean *ExtraTurn)
             Turn(Player1(*S)) = false;
             Turn(Player2(*S)) = true;
          }
+         printf("lalala\n");
          while (P != NULL){
+             printf("lalala\n");
              AddNextTurn(&ElmtTab(ArrayBangunan(*S), Info(P)));
-             P = Next(P);
+            P = Next(P);
              Serang(ElmtTab(ArrayBangunan(*S), Info(P))) = false;
              Move(ElmtTab(ArrayBangunan(*S), Info(P))) = false;
              //cek penambahan instant reinforcement
@@ -105,6 +112,7 @@ void EndTurn (State *S, boolean *ExtraTurn)
                  IR = false;
              }
          }
+         printf("lalala\n");
          //menambahkan instant reinforcement
          if (IR){
              Add(&QSkill(Player1(*S)), 6);
