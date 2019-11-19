@@ -77,4 +77,5 @@ void IU(Bangunan *B);
 /* I.S. Sembarang */
 /* F.S. Bangunan naik level secara instant */
 
+void BackToLv1(Bangunan *B);
 #endif

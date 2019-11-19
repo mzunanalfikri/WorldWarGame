@@ -55,6 +55,7 @@ int main() {
             Attack(&S, G);
         } else if (IsEQCKataString("LEVEL_UP")){
             LevelUp(&S);
+            addIR(&S);
         } else if (IsEQCKataString("SKILL")){
             printf("skill \n");
             Skill(&S, &extraTurn);

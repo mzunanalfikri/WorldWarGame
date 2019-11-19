@@ -182,3 +182,27 @@ void IU(Bangunan *B)
         Level(*B) += 1;
     }
 }
+
+void BackToLv1(Bangunan *B)
+/* I.S. Sembarang */
+/* F.S. Bangunan naik level secara instant */
+{
+    Level(*B) = 1;
+    Serang(*B) = false;
+    Pertahanan(*B) = false;
+    Move(*B) = false;
+    if (Type(*B) == 'C'){
+        A(*B) = 10;
+        M(*B) = 40;
+    } else if (Type(*B) == 'T') {
+        A(*B) = 5;
+        M(*B) = 20;
+        Pertahanan(*B) = true;
+    } else if (Type(*B) == 'F') {
+        A(*B) = 10;
+        M(*B) = 20;
+    } else if (Type(*B) == 'V'){
+        A(*B) = 5;
+        M(*B) = 20;
+    }
+}
