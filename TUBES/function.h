@@ -129,7 +129,7 @@ void ChooseBangunanPlayerAttack(State S, Graph G, int *serang, int *defend, bool
 /* F.S. serang menjadi indeks bangunan penyerang, defend menjadi indeks bangunan
         yang bertahan */
 
-void PreAttack(State *S, int pendonor, int penerima);
+void PreAttack(State *S, int serang, int defend);
 /* prosedur transisi untuk attack */
 
 void Attack(State *S, Graph G);

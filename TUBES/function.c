@@ -686,11 +686,58 @@ void ChooseBangunanPlayerAttack(State S, Graph G, int *serang, int *defend, bool
     }
 }
 
-void PreAttack(State *S, int pendonor, int penerima)
+void PreAttack(State *S, int serang, int defend)
 /* prosedur transisi untuk attack */
 {
- //true serang
+    int x;
+    printf("Jumlah pasukan : ");
+    ReadCmd();
+    x = KataToInt(CKata);
+    while (Pasukan(ElmtTab(ArrayBangunan(*S), serang)) < x || x < 0) {
+        printf("Jumlah pasukan tidak valid, masukkan pasukan lagi : ");
+        ReadCmd();
+        x = KataToInt(CKata);
+    }
+    if (Pertahanan(ElmtTab(ArrayBangunan(*S), defend))){
+        printf("lawan ada pertahanan \n");
+        if (x >= Pasukan(ElmtTab(ArrayBangunan(*S), defend))*4/3){
+            Pasukan(ElmtTab(ArrayBangunan(*S), serang)) -= x;
+            Pasukan(ElmtTab(ArrayBangunan(*S), defend)) = x - Pasukan(ElmtTab(ArrayBangunan(*S), defend))*4/3;
+            Netral(ElmtTab(ArrayBangunan(*S), defend)) = false;
+            if (Turn(Player1(*S))){
+                DelP(&ListIdxBangunan(Player2(*S)), defend);
+                InsVFirst(&ListIdxBangunan(Player1(*S)), defend);
+            } else if (Turn(Player2(*S))) {
+                DelP(&ListIdxBangunan(Player1(*S)), defend);
+                InsVFirst(&ListIdxBangunan(Player2(*S)), defend);
+            }
+        } else {
+            Pasukan(ElmtTab(ArrayBangunan(*S), serang)) -= x;
+            Pasukan(ElmtTab(ArrayBangunan(*S), defend)) -= x*3/4;
+            printf("Bangunan gagal direbut. \n");
+        }
+    } else {
+        printf("lawan ngga ada pertahanan\n");
+        if (x >= Pasukan(ElmtTab(ArrayBangunan(*S), defend))){
+            Pasukan(ElmtTab(ArrayBangunan(*S), serang)) -= x;
+            Pasukan(ElmtTab(ArrayBangunan(*S), defend)) = x - Pasukan(ElmtTab(ArrayBangunan(*S), defend));
+            Netral(ElmtTab(ArrayBangunan(*S), defend)) = false;
+            if (Turn(Player1(*S))){
+                DelP(&ListIdxBangunan(Player2(*S)), defend);
+                InsVFirst(&ListIdxBangunan(Player1(*S)), defend);
+            } else if (Turn(Player2(*S))) {
+                DelP(&ListIdxBangunan(Player1(*S)), defend);
+                InsVFirst(&ListIdxBangunan(Player2(*S)), defend);
+            }
+        } else {
+            Pasukan(ElmtTab(ArrayBangunan(*S), serang)) -= x;
+            Pasukan(ElmtTab(ArrayBangunan(*S), defend)) -= x;
+            printf("Bangunan gagal direbut. \n");
+        }
+    }
+    Serang(ElmtTab(ArrayBangunan(*S), serang)) = true;
 }
+
 void Attack(State *S, Graph G)
 /* Procedure untuk memindahkan pasukan dari bangunan satu ke lainnya */
 {
