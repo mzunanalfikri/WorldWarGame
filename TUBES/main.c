@@ -19,8 +19,11 @@ int main() {
     State S;
     MATRIKS Map;
     Graph G;
+    
     boolean endgame;
+    boolean extraTurn;
 
+    extraTurn = false;
     endgame = false;
     ReadKonfigurasiFile(&S, &Map, &G);
     Turn(Player1(S)) = true;
@@ -38,7 +41,7 @@ int main() {
         } else if (IsEQCKataString("UNDO")) {
             printf("Undo \n");
         } else if (IsEQCKataString("END_TURN")){
-            EndTurn(&S);
+            EndTurn(&S, extraTurn);
             StatusPlayer(S,Map);
         } else if (IsEQCKataString("MOVE")){
             MovePasukan(&S, G);

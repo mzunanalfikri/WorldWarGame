@@ -46,7 +46,7 @@ berkurang 1 menjadi sisa 2.*/
 
 boolean IsShield (State S);
 
-void EndTurn (State *S);
+void EndTurn (State *S, boolean ExtraTurn);
 /* kondisi P1 saat ini : P2 turn true, setiap bangunan di P2 bertambah pasukannya */
 /* kondisi P2 saat ini : P1 trun true, setiap bangunan di P1 bertambah pasukannya */
 

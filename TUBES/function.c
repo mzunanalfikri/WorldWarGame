@@ -17,22 +17,22 @@ INTEGER DIPETAKAN KE SKILL :
 
 void NambahSkill(State *S){
     if(Turn(Player1(*S))){
-        if(IsShield(&S)){
+        if(IsShield(*S)){
             Add(&QSkill(Player1(*S)),2);
         }
-        else if(IsExtraTurn(&S)){
+        else if(IsExtraTurn(*S)){
             Add(&QSkill(Player1(*S)),3);
         }
-        else if(IsAttackUp(&S)){
+        else if(IsAttackUp(*S)){
             Add(&QSkill(Player1(*S)),4);
         }
-        else if(IsCriticalHit(&S)){
+        else if(IsCriticalHit(*S)){
             Add(&QSkill(Player1(*S)),5);
         }
-        else if(IsIR(&S)){
+        else if(IsIR(*S)){
             Add(&QSkill(Player1(*S)),6);
         }
-        else if(IsBarrage($S)){
+        else if(IsBarrage(*S)){
             Add(&QSkill(Player1(*S)),7);
         }
     }
@@ -56,7 +56,7 @@ berkurang 1 menjadi sisa 2.*/
 boolean IsShield (State S){
 
 }
-void EndTurn (State *S)
+void EndTurn (State *S, boolean extraTurn)
 /* kondisi P1 saat ini : P2 turn true, setiap bangunan di P2 bertambah pasukannya */
 /* kondisi P2 saat ini : P1 trun true, setiap bangunan di P1 bertambah pasukannya */
  {
@@ -492,6 +492,7 @@ void MovePasukaB1B2(State *S, int pendonor, int penerima)
         ReadCmd();
         x = KataToInt(CKata);
     }
+    Move(ElmtTab(ArrayBangunan(*S), pendonor)) = true;
     Pasukan(ElmtTab(ArrayBangunan(*S), pendonor)) = Pasukan(ElmtTab(ArrayBangunan(*S), pendonor)) - x;
     Pasukan(ElmtTab(ArrayBangunan(*S), penerima)) = Pasukan(ElmtTab(ArrayBangunan(*S), penerima)) + x;
     printf("%d Pasukan dari ", x);
