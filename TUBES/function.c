@@ -53,16 +53,16 @@ void InstantUpgrade (State *S){
             IU(&(ElmtTab(ArrayBangunan(*S),Info(P1))));
             P1=Next(P1);
         }
-        printf("Your Instant Upgrade Skill has been used\n");
-        printf("All of your building's level have been upgraded\n");
+        printf("Your Instant Upgrade Skill has been used.\n");
+        printf("All of your building's level have been upgraded!\n");
     }else if (Turn(Player2(*S))){
         P2 = First(ListIdxBangunan(Player2(*S)));
         while(P2 != NULL){
             IU(&(ElmtTab(ArrayBangunan(*S),Info(P2))));
             P2=Next(P2);
         }
-        printf("Your Instant Upgrade Skill has been used\n");
-        printf("All of your building's level have been upgraded\n");
+        printf("Your Instant Upgrade Skill has been used.\n");
+        printf("All of your building's level have been upgraded!\n");
     }
 }
 /*Seluruh bangunan yang dimiliki pemain akan naik 1 level.
@@ -194,26 +194,41 @@ Seluruh bangunan mendapatkan tambahan 5 pasukan.
             Pasukan(ElmtTab(ArrayBangunan(*S),Info(P1)))+=5;
             P1=Next(P1);
         }
-        printf("Your Instant Reinforcement Skill has been used\n");
-        printf("All of your building's army have been increased by 5\n");
+        printf("Your Instant Reinforcement Skill has been used.\n");
+        printf("All of your troops in every buildings have been increased by 5!\n");
     }else if (Turn(Player2(*S))){
         P2 = First(ListIdxBangunan(Player2(*S)));
         while(P2 != NULL){
             Pasukan(ElmtTab(ArrayBangunan(*S),Info(P2)))+=5;
             P2=Next(P2);
         }
-        printf("Your Instant Reinforcement Skill has been used\n");
-        printf("All of your building's army have been increased by 5\n");
+        printf("Your Instant Reinforcement Skill has been used.\n");
+        printf("All of your troops in every buildings have been increased by 5!\n");
     }
 }
-
-
 /*
 Pemain mendapat skill ini di akhir gilirannya bila semua bangunan yang ia miliki
 memiliki level 4.
 */
-void Barrage (State *SMusuh){
-    
+void Barrage (State *S){
+    addresslist P1,P2;
+    if(Turn(Player1(*S))){
+        P2 = First(ListIdxBangunan(Player2(*S)));
+        while(P2 != NULL){
+            Pasukan(ElmtTab(ArrayBangunan(*S),Info(P2)))-=10;
+            P2=Next(P2);
+        }
+        printf("Your Barrage Skill has been used.\n");
+        printf("All of your enemy's troops in every buildings have been decreased by 10!\n");
+    }else if (Turn(Player2(*S))){
+        P1 = First(ListIdxBangunan(Player1(*S)));
+        while(P1 != NULL){
+            Pasukan(ElmtTab(ArrayBangunan(*S),Info(P1)))-=10;
+            P1=Next(P1);
+        }
+        printf("Your Barrage Skill has been used.\n");
+        printf("All of your enemy's troops in every buildings have been decreased by 10!\n");
+    }
 }
 /*Jumlah pasukan pada seluruh bangunan musuh akan berkurang sebanyak 10
 pasukan.
