@@ -114,6 +114,7 @@ int main() {
         }
         
         //cek juga ada yang kalah atau enggak
+        GameEnd(S, &endgame);
     }
 
     return 0;

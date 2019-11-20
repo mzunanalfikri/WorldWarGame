@@ -132,4 +132,7 @@ void Attack(State *S, Graph G, boolean * attackUP, boolean * crithit);
 int NBElmtTower(List L, TabBangunan B);
 /* Mengembalikan banyaknya element tower dari sebuah list */
 
+void GameEnd(State S, boolean *endgame);
+/* Kondisi game berakhir */
+
 #endif
