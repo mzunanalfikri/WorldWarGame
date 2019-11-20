@@ -10,7 +10,7 @@ INTEGER DIPETAKAN KE SKILL :
 2 --> shield (BONUS), udah di cek nambah
 3 --> Extra Turn , udah di cek nambah
 4 --> Attack Up (BONUS), udah di cek nambah
-5 --> Critical Hit (BONUS), udah di cek, belom implementasi
+5 --> Critical Hit (BONUS), udah di cek
 6 --> Instant Reinforcement, udah di cekk nambahh
 7 --> Barrage, udah di cek nambahh
 =========================================== */
