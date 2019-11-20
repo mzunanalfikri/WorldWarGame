@@ -751,7 +751,29 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP, boolean * cr
     }
     //implementasi crithit if crithit ada kondisi lagi, trus crithit di off kan
 
-    if (  (Pertahanan(ElmtTab(ArrayBangunan(*S), defend)) || skillshield ) && !(*attackUP)){
+    if (*crithit) {
+        printf("attack mode critical hit");
+        if (x >= Pasukan(ElmtTab(ArrayBangunan(*S), defend))/2){
+            Pasukan(ElmtTab(ArrayBangunan(*S), serang)) -= x;
+            Pasukan(ElmtTab(ArrayBangunan(*S), defend)) = x - Pasukan(ElmtTab(ArrayBangunan(*S), defend))/2;
+            Netral(ElmtTab(ArrayBangunan(*S), defend)) = false;
+            BackToLv1(&ElmtTab(ArrayBangunan(*S), defend));
+            if (Turn(Player1(*S))){
+                DelP(&ListIdxBangunan(Player2(*S)), defend);
+                InsVLast(&ListIdxBangunan(Player1(*S)), defend);
+            } else if (Turn(Player2(*S))) {
+                DelP(&ListIdxBangunan(Player1(*S)), defend);
+                InsVLast(&ListIdxBangunan(Player2(*S)), defend);
+            }
+            akuisisi = true;
+            printf("Bangunan menjadi milikmu! \n");
+        } else {
+            Pasukan(ElmtTab(ArrayBangunan(*S), serang)) -= x;
+            Pasukan(ElmtTab(ArrayBangunan(*S), defend)) -= x*2;
+            printf("Bangunan gagal direbut. \n");
+        }
+
+    } else if ( (Pertahanan(ElmtTab(ArrayBangunan(*S), defend)) || skillshield ) && !(*attackUP)){
         printf("lawan ada pertahanan \n");
         if (x >= Pasukan(ElmtTab(ArrayBangunan(*S), defend))*4/3){
             Pasukan(ElmtTab(ArrayBangunan(*S), serang)) -= x;
@@ -795,7 +817,8 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP, boolean * cr
         }
     }
     Serang(ElmtTab(ArrayBangunan(*S), serang)) = true;
-    
+    (*crithit) = false;
+
     //pengecekan penambahan skill
     if (akuisisi){
         if (Turn(Player1(*S))){
