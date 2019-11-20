@@ -7,6 +7,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "boolean.h"
+#include "mesinkar.h"
+#include "mesinkata.h"
 
 boolean IsPunyaHubungan(Graph G1,int Bangunan1,TabBangunan T2) {
 	int j = 1;
@@ -36,7 +38,6 @@ void Attack(State *S,Graph G){
 	Bangunan BangunanAtt,BangunanDef;
 	pasukan_deff = Pasukan(BangunanDef);
 	
-	
 	/* DAFTAR BANGUNAN PLAYER */
 	
 	printf("Daftar bangunan: \n");
@@ -57,8 +58,10 @@ void Attack(State *S,Graph G){
 	/* PRE - ATTACK */ 
 		
 	printf("Bangunan yang digunakan untuk menyerang: ");
-	scanf("%d",&X);
+	ReadCmd();
+	X = KataToInt(CKata);
 	BangunanAtt = ElmtTab(T1,arrayAtt[X]);
+	printf("\n");
 	if (IsPunyaHubungan(G,arrayAtt[X],T1)) {
 		printf("Daftar bangunan yang dapat diserang: \n");
 		while (j < NbElmtTabArray(T1)) {
@@ -73,11 +76,15 @@ void Attack(State *S,Graph G){
 			else {
 				j++; } }
 		printf("Bangunan yang diserang: ");
-		scanf("%d",&Y);
+		ReadCmd();
+		Y = KataToInt(CKata);
 		BangunanDef = ElmtTab(T1,array_target[Y]);
+		printf("\n");
 		printf("Jumlah pasukan : ");
-		scanf("%d",&jml_pasukan);
+		ReadCmd();
+		jml_pasukan = KataToInt(CKata);
 		pasukan_for_att = jml_pasukan; 
+		printf("\n");
 		
 		/* PROCESS SELAMA ATTACK BERLANGSUNG */
 		
