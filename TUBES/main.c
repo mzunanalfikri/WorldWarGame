@@ -67,6 +67,7 @@ int main() {
             Skill(&S, &extraTurn); 
             //
             PushState(&SStacks, S);
+            EndTurnState(&SStacks);
         } else if (IsEQCKataString("UNDO")) {
             printf("Undo \n");
             Undo(&SStacks);

@@ -95,7 +95,7 @@ void Undo(StackState *S){
     //printf("Original stack is empty??? %s\n", (IsEmptyStackState(*S)? "YES" : "Thankfully not"));
 
     if (IsEmptyStackState(STemp)) {
-        printf("You cannot undo past the point before your turn started.\n");
+        printf("You cannot undo past the point before your turn started, or before your skill changed the world.\n");
     } else {
         CopyStackState(STemp, S);
         printf("Your previous action has been undone.\n");
