@@ -7,15 +7,15 @@
 /* ======================================
 INTEGER DIPETAKAN KE SKILL :
 1 --> Instant Upgrade
-2 --> shield (BONUS)
+2 --> shield (BONUS), udah di cek nambah
 3 --> Extra Turn , udah di cek nambah
-4 --> Attack Up (BONUS)
+4 --> Attack Up (BONUS), udah di cek nambah
 5 --> Critical Hit (BONUS)
 6 --> Instant Reinforcement, udah di cekk nambahh
 7 --> Barrage, udah di cek nambahh
 =========================================== */
 
-void Skill(State *S, boolean * ExtraTurn)
+void Skill(State *S, boolean * ExtraTurn, boolean *AttackUP)
 /* untuk memanggil skill skill */
 {
     int Skil;
@@ -39,6 +39,7 @@ void Skill(State *S, boolean * ExtraTurn)
         ExtraTurnSkill(S, ExtraTurn);
     } else if (Skil == 4) {
         //manggil attack up
+        AttackUp(AttackUP);
     } else if (Skil == 5) {
         //manggil Critical hit
     } else if (Skil == 6) {
@@ -150,8 +151,9 @@ void ExtraTurnSkill (State *S, boolean *ExtraTurn){
 yang sama.
 */
 
-void AttackUp (State *S){ //bonus
-
+void AttackUp (boolean * AttackUp){ //bonus
+    (*AttackUp) = true;
+    printf("Attack Up berhasil diaktifkan");
 } 
 /*Pada giliran ini, setelah skill ini diak4tifkan, pertahanan bangunan musuh (termasuk
 Shield) tidak akan mempengaruhi penyerangan.
@@ -691,7 +693,7 @@ void ChooseBangunanPlayerAttack(State S, Graph G, int *serang, int *defend, bool
     }
 }
 
-void PreAttack(State *S, int serang, int defend)
+void PreAttack(State *S, int serang, int defend, boolean *attackUP)
 /* prosedur transisi untuk attack */
 {
     boolean akuisisi;
@@ -705,7 +707,11 @@ void PreAttack(State *S, int serang, int defend)
         ReadCmd();
         x = KataToInt(CKata);
     }
-    if (Pertahanan(ElmtTab(ArrayBangunan(*S), defend))){
+    //debug
+    if (*attackUP) {
+        printf("attackup aktif untuk pengerangan.\n");
+    }
+    if (Pertahanan(ElmtTab(ArrayBangunan(*S), defend)) && !(*attackUP)){
         printf("lawan ada pertahanan \n");
         if (x >= Pasukan(ElmtTab(ArrayBangunan(*S), defend))*4/3){
             Pasukan(ElmtTab(ArrayBangunan(*S), serang)) -= x;
@@ -714,12 +720,13 @@ void PreAttack(State *S, int serang, int defend)
             BackToLv1(&ElmtTab(ArrayBangunan(*S), defend));
             if (Turn(Player1(*S))){
                 DelP(&ListIdxBangunan(Player2(*S)), defend);
-                InsVFirst(&ListIdxBangunan(Player1(*S)), defend);
+                InsVLast(&ListIdxBangunan(Player1(*S)), defend);
             } else if (Turn(Player2(*S))) {
                 DelP(&ListIdxBangunan(Player1(*S)), defend);
-                InsVFirst(&ListIdxBangunan(Player2(*S)), defend);
+                InsVLast(&ListIdxBangunan(Player2(*S)), defend);
             }
             akuisisi = true;
+            printf("Bangunan menjadi milikmu! \n");
         } else {
             Pasukan(ElmtTab(ArrayBangunan(*S), serang)) -= x;
             Pasukan(ElmtTab(ArrayBangunan(*S), defend)) -= x*3/4;
@@ -734,12 +741,13 @@ void PreAttack(State *S, int serang, int defend)
             BackToLv1(&ElmtTab(ArrayBangunan(*S), defend));
             if (Turn(Player1(*S))){
                 DelP(&ListIdxBangunan(Player2(*S)), defend);
-                InsVFirst(&ListIdxBangunan(Player1(*S)), defend);
+                InsVLast(&ListIdxBangunan(Player1(*S)), defend);
             } else if (Turn(Player2(*S))) {
                 DelP(&ListIdxBangunan(Player1(*S)), defend);
-                InsVFirst(&ListIdxBangunan(Player2(*S)), defend);
+                InsVLast(&ListIdxBangunan(Player2(*S)), defend);
             }
             akuisisi = true;
+            printf("Bangunan menjadi milikmu! \n");
         } else {
             Pasukan(ElmtTab(ArrayBangunan(*S), serang)) -= x;
             Pasukan(ElmtTab(ArrayBangunan(*S), defend)) -= x;
@@ -747,6 +755,7 @@ void PreAttack(State *S, int serang, int defend)
         }
     }
     Serang(ElmtTab(ArrayBangunan(*S), serang)) = true;
+    (*attackUP) = false;
     //pengecekan penambahan skill
     if (akuisisi){
         if (Turn(Player1(*S))){
@@ -760,10 +769,16 @@ void PreAttack(State *S, int serang, int defend)
                 Add(&QSkill(Player2(*S)), 7);
                 printf("Player 2 mendatapkan Skill Barrage \n");
             }
-            if (NbElmtList(ListIdxBangunan(Player1(*S))) == 2){
+            //cek dapa shield
+            if (NbElmtList(ListIdxBangunan(Player2(*S))) == 2 && SearchB(ListIdxBangunan(Player2(*S)),defend)){
                 Add(&QSkill(Player2(*S)), 2);
                 printf("Player 2 mendatapkan Skill Shield \n");
             }
+            //cek dapet attack up
+            if (NBElmtTower(ListIdxBangunan(Player1(*S)), ArrayBangunan(*S)) == 3  && Type(ElmtTab(ArrayBangunan(*S), defend)) == 'T'){
+                Add(&QSkill(Player1(*S)), 4);
+                printf("player 1 mendapatkan attack up");
+            } 
         } else if(Turn(Player2(*S))) {
             //Cek dapet extra turn
             if (Type(ElmtTab(ArrayBangunan(*S), defend)) == 'F' && SearchB(ListIdxBangunan(Player1(*S)),defend) ){
@@ -775,15 +790,21 @@ void PreAttack(State *S, int serang, int defend)
                 Add(&QSkill(Player1(*S)), 7);
                 printf("Player 1 mendatapkan Skill Barrage \n");
             }
-            if (NbElmtList(ListIdxBangunan(Player2(*S))) == 2){
+            //cek shield
+            if (NbElmtList(ListIdxBangunan(Player1(*S))) == 2 && SearchB(ListIdxBangunan(Player1(*S)),defend)){
                 Add(&QSkill(Player2(*S)), 2);
                 printf("Player 1 mendatapkan Skill Shield \n");
             }
+            //cek penambahan attack up
+            if (NBElmtTower(ListIdxBangunan(Player2(*S)), ArrayBangunan(*S) ) == 3  && Type(ElmtTab(ArrayBangunan(*S), defend)) == 'T'){
+                Add(&QSkill(Player2(*S)), 4);
+                printf("player 2 mendapatkan attack up");
+            } 
         }
     }
 }
 
-void Attack(State *S, Graph G)
+void Attack(State *S, Graph G, boolean * attackUP)
 /* Procedure untuk memindahkan pasukan dari bangunan satu ke lainnya */
 {
     int attack;
@@ -794,7 +815,7 @@ void Attack(State *S, Graph G)
         if (attack == 0 || defend == 0){
             printf("Attack gagal.\n");
         } else {
-            PreAttack(S, attack, defend);
+            PreAttack(S, attack, defend, attackUP);
         }
         //printf(" x : %d\n", x);
     } else if (Turn(Player2(*S))) {
@@ -803,7 +824,26 @@ void Attack(State *S, Graph G)
         if (attack == 0 || defend == 0){
             printf("Attack gagal.\n");
         } else {
-           PreAttack(S, attack, defend);
+           PreAttack(S, attack, defend, attackUP);
         }
     }
+}
+
+int NBElmtTower(List L, TabBangunan B)
+{
+    addresslist P;
+    int Count;
+
+    // ALGORITMA
+    P = First(L);
+    Count = 0;
+    while (P != NULL)
+    {
+        if (Type(ElmtTab(B, Info(P))) == 'T'){
+            Count++;
+        }
+        P = Next(P);
+    }
+
+    return Count;
 }

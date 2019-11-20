@@ -41,8 +41,10 @@ int main() {
     
     boolean endgame;
     boolean extraTurn;
+    boolean attackUp;
 
     extraTurn = false;
+    attackUp = false;
     endgame = false;
     ReadKonfigurasiFile(&S, &Map, &G);
     Turn(Player1(S)) = true;
@@ -55,7 +57,7 @@ int main() {
         ReadCmd();
         if (IsEQCKataString("ATTACK")){
             //memanggil fungsi attack
-            Attack(&S, G);
+            Attack(&S, G, &attackUp);
             //
             PushState(&SStacks, S);
         } else if (IsEQCKataString("LEVEL_UP")){
@@ -64,7 +66,7 @@ int main() {
             PushState(&SStacks, S);
         } else if (IsEQCKataString("SKILL")){
             //manggil fungsi skill
-            Skill(&S, &extraTurn); 
+            Skill(&S, &extraTurn, &attackUp); 
             //
             PushState(&SStacks, S);
             EndTurnState(&SStacks);

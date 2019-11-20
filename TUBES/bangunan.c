@@ -178,7 +178,7 @@ void IU(Bangunan *B)
 /* I.S. Sembarang */
 /* F.S. Bangunan naik level secara instant */
 {
-    if (IsNaikLevel(*B)){
+    if (Level(*B)<4){
         if (Type(*B) == 'C'){
             if (Level(*B) == 1) {
                 A(*B) = 15;

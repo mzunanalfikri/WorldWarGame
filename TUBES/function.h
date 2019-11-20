@@ -32,7 +32,7 @@ INTEGER DIPETAKAN KE SKILL :
 7 --> Barrage
 =========================================== */
 
-void Skill(State *S, boolean * ExtraTurn);
+void Skill(State *S, boolean * ExtraTurn, boolean * AttackUP);
 /* untuk memanggil skill skill */
 
 void InstantUpgrade (State *S);
@@ -57,7 +57,7 @@ yang sama.
 Pemain mendapat skill ini jika Fort pemain tersebut direbut lawan.
 */
 
-void AttackUp (State *S); //bonus
+void AttackUp (boolean *AttackUp); //bonus
 /*Pada giliran ini, setelah skill ini diaktifkan, pertahanan bangunan musuh (termasuk
 Shield) tidak akan mempengaruhi penyerangan.
 Pemain mendapat skill ini jika pemain baru saja menyerang Tower lawan dan
@@ -123,10 +123,13 @@ void ChooseBangunanPlayerAttack(State S, Graph G, int *serang, int *defend, bool
 /* F.S. serang menjadi indeks bangunan penyerang, defend menjadi indeks bangunan
         yang bertahan */
 
-void PreAttack(State *S, int serang, int defend);
+void PreAttack(State *S, int serang, int defend, boolean *attackUP);
 /* prosedur transisi untuk attack */
 
-void Attack(State *S, Graph G);
+void Attack(State *S, Graph G, boolean * attackUP);
 /* Procedure untuk memindahkan pasukan dari bangunan satu ke lainnya */
+
+int NBElmtTower(List L, TabBangunan B);
+/* Mengembalikan banyaknya element tower dari sebuah list */
 
 #endif
