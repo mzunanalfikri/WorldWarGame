@@ -32,7 +32,7 @@ void SetSkill(State *S){
             Add(&QSkill(Player1(*S)),4);
         } else if (IsEQCKataString("Critical Hit")){
             Add(&QSkill(Player1(*S)),5);
-        } else if (IsEQCKataString("Instant Reinforcement")){
+        } else if (IsEQCKataString("IR")){
             Add(&QSkill(Player1(*S)),6);
         } else if (IsEQCKataString("Barrage")){
             Add(&QSkill(Player1(*S)),7);
@@ -51,7 +51,7 @@ void SetSkill(State *S){
             Add(&QSkill(Player2(*S)),4);
         } else if (IsEQCKataString("Critical Hit")){
             Add(&QSkill(Player2(*S)),5);
-        } else if (IsEQCKataString("Instant Reinforcement")){
+        } else if (IsEQCKataString("IR")){
             Add(&QSkill(Player2(*S)),6);
         } else if (IsEQCKataString("Barrage")){
             Add(&QSkill(Player2(*S)),7);
@@ -149,6 +149,7 @@ void SetPlayersBangunan(State *S){
     while (n > 0){
         printf("masukkan indeks bangunan: ");
         scanf("%d",&x);
+        Netral(ElmtTab(ArrayBangunan(*S), x)) = false;
         if (Turn(Player1(*S))){
             InsVLast(&ListIdxBangunan(Player1(*S)), x);
             if (SearchB(ListIdxBangunan(Player2(*S)),x)){
