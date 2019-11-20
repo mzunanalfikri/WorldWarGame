@@ -77,7 +77,5 @@ void CopyQueue (Queue Q1 ,Queue *Q2);
 /* F.S. Terbentuk Q2 sama persis dengan Q1 */
 void PrintQSkill (Queue Q);
 
-void PrintTopQSkill (Queue Q);
-/* menampilkan top skill */
 
 #endif

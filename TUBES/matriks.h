@@ -7,9 +7,9 @@
 
 /* Ukuran minimum dan maksimum baris dan kolom */
 #define BrsMin 1
-#define BrsMax 20
+#define BrsMax 30
 #define KolMin 1
-#define KolMax 30
+#define KolMax 20
 
 typedef int indeks; /* indeks baris, kolom */
 typedef struct {
