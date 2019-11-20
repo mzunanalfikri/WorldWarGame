@@ -855,7 +855,7 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP, boolean * cr
             //cek dapet attack up
             if (NBElmtTower(ListIdxBangunan(Player1(*S)), ArrayBangunan(*S)) == 3  && Type(ElmtTab(ArrayBangunan(*S), defend)) == 'T' && direbut ){
                 Add(&QSkill(Player1(*S)), 4);
-                printf("player 1 mendapatkan attack up");
+                printf("player 1 mendapatkan attack up\n");
             } 
         } else if(Turn(Player2(*S))) {
             //Cek dapet extra turn
@@ -876,7 +876,7 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP, boolean * cr
             //cek penambahan attack up
             if (NBElmtTower(ListIdxBangunan(Player2(*S)), ArrayBangunan(*S) ) == 3  && Type(ElmtTab(ArrayBangunan(*S), defend)) == 'T' && direbut){
                 Add(&QSkill(Player2(*S)), 4);
-                printf("player 2 mendapatkan attack up");
+                printf("player 2 mendapatkan attack up\n");
             } 
         }
     }
