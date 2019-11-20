@@ -34,6 +34,7 @@ void Skill(State *S, boolean * ExtraTurn, boolean *AttackUP)
         InstantUpgrade(S);
     } else if (Skil == 2) {
         //manggil shield
+        Shield(S);
     } else if (Skil == 3) {
         //manggil extra turn
         ExtraTurnSkill(S, ExtraTurn);
@@ -75,7 +76,11 @@ void InstantUpgrade (State *S){
 Pemain tidak akan mendapat skill ini selain dari daftar skill awal.*/
 
 void Shield (State *S){ //bonus
-    
+    if (Turn(Player1(*S))){
+        ShieldPlayer(Player1(*S)) = 2;
+    } else if (Turn(Player2(*S))) {
+        ShieldPlayer(Player2(*S)) = 2;
+    }
 }
 /*
 Seluruh bangunan yang dimiliki oleh pemain akan memiliki pertahanan selama 2
@@ -106,6 +111,10 @@ void EndTurn (State *S, boolean *ExtraTurn)
          }
          //ingetin update nge false in serang di bangunannya
          //sama move juga
+         //cek pengurangan shield
+         if (ShieldPlayer(Player2(*S))>0){
+             ShieldPlayer(Player2(*S)) -= 1;
+         }
         if (*ExtraTurn){
             printf("Extra Turn Activated, Player 1's Turn!\n ");
         } else {
@@ -130,6 +139,10 @@ void EndTurn (State *S, boolean *ExtraTurn)
              Serang(ElmtTab(ArrayBangunan(*S), Info(P))) = false;
              Move(ElmtTab(ArrayBangunan(*S), Info(P))) = false;
              P = Next(P);
+         }
+         //cek pengurangan shield
+         if (ShieldPlayer(Player1(*S))>0){
+             ShieldPlayer(Player1(*S)) -= 1;
          }
          if (*ExtraTurn){
             printf("Extra Turn Activated, Player 2's Turn!\n ");
@@ -711,7 +724,20 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP)
     if (*attackUP) {
         printf("attackup aktif untuk pengerangan.\n");
     }
-    if (Pertahanan(ElmtTab(ArrayBangunan(*S), defend)) && !(*attackUP)){
+
+    //cek bangunan yang di attack punya skill atau enggak
+    boolean skillshield;
+    skillshield =false;
+    if (SearchB(ListIdxBangunan(Player2(*S)), defend) && ShieldPlayer(Player2(*S))>0 ){
+        skillshield = true;
+        printf("shield player 2 active\n");
+    }
+    if (SearchB(ListIdxBangunan(Player1(*S)), defend) && ShieldPlayer(Player1(*S))>0 ){
+        skillshield = true;
+        printf("shield player 1 active\n");
+    }
+
+    if (  (Pertahanan(ElmtTab(ArrayBangunan(*S), defend)) || skillshield ) && !(*attackUP)){
         printf("lawan ada pertahanan \n");
         if (x >= Pasukan(ElmtTab(ArrayBangunan(*S), defend))*4/3){
             Pasukan(ElmtTab(ArrayBangunan(*S), serang)) -= x;

@@ -13,6 +13,7 @@ void MakePlayer(Player *P)
     CreateEmpty(&QSkill(*P), 10);
     Add(&QSkill(*P),1);
     Turn(*P) = false;
+    ShieldPlayer(*P) = 0;
 }
 
 void PrintPlayer(Player P)
@@ -30,4 +31,5 @@ void CopyPlayer(Player Pin, Player *Phsl)
     CopyList(ListIdxBangunan(Pin), &ListIdxBangunan(*Phsl));
     CopyQueue(QSkill(Pin), &QSkill(*Phsl));
     Turn(*Phsl) = Turn(Pin); 
+    ShieldPlayer(*Phsl) = ShieldPlayer(Pin);
 }
