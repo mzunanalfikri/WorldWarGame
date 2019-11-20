@@ -924,11 +924,15 @@ void GameEnd(State S, boolean *endgame)
     if (IsEmptyList(ListIdxBangunan(Player1(S)))){
         // player 2 menang
         printf("Selamat player 2 menang !!!\n");
+        printf("Tekan Enter ntuk keluar");
+        STARTcmd();
+        (*endgame) = true;
     } else if (IsEmptyList(ListIdxBangunan(Player2(S)))) {
         //player 1 menang
         printf("Selamat player 1 menang !!!\n");
+        printf("Tekan Enter ntuk keluar");
+        STARTcmd();
+        (*endgame) = true;
     }
-    printf("Tekan Enter ntuk keluar");
-    STARTcmd();
-    (*endgame) = true;
+    
 }
