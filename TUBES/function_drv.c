@@ -37,7 +37,7 @@ void SetSkill(State *S){
         } else if (IsEQCKataString("Barrage")){
             Add(&QSkill(Player1(*S)),1);
         }
-        PrintQSkill(QSkill(Player1(*S));
+        PrintQSkill(QSkill(Player1(*S)));
     } else if (Turn(Player2(*S))) {
         EnterCommad(*S);
         ReadCmd();
@@ -56,7 +56,7 @@ void SetSkill(State *S){
         } else if (IsEQCKataString("Barrage")){
             Add(&QSkill(Player2(*S)),1);
         }
-        PrintQSkill(QSkill(Player2(*S));
+        PrintQSkill(QSkill(Player2(*S)));
     }
 }
 
