@@ -154,4 +154,31 @@ void CopyQueue (Queue Q1 ,Queue *Q2){
     }
 }
 
-
+void PrintTopQSkill (Queue Q)
+/* menampilkan top skill */
+{
+    infotype X;
+    printf("Skill Avaible : ");
+    
+    if (!IsEmpty(Q)){
+        Del(&Q,&X);
+        if (X == 1){
+            printf("InstantUpgrade ");
+        } else if (X == 2) {
+            printf("Shield ");
+        } else if (X == 3) {
+            printf("Extra Turn ");
+        } else if (X == 4){
+            printf("AttackUp ");
+        } else if (X == 5){
+            printf ("CriticalHit ");
+        } else if (X == 6) {
+            printf("InstantReinforcement ");
+        } else if (X == 7) {
+            printf("Barrage");
+        }
+    } else {
+        printf("Kamu tidak mempunyai skill.");
+    }
+    printf("\n");
+}

@@ -103,6 +103,8 @@ int main() {
             printf("tampilin help");
         } else if (IsEQCKataString("PRINT_GRAPH")) {
             PrintInfoGraph(G);
+        } else {
+            printf("Command salah, masukkan lagi!\n");
         }
         
         //cek juga ada yang kalah atau enggak

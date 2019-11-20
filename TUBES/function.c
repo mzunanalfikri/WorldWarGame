@@ -312,7 +312,8 @@ void StatusPlayer(State S, MATRIKS Map)
             count++;
         }
 
-        PrintQSkill(QSkill(Player1(S)));
+        //PrintQSkill(QSkill(Player1(S)));
+        PrintTopQSkill(QSkill(Player1(S)));
     } else if (Turn(Player2(S))) {
         CetakMatiksWarna(Map, S);
         
@@ -346,7 +347,8 @@ void StatusPlayer(State S, MATRIKS Map)
             count++;
         }
 
-        PrintQSkill(QSkill(Player2(S)));
+        //PrintQSkill(QSkill(Player2(S)));
+        PrintTopQSkill(QSkill(Player2(S)));
     }
 }
 /* **** ATTACK MECHANISM *** */
