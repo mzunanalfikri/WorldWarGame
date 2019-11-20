@@ -24,6 +24,12 @@ void Skill(State *S, boolean * ExtraTurn, boolean *AttackUP, boolean *crithit)
     // if (Turn(Player2(*S))){
     //     P = Player2(*S);
     // }
+    if((Turn(Player1(*S)))&&(NBElmt(QSkill(Player1(*S)))==0)){
+        printf("Anda tidak mempunyai skill apapun saat ini.\n");
+    }else if((Turn(Player2(*S)))&&(NBElmt(QSkill(Player2(*S)))==0)){
+        printf("Anda tidak mempunyai skill apapun saat ini.\n");
+    }
+    
     if (Turn(Player1(*S))){
         Del(&QSkill(Player1(*S)), &Skil);
         //cek critical hit
@@ -36,7 +42,7 @@ void Skill(State *S, boolean * ExtraTurn, boolean *AttackUP, boolean *crithit)
         //cek dapet critical hit
         if (Skil == 3) {
             Add(&QSkill(Player1(*S)), 5);
-            printf("player 2 dapat critical hit");
+            printf("player 1 dapat critical hit");
         }
     }
     if (Skil == 1){
@@ -71,7 +77,7 @@ void InstantUpgrade (State *S){
             IU(&(ElmtTab(ArrayBangunan(*S),Info(P1))));
             P1=Next(P1);
         }
-        printf("Your Instant Upgrade Skill has been used.\n");
+        printf("Your Instant Upgrade Skill has been activated.\n");
         printf("All of your building's level have been upgraded!\n");
     }else if (Turn(Player2(*S))){
         P2 = First(ListIdxBangunan(Player2(*S)));
@@ -79,7 +85,7 @@ void InstantUpgrade (State *S){
             IU(&(ElmtTab(ArrayBangunan(*S),Info(P2))));
             P2=Next(P2);
         }
-        printf("Your Instant Upgrade Skill has been used.\n");
+        printf("Your Instant Upgrade Skill has been activated.\n");
         printf("All of your building's level have been upgraded!\n");
     }
 }
@@ -127,7 +133,7 @@ void EndTurn (State *S, boolean *ExtraTurn, boolean *attackUP)
              ShieldPlayer(Player2(*S)) -= 1;
          }
         if (*ExtraTurn){
-            printf("Extra Turn Activated, Player 1's Turn!\n ");
+            printf("Extra Turn has been Activated, Player 1's Turn!\n ");
         } else {
             printf("\n");
             printf("===================================\n");
@@ -156,7 +162,7 @@ void EndTurn (State *S, boolean *ExtraTurn, boolean *attackUP)
              ShieldPlayer(Player1(*S)) -= 1;
          }
          if (*ExtraTurn){
-            printf("Extra Turn Activated, Player 2's Turn!\n ");
+            printf("Extra Turn has been Activated, Player 2's Turn!\n ");
         } else {
             printf("\n");
             printf("===================================\n");
@@ -170,7 +176,7 @@ void EndTurn (State *S, boolean *ExtraTurn, boolean *attackUP)
 
 void ExtraTurnSkill (State *S, boolean *ExtraTurn){
     (*ExtraTurn) = true;
-    printf("Extra Turn activated.\n");
+    printf("Extra Turn has been activated.\n");
 }
 /*Setelah giliran pengaktifan skill ini berakhir, pemain selanjutnya tetap pemain
 yang sama.
@@ -178,7 +184,7 @@ yang sama.
 
 void AttackUp (boolean * AttackUp){ //bonus
     (*AttackUp) = true;
-    printf("Attack Up berhasil diaktifkan");
+    printf("Attack Up has been activated");
 } 
 /*Pada giliran ini, setelah skill ini diak4tifkan, pertahanan bangunan musuh (termasuk
 Shield) tidak akan mempengaruhi penyerangan.
@@ -187,7 +193,7 @@ jumlah towernya menjadi 3.*/
 
 void CriticalHit (boolean *crithit){ //bonus
     (*crithit) = true;
-    printf("skill critical hit activated. \n");
+    printf("Critical hit has been activated. \n");
 }
 /*Pada giliran ini, setelah skill diaktifkan, jumlah pasukan pada bangunan yang
 melakukan serangan tepat selanjutnya (hanya berlaku 1 serangan) hanya
@@ -479,7 +485,7 @@ void ChooseBangunanPlayerLevelUp(State S, int * x, boolean player1)
     ReadCmd();
     temp = KataToInt(CKata);
     while (temp >= count){
-        printf ("Masukan salah, Bangunan yang akan dinaikkan levelnya :");
+        printf ("Masukan salah!\nBangunan yang akan dinaikkan levelnya :");
         //scanf("%d", &temp);
         ReadCmd();
         temp = KataToInt(CKata);
@@ -542,7 +548,7 @@ void ChooseBangunanPlayerMove(State S,Graph G, int *pendonor, int*penerima, bool
         ReadCmd();
         temp = KataToInt(CKata);
         while (temp >= count || temp <= 0){
-            printf ("Masukan salah, Bangunan yang akan dinaikkan levelnya :");
+            printf ("Masukan salah!\nBangunan yang akan dinaikkan levelnya :");
             //scanf("%d", &temp);
             ReadCmd();
             temp = KataToInt(CKata);
@@ -574,7 +580,7 @@ void ChooseBangunanPlayerMove(State S,Graph G, int *pendonor, int*penerima, bool
             ReadCmd();
             temp = KataToInt(CKata);
             while (temp >= count || temp <= 0){
-                printf ("Masukan salah, Bangunan yang akan dinaikkan levelnya :");
+                printf ("Masukan salah!\nBangunan yang akan dinaikkan levelnya :");
                 //scanf("%d", &temp);
                 ReadCmd();
                 temp = KataToInt(CKata);
@@ -593,7 +599,7 @@ void MovePasukaB1B2(State *S, int pendonor, int penerima)
     ReadCmd();
     x = KataToInt(CKata);
     while (Pasukan(ElmtTab(ArrayBangunan(*S), pendonor)) < x) {
-        printf("Jumlah pasukan tidak valid, masukkan pasukan lagi : ");
+        printf("Jumlah pasukan tidak valid!\nMasukkan pasukan lagi : ");
         ReadCmd();
         x = KataToInt(CKata);
     }
@@ -674,7 +680,7 @@ void ChooseBangunanPlayerAttack(State S, Graph G, int *serang, int *defend, bool
         ReadCmd();
         temp = KataToInt(CKata);
         while (temp >= count || temp <= 0){
-            printf ("Masukan salah, Bangunan yang digunakan untuk menyerang :");
+            printf ("Masukan salah!\nBangunan yang digunakan untuk menyerang :");
             //scanf("%d", &temp);
             ReadCmd();
             temp = KataToInt(CKata);
@@ -709,7 +715,7 @@ void ChooseBangunanPlayerAttack(State S, Graph G, int *serang, int *defend, bool
             ReadCmd();
             temp = KataToInt(CKata);
             while (temp >= count || temp <= 0){
-                printf ("Masukan salah, Bangunan yang diserang: ");
+                printf ("Masukan salah!\nBangunan yang diserang: ");
                 //scanf("%d", &temp);
                 ReadCmd();
                 temp = KataToInt(CKata);
@@ -729,13 +735,13 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP, boolean * cr
     ReadCmd();
     x = KataToInt(CKata);
     while (Pasukan(ElmtTab(ArrayBangunan(*S), serang)) < x || x < 0) {
-        printf("Jumlah pasukan tidak valid, masukkan pasukan lagi : ");
+        printf("Jumlah pasukan tidak valid!\nMasukkan pasukan lagi : ");
         ReadCmd();
         x = KataToInt(CKata);
     }
     //debug
     if (*attackUP) {
-        printf("attackup aktif untuk pengerangan.\n");
+        printf("Attack Up aktif untuk pengerangan.\n");
     }
 
     //cek bangunan yang di attack punya skill atau enggak
