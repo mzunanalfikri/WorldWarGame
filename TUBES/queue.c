@@ -128,7 +128,7 @@ void PrintQSkill (Queue Q){
         } else if (X == 3) {
             printf("Extra Turn");
         } else if (X == 4){
-            printf("AttackUp | ");
+            printf("AttackUp");
         } else if (X == 5){
             printf ("CriticalHit");
         } else if (X == 6) {
