@@ -35,14 +35,14 @@ void Skill(State *S, boolean * ExtraTurn, boolean *AttackUP, boolean *crithit)
         //cek critical hit
         if (Skil == 3) {
             Add(&QSkill(Player2(*S)), 5);
-            printf("player 2 dapat critical hit");
+            printf("player 2 dapat critical hit\n");
         }
     } else if (Turn(Player2(*S))){
         Del(&QSkill(Player2(*S)), &Skil);
         //cek dapet critical hit
         if (Skil == 3) {
             Add(&QSkill(Player1(*S)), 5);
-            printf("player 1 dapat critical hit");
+            printf("player 1 dapat critical hit\n");
         }
     }
     if (Skil == 1){
@@ -186,7 +186,7 @@ yang sama.
 
 void AttackUp (boolean * AttackUp){ //bonus
     (*AttackUp) = true;
-    printf("Attack Up has been activated");
+    printf("Attack Up has been activated\n");
 } 
 /*Pada giliran ini, setelah skill ini diak4tifkan, pertahanan bangunan musuh (termasuk
 Shield) tidak akan mempengaruhi penyerangan.
@@ -225,7 +225,7 @@ void AddIR (State *S){
         } else if (Turn(Player2(*S))) {
             Add(&QSkill(Player2(*S)), 6);
         }
-        printf("kamu dapat IR");
+        printf("kamu dapat IR\n");
     }
 }
 
@@ -264,18 +264,26 @@ void Barrage (State *S){
         P1 = First(ListIdxBangunan(Player1(*S)));
         while(P1 != NULL){
             Pasukan(ElmtTab(ArrayBangunan(*S),Info(P1)))-=10;
+            if(Pasukan(ElmtTab(ArrayBangunan(*S),Info(P1)))<0){
+                Pasukan(ElmtTab(ArrayBangunan(*S),Info(P1)))=0;
+            }
             P1=Next(P1);
         }
+        
         printf("Your Barrage Skill has been used\n");
-        printf("All of your enemy building's army have been decreased by 5\n");
+        printf("All of your enemy building's army have been decreased by 10\n");
     }else if (!Turn(Player2(*S))){
         P2 = First(ListIdxBangunan(Player2(*S)));
         while(P2 != NULL){
             Pasukan(ElmtTab(ArrayBangunan(*S),Info(P2)))-=10;
+            if(Pasukan(ElmtTab(ArrayBangunan(*S),Info(P2)))<0){
+                Pasukan(ElmtTab(ArrayBangunan(*S),Info(P2)))=0;
+            }
             P2=Next(P2);
         }
+        
         printf("Your Barrage Skill has been used\n");
-        printf("All of your enemy building's army have been decreased by 5\n");
+        printf("All of your enemy building's army have been decreased by 10\n");
     }
 }
 /*Jumlah pasukan pada seluruh bangunan musuh akan berkurang sebanyak 10
@@ -872,7 +880,7 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP, boolean * cr
             }
             //cek shield
             if (NbElmtList(ListIdxBangunan(Player1(*S))) == 2 && direbut){
-                Add(&QSkill(Player2(*S)), 2);
+                Add(&QSkill(Player1(*S)), 2);
                 printf("Player 1 mendatapkan Skill Shield \n");
             }
             //cek penambahan attack up
