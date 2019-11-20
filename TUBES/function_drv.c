@@ -1,15 +1,29 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>
+#include "arraydin.h"
+#include "bangunan.h"
+#include "listlinier.h"
+#include "matriks.h"
+#include "player.h"
+#include "point.h"
+#include "queue.h"
+#include "stackt.h"
+#include "state.h"
+#include "graph.h"
+#include "pcolor.h"
 #include "function.h"
+#include "mesinkar.h"
+#include "mesinkata.h"
+#include "readfile.h"
 
 void SetSkill(State *S){
     infotype X;
-    Queue Q = QSkill(Player1(S));
+    Queue Q = QSkill(Player1(*S));
     while(!IsEmpty(Q)){
         Del(&Q,&X);
     }
-    EnterCommad(S);
+    EnterCommad(*S);
     ReadCmd();
     if (IsEQCKataString("Instant Upgrade")){
         Add(&Q,1);
@@ -27,6 +41,32 @@ void SetSkill(State *S){
         Add(&Q,7);
     }
     PrintQSkill(Q);
+}
+
+void SetBangunan (Bangunan *B)
+/* I.S. Sembarang */
+/* F.S. Membuat sebuah bangunan default level 1 (digunakan pada awal load file) */
+{
+    int lv,serang,pertahanan,netral,move,pasukan,A,M;
+    char type;
+    scanf("%d",&lv);
+    Level(*B) = lv;
+    scanf("%d",&serang);
+    Serang(*B) = serang;
+    scanf("%d",&pertahanan);
+    Pertahanan(*B) = pertahanan;
+    scanf(" %c",&type);
+    Type(*B) = type;
+    scanf("%d",&netral);
+    Netral(*B) = netral;
+    scanf("%d",&move);
+    Move(*B) = move;
+    scanf("%d",&pasukan);
+    Pasukan(*B) = pasukan;
+    scanf("%d",&A);
+    A(*B) = A;
+    scanf("%d",&M);
+    M(*B) = M;
 }
 
 int main() {
@@ -65,11 +105,13 @@ int main() {
             PushState(&SStacks, S);
         } else if (IsEQCKataString("SKILL")){
             //manggil fungsi skill
-            SetSkill(&S);
             Skill(&S, &extraTurn, &attackUp, &criticalHit); 
             //
             PushState(&SStacks, S);
             EndTurnState(&SStacks);
+        } else if (IsEQCKataString("SET_SKILL")){
+            //manggil fungsi skill
+            SetSkill(&S); 
         } else if (IsEQCKataString("UNDO")) {
             printf("Undo \n");
             Undo(&SStacks);
