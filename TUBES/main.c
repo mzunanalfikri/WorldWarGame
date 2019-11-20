@@ -46,35 +46,44 @@ int main() {
     endgame = false;
     ReadKonfigurasiFile(&S, &Map, &G);
     Turn(Player1(S)) = true;
-    PushState(&SStacks, S);
+    //PushState(&SStacks, S);
     StatusPlayer(S, Map);
 
     while (!endgame){
         EnterCommad(S);
         ReadCmd();
         if (IsEQCKataString("ATTACK")){
-            printf("menampilkan attack mechanism\n");
+            //memanggil fungsi attack
             Attack(&S, G);
-            PushState(&SStacks, S);
+            //
+            //PushState(&SStacks, S);
         } else if (IsEQCKataString("LEVEL_UP")){
+            //panggil fungsi levelup
             LevelUp(&S);
-            PushState(&SStacks, S);
+            //PushState(&SStacks, S);
         } else if (IsEQCKataString("SKILL")){
-            printf("skill \n");
-            Skill(&S, &extraTurn);
-            PushState(&SStacks, S);
+            //manggil fungsi skill
+            Skill(&S, &extraTurn); 
+            //
+            //PushState(&SStacks, S);
         } else if (IsEQCKataString("UNDO")) {
             printf("Undo \n");
-            Undo(&SStacks);
-            CopyState(InfoTop(SStacks), &S);
+            // Undo(&SStacks);
+            // CopyState(InfoTop(SStacks), &S);
         } else if (IsEQCKataString("END_TURN")){
+            //cek dapet instant reinforcement
             AddIR(&S);
+            //fungsi end turn
             EndTurn(&S, &extraTurn);
+            //print status player
             StatusPlayer(S,Map);
-            EndTurnState(&SStacks);
+            //
+            // EndTurnState(&SStacks);
         } else if (IsEQCKataString("MOVE")){
+            //funsi pasukan
             MovePasukan(&S, G);
-            PushState(&SStacks, S);
+            //
+            // PushState(&SStacks, S);
         } else if (IsEQCKataString("EXIT")){
             endgame = true;
         } else if (IsEQCKataString("MAP")){
