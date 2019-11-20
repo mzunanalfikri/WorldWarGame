@@ -25,17 +25,17 @@ void SetSkill(State *S){
         if (IsEQCKataString("Instant Upgrade")){
             Add(&QSkill(Player1(*S)),1);
         } else if (IsEQCKataString("Shield")){
-            Add(&QSkill(Player1(*S)),1);
+            Add(&QSkill(Player1(*S)),2);
         } else if (IsEQCKataString("ExtraTurn")){
-            Add(&QSkill(Player1(*S)),1);
+            Add(&QSkill(Player1(*S)),3);
         } else if (IsEQCKataString("Attack Up ")) {
-            Add(&QSkill(Player1(*S)),1);
+            Add(&QSkill(Player1(*S)),4);
         } else if (IsEQCKataString("Critical Hit")){
-            Add(&QSkill(Player1(*S)),1);
+            Add(&QSkill(Player1(*S)),5);
         } else if (IsEQCKataString("Instant Reinforcement")){
-            Add(&QSkill(Player1(*S)),1);
+            Add(&QSkill(Player1(*S)),6);
         } else if (IsEQCKataString("Barrage")){
-            Add(&QSkill(Player1(*S)),1);
+            Add(&QSkill(Player1(*S)),7);
         }
         PrintQSkill(QSkill(Player1(*S)));
     } else if (Turn(Player2(*S))) {
@@ -44,17 +44,17 @@ void SetSkill(State *S){
         if (IsEQCKataString("Instant Upgrade")){
             Add(&QSkill(Player2(*S)),1);
         } else if (IsEQCKataString("Shield")){
-            Add(&QSkill(Player2(*S)),1);
+            Add(&QSkill(Player2(*S)),2);
         } else if (IsEQCKataString("ExtraTurn")){
-            Add(&QSkill(Player2(*S)),1);
+            Add(&QSkill(Player2(*S)),3);
         } else if (IsEQCKataString("Attack Up ")) {
-            Add(&QSkill(Player2(*S)),1);
+            Add(&QSkill(Player2(*S)),4);
         } else if (IsEQCKataString("Critical Hit")){
-            Add(&QSkill(Player2(*S)),1);
+            Add(&QSkill(Player2(*S)),5);
         } else if (IsEQCKataString("Instant Reinforcement")){
-            Add(&QSkill(Player2(*S)),1);
+            Add(&QSkill(Player2(*S)),6);
         } else if (IsEQCKataString("Barrage")){
-            Add(&QSkill(Player2(*S)),1);
+            Add(&QSkill(Player2(*S)),7);
         }
         PrintQSkill(QSkill(Player2(*S)));
     }
