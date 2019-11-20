@@ -50,6 +50,11 @@ int main() {
     endgame = false;
     ReadKonfigurasiFile(&S, &Map, &G);
     Turn(Player1(S)) = true;
+    printf("\n");
+    printf("===================================\n");
+    printf("======== Player 1's Turn ! ========\n");
+    printf("===================================\n");
+    printf("\n");
     CreateEmptyStackState(&SStacks);
     PushState(&SStacks, S);
     StatusPlayer(S, Map);
@@ -68,6 +73,7 @@ int main() {
             PushState(&SStacks, S);
         } else if (IsEQCKataString("SKILL")){
             //manggil fungsi skill
+            
             Skill(&S, &extraTurn, &attackUp, &criticalHit); 
             //
             PushState(&SStacks, S);
@@ -103,8 +109,8 @@ int main() {
             printf("tampilin help");
         } else if (IsEQCKataString("PRINT_GRAPH")) {
             PrintInfoGraph(G);
-        } else {
-            printf("Command salah, masukkan lagi!\n");
+        } else{
+            printf("COMMAND yang anda masukkan tidak tersedia, coba lagi!\n");
         }
         
         //cek juga ada yang kalah atau enggak
