@@ -58,7 +58,6 @@ int main() {
             PushState(&SStacks, S);
         } else if (IsEQCKataString("LEVEL_UP")){
             LevelUp(&S);
-            addIR(&S);
             PushState(&SStacks, S);
         } else if (IsEQCKataString("SKILL")){
             printf("skill \n");
