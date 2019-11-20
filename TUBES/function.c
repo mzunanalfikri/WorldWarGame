@@ -488,7 +488,6 @@ void ChooseBangunanPlayerLevelUp(State S, int * x, boolean player1)
 }
 
 
-
 void LevelUp(State * S)
 /* Procedure untuk level up */
 {
