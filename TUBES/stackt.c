@@ -69,15 +69,19 @@ void CopyStackState(StackState Sin, StackState *Sout){
 }
 
 void EndTurnState(StackState* Sin){
-    StackState X;
+    //StackState X;
     State Final = InfoTop(*Sin);
+    State Final_Copy;
     State Temp;
-    CreateEmptyStackState(&X);
-    PushState(&X,Final);
+
+    MakeState(&Final_Copy, MaxElArray(ArrayBangunan(Final)));
+    CopyState(Final, &Final_Copy);
+    //CreateEmptyStackState(&X);
+    //PushState(&X,Final);
     while(!IsEmptyStackState(*Sin)){
         PopState(Sin,&Temp);
     }
-    PushState(Sin,Final);
+    PushState(Sin,Final_Copy);
 }
 
 void Undo(StackState *S){
