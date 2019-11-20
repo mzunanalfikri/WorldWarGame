@@ -104,7 +104,7 @@ int main() {
         } else if (IsEQCKataString("PRINT_GRAPH")) {
             PrintInfoGraph(G);
         }
-        // disini lakukan pengecekan skiil bertamah
+        
         //cek juga ada yang kalah atau enggak
     }
 

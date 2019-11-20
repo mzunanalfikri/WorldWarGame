@@ -838,7 +838,7 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP, boolean * cr
                 printf("Player 2 mendatapkan Skill Shield \n");
             }
             //cek dapet attack up
-            if (NBElmtTower(ListIdxBangunan(Player1(*S)), ArrayBangunan(*S)) == 3  && Type(ElmtTab(ArrayBangunan(*S), defend)) == 'T'){
+            if (NBElmtTower(ListIdxBangunan(Player1(*S)), ArrayBangunan(*S)) == 3  && Type(ElmtTab(ArrayBangunan(*S), defend)) == 'T' && SearchB(ListIdxBangunan(Player2(*S)), defend) ){
                 Add(&QSkill(Player1(*S)), 4);
                 printf("player 1 mendapatkan attack up");
             } 
@@ -859,7 +859,7 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP, boolean * cr
                 printf("Player 1 mendatapkan Skill Shield \n");
             }
             //cek penambahan attack up
-            if (NBElmtTower(ListIdxBangunan(Player2(*S)), ArrayBangunan(*S) ) == 3  && Type(ElmtTab(ArrayBangunan(*S), defend)) == 'T'){
+            if (NBElmtTower(ListIdxBangunan(Player2(*S)), ArrayBangunan(*S) ) == 3  && Type(ElmtTab(ArrayBangunan(*S), defend)) == 'T' && SearchB(ListIdxBangunan(Player1(*S)), defend)){
                 Add(&QSkill(Player2(*S)), 4);
                 printf("player 2 mendapatkan attack up");
             } 
