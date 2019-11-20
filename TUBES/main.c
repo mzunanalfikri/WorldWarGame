@@ -42,7 +42,9 @@ int main() {
     boolean endgame;
     boolean extraTurn;
     boolean attackUp;
+    boolean criticalHit;
 
+    criticalHit = false;
     extraTurn = false;
     attackUp = false;
     endgame = false;
@@ -57,7 +59,7 @@ int main() {
         ReadCmd();
         if (IsEQCKataString("ATTACK")){
             //memanggil fungsi attack
-            Attack(&S, G, &attackUp);
+            Attack(&S, G, &attackUp, &criticalHit);
             //
             PushState(&SStacks, S);
         } else if (IsEQCKataString("LEVEL_UP")){
@@ -66,7 +68,7 @@ int main() {
             PushState(&SStacks, S);
         } else if (IsEQCKataString("SKILL")){
             //manggil fungsi skill
-            Skill(&S, &extraTurn, &attackUp); 
+            Skill(&S, &extraTurn, &attackUp, &criticalHit); 
             //
             PushState(&SStacks, S);
             EndTurnState(&SStacks);
@@ -78,7 +80,7 @@ int main() {
             //cek dapet instant reinforcement
             AddIR(&S);
             //fungsi end turn
-            EndTurn(&S, &extraTurn);
+            EndTurn(&S, &extraTurn, &attackUp);
             //print status player
             StatusPlayer(S,Map);
             //

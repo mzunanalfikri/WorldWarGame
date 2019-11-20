@@ -32,7 +32,7 @@ INTEGER DIPETAKAN KE SKILL :
 7 --> Barrage
 =========================================== */
 
-void Skill(State *S, boolean * ExtraTurn, boolean * AttackUP);
+void Skill(State *S, boolean * ExtraTurn, boolean * AttackUP,  boolean *crithit);
 /* untuk memanggil skill skill */
 
 void InstantUpgrade (State *S);
@@ -46,7 +46,7 @@ bertambah, namun menjadi nilai maksimum.
 Pemain mendapat skill ini jika setelah sebuah lawan menyerang, bangunan pemain
 berkurang 1 menjadi sisa 2.*/
 
-void EndTurn (State *S, boolean *ExtraTurn);
+void EndTurn (State *S, boolean *ExtraTurn, boolean *attackUP);
 /* kondisi P1 saat ini : P2 turn true, setiap bangunan di P2 bertambah pasukannya */
 /* kondisi P2 saat ini : P1 trun true, setiap bangunan di P1 bertambah pasukannya */
 
@@ -64,7 +64,7 @@ Pemain mendapat skill ini jika pemain baru saja menyerang Tower lawan dan
 jumlah towernya menjadi 3.*/
 
 
-void CriticalHit (State *S);
+void CriticalHit (boolean *crithit);
 /*Pada giliran ini, setelah skill diaktifkan, jumlah pasukan pada bangunan yang
 melakukan serangan tepat selanjutnya (hanya berlaku 1 serangan) hanya
 efektif sebanyak 2 kali lipat pasukan. Skill ini
@@ -123,10 +123,10 @@ void ChooseBangunanPlayerAttack(State S, Graph G, int *serang, int *defend, bool
 /* F.S. serang menjadi indeks bangunan penyerang, defend menjadi indeks bangunan
         yang bertahan */
 
-void PreAttack(State *S, int serang, int defend, boolean *attackUP);
+void PreAttack(State *S, int serang, int defend, boolean *attackUP, boolean *crithit);
 /* prosedur transisi untuk attack */
 
-void Attack(State *S, Graph G, boolean * attackUP);
+void Attack(State *S, Graph G, boolean * attackUP, boolean * crithit);
 /* Procedure untuk memindahkan pasukan dari bangunan satu ke lainnya */
 
 int NBElmtTower(List L, TabBangunan B);
