@@ -19,29 +19,45 @@
 
 void SetSkill(State *S){
     infotype X;
-    Queue Q = QSkill(Player1(*S));
-    while(!IsEmpty(Q)){
-        Del(&Q,&X);
+    if (Turn(Player1(*S))){
+        EnterCommad(*S);
+        ReadCmd();
+        if (IsEQCKataString("Instant Upgrade")){
+            Add(&QSkill(Player1(*S)),1);
+        } else if (IsEQCKataString("Shield")){
+            Add(&QSkill(Player1(*S)),1);
+        } else if (IsEQCKataString("ExtraTurn")){
+            Add(&QSkill(Player1(*S)),1);
+        } else if (IsEQCKataString("Attack Up ")) {
+            Add(&QSkill(Player1(*S)),1);
+        } else if (IsEQCKataString("Critical Hit")){
+            Add(&QSkill(Player1(*S)),1);
+        } else if (IsEQCKataString("Instant Reinforcement")){
+            Add(&QSkill(Player1(*S)),1);
+        } else if (IsEQCKataString("Barrage")){
+            Add(&QSkill(Player1(*S)),1);
+        }
+        PrintQSkill(QSkill(Player1(*S));
+    } else if (Turn(Player2(*S))) {
+        EnterCommad(*S);
+        ReadCmd();
+        if (IsEQCKataString("Instant Upgrade")){
+            Add(&QSkill(Player2(*S)),1);
+        } else if (IsEQCKataString("Shield")){
+            Add(&QSkill(Player2(*S)),1);
+        } else if (IsEQCKataString("ExtraTurn")){
+            Add(&QSkill(Player2(*S)),1);
+        } else if (IsEQCKataString("Attack Up ")) {
+            Add(&QSkill(Player2(*S)),1);
+        } else if (IsEQCKataString("Critical Hit")){
+            Add(&QSkill(Player2(*S)),1);
+        } else if (IsEQCKataString("Instant Reinforcement")){
+            Add(&QSkill(Player2(*S)),1);
+        } else if (IsEQCKataString("Barrage")){
+            Add(&QSkill(Player2(*S)),1);
+        }
+        PrintQSkill(QSkill(Player2(*S));
     }
-    EnterCommad(*S);
-    ReadCmd();
-    if (IsEQCKataString("Instant Upgrade")){
-        Add(&Q,1);
-    } else if (IsEQCKataString("Shield")){
-        Add(&Q,2);
-    } else if (IsEQCKataString("ExtraTurn")){
-        Add(&Q,3);
-    } else if (IsEQCKataString("Attack Up ")) {
-        Add(&Q,4);
-    } else if (IsEQCKataString("Critical Hit")){
-        Add(&Q,5);
-    } else if (IsEQCKataString("Instant Reinforcement")){
-        Add(&Q,6);
-    } else if (IsEQCKataString("Barrage")){
-        Add(&Q,7);
-    }
-    PrintQSkill(Q);
-    PrintTopQSkill(Q);
 }
 
  void SetBangunan (Bangunan *B)
