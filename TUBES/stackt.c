@@ -80,24 +80,21 @@ void EndTurnState(StackState* Sin){
     //PushState(&X,Final);
     while(!IsEmptyStackState(*Sin)){
         PopState(Sin,&Temp);
+        DealokState(&Temp);
     }
     PushState(Sin,Final_Copy);
 }
 
 void Undo(StackState *S){
-    StackState STemp;
     State XTemp;
+    PopState(S, &XTemp);
 
-    CreateEmptyStackState(&STemp);
-    CopyStackState(*S, &STemp);
-    PopState(&STemp, &XTemp);
 
-    //printf("Original stack is empty??? %s\n", (IsEmptyStackState(*S)? "YES" : "Thankfully not"));
-
-    if (IsEmptyStackState(STemp)) {
-        printf("You cannot undo past the point before your turn started, or before your skill changed the world.\n");
+    if (IsEmptyStackState(*S)) {
+        PushState(S, XTemp);
+        printf("Anda tidak dapat membatalkan (Undo) hingga sebelum giliran Anda dimulai, atau hingga sebelum dunia berubah karena kekuatan Skill Anda.\n");
     } else {
-        CopyStackState(STemp, S);
-        printf("Your previous action has been undone.\n");
+        DealokState(&XTemp);
+        printf("Aksi Anda yang sebelumnya telah dibatalkan (Undo).\n");
     }
 }

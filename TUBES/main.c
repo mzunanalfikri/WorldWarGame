@@ -86,7 +86,7 @@ int main() {
             PushState(&SStacks, S);
             EndTurnState(&SStacks);
         } else if (IsEQCKataString("UNDO")) {
-            printf("Undo \n");
+            //printf("Undo \n");
             Undo(&SStacks);
             CopyState(InfoTop(SStacks), &S);
         } else if (IsEQCKataString("END_TURN")){

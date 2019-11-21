@@ -28,3 +28,9 @@ void PrintState(State S){
     PrintPlayer(Player1(S));
     PrintPlayer(Player2(S));
 }
+
+void DealokState(State *S) {
+    DealokasiArray(&ArrayBangunan(*S));
+    DealokasiPlayer(&Player1(*S));
+    DealokasiPlayer(&Player2(*S));
+}

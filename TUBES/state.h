@@ -30,4 +30,6 @@ void CopyState(State Sin, State * Sout);
 
 void PrintState(State S);
 
+void DealokState(State *S);
+
 #endif
