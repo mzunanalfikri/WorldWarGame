@@ -120,25 +120,22 @@ void Del (Queue * Q, infotype * X)
 void PrintQSkill (Queue Q){
     infotype X;
     printf("Skill Avaible | ");
-    
-    while(!IsEmpty(Q)){
         Del(&Q,&X);
         if (X == 1){
-            printf("InstantUpgrade | ");
+            printf("InstantUpgrade");
         } else if (X == 2) {
-            printf("Shield | ");
+            printf("Shield");
         } else if (X == 3) {
-            printf("Extra Turn | ");
+            printf("Extra Turn");
         } else if (X == 4){
-            printf("AttackUp | ");
+            printf("AttackUp");
         } else if (X == 5){
-            printf ("CriticalHit | ");
+            printf ("CriticalHit");
         } else if (X == 6) {
-            printf("InstantReinforcement | ");
+            printf("InstantReinforcement");
         } else if (X == 7) {
             printf("Barrage");
         }
-    }
     printf("\n");
 }
 

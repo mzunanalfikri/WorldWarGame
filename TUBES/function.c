@@ -496,7 +496,6 @@ void ChooseBangunanPlayerLevelUp(State S, int * x, boolean player1)
 }
 
 
-
 void LevelUp(State * S)
 /* Procedure untuk level up */
 {
@@ -731,7 +730,9 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP, boolean * cr
 /* prosedur transisi untuk attack */
 {
     boolean akuisisi;
+    boolean direbut;
     akuisisi = false;
+    direbut = false;
     int x;
     printf("Jumlah pasukan : ");
     ReadCmd();
@@ -767,9 +768,11 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP, boolean * cr
             Netral(ElmtTab(ArrayBangunan(*S), defend)) = false;
             BackToLv1(&ElmtTab(ArrayBangunan(*S), defend));
             if (Turn(Player1(*S))){
+                direbut = SearchB(ListIdxBangunan(Player2(*S)),defend);
                 DelP(&ListIdxBangunan(Player2(*S)), defend);
                 InsVLast(&ListIdxBangunan(Player1(*S)), defend);
             } else if (Turn(Player2(*S))) {
+                direbut = SearchB(ListIdxBangunan(Player1(*S)),defend);
                 DelP(&ListIdxBangunan(Player1(*S)), defend);
                 InsVLast(&ListIdxBangunan(Player2(*S)), defend);
             }
@@ -789,9 +792,11 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP, boolean * cr
             Netral(ElmtTab(ArrayBangunan(*S), defend)) = false;
             BackToLv1(&ElmtTab(ArrayBangunan(*S), defend));
             if (Turn(Player1(*S))){
+                direbut = SearchB(ListIdxBangunan(Player2(*S)),defend);
                 DelP(&ListIdxBangunan(Player2(*S)), defend);
                 InsVLast(&ListIdxBangunan(Player1(*S)), defend);
             } else if (Turn(Player2(*S))) {
+                direbut = SearchB(ListIdxBangunan(Player1(*S)),defend);
                 DelP(&ListIdxBangunan(Player1(*S)), defend);
                 InsVLast(&ListIdxBangunan(Player2(*S)), defend);
             }
@@ -810,9 +815,11 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP, boolean * cr
             Netral(ElmtTab(ArrayBangunan(*S), defend)) = false;
             BackToLv1(&ElmtTab(ArrayBangunan(*S), defend));
             if (Turn(Player1(*S))){
+                direbut = SearchB(ListIdxBangunan(Player2(*S)),defend);
                 DelP(&ListIdxBangunan(Player2(*S)), defend);
                 InsVLast(&ListIdxBangunan(Player1(*S)), defend);
             } else if (Turn(Player2(*S))) {
+                direbut = SearchB(ListIdxBangunan(Player1(*S)),defend);
                 DelP(&ListIdxBangunan(Player1(*S)), defend);
                 InsVLast(&ListIdxBangunan(Player2(*S)), defend);
             }
@@ -831,7 +838,7 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP, boolean * cr
     if (akuisisi){
         if (Turn(Player1(*S))){
             //Cek dapet extra turn
-            if (Type(ElmtTab(ArrayBangunan(*S), defend)) == 'F' && SearchB(ListIdxBangunan(Player2(*S)),defend)){
+            if (Type(ElmtTab(ArrayBangunan(*S), defend)) == 'F' && direbut){
                 Add(&QSkill(Player2(*S)), 3);
                 printf("Player 2 mendapatkan Skill Extra Turn \n");
             }
@@ -841,18 +848,18 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP, boolean * cr
                 printf("Player 2 mendatapkan Skill Barrage \n");
             }
             //cek dapa shield
-            if (NbElmtList(ListIdxBangunan(Player2(*S))) == 2 && SearchB(ListIdxBangunan(Player2(*S)),defend)){
+            if (NbElmtList(ListIdxBangunan(Player2(*S))) == 2 && direbut){
                 Add(&QSkill(Player2(*S)), 2);
                 printf("Player 2 mendatapkan Skill Shield \n");
             }
             //cek dapet attack up
-            if (NBElmtTower(ListIdxBangunan(Player1(*S)), ArrayBangunan(*S)) == 3  && Type(ElmtTab(ArrayBangunan(*S), defend)) == 'T' && SearchB(ListIdxBangunan(Player2(*S)), defend) ){
+            if (NBElmtTower(ListIdxBangunan(Player1(*S)), ArrayBangunan(*S)) == 3  && Type(ElmtTab(ArrayBangunan(*S), defend)) == 'T' && direbut ){
                 Add(&QSkill(Player1(*S)), 4);
-                printf("player 1 mendapatkan attack up");
+                printf("player 1 mendapatkan attack up\n");
             } 
         } else if(Turn(Player2(*S))) {
             //Cek dapet extra turn
-            if (Type(ElmtTab(ArrayBangunan(*S), defend)) == 'F' && SearchB(ListIdxBangunan(Player1(*S)),defend) ){
+            if (Type(ElmtTab(ArrayBangunan(*S), defend)) == 'F' && direbut){
                 Add(&QSkill(Player1(*S)), 3);
                 printf("Player 1 mendapatkan Skill Extra Turn \n");
             }
@@ -862,14 +869,14 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP, boolean * cr
                 printf("Player 1 mendatapkan Skill Barrage \n");
             }
             //cek shield
-            if (NbElmtList(ListIdxBangunan(Player1(*S))) == 2 && SearchB(ListIdxBangunan(Player1(*S)),defend)){
+            if (NbElmtList(ListIdxBangunan(Player1(*S))) == 2 && direbut){
                 Add(&QSkill(Player2(*S)), 2);
                 printf("Player 1 mendatapkan Skill Shield \n");
             }
             //cek penambahan attack up
-            if (NBElmtTower(ListIdxBangunan(Player2(*S)), ArrayBangunan(*S) ) == 3  && Type(ElmtTab(ArrayBangunan(*S), defend)) == 'T' && SearchB(ListIdxBangunan(Player1(*S)), defend)){
+            if (NBElmtTower(ListIdxBangunan(Player2(*S)), ArrayBangunan(*S) ) == 3  && Type(ElmtTab(ArrayBangunan(*S), defend)) == 'T' && direbut){
                 Add(&QSkill(Player2(*S)), 4);
-                printf("player 2 mendapatkan attack up");
+                printf("player 2 mendapatkan attack up\n");
             } 
         }
     }
@@ -925,11 +932,15 @@ void GameEnd(State S, boolean *endgame)
     if (IsEmptyList(ListIdxBangunan(Player1(S)))){
         // player 2 menang
         printf("Selamat player 2 menang !!!\n");
+        printf("Tekan Enter ntuk keluar");
+        STARTcmd();
+        (*endgame) = true;
     } else if (IsEmptyList(ListIdxBangunan(Player2(S)))) {
         //player 1 menang
         printf("Selamat player 1 menang !!!\n");
+        printf("Tekan Enter ntuk keluar");
+        STARTcmd();
+        (*endgame) = true;
     }
-    printf("Tekan Enter ntuk keluar");
-    STARTcmd();
-    (*endgame) = true;
+    
 }
