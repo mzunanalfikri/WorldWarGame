@@ -15,7 +15,7 @@ INTEGER DIPETAKAN KE SKILL :
 7 --> Barrage, udah di cek nambahh
 =========================================== */
 
-void Skill(State *S, boolean * ExtraTurn, boolean *AttackUP, boolean *crithit)
+void Skill(State *S, boolean * ExtraTurn, boolean *AttackUP)
 /* untuk memanggil skill skill */
 {
     int Skil;
@@ -59,7 +59,7 @@ void Skill(State *S, boolean * ExtraTurn, boolean *AttackUP, boolean *crithit)
         AttackUp(AttackUP);
     } else if (Skil == 5) {
         //manggil Critical hit
-        CriticalHit(crithit);
+        CriticalHit(S);
     } else if (Skil == 6) {
         //manggil instant reinforcement
         InstantReinforcement(S);
@@ -193,8 +193,8 @@ Shield) tidak akan mempengaruhi penyerangan.
 Pemain mendapat skill ini jika pemain baru saja menyerang Tower lawan dan
 jumlah towernya menjadi 3.*/
 
-void CriticalHit (boolean *crithit){ //bonus
-    (*crithit) = true;
+void CriticalHit (State *S){ //bonus
+    CritHit(*S) = true;
     printf("Critical hit has been activated. \n");
 }
 /*Pada giliran ini, setelah skill diaktifkan, jumlah pasukan pada bangunan yang
@@ -736,7 +736,7 @@ void ChooseBangunanPlayerAttack(State S, Graph G, int *serang, int *defend, bool
     }
 }
 
-void PreAttack(State *S, int serang, int defend, boolean *attackUP, boolean * crithit)
+void PreAttack(State *S, int serang, int defend, boolean *attackUP)
 /* prosedur transisi untuk attack */
 {
     boolean akuisisi;
@@ -770,7 +770,7 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP, boolean * cr
     }
     //implementasi crithit if crithit ada kondisi lagi, trus crithit di off kan
 
-    if (*crithit) {
+    if (CritHit(*S)) {
         printf("attack mode critical hit");
         if (x >= Pasukan(ElmtTab(ArrayBangunan(*S), defend))/2){
             Pasukan(ElmtTab(ArrayBangunan(*S), serang)) -= x;
@@ -842,7 +842,7 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP, boolean * cr
         }
     }
     Serang(ElmtTab(ArrayBangunan(*S), serang)) = true;
-    (*crithit) = false;
+    CritHit(*S) = false;
 
     //pengecekan penambahan skill
     if (akuisisi){
@@ -892,7 +892,7 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP, boolean * cr
     }
 }
 
-void Attack(State *S, Graph G, boolean * attackUP, boolean * crithit)
+void Attack(State *S, Graph G, boolean * attackUP)
 /* Procedure untuk memindahkan pasukan dari bangunan satu ke lainnya */
 {
     int attack;
@@ -903,7 +903,7 @@ void Attack(State *S, Graph G, boolean * attackUP, boolean * crithit)
         if (attack == 0 || defend == 0){
             printf("Attack gagal.\n");
         } else {
-            PreAttack(S, attack, defend, attackUP, crithit);
+            PreAttack(S, attack, defend, attackUP);
         }
         //printf(" x : %d\n", x);
     } else if (Turn(Player2(*S))) {
@@ -912,7 +912,7 @@ void Attack(State *S, Graph G, boolean * attackUP, boolean * crithit)
         if (attack == 0 || defend == 0){
             printf("Attack gagal.\n");
         } else {
-           PreAttack(S, attack, defend, attackUP, crithit);
+           PreAttack(S, attack, defend, attackUP);
         }
     }
 }
