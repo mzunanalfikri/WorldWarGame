@@ -42,9 +42,7 @@ int main() {
     boolean endgame;
     boolean extraTurn;
     boolean attackUp;
-    //boolean criticalHit;
-
-    //criticalHit = false;
+    
     extraTurn = false;
     attackUp = false;
     endgame = false;
@@ -72,7 +70,7 @@ int main() {
         if (IsEQCKataString("ATTACK")){
             //memanggil fungsi attack
             Attack(&S, G, &attackUp);
-            //
+            //push ke stack
             PushState(&SStacks, S);
         } else if (IsEQCKataString("LEVEL_UP")){
             //panggil fungsi levelup
@@ -80,9 +78,8 @@ int main() {
             PushState(&SStacks, S);
         } else if (IsEQCKataString("SKILL")){
             //manggil fungsi skill
-            
             Skill(&S, &extraTurn, &attackUp); 
-            //
+            //push ke stack
             PushState(&SStacks, S);
             EndTurnState(&SStacks);
         } else if (IsEQCKataString("UNDO")) {
@@ -96,13 +93,13 @@ int main() {
             EndTurn(&S, &extraTurn, &attackUp);
             //print status player
             StatusPlayer(S,Map);
-            //
+            //push ke stack
             PushState(&SStacks, S);
             EndTurnState(&SStacks);
         } else if (IsEQCKataString("MOVE")){
             //funsi pasukan
             MovePasukan(&S, G);
-            //
+            //push ke stack
             PushState(&SStacks, S);
         } else if (IsEQCKataString("EXIT")){
             endgame = true;
@@ -113,14 +110,13 @@ int main() {
         } else if (IsEQCKataString("STATUS")) {
             StatusPlayer(S, Map);
         } else if (IsEQCKataString("HELP")){
-            printf("tampilin help");
+            Help();
         } else if (IsEQCKataString("PRINT_GRAPH")) {
             PrintInfoGraph(G);
         } else{
             printf("COMMAND yang anda masukkan tidak tersedia, coba lagi!\n");
         }
-        
-        //cek juga ada yang kalah atau enggak
+        //Cek Kondisi Game Over
         GameEnd(S, &endgame);
     }
 
