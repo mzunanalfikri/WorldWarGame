@@ -880,7 +880,7 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP, boolean * cr
             }
             //cek shield
             if (NbElmtList(ListIdxBangunan(Player1(*S))) == 2 && direbut){
-                Add(&QSkill(Player2(*S)), 2);
+                Add(&QSkill(Player1(*S)), 2);
                 printf("Player 1 mendatapkan Skill Shield \n");
             }
             //cek penambahan attack up
