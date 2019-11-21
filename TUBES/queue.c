@@ -21,7 +21,7 @@ int NBElmt (Queue Q)
     {
         return 0;
     }
-    else // queue tidak kosaong
+    else // queue tidak kosong
     {
         if (Head(Q) <= Tail(Q))
         {
@@ -77,23 +77,27 @@ void Add (Queue * Q, infotype X)
     // KAMUS LOKAL
 
     // ALGORITMA
-    if (IsEmpty(*Q))
-    {
-        Head(*Q) = 1;
-        Tail(*Q) = 1;
-        InfoTail(*Q)=X;
-    }
-    else if (Tail(*Q) != MaxElQueue(*Q))
-    {
-        Tail(*Q)++;
-        InfoTail(*Q)=X;
+    if(NBElmt(*Q)>=10){
+        printf("queue penuh\n");
+    }else{
+        if (IsEmpty(*Q))
+        {
+            Head(*Q) = 1;
+            Tail(*Q) = 1;
+            InfoTail(*Q)=X;
+        }
+        else if (Tail(*Q) != MaxElQueue(*Q))
+        {
+            Tail(*Q)++;
+            InfoTail(*Q)=X;
 
-    }
-    else // Tail = indeks akhir
-    {
-        Tail(*Q) = 1;
-        InfoTail(*Q)=X;
+        }
+        else // Tail = indeks akhir
+        {
+            Tail(*Q) = 1;
+            InfoTail(*Q)=X;
 
+        }
     }
 }
 void Del (Queue * Q, infotype * X)

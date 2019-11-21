@@ -221,11 +221,22 @@ void AddIR (State *S){
     }
     if(four){
         if (Turn(Player1(*S))){
-            Add(&QSkill(Player1(*S)), 6);
+            if(NBElmt(QSkill(Player1(*S)))<10){
+                Add(&QSkill(Player1(*S)), 6);
+                printf("kamu dapat IR\n");
+            }else{
+                printf("queue penuh\n");
+            }
         } else if (Turn(Player2(*S))) {
-            Add(&QSkill(Player2(*S)), 6);
+            if(NBElmt(QSkill(Player2(*S)))<10){
+                Add(&QSkill(Player2(*S)), 6);
+                printf("kamu dapat IR\n");
+            }else{
+                printf("queue penuh\n");
+            }
+           
         }
-        printf("kamu dapat IR\n");
+        
     }
 }
 
