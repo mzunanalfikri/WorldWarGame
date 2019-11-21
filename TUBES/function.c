@@ -95,8 +95,10 @@ Pemain tidak akan mendapat skill ini selain dari daftar skill awal.*/
 void Shield (State *S){ //bonus
     if (Turn(Player1(*S))){
         ShieldPlayer(Player1(*S)) = 2;
+        printf("Your shield skill activated");
     } else if (Turn(Player2(*S))) {
         ShieldPlayer(Player2(*S)) = 2;
+        printf("Your shield skill activated");
     }
 }
 /*
