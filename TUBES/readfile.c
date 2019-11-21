@@ -112,8 +112,6 @@ void ReadKonfigurasiFile(State *S, MATRIKS *M, Graph *G) {
 	// InsVFirst(&ListIdxBangunan(Player1(*S)), 17);
 	// InsVFirst(&ListIdxBangunan(Player2(*S)), 4);
 
-	Netral(ElmtTab(ArrayBangunan(*S), 1)) = false;
-	Netral(ElmtTab(ArrayBangunan(*S), 2)) = false;
 	/* MAKE BANGUNAN ARRAY END */
 	//TulisMATRIKS(*M);
 

@@ -775,7 +775,6 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP)
         if (x >= Pasukan(ElmtTab(ArrayBangunan(*S), defend))/2){
             Pasukan(ElmtTab(ArrayBangunan(*S), serang)) -= x;
             Pasukan(ElmtTab(ArrayBangunan(*S), defend)) = x - Pasukan(ElmtTab(ArrayBangunan(*S), defend))/2;
-            Netral(ElmtTab(ArrayBangunan(*S), defend)) = false;
             BackToLv1(&ElmtTab(ArrayBangunan(*S), defend));
             if (Turn(Player1(*S))){
                 direbut = SearchB(ListIdxBangunan(Player2(*S)),defend);
@@ -799,7 +798,6 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP)
         if (x >= Pasukan(ElmtTab(ArrayBangunan(*S), defend))*4/3){
             Pasukan(ElmtTab(ArrayBangunan(*S), serang)) -= x;
             Pasukan(ElmtTab(ArrayBangunan(*S), defend)) = x - Pasukan(ElmtTab(ArrayBangunan(*S), defend))*4/3;
-            Netral(ElmtTab(ArrayBangunan(*S), defend)) = false;
             BackToLv1(&ElmtTab(ArrayBangunan(*S), defend));
             if (Turn(Player1(*S))){
                 direbut = SearchB(ListIdxBangunan(Player2(*S)),defend);
@@ -822,7 +820,6 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP)
         if (x >= Pasukan(ElmtTab(ArrayBangunan(*S), defend))){
             Pasukan(ElmtTab(ArrayBangunan(*S), serang)) -= x;
             Pasukan(ElmtTab(ArrayBangunan(*S), defend)) = x - Pasukan(ElmtTab(ArrayBangunan(*S), defend));
-            Netral(ElmtTab(ArrayBangunan(*S), defend)) = false;
             BackToLv1(&ElmtTab(ArrayBangunan(*S), defend));
             if (Turn(Player1(*S))){
                 direbut = SearchB(ListIdxBangunan(Player2(*S)),defend);

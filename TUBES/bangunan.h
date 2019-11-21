@@ -11,7 +11,6 @@ Properti ADT Bangunan :
      U (Pasukan Awal) {tidak perlu, karena hanya di awal}
 8. Posisi
 9. Serang (false jika belom menyerang, true jika sudah menyerang)
-10. Netral (true jika bangunan tidak dimiliki siapapun)
 */
 
 #ifndef BANGUNAN_H
@@ -29,7 +28,6 @@ typedef struct {
     boolean Pertahanan;
     POINT Posisi;
     boolean Serang;
-    boolean Netral;
     boolean Move;
 } Bangunan;
 
@@ -42,7 +40,6 @@ typedef struct {
 #define Pertahanan(B) (B).Pertahanan
 #define Posisi(B) (B).Posisi
 #define Serang(B) (B).Serang
-#define Netral(B) (B).Netral
 #define Move(B) (B).Move
 
 /* ************** Prototype ************** */
