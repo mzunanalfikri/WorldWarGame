@@ -62,7 +62,7 @@ void SetSkill(State *S){
 
  void SetBangunan (Bangunan *B)
 {
-    int lv,serang,pertahanan,netral,move,pasukan,A,M;
+    int lv,serang,pertahanan,move,pasukan,A,M;
     char type;
     printf("level: ");
     scanf("%d",&lv);
@@ -76,9 +76,6 @@ void SetSkill(State *S){
     printf("Tipe bangunan? :");
     scanf(" %c",&type);
     Type(*B) = type;
-    printf("Netral(1/0)? :");
-    scanf("%d",&netral);
-    Netral(*B) = netral;
     printf("Move( 1/0)? :");
     scanf("%d",&move);
     Move(*B) = move;
@@ -149,7 +146,6 @@ void SetPlayersBangunan(State *S){
     while (n > 0){
         printf("masukkan indeks bangunan: ");
         scanf("%d",&x);
-        Netral(ElmtTab(ArrayBangunan(*S), x)) = false;
         if (Turn(Player1(*S))){
             InsVLast(&ListIdxBangunan(Player1(*S)), x);
             if (SearchB(ListIdxBangunan(Player2(*S)),x)){

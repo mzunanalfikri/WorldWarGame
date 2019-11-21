@@ -14,7 +14,6 @@ Bangunan MakeBangunanLv1 (char type, POINT P)
     Pertahanan(B) = false;
     Type(B) = type;
     Posisi(B) = P;
-    Netral(B) = true;
     Move(B) = false;
     if (type == 'C'){
         Pasukan(B) = 40;
@@ -141,7 +140,6 @@ void CopyBangunan (Bangunan BIn, Bangunan * BHsl){
     Absis(Posisi(*BHsl)) = Absis(Posisi(BIn));
     Ordinat(Posisi(*BHsl)) = Ordinat(Posisi(BIn));
     Serang(*BHsl) = Serang(BIn);
-    Netral(*BHsl) = Netral(BIn); 
 }
 
 void PrintBangunan (Bangunan B)

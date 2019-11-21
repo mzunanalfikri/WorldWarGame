@@ -12,12 +12,14 @@ void MakeState(State *S, int JumlahBangunan)
     MakeEmptyArray(&ArrayBangunan(*S), JumlahBangunan);
     MakePlayer(&Player1(*S));
     MakePlayer(&Player2(*S));
+    CritHit(*S) = false;
 }
 
 void CopyState(State Sin, State * Sout){
     CopyTab(ArrayBangunan(Sin),&ArrayBangunan(*Sout));
     CopyPlayer(Player1(Sin),&Player1(*Sout));
     CopyPlayer(Player2(Sin),&Player2(*Sout));
+    CritHit(*Sout) = CritHit(Sin); 
 }
 /* I.S. State Sout sembarang */
 /* F.S. State Sout terisi salinan state Sin */

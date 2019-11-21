@@ -8,13 +8,15 @@
 typedef struct {
     TabBangunan ArrayBangunan;
     Player Player1;
-    Player Player2;    
+    Player Player2;
+    boolean CritHit;    
 } State;
 
 /* *** Selektor *** */
 #define ArrayBangunan(S) (S).ArrayBangunan
 #define Player1(S) (S).Player1
 #define Player2(S) (S).Player2
+#define CritHit(S) (S).CritHit
 
 void MakeState(State *S, int JumlahBangunan);
 /* I.S. State S Sembarang */

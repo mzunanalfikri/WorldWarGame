@@ -42,9 +42,9 @@ int main() {
     boolean endgame;
     boolean extraTurn;
     boolean attackUp;
-    boolean criticalHit;
+    //boolean criticalHit;
 
-    criticalHit = false;
+    //criticalHit = false;
     extraTurn = false;
     attackUp = false;
     endgame = false;
@@ -71,7 +71,7 @@ int main() {
         ReadCmd();
         if (IsEQCKataString("ATTACK")){
             //memanggil fungsi attack
-            Attack(&S, G, &attackUp, &criticalHit);
+            Attack(&S, G, &attackUp);
             //
             PushState(&SStacks, S);
         } else if (IsEQCKataString("LEVEL_UP")){
@@ -81,7 +81,7 @@ int main() {
         } else if (IsEQCKataString("SKILL")){
             //manggil fungsi skill
             
-            Skill(&S, &extraTurn, &attackUp, &criticalHit); 
+            Skill(&S, &extraTurn, &attackUp); 
             //
             PushState(&SStacks, S);
             EndTurnState(&SStacks);
