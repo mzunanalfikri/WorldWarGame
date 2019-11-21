@@ -115,7 +115,7 @@ void EndTurn (State *S, boolean *ExtraTurn, boolean *attackUP)
          P = First(ListIdxBangunan(Player2(*S)));
          if (*ExtraTurn) {
              P = First(ListIdxBangunan(Player1(*S)));
-             (*ExtraTurn) = false;
+            
          } else {
             Turn(Player1(*S)) = false;
             Turn(Player2(*S)) = true;
@@ -134,6 +134,7 @@ void EndTurn (State *S, boolean *ExtraTurn, boolean *attackUP)
          }
         if (*ExtraTurn){
             printf("Extra Turn has been Activated, Player 1's Turn!\n ");
+             (*ExtraTurn) = false;
         } else {
             printf("\n");
             printf("===================================\n");
@@ -146,7 +147,7 @@ void EndTurn (State *S, boolean *ExtraTurn, boolean *attackUP)
          P = First(ListIdxBangunan(Player1(*S)));
          if (*ExtraTurn){
              P = First(ListIdxBangunan(Player2(*S)));
-             (*ExtraTurn) = false;
+            
          } else {
             Turn(Player2(*S)) = false;
             Turn(Player1(*S)) = true;
@@ -163,6 +164,7 @@ void EndTurn (State *S, boolean *ExtraTurn, boolean *attackUP)
          }
          if (*ExtraTurn){
             printf("Extra Turn has been Activated, Player 2's Turn!\n ");
+             (*ExtraTurn) = false;
         } else {
             printf("\n");
             printf("===================================\n");
@@ -549,7 +551,7 @@ void ChooseBangunanPlayerMove(State S,Graph G, int *pendonor, int*penerima, bool
         ReadCmd();
         temp = KataToInt(CKata);
         while (temp >= count || temp <= 0){
-            printf ("Masukan salah!\nBangunan yang akan dinaikkan levelnya :");
+            printf ("Masukan salah!\nPilih Bangunan :");
             //scanf("%d", &temp);
             ReadCmd();
             temp = KataToInt(CKata);
@@ -581,7 +583,7 @@ void ChooseBangunanPlayerMove(State S,Graph G, int *pendonor, int*penerima, bool
             ReadCmd();
             temp = KataToInt(CKata);
             while (temp >= count || temp <= 0){
-                printf ("Masukan salah!\nBangunan yang akan dinaikkan levelnya :");
+                printf ("Masukan salah!\nBangunan yang akan menerima :");
                 //scanf("%d", &temp);
                 ReadCmd();
                 temp = KataToInt(CKata);
