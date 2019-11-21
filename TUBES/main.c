@@ -58,7 +58,14 @@ int main() {
     CreateEmptyStackState(&SStacks);
     PushState(&SStacks, S);
     StatusPlayer(S, Map);
-
+    printf("Command yang tersedia: \n");
+    printf("- ATTACK\n");
+    printf("- LEVEL_UP\n");
+    printf("- SKILL\n");
+    printf("- UNDO\n");
+    printf("- END_TURN\n");
+    printf("- MOVE\n");
+    printf("- EXIT\n");
     while (!endgame){
         EnterCommad(S);
         ReadCmd();
