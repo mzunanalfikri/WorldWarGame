@@ -143,4 +143,10 @@ void Help();
 /* I.S. Sembarang */
 /* F.S. Mencetak list command di layar */
 
+void CetakWarnaRed(Kata CKata);
+/* Untuk Mencetak warna merah CKata */
+
+void CetakWarnaBlue(Kata CKata);
+/* Untuk Mencetak warna merah CKata */
+
 #endif
