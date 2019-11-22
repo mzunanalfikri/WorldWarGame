@@ -72,6 +72,7 @@ int main() {
 
     printf("Ready for Battle ? Tulis YES untuk memulai permainan!\n");
     ReadCmd();
+    printf("Prepare yourself to enter the new world!");
     printf(".");
     delay(1);
     printf(".");
