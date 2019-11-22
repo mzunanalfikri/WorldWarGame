@@ -66,8 +66,8 @@ void welcome(){
     printf("                         s.   o s                          \n");
     printf("                                       `:`                 \n");
     printf("                                                           \n");  
-    //delay(2); system("cls");
-    delay(2);
+    //delay(1); system("cls");
+    delay(1);
     system("cls");
 
     printf("                                                           \n");
@@ -88,8 +88,8 @@ void welcome(){
     printf("                       s. os                               \n");
     printf("                                    `:`                    \n");
     printf("                                                           \n");  
-    //delay(2); system("cls");
-    delay(2);
+    //delay(1); system("cls");
+    delay(1);
     system("cls");
 
     printf("                                                           \n");
@@ -111,8 +111,8 @@ void welcome(){
     printf("                                   `:`                     \n");
     printf("                                                           \n");  
     printf("                             W  E  L                       \n");
-    //delay(2); system("cls");
-    delay(2);
+    //delay(1); system("cls");
+    delay(1);
     system("cls");
 
     printf("                                                           \n");
@@ -134,8 +134,8 @@ void welcome(){
     printf("                                  `:`                      \n");
     printf("                                                           \n");  
     printf("                      W  E  L  C  O  M  E                  \n");
-    //delay(2); system("cls");
-    delay(2);
+    //delay(1); system("cls");
+    delay(1);
     system("cls");
 
     printf("                                                           \n");
@@ -157,8 +157,8 @@ void welcome(){
     printf("                                `:`                        \n");
     printf("                                                           \n");  
     printf("                 W  E  L  C  O  M  E                       \n");
-    //delay(2); system("cls");
-    delay(1000);
+    //delay(1); system("cls");
+    delay(1);
     system("cls");
     
     printf("                                                           \n");
@@ -180,8 +180,8 @@ void welcome(){
     printf("                              `:`                          \n");
     printf("                                                           \n");  
     printf("                 W  E  L  C  O  M  E    T  O               \n");
-    //delay(2); system("cls");
-    delay(2);
+    //delay(1); system("cls");
+    delay(1);
     system("cls");
 }
 int main() {
@@ -200,7 +200,7 @@ int main() {
     endgame = false;
     ReadKonfigurasiFile(&S, &Map, &G);
     Turn(Player1(S)) = true;
-    welcome();
+    //welcome();
     printf("\n");
     printf("===================================\n");
     printf("======== Player 1's Turn ! ========\n");
@@ -268,6 +268,9 @@ int main() {
             PrintInfoGraph(G);
         } else if (IsEQCKataString("SAVE")) {
             save(SStacks, Map, G, extraTurn, attackUp, "p.txt");
+        } else if (IsEQCKataString("LOAD")) {
+            load(&SStacks, &Map, &G, &extraTurn, &attackUp, "p.txt");
+            CopyState(InfoTop(SStacks), &S);
         } else{
             printf("COMMAND yang anda masukkan tidak tersedia, coba lagi!\n");
         }

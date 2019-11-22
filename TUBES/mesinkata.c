@@ -52,6 +52,18 @@ void ReadCmd(){
         }
 }
 
+void LoadFile(char save_file[]){
+    STARTload(save_file);
+        IgnoreBlank();
+
+        if (CC == MARK) {
+            EndKata = true;
+        } else {
+            EndKata = false;
+            SalinKata();
+        }
+}
+
 void ADVKATA()
 /* I.S. : CC adalah karakter pertama kata yang akan diakuisisi
    F.S. : CKata adalah kata terakhir yang sudah diakuisisi,
