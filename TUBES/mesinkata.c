@@ -156,7 +156,6 @@ boolean IsEQCKataString(char kata[20])
 /* mengembalikan true jika kata sama dengan CKata */
 {
     int i = 1;
-    count1 = 0;
     while (kata[i-1] != NULL){
         if (CKata.TabKata[i] != kata[i-1]){
             return false;
