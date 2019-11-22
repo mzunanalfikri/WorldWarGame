@@ -884,7 +884,7 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP)
                 Add(&QSkill(Player2(*S)), 7);
                 printf("Player 2 mendapatkan Skill Barrage! \n");
             }
-            //cek dapa shield
+            //cek dapa shields
             if (NbElmtList(ListIdxBangunan(Player2(*S))) == 2 && direbut){
                 Add(&QSkill(Player2(*S)), 2);
                 printf("Player 2 mendapatkan Skill Shield !\n");
@@ -892,7 +892,7 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP)
             //cek dapet attack up
             if (NBElmtTower(ListIdxBangunan(Player1(*S)), ArrayBangunan(*S)) == 3  && Type(ElmtTab(ArrayBangunan(*S), defend)) == 'T' && direbut ){
                 Add(&QSkill(Player1(*S)), 4);
-                printf("player 1 mendapatkan Attack Up!\n");
+                printf("Player 1 mendapatkan Attack Up!\n");
             } 
         } else if(Turn(Player2(*S))) {
             //Cek dapet extra turn
@@ -903,17 +903,17 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP)
             //cek dapet barrage
             if (NbElmtList(ListIdxBangunan(Player2(*S))) == 10){
                 Add(&QSkill(Player1(*S)), 7);
-                printf("Player 1 mendatapkan Skill Barrage! \n");
+                printf("Player 1 mendapatkan Skill Barrage! \n");
             }
             //cek shield
             if (NbElmtList(ListIdxBangunan(Player1(*S))) == 2 && direbut){
                 Add(&QSkill(Player1(*S)), 2);
-                printf("Player 1 mendatapkan Skill Shield! \n");
+                printf("Player 1 mendapatkan Skill Shield! \n");
             }
             //cek penambahan attack up
             if (NBElmtTower(ListIdxBangunan(Player2(*S)), ArrayBangunan(*S) ) == 3  && Type(ElmtTab(ArrayBangunan(*S), defend)) == 'T' && direbut){
                 Add(&QSkill(Player2(*S)), 4);
-                printf("player 2 mendapatkan Attack Up1\n");
+                printf("Player 2 mendapatkan Attack Up1\n");
             } 
         }
     }
