@@ -52,7 +52,7 @@ int main() {
     endgame = false;
     Kata player1, player2;
 
-    // welcome();
+    welcome();
     //tampilin rule game jugaa
 
 
@@ -72,11 +72,7 @@ int main() {
 
     printf("Ready for Battle ? Tulis YES untuk memulai permainan!\n");
     ReadCmd();
-<<<<<<< HEAD
-    printf("Prepare yourself to enter the new world!");
-=======
     printf("Siapkan dirimu untuk memasuki dunia baru");
->>>>>>> parent of b12049b... add
     printf(".");
     delay(1);
     printf(".");
