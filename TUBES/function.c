@@ -69,7 +69,10 @@ void Skill(State *S, boolean * ExtraTurn, boolean *AttackUP)
     //skill dipanggil kosongin stack state
 }
 
-void InstantUpgrade (State *S){
+void InstantUpgrade (State *S)
+/*Seluruh bangunan yang dimiliki pemain akan naik 1 level.
+Pemain tidak akan mendapat skill ini selain dari daftar skill awal.*/
+{
     addresslist P1,P2;
     if(Turn(Player1(*S))){
         P1 = First(ListIdxBangunan(Player1(*S)));
@@ -89,10 +92,14 @@ void InstantUpgrade (State *S){
         printf("All of your building's level have been upgraded!\n");
     }
 }
-/*Seluruh bangunan yang dimiliki pemain akan naik 1 level.
-Pemain tidak akan mendapat skill ini selain dari daftar skill awal.*/
 
-void Shield (State *S){ //bonus
+void Shield (State *S)
+/*
+Seluruh bangunan yang dimiliki oleh pemain akan memiliki pertahanan selama 2
+turn lawan. Apabila skill ini digunakan 2 kali berturut-turut, durasi tidak akan
+bertambah, namun menjadi nilai maksimum.
+*/
+{ //bonus
     if (Turn(Player1(*S))){
         ShieldPlayer(Player1(*S)) = 2;
         printf("Your shield skill activated");
@@ -101,11 +108,7 @@ void Shield (State *S){ //bonus
         printf("Your shield skill activated");
     }
 }
-/*
-Seluruh bangunan yang dimiliki oleh pemain akan memiliki pertahanan selama 2
-turn lawan. Apabila skill ini digunakan 2 kali berturut-turut, durasi tidak akan
-bertambah, namun menjadi nilai maksimum.
-*/
+
 
 
 void EndTurn (State *S, boolean *ExtraTurn, boolean *attackUP)
@@ -178,35 +181,42 @@ void EndTurn (State *S, boolean *ExtraTurn, boolean *attackUP)
      (*attackUP) = false;
  }
 
-void ExtraTurnSkill (State *S, boolean *ExtraTurn){
-    (*ExtraTurn) = true;
-    printf("Extra Turn has been activated.\n");
-}
+void ExtraTurnSkill (State *S, boolean *ExtraTurn)
 /*Setelah giliran pengaktifan skill ini berakhir, pemain selanjutnya tetap pemain
 yang sama.
 */
+{
+    (*ExtraTurn) = true;
+    printf("Extra Turn has been activated.\n");
+}
 
-void AttackUp (boolean * AttackUp){ //bonus
-    (*AttackUp) = true;
-    printf("Attack Up has been activated\n");
-} 
+
+void AttackUp (boolean * AttackUp)
 /*Pada giliran ini, setelah skill ini diak4tifkan, pertahanan bangunan musuh (termasuk
 Shield) tidak akan mempengaruhi penyerangan.
 Pemain mendapat skill ini jika pemain baru saja menyerang Tower lawan dan
 jumlah towernya menjadi 3.*/
+{ //bonus
+    (*AttackUp) = true;
+    printf("Attack Up has been activated\n");
+} 
 
-void CriticalHit (State *S){ //bonus
-    CritHit(*S) = true;
-    printf("Critical hit has been activated. \n");
-}
+void CriticalHit (State *S)
 /*Pada giliran ini, setelah skill diaktifkan, jumlah pasukan pada bangunan yang
 melakukan serangan tepat selanjutnya (hanya berlaku 1 serangan) hanya
 efektif sebanyak 2 kali lipat pasukan. Skill ini
 akan menonaktifkan Shield maupun pertahanan bangunan, seperti Attack Up.
 Pemain mendapat skill ini jika lawan baru saja mengaktifkan skill Extra Turn.
 */
+{ //bonus
+    CritHit(*S) = true;
+    printf("Critical hit has been activated. \n");
+}
 
-void AddIR (State *S){
+
+void AddIR (State *S)
+/* Procedur untuk pengecekan penambahan skill Instant Reinforcement */
+{
     addresslist P;
     boolean four = true;
     P = First(ListIdxBangunan(Player1(*S)));
@@ -304,7 +314,9 @@ pasukan.
 Pemain mendapat skill ini jika lawan baru saja bertambah bangunannya menjadi
 10 bangunan.*/
 
-
+/*************************/
+/* MENAMPILKAN GAME PLAY */
+/*************************/
 void StatusPlayer(State S, MATRIKS Map)
 /* prosedur untuk menampilkan status player (map, bangunan, skill) */
 {
@@ -380,7 +392,6 @@ void StatusPlayer(State S, MATRIKS Map)
         PrintTopQSkill(QSkill(Player2(S)));
     }
 }
-/* **** ATTACK MECHANISM *** */
 
 // Fungsi untuk cetak matriks dengan warna
 void CetakMatiksWarna(MATRIKS M, State S)

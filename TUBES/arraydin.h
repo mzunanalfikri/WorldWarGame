@@ -105,5 +105,7 @@ void AddAsLastEl(TabBangunan *T, ElTypeArr X);
 /* ********** MENGHAPUS ELEMEN ********** */
 
 void PrintAllBangunan(TabBangunan B);
+/* I.S. Sembarang */
+/* F.S. Tercetak di layar semua properti dari semua bangunan */
 
 #endif
