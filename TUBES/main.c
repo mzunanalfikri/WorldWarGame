@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>
+#include<conio.h>
 #include "arraydin.h"
 #include "bangunan.h"
 #include "listlinier.h"
@@ -49,9 +50,34 @@ int main() {
     extraTurn = false;
     attackUp = false;
     endgame = false;
+    Kata player1, player2;
+
+    system("cls");
+    welcome();
+    //tampilin rule game jugaa
+
+
+    printf("Masukkan Nama Player 1 : ");
+    ReadCmd();
+    CopyKata(&player1, CKata);
+    printf("Masukkan Nama Player 2 : ");
+    ReadCmd();
+    CopyKata(&player2, CKata);
+
+    printf("=======================================\n");
+    printf("          Player 1 (RED): ");
+    CetakWarnaRed(player1); 
+    printf("          Player 2 (BLUE): ");
+    CetakWarnaBlue(player2); 
+    printf("=======================================\n"); 
+
+    printf("Ready for Battle ? Tulis YES untuk memulai permainan !");
+    ReadCmd();
+    system("cls");
+    //dikasih asci simple disini sabii
+
     ReadKonfigurasiFile(&S, &Map, &G);
     Turn(Player1(S)) = true;
-    welcome();
     printf("\n");
     printf("===================================\n");
     printf("======== Player 1's Turn ! ========\n");
@@ -69,6 +95,7 @@ int main() {
     printf("- MOVE\n");
     printf("- EXIT\n");
     while (!endgame){
+        
         EnterCommad(S);
         ReadCmd();
         if (IsEQCKataString("ATTACK")){
@@ -119,9 +146,14 @@ int main() {
             PrintInfoGraph(G);
         } else if (IsEQCKataString("SAVE")) {
             //save(SStacks, Map, G, extraTurn, attackUp, "p.txt");
+        } else if (IsEQCKataString("LOAD")) {
+            //load(&SStacks, &Map, &G, &extraTurn, &attackUp, "p.txt");
+            CopyState(InfoTop(SStacks), &S);
+            //save(SStacks, Map, G, extraTurn, attackUp, "p.txt");
         } else{
             printf("COMMAND yang anda masukkan tidak tersedia, coba lagi!\n");
         }
+        system("cls");
         //Cek Kondisi Game Over
         GameEnd(S, &endgame);
     }

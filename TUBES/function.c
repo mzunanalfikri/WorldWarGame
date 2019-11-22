@@ -991,3 +991,23 @@ void Help()
     printf("SAVE - Menyimpan status permainan ke file eksternal\n\n");
     printf("EXIT - Keluar dari permainan\n\n");
 }
+
+void CetakWarnaRed(Kata CKata)
+/* Untuk Mencetak warna merah CKata */
+{
+    for (int i = 1 ; i<= CKata.Length ; i++){
+        printf("%s%c", RED, CKata.TabKata[i]);
+        printf("%s", NORMAL);
+    }
+    printf("\n");
+}
+
+void CetakWarnaBlue(Kata CKata)
+/* Untuk Mencetak warna merah CKata */
+{
+    for (int i = 1 ; i<= CKata.Length ; i++){
+        printf("%s%c", BLUE, CKata.TabKata[i]);
+        printf("%s", NORMAL);
+    }
+    printf("\n");
+}

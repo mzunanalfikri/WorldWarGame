@@ -1,6 +1,7 @@
 #include <stdio.h>
+#include<stdlib.h>
+#include<conio.h>
 #include "welcome.h"
-
 
 void delay(int number_of_seconds) 
 { 

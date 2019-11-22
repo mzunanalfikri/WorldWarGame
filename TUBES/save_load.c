@@ -43,6 +43,7 @@ void save(StackState StackS, MATRIKS M, Graph G, boolean extraTurn, boolean atta
         }
 
         // D:\\github\\TubesAlstrukdat1\\TUBES\\s.txt
+        fprintf(save_file, "AVATARWORLDWARSAVE\n"); // Basically a header
 
         fprintf(save_file, "%d %d\n", M.NBrsEff, M.NKolEff); // Saves map size
 
@@ -97,6 +98,8 @@ void save(StackState StackS, MATRIKS M, Graph G, boolean extraTurn, boolean atta
         fprintf(save_file, "%s\n", (extraTurn ? "eTy" : "eTn")); // Saves extraTurn state
 
         // Now, on to saving the actual game states (in the stack)
+
+        fprintf(save_file, "%s\n", (CritHit(InfoTop(StackS)) ? "cHy" : "cHn")); // Saves critical hit state
         
         // Saves bangunans (Level, pasukan, Serang, Move)
         for (i = 1; i <= num_of_banguns; ++i) {
@@ -150,5 +153,241 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
 // I.S. StackS, M, G, extraTurn, attackUp sembarang; filepath terdefinisi
 // F.S. Data pada StackS, M, G, extraTurn, attackUp sesuai data yang ada pada file yang ada pada filepath
     {
+        // KAMUS
+        FILE * save_file;
+        int i, j, Mat_x, Mat_y, num_of_banguns, tempInt;
+        State baseState, tempState;
+        addressParent bangunode;
+        addresslist bangbung;
+        addresslist Pbangun;
+
+        // ALGORITMA
+        filepath = "s.txt"; // Need to make this dynamic but don't know how
+
+        LoadFile("s.txt");
+
+        // ** Basically reads the configuration file to create a base state
+
+        if (IsEQCKataString("AVATARWORLDWARSAVE")) {
+            printf("Save file recognized. Loading...\n");
+            ADVKATA();
+        } else {
+            printf("Save file invalid or corrupted.\n");
+            return;
+        }
+
+        Mat_x = KataToInt(CKata);
+        ADVKATA();
+        //TulisCKata();
+        Mat_y = KataToInt(CKata);
+
+        MakeMATRIKS(Mat_x, Mat_y, M);
+
+        ADVKATA();
+
+        num_of_banguns = KataToInt(CKata);
+
+        MakeState(&baseState, num_of_banguns);
+
+        ADVKATA();
+
+        baca_array_bangunan(&ArrayBangunan(baseState), num_of_banguns, M);
+
+        /* MAKE GRAF */
+        CreateEmptyGraph(G);
+
+        /* MAKE GRAF END */
+        BacaGraf(G,num_of_banguns);
+        ADVKATA();
+
+        // !! Configuration section ended, base state created
+
+        printf("Current CKata is : ");
+        TulisCKata();
+
+        // Gets whose turn it is
+        if(IsEQCKataInt(1)) {
+            Turn(Player1(baseState)) = true;
+            Turn(Player2(baseState)) = false;
+        } else if (IsEQCKataInt(2)) {
+            Turn(Player1(baseState)) = false;
+            Turn(Player2(baseState)) = true;
+        } else {
+            printf("Player turn state not recognized.\n");
+        }
         
+        ADVKATA();
+
+        printf("Current CKata is : ");
+        TulisCKata();
+
+        // Gets attackUp state
+        if (IsEQCKataString("aUy")) {
+            *attackUp = true;
+        } else if(IsEQCKataString("aUn")) {
+            *attackUp = false;
+        } else{
+            printf("Attack up state not recognized.\n");
+        }
+
+        ADVKATA();
+
+        printf("Current CKata is : ");
+        TulisCKata();
+
+        // Gets extraTurn state
+        if (IsEQCKataString("eTy")) {
+            *extraTurn = true;
+        } else if(IsEQCKataString("eTn")) {
+            *extraTurn = false;
+        } else{
+            printf("Extra turn state not recognized.\n");
+        }
+
+        ADVKATA();
+
+        printf("Current CKata is : ");
+        TulisCKata();
+
+        // starts creating individual states
+        MakeState(&tempState, num_of_banguns);
+        CopyState(baseState, &tempState);
+
+        // Gets critical hit state
+        if (IsEQCKataString("cHy")) {
+            CritHit(tempState) = true;
+        } else if(IsEQCKataString("cHn")) {
+            CritHit(tempState) = false;
+        } else{
+            printf("Ciritcal hit state not recognized.\n");
+        }
+
+        ADVKATA();
+
+        printf("Current CKata is : ");
+        TulisCKata();
+
+        // Inserts bangunans
+        for (i = 1; i <= num_of_banguns; ++i) {
+            printf("Current CKata is : ");
+            TulisCKata();
+            Pasukan(ElmtTab(ArrayBangunan(tempState), i)) = 999;
+            tempInt = KataToInt(CKata);
+            while (Level(ElmtTab(ArrayBangunan(tempState), i)) < tempInt) {
+                NaikLevel(&ElmtTab(ArrayBangunan(tempState), i));
+            };
+
+            ADVKATA();
+            printf("Current CKata is : ");
+            TulisCKata();
+
+            Pasukan(ElmtTab(ArrayBangunan(tempState), i)) = KataToInt(CKata);
+            ADVKATA();
+            printf("Current CKata is : ");
+            TulisCKata();
+
+            if (IsEQCKataString("batdy")) {
+                Serang(ElmtTab(ArrayBangunan(tempState), i)) = true;
+            } else if (IsEQCKataString("batdn")) {
+                Serang(ElmtTab(ArrayBangunan(tempState), i)) = false;
+            } else {
+                printf("Building attack state not recognized.\n");
+            };
+
+            ADVKATA();
+            printf("Current CKata is : ");
+            TulisCKata();
+
+            if(IsEQCKataString("bmtdy")) {
+                Move(ElmtTab(ArrayBangunan(tempState), i)) = true;
+            } else if (IsEQCKataString("bmtdn")) {
+                Move(ElmtTab(ArrayBangunan(tempState), i)) = false;
+            } else {
+                printf("Building move state not recognized.\n");
+            }
+
+            ADVKATA();
+            printf("Current CKata is : ");
+            TulisCKata();
+
+        }
+
+        printf("Adding player 1 bangunan list\n");
+        // Gets PLayer 1's bangunan list
+        while (!IsEQCKataString("p1s")) {
+            InsVLast(&ListIdxBangunan(Player1(tempState)), KataToInt(CKata));
+            ADVKATA();
+        }
+
+        ADVKATA();
+        printf("Adding player 1 skill queue\n");
+
+        // Gets player 1's skill queue
+        while (!IsEQCKataString("p1bs0") && !IsEQCKataString("p1bs1") && !IsEQCKataString("p1bs2")) {
+            Add(&QSkill(Player1(tempState)), KataToInt(CKata));
+            ADVKATA();
+        }
+
+        printf("Adding player 1 shield state\n");
+        // Gets player 1's shield state
+        if (IsEQCKataString("p1bs0")) {
+            ShieldPlayer(Player1(tempState)) = 0;
+        } else if (IsEQCKataString("p1bs1")) {
+            ShieldPlayer(Player1(tempState)) = 1;
+        } else if (IsEQCKataString("p1bs2")) {
+            ShieldPlayer(Player1(tempState)) = 2;
+        } else {
+            printf("Player 1 shield state not recognized.\n");
+        }
+
+        ADVKATA();
+        printf("Adding player 2 bangunan list\n");
+
+        // Gets PLayer 2's bangunan list
+        while (!IsEQCKataString("p2s")) {
+            InsVLast(&ListIdxBangunan(Player2(tempState)), KataToInt(CKata));
+            ADVKATA();
+        }
+
+        PrintState(tempState);
+
+        ADVKATA();
+        printf("Adding player 2 skill queue\n");
+
+        // Gets player 2's skill queue
+        /*
+        CreateEmpty(&QSkill(Player2(tempState)), 10);
+        while (!IsEQCKataString("p2bs0") && !IsEQCKataString("p2bs1") && !IsEQCKataString("p2bs2")) {
+            printf("Kurrent CKAta  :  ");
+            TulisCKata();
+            Add(&QSkill(Player2(tempState)), KataToInt(CKata));
+            ADVKATA();
+            printf("added a skill to player 2\n");
+        } */
+
+        printf("Kurrent CKAta  :  ");
+            TulisCKata();
+        
+        printf("Adding player 2 shield state\n");
+        // Gets player 2's shield state
+        if (IsEQCKataString("p2bs0")) {
+            ShieldPlayer(Player2(tempState)) = 0;
+        } else if (IsEQCKataString("p2bs1")) {
+            ShieldPlayer(Player2(tempState)) = 1;
+        } else if (IsEQCKataString("p2bs2")) {
+            ShieldPlayer(Player2(tempState)) = 2;
+        } else {
+            printf("Player 2 shield state not recognized.\n");
+        }
+
+        //ADVKATA();
+
+        printf("Finished loading.\n");
+        
+        FINISH();
+
+        PushState(StackS, tempState);
+
+        EndTurnState(StackS);
+
     }
