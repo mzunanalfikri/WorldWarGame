@@ -25,6 +25,9 @@ void START();
 void STARTcmd();
 /* membaca file dari stdin */
 
+void STARTload(char save_file[]);
+/* membaca file pada path save_file */
+
 void ADV();
 /* Pita dimajukan satu karakter.
    I.S. : Karakter pada jendela = CC
