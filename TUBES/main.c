@@ -70,8 +70,14 @@ int main() {
     CetakWarnaBlue(player2); 
     printf("=======================================\n"); 
 
-    printf("Ready for Battle ? Tulis YES untuk memulai permainan!");
+    printf("Ready for Battle ? Tulis YES untuk memulai permainan!\n");
     ReadCmd();
+    printf(".");
+    delay(1);
+    printf(".");
+    delay(1);
+    printf(".");
+    delay(1);
     system("cls");
     //dikasih asci simple disini sabii
 
@@ -85,14 +91,7 @@ int main() {
     CreateEmptyStackState(&SStacks);
     PushState(&SStacks, S);
     StatusPlayer(S, Map);
-    printf("Command yang tersedia: \n");
-    printf("- ATTACK\n");
-    printf("- LEVEL_UP\n");
-    printf("- SKILL\n");
-    printf("- UNDO\n");
-    printf("- END_TURN\n");
-    printf("- MOVE\n");
-    printf("- EXIT\n");
+    Help();
     while (!endgame){
         
         EnterCommad(S);
