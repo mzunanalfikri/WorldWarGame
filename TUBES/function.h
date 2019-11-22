@@ -135,4 +135,8 @@ int NBElmtTower(List L, TabBangunan B);
 void GameEnd(State S, boolean *endgame);
 /* Kondisi game berakhir */
 
+void Help();
+/* I.S. Sembarang */
+/* F.S. Mencetak list command di layar */
+
 #endif
