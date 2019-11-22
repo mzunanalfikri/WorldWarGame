@@ -70,9 +70,12 @@ int main() {
     CetakWarnaBlue(player2); 
     printf("=======================================\n"); 
 
-    printf("Ready for Battle ? Tekan apapun untuk memulai permainan!\n");
+    printf("Apakah KAMU SIAPPPP ? Tulis SIAPP untuk memulai permainan!\n");
     ReadCmd();
-    printf("Prepare yourself to enter the new world!");
+    while (!(IsEQCKataString("SIAPP"))){
+        ReadCmd();
+    }
+    printf("Mari bersiap. Kita akan memulai sesuatu yang panjang!!");
     printf(".");
     delay(1);
     printf(".");
@@ -86,7 +89,7 @@ int main() {
     Turn(Player1(S)) = true;
     printf("\n");
     printf("===================================\n");
-    printf("======== Player 1's Turn ! ========\n");
+    printf("======== Giliran Player 1! ========\n");
     printf("===================================\n");
     printf("\n");
     CreateEmptyStackState(&SStacks);
