@@ -70,7 +70,7 @@ int main() {
     CetakWarnaBlue(player2); 
     printf("=======================================\n"); 
 
-    printf("Ready for Battle ? Tulis YES untuk memulai permainan!\n");
+    printf("Ready for Battle ? Tekan apapun untuk memulai permainan!\n");
     ReadCmd();
     printf("Prepare yourself to enter the new world!");
     printf(".");

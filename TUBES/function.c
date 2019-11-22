@@ -345,7 +345,12 @@ void StatusPlayer(State S, MATRIKS Map,Kata player1, Kata player2)
         printf("%s", NORMAL);
         printf("%s%c", RED, '1');
         printf("%s", NORMAL);
-        printf(" : ");
+        printf("%s%c", RED, ' ');
+        printf("%s", NORMAL);
+        printf("%s%c", RED, ':');
+        printf("%s", NORMAL);
+        printf("%s%c", RED, ' ');
+        printf("%s", NORMAL);
         CetakWarnaRed(player1);
 
         printf("Daftar Bangunan : \n");
@@ -381,7 +386,12 @@ void StatusPlayer(State S, MATRIKS Map,Kata player1, Kata player2)
         printf("%s", NORMAL);
         printf("%s%c", BLUE, '2');
         printf("%s", NORMAL);
-        printf(" : ");
+        printf("%s%c", BLUE, ' ');
+        printf("%s", NORMAL);
+        printf("%s%c", BLUE, ':');
+        printf("%s", NORMAL);
+        printf("%s%c", BLUE, ' ');
+        printf("%s", NORMAL);
         CetakWarnaBlue(player2);
 
         printf("Daftar Bangunan : \n");
@@ -970,13 +980,13 @@ void GameEnd(State S, boolean *endgame)
 {
     if (IsEmptyList(ListIdxBangunan(Player1(S)))){
         // player 2 menang
-        printf("Selamat player 2 menang !!!\n");
+        winp2();
         printf("Tekan Enter ntuk keluar");
         STARTcmd();
         (*endgame) = true;
     } else if (IsEmptyList(ListIdxBangunan(Player2(S)))) {
         //player 1 menang
-        printf("Selamat player 1 menang !!!\n");
+        winp1();
         printf("Tekan Enter ntuk keluar");
         STARTcmd();
         (*endgame) = true;
