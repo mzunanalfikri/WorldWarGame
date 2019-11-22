@@ -145,9 +145,9 @@ int main() {
         } else if (IsEQCKataString("PRINT_GRAPH")) {
             PrintInfoGraph(G);
         } else if (IsEQCKataString("SAVE")) {
-            save(SStacks, Map, G, extraTurn, attackUp, "p.txt");
+            //save(SStacks, Map, G, extraTurn, attackUp, "p.txt");
         } else if (IsEQCKataString("LOAD")) {
-            load(&SStacks, &Map, &G, &extraTurn, &attackUp, "p.txt");
+            //load(&SStacks, &Map, &G, &extraTurn, &attackUp, "p.txt");
             CopyState(InfoTop(SStacks), &S);
             //save(SStacks, Map, G, extraTurn, attackUp, "p.txt");
         } else{

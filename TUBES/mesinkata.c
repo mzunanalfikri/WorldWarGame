@@ -155,16 +155,19 @@ void TulisCKata() {
 boolean IsEQCKataString(char kata[20])
 /* mengembalikan true jika kata sama dengan CKata */
 {
-    int count;
-    count = 0;
+    int count1, count2;
+    count1 = 0;
+    count2 = 0;
     for (int i = 1 ; i <= CKata.Length ; i++){
-        if (CKata.TabKata[i] == kata[i-1]){
-            count++;
-            //return false;
-        }
+        // if (CKata.TabKata[i] == kata[i-1]){
+        //     count1++;
+        //     //return false;
+        // }
+        count1 += CKata.TabKata[i];
+        count2 += kata[i-1];
     }
     //return true;
-    return (count == CKata.Length);
+    return (count1 == count2);
 }
 
 boolean IsEQCKataInt(int X)
