@@ -141,6 +141,8 @@ void EndTurn (State *S, boolean *ExtraTurn, boolean *attackUP)
             printf("Extra Turn has been Activated, Player 1's Turn!\n ");
              (*ExtraTurn) = false;
         } else {
+            delay(1);
+            system("cls");
             printf("\n");
             printf("===================================\n");
             printf("======== Player 2's Turn ! ========\n");
@@ -171,6 +173,8 @@ void EndTurn (State *S, boolean *ExtraTurn, boolean *attackUP)
             printf("Extra Turn has been Activated, Player 2's Turn!\n ");
              (*ExtraTurn) = false;
         } else {
+            delay(1);
+            system("cls");
             printf("\n");
             printf("===================================\n");
             printf("======== Player 1's Turn ! ========\n");

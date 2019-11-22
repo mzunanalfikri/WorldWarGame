@@ -159,10 +159,12 @@ boolean IsEQCKataString(char kata[20])
     count1 = 0;
     count2 = 0;
     for (int i = 1 ; i <= CKata.Length ; i++){
-        // if (CKata.TabKata[i] == kata[i-1]){
-        //     count1++;
-        //     //return false;
-        // }
+        if (CKata.TabKata[i] == kata[i-1]){
+            count1++;
+            //return false;
+        }else{
+            return false;
+        }
         count1 += CKata.TabKata[i];
         count2 += kata[i-1];
     }
