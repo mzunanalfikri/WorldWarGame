@@ -52,7 +52,6 @@ int main() {
     endgame = false;
     Kata player1, player2;
 
-    system("cls");
     welcome();
     //tampilin rule game jugaa
 
@@ -71,7 +70,7 @@ int main() {
     CetakWarnaBlue(player2); 
     printf("=======================================\n"); 
 
-    printf("Ready for Battle ? Tulis YES untuk memulai permainan !");
+    printf("Ready for Battle ? Tulis YES untuk memulai permainan!");
     ReadCmd();
     system("cls");
     //dikasih asci simple disini sabii
@@ -153,7 +152,8 @@ int main() {
         } else{
             printf("COMMAND yang anda masukkan tidak tersedia, coba lagi!\n");
         }
-        system("cls");
+        //delay(1);
+        //system("cls");
         //Cek Kondisi Game Over
         GameEnd(S, &endgame);
     }
