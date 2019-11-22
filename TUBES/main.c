@@ -72,7 +72,7 @@ int main() {
 
     printf("Ready for Battle ? Tulis YES untuk memulai permainan!\n");
     ReadCmd();
-    printf("Siapkan dirimu untuk memasuki dunia baru");
+    printf("Prepare yourself to enter the new world!");
     printf(".");
     delay(1);
     printf(".");
@@ -91,7 +91,7 @@ int main() {
     printf("\n");
     CreateEmptyStackState(&SStacks);
     PushState(&SStacks, S);
-    StatusPlayer(S, Map);
+    StatusPlayer(S, Map,player1,player2);
     Help();
     while (!endgame){
         
@@ -120,9 +120,9 @@ int main() {
             //cek dapet instant reinforcement
             AddIR(&S);
             //fungsi end turn
-            EndTurn(&S, &extraTurn, &attackUp);
+            EndTurn(&S, &extraTurn, &attackUp,player1,player2);
             //print status player
-            StatusPlayer(S,Map);
+            StatusPlayer(S,Map,player1,player2);
             //push ke stack
             PushState(&SStacks, S);
             EndTurnState(&SStacks);
@@ -138,7 +138,7 @@ int main() {
         } else if(IsEQCKataString("PRINT_ALL_BANGUNAN")){
             PrintAllBangunan(ArrayBangunan(S));
         } else if (IsEQCKataString("STATUS")) {
-            StatusPlayer(S, Map);
+            StatusPlayer(S, Map,player1,player2);
         } else if (IsEQCKataString("HELP")){
             Help();
         } else if (IsEQCKataString("PRINT_GRAPH")) {

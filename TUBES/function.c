@@ -111,11 +111,12 @@ bertambah, namun menjadi nilai maksimum.
 
 
 
-void EndTurn (State *S, boolean *ExtraTurn, boolean *attackUP)
+void EndTurn (State *S, boolean *ExtraTurn, boolean *attackUP,Kata player1, Kata player2)
 /* kondisi P1 saat ini : P2 turn true, setiap bangunan di P2 bertambah pasukannya */
 /* kondisi P2 saat ini : P1 trun true, setiap bangunan di P1 bertambah pasukannya */
  {
-     addresslist P;
+    addresslist P;
+ 
      if (Turn(Player1(*S))){
          P = First(ListIdxBangunan(Player2(*S)));
          if (*ExtraTurn) {
@@ -321,9 +322,10 @@ Pemain mendapat skill ini jika lawan baru saja bertambah bangunannya menjadi
 /*************************/
 /* MENAMPILKAN GAME PLAY */
 /*************************/
-void StatusPlayer(State S, MATRIKS Map)
+void StatusPlayer(State S, MATRIKS Map,Kata player1, Kata player2)
 /* prosedur untuk menampilkan status player (map, bangunan, skill) */
 {
+    
     if (Turn(Player1(S))){
         CetakMatiksWarna(Map, S);
         
@@ -343,7 +345,8 @@ void StatusPlayer(State S, MATRIKS Map)
         printf("%s", NORMAL);
         printf("%s%c", RED, '1');
         printf("%s", NORMAL);
-        printf("\n");
+        printf(" : ");
+        CetakWarnaRed(player1);
 
         printf("Daftar Bangunan : \n");
         addresslist P;
@@ -378,7 +381,8 @@ void StatusPlayer(State S, MATRIKS Map)
         printf("%s", NORMAL);
         printf("%s%c", BLUE, '2');
         printf("%s", NORMAL);
-        printf("\n");
+        printf(" : ");
+        CetakWarnaBlue(player2);
 
         printf("Daftar Bangunan : \n");
         addresslist P;
