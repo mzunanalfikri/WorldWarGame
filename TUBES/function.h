@@ -33,7 +33,7 @@ INTEGER DIPETAKAN KE SKILL :
 =========================================== */
 
 void Skill(State *S, boolean * ExtraTurn, boolean * AttackUP);
-/* untuk memanggil skill skill */
+/* Untuk memanggil skill skill */
 
 void InstantUpgrade (State *S);
 /*Seluruh bangunan yang dimiliki pemain akan naik 1 level.
@@ -73,6 +73,7 @@ Pemain mendapat skill ini jika lawan baru saja mengaktifkan skill Extra Turn.
 */
 
 void AddIR (State *S);
+/* Procedur untuk pengecekan penambahan skill Instant Reinforcement */
 
 void InstantReinforcement (State *S);
 /*Seluruh bangunan mendapatkan tambahan 5 pasukan.
@@ -85,6 +86,9 @@ pasukan.
 Pemain mendapat skill ini jika lawan baru saja bertambah bangunannya menjadi
 10 bangunan.*/
 
+/*************************/
+/* MENAMPILKAN GAME PLAY */
+/*************************/
 void StatusPlayer(State S, MATRIKS Map);
 /* prosedur untuk menampilkan status player (map, bangunan, skill) */
 

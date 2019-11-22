@@ -130,7 +130,9 @@ void AddNextTurn (Bangunan * B)
     }
 }
 
-void CopyBangunan (Bangunan BIn, Bangunan * BHsl){
+void CopyBangunan (Bangunan BIn, Bangunan * BHsl)
+/*Melakukan assignment MHsl dgn MIn */
+{
     Type(*BHsl) = Type(BIn);
     Pasukan(*BHsl) = Pasukan(BIn);
     Level(*BHsl) = Level(BIn);
@@ -229,7 +231,7 @@ void IU(Bangunan *B)
 
 void BackToLv1(Bangunan *B)
 /* I.S. Sembarang */
-/* F.S. Bangunan kembali ke level 1 */
+/* F.S. Bangunan kembali ke level 1 dengan jumlah bangunan tetap*/
 {
     Level(*B) = 1;
     Serang(*B) = false;

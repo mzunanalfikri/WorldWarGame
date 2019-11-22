@@ -118,6 +118,8 @@ void AddAsLastEl(TabBangunan *T, ElTypeArr X)
 }
 
 void PrintAllBangunan(TabBangunan B)
+/* I.S. Sembarang */
+/* F.S. Tercetak di layar semua properti dari semua bangunan */
 {
     int pertahanan;
     int serang;
