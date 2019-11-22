@@ -66,7 +66,7 @@ int KataToInt(Kata DefKata);
 	 
 char CommandToChar(Kata CKata);
 
-void TulisCKata();
+void TulisCKata(Kata kataa);
 /* Untuk Mencetak Ckata */
 
 boolean IsEQCKataString(char kata[20]);

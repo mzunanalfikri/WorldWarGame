@@ -47,7 +47,7 @@ bertambah, namun menjadi nilai maksimum.
 Pemain mendapat skill ini jika setelah sebuah lawan menyerang, bangunan pemain
 berkurang 1 menjadi sisa 2.*/
 
-void EndTurn (State *S, boolean *ExtraTurn, boolean *attackUP);
+void EndTurn (State *S, boolean *ExtraTurn, boolean *attackUP,Kata player1, Kata player2);
 /* kondisi P1 saat ini : P2 turn true, setiap bangunan di P2 bertambah pasukannya */
 /* kondisi P2 saat ini : P1 trun true, setiap bangunan di P1 bertambah pasukannya */
 
@@ -90,7 +90,7 @@ Pemain mendapat skill ini jika lawan baru saja bertambah bangunannya menjadi
 /*************************/
 /* MENAMPILKAN GAME PLAY */
 /*************************/
-void StatusPlayer(State S, MATRIKS Map);
+void StatusPlayer(State S, MATRIKS Map,Kata player1, Kata player2);
 /* prosedur untuk menampilkan status player (map, bangunan, skill) */
 
 // Fungsi untuk cetak matriks dengan warna

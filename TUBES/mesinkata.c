@@ -137,19 +137,17 @@ char CommandToChar(Kata CKata) {
 	return CKata.TabKata[1]; }
 
 
-void TulisCKata() {
+void TulisCKata(Kata kataa) {
     int i;
 
-    printf("Ckata : ");
-
-    for (i = 1; i <= CKata.Length; i++)
+    for (i = 1; i <= kataa.Length; i++)
     {
-        printf("%c", CKata.TabKata[i]);
+        printf("%c", kataa.TabKata[i]);
     }
 
 	//printf("\nEnd Ckata|||");
 
-    printf("\n");
+    // printf("\n");
 }
 
 boolean IsEQCKataString(char kata[20])
