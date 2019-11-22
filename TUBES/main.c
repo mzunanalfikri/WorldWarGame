@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>
+#include<conio.h>
 #include "arraydin.h"
 #include "bangunan.h"
 #include "listlinier.h"
@@ -51,7 +52,8 @@ int main() {
     endgame = false;
     Kata player1, player2;
 
-    //welcome();
+    system("cls");
+    welcome();
     //tampilin rule game jugaa
 
 
@@ -71,6 +73,7 @@ int main() {
 
     printf("Ready for Battle ? Tulis YES untuk memulai permainan !");
     ReadCmd();
+    system("cls");
     //dikasih asci simple disini sabii
 
     ReadKonfigurasiFile(&S, &Map, &G);
@@ -92,6 +95,7 @@ int main() {
     printf("- MOVE\n");
     printf("- EXIT\n");
     while (!endgame){
+        
         EnterCommad(S);
         ReadCmd();
         if (IsEQCKataString("ATTACK")){
@@ -145,6 +149,7 @@ int main() {
         } else{
             printf("COMMAND yang anda masukkan tidak tersedia, coba lagi!\n");
         }
+        system("cls");
         //Cek Kondisi Game Over
         GameEnd(S, &endgame);
     }
