@@ -44,10 +44,14 @@ addresslist Alokasi (infotype X);
 /* Jika alokasi berhasil, maka addresslist tidak nil, dan misalnya */
 /* menghasilkan P, maka Info(P)=X, Next(P)=Nil */
 /* Jika alokasi gagal, mengirimkan Nil */
-void DealokasiList (addresslist *P);
+void DealokasiList (addresslist P);
 /* I.S. P terdefinisi */
 /* F.S. P dikembalikan ke sistem */
 /* Melakukan dealokasi/pengembalian addresslist P */
+
+void DealokasiAllList (List ListP);
+// I.S. ListP terdifinisi
+// F.S. Seluruh element di list ListP dikembalikan ke sistem
 
 /****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
 addresslist Search (List L, infotype X);

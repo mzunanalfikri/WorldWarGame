@@ -33,3 +33,11 @@ void CopyPlayer(Player Pin, Player *Phsl)
     Turn(*Phsl) = Turn(Pin); 
     ShieldPlayer(*Phsl) = ShieldPlayer(Pin);
 }
+
+void DealokasiPlayer(Player *P)
+// I.S. Player P terdefinisi
+// F.S. Memori yang digunakan player P dikembalikan ke sistem
+    {
+        DealokasiAllList(ListIdxBangunan(*P));
+        DeAlokasi(&QSkill(*P));
+    }

@@ -31,6 +31,13 @@ void STARTcmd() {
     ADV();
 }
 
+void STARTload(char save_file[]) {
+    /* Algoritma */
+    pita = fopen(save_file, "r");
+    EOP=false;
+    ADV();
+}
+
 void ADV() {
 /* Pita dimajukan satu karakter.
    I.S. : Karakter pada jendela = CC

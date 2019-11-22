@@ -118,10 +118,11 @@ void AddAsLastEl(TabBangunan *T, ElTypeArr X)
 }
 
 void PrintAllBangunan(TabBangunan B)
+/* I.S. Sembarang */
+/* F.S. Tercetak di layar semua properti dari semua bangunan */
 {
     int pertahanan;
     int serang;
-    int netral;
     int move;
     
     for (int i = 1 ; i <= GetLastIdx(B) ; i++){
@@ -131,15 +132,12 @@ void PrintAllBangunan(TabBangunan B)
         if (Serang(ElmtTab(B, i))){
             serang = 1;
         } else { serang = 0; }
-        if (Netral(ElmtTab(B, i))){
-            netral = 1;
-        } else { netral = 0; }
         if (Move(ElmtTab(B, i))){
             move = 1;
         } else { move = 0; }
-        printf("%d. %c | (%d,%d) | Pasukan : %d | Level : %d | A : %d | M : %d | Pertahanan : %d | Serang : %d | Netral : %d | Move : %d \n", 
+        printf("%d. %c | (%d,%d) | Pasukan : %d | Level : %d | A : %d | M : %d | Pertahanan : %d | Serang : %d | Move : %d \n", 
         i, Type(ElmtTab(B, i)), Absis(Posisi(ElmtTab(B, i))), Ordinat(Posisi(ElmtTab(B, i))), Pasukan(ElmtTab(B, i)), Level(ElmtTab(B, i)),
-        A(ElmtTab(B, i)), M(ElmtTab(B, i)), pertahanan, serang, netral, move);
+        A(ElmtTab(B, i)), M(ElmtTab(B, i)), pertahanan, serang, move);
     }
 
 }

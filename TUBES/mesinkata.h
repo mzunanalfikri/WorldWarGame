@@ -32,6 +32,9 @@ void STARTKATA();
 void ReadCmd();
 /* membaca kata dari cmd */
 
+void LoadFile(char save_file[]);
+/* membaca file pada path save_file untuk loading */
+
 void ADVKATA();
 /* I.S. : CC adalah karakter pertama kata yang akan diakuisisi
    F.S. : CKata adalah kata terakhir yang sudah diakuisisi,

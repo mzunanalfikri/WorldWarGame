@@ -32,8 +32,8 @@ INTEGER DIPETAKAN KE SKILL :
 7 --> Barrage
 =========================================== */
 
-void Skill(State *S, boolean * ExtraTurn, boolean * AttackUP,  boolean *crithit);
-/* untuk memanggil skill skill */
+void Skill(State *S, boolean * ExtraTurn, boolean * AttackUP);
+/* Untuk memanggil skill skill */
 
 void InstantUpgrade (State *S);
 /*Seluruh bangunan yang dimiliki pemain akan naik 1 level.
@@ -64,7 +64,7 @@ Pemain mendapat skill ini jika pemain baru saja menyerang Tower lawan dan
 jumlah towernya menjadi 3.*/
 
 
-void CriticalHit (boolean *crithit);
+void CriticalHit (State *S);
 /*Pada giliran ini, setelah skill diaktifkan, jumlah pasukan pada bangunan yang
 melakukan serangan tepat selanjutnya (hanya berlaku 1 serangan) hanya
 efektif sebanyak 2 kali lipat pasukan. Skill ini
@@ -73,6 +73,7 @@ Pemain mendapat skill ini jika lawan baru saja mengaktifkan skill Extra Turn.
 */
 
 void AddIR (State *S);
+/* Procedur untuk pengecekan penambahan skill Instant Reinforcement */
 
 void InstantReinforcement (State *S);
 /*Seluruh bangunan mendapatkan tambahan 5 pasukan.
@@ -85,6 +86,9 @@ pasukan.
 Pemain mendapat skill ini jika lawan baru saja bertambah bangunannya menjadi
 10 bangunan.*/
 
+/*************************/
+/* MENAMPILKAN GAME PLAY */
+/*************************/
 void StatusPlayer(State S, MATRIKS Map);
 /* prosedur untuk menampilkan status player (map, bangunan, skill) */
 
@@ -123,10 +127,10 @@ void ChooseBangunanPlayerAttack(State S, Graph G, int *serang, int *defend, bool
 /* F.S. serang menjadi indeks bangunan penyerang, defend menjadi indeks bangunan
         yang bertahan */
 
-void PreAttack(State *S, int serang, int defend, boolean *attackUP, boolean *crithit);
+void PreAttack(State *S, int serang, int defend, boolean *attackUP);
 /* prosedur transisi untuk attack */
 
-void Attack(State *S, Graph G, boolean * attackUP, boolean * crithit);
+void Attack(State *S, Graph G, boolean * attackUP);
 /* Procedure untuk memindahkan pasukan dari bangunan satu ke lainnya */
 
 int NBElmtTower(List L, TabBangunan B);
@@ -134,5 +138,15 @@ int NBElmtTower(List L, TabBangunan B);
 
 void GameEnd(State S, boolean *endgame);
 /* Kondisi game berakhir */
+
+void Help();
+/* I.S. Sembarang */
+/* F.S. Mencetak list command di layar */
+
+void CetakWarnaRed(Kata CKata);
+/* Untuk Mencetak warna merah CKata */
+
+void CetakWarnaBlue(Kata CKata);
+/* Untuk Mencetak warna merah CKata */
 
 #endif

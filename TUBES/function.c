@@ -15,7 +15,7 @@ INTEGER DIPETAKAN KE SKILL :
 7 --> Barrage, udah di cek nambahh
 =========================================== */
 
-void Skill(State *S, boolean * ExtraTurn, boolean *AttackUP, boolean *crithit)
+void Skill(State *S, boolean * ExtraTurn, boolean *AttackUP)
 /* untuk memanggil skill skill */
 {
     int Skil;
@@ -59,7 +59,7 @@ void Skill(State *S, boolean * ExtraTurn, boolean *AttackUP, boolean *crithit)
         AttackUp(AttackUP);
     } else if (Skil == 5) {
         //manggil Critical hit
-        CriticalHit(crithit);
+        CriticalHit(S);
     } else if (Skil == 6) {
         //manggil instant reinforcement
         InstantReinforcement(S);
@@ -69,7 +69,10 @@ void Skill(State *S, boolean * ExtraTurn, boolean *AttackUP, boolean *crithit)
     //skill dipanggil kosongin stack state
 }
 
-void InstantUpgrade (State *S){
+void InstantUpgrade (State *S)
+/*Seluruh bangunan yang dimiliki pemain akan naik 1 level.
+Pemain tidak akan mendapat skill ini selain dari daftar skill awal.*/
+{
     addresslist P1,P2;
     if(Turn(Player1(*S))){
         P1 = First(ListIdxBangunan(Player1(*S)));
@@ -89,21 +92,23 @@ void InstantUpgrade (State *S){
         printf("All of your building's level have been upgraded!\n");
     }
 }
-/*Seluruh bangunan yang dimiliki pemain akan naik 1 level.
-Pemain tidak akan mendapat skill ini selain dari daftar skill awal.*/
 
-void Shield (State *S){ //bonus
-    if (Turn(Player1(*S))){
-        ShieldPlayer(Player1(*S)) = 2;
-    } else if (Turn(Player2(*S))) {
-        ShieldPlayer(Player2(*S)) = 2;
-    }
-}
+void Shield (State *S)
 /*
 Seluruh bangunan yang dimiliki oleh pemain akan memiliki pertahanan selama 2
 turn lawan. Apabila skill ini digunakan 2 kali berturut-turut, durasi tidak akan
 bertambah, namun menjadi nilai maksimum.
 */
+{ //bonus
+    if (Turn(Player1(*S))){
+        ShieldPlayer(Player1(*S)) = 2;
+        printf("Your shield skill activated");
+    } else if (Turn(Player2(*S))) {
+        ShieldPlayer(Player2(*S)) = 2;
+        printf("Your shield skill activated");
+    }
+}
+
 
 
 void EndTurn (State *S, boolean *ExtraTurn, boolean *attackUP)
@@ -176,35 +181,42 @@ void EndTurn (State *S, boolean *ExtraTurn, boolean *attackUP)
      (*attackUP) = false;
  }
 
-void ExtraTurnSkill (State *S, boolean *ExtraTurn){
-    (*ExtraTurn) = true;
-    printf("Extra Turn has been activated.\n");
-}
+void ExtraTurnSkill (State *S, boolean *ExtraTurn)
 /*Setelah giliran pengaktifan skill ini berakhir, pemain selanjutnya tetap pemain
 yang sama.
 */
+{
+    (*ExtraTurn) = true;
+    printf("Extra Turn has been activated.\n");
+}
 
-void AttackUp (boolean * AttackUp){ //bonus
-    (*AttackUp) = true;
-    printf("Attack Up has been activated\n");
-} 
+
+void AttackUp (boolean * AttackUp)
 /*Pada giliran ini, setelah skill ini diak4tifkan, pertahanan bangunan musuh (termasuk
 Shield) tidak akan mempengaruhi penyerangan.
 Pemain mendapat skill ini jika pemain baru saja menyerang Tower lawan dan
 jumlah towernya menjadi 3.*/
+{ //bonus
+    (*AttackUp) = true;
+    printf("Attack Up has been activated\n");
+} 
 
-void CriticalHit (boolean *crithit){ //bonus
-    (*crithit) = true;
-    printf("Critical hit has been activated. \n");
-}
+void CriticalHit (State *S)
 /*Pada giliran ini, setelah skill diaktifkan, jumlah pasukan pada bangunan yang
 melakukan serangan tepat selanjutnya (hanya berlaku 1 serangan) hanya
 efektif sebanyak 2 kali lipat pasukan. Skill ini
 akan menonaktifkan Shield maupun pertahanan bangunan, seperti Attack Up.
 Pemain mendapat skill ini jika lawan baru saja mengaktifkan skill Extra Turn.
 */
+{ //bonus
+    CritHit(*S) = true;
+    printf("Critical hit has been activated. \n");
+}
 
-void AddIR (State *S){
+
+void AddIR (State *S)
+/* Procedur untuk pengecekan penambahan skill Instant Reinforcement */
+{
     addresslist P;
     boolean four = true;
     P = First(ListIdxBangunan(Player1(*S)));
@@ -221,11 +233,22 @@ void AddIR (State *S){
     }
     if(four){
         if (Turn(Player1(*S))){
-            Add(&QSkill(Player1(*S)), 6);
+            if(NBElmt(QSkill(Player1(*S)))<10){
+                Add(&QSkill(Player1(*S)), 6);
+                printf("kamu dapat IR\n");
+            }else{
+                printf("queue penuh\n");
+            }
         } else if (Turn(Player2(*S))) {
-            Add(&QSkill(Player2(*S)), 6);
+            if(NBElmt(QSkill(Player2(*S)))<10){
+                Add(&QSkill(Player2(*S)), 6);
+                printf("kamu dapat IR\n");
+            }else{
+                printf("queue penuh\n");
+            }
+           
         }
-        printf("kamu dapat IR\n");
+        
     }
 }
 
@@ -291,7 +314,9 @@ pasukan.
 Pemain mendapat skill ini jika lawan baru saja bertambah bangunannya menjadi
 10 bangunan.*/
 
-
+/*************************/
+/* MENAMPILKAN GAME PLAY */
+/*************************/
 void StatusPlayer(State S, MATRIKS Map)
 /* prosedur untuk menampilkan status player (map, bangunan, skill) */
 {
@@ -367,7 +392,6 @@ void StatusPlayer(State S, MATRIKS Map)
         PrintTopQSkill(QSkill(Player2(S)));
     }
 }
-/* **** ATTACK MECHANISM *** */
 
 // Fungsi untuk cetak matriks dengan warna
 void CetakMatiksWarna(MATRIKS M, State S)
@@ -736,7 +760,7 @@ void ChooseBangunanPlayerAttack(State S, Graph G, int *serang, int *defend, bool
     }
 }
 
-void PreAttack(State *S, int serang, int defend, boolean *attackUP, boolean * crithit)
+void PreAttack(State *S, int serang, int defend, boolean *attackUP)
 /* prosedur transisi untuk attack */
 {
     boolean akuisisi;
@@ -770,12 +794,11 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP, boolean * cr
     }
     //implementasi crithit if crithit ada kondisi lagi, trus crithit di off kan
 
-    if (*crithit) {
+    if (CritHit(*S)) {
         printf("attack mode critical hit");
         if (x >= Pasukan(ElmtTab(ArrayBangunan(*S), defend))/2){
             Pasukan(ElmtTab(ArrayBangunan(*S), serang)) -= x;
             Pasukan(ElmtTab(ArrayBangunan(*S), defend)) = x - Pasukan(ElmtTab(ArrayBangunan(*S), defend))/2;
-            Netral(ElmtTab(ArrayBangunan(*S), defend)) = false;
             BackToLv1(&ElmtTab(ArrayBangunan(*S), defend));
             if (Turn(Player1(*S))){
                 direbut = SearchB(ListIdxBangunan(Player2(*S)),defend);
@@ -799,7 +822,6 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP, boolean * cr
         if (x >= Pasukan(ElmtTab(ArrayBangunan(*S), defend))*4/3){
             Pasukan(ElmtTab(ArrayBangunan(*S), serang)) -= x;
             Pasukan(ElmtTab(ArrayBangunan(*S), defend)) = x - Pasukan(ElmtTab(ArrayBangunan(*S), defend))*4/3;
-            Netral(ElmtTab(ArrayBangunan(*S), defend)) = false;
             BackToLv1(&ElmtTab(ArrayBangunan(*S), defend));
             if (Turn(Player1(*S))){
                 direbut = SearchB(ListIdxBangunan(Player2(*S)),defend);
@@ -822,7 +844,6 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP, boolean * cr
         if (x >= Pasukan(ElmtTab(ArrayBangunan(*S), defend))){
             Pasukan(ElmtTab(ArrayBangunan(*S), serang)) -= x;
             Pasukan(ElmtTab(ArrayBangunan(*S), defend)) = x - Pasukan(ElmtTab(ArrayBangunan(*S), defend));
-            Netral(ElmtTab(ArrayBangunan(*S), defend)) = false;
             BackToLv1(&ElmtTab(ArrayBangunan(*S), defend));
             if (Turn(Player1(*S))){
                 direbut = SearchB(ListIdxBangunan(Player2(*S)),defend);
@@ -842,7 +863,7 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP, boolean * cr
         }
     }
     Serang(ElmtTab(ArrayBangunan(*S), serang)) = true;
-    (*crithit) = false;
+    CritHit(*S) = false;
 
     //pengecekan penambahan skill
     if (akuisisi){
@@ -892,7 +913,7 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP, boolean * cr
     }
 }
 
-void Attack(State *S, Graph G, boolean * attackUP, boolean * crithit)
+void Attack(State *S, Graph G, boolean * attackUP)
 /* Procedure untuk memindahkan pasukan dari bangunan satu ke lainnya */
 {
     int attack;
@@ -903,7 +924,7 @@ void Attack(State *S, Graph G, boolean * attackUP, boolean * crithit)
         if (attack == 0 || defend == 0){
             printf("Attack gagal.\n");
         } else {
-            PreAttack(S, attack, defend, attackUP, crithit);
+            PreAttack(S, attack, defend, attackUP);
         }
         //printf(" x : %d\n", x);
     } else if (Turn(Player2(*S))) {
@@ -912,7 +933,7 @@ void Attack(State *S, Graph G, boolean * attackUP, boolean * crithit)
         if (attack == 0 || defend == 0){
             printf("Attack gagal.\n");
         } else {
-           PreAttack(S, attack, defend, attackUP, crithit);
+           PreAttack(S, attack, defend, attackUP);
         }
     }
 }
@@ -953,4 +974,40 @@ void GameEnd(State S, boolean *endgame)
         (*endgame) = true;
     }
     
+}
+
+
+void Help()
+/* I.S. Sembarang */
+/* F.S. Mencetak list command di layar */
+{
+    printf("COMMANDS : \n\n");
+    printf("ATTACK - Memulai serangan ke bangunan lain\n\n");
+    printf("LEVEL_UP - Menaikan level suatu bangunan dari pemain\n\n");
+    printf("SKILL - Memakai skill yang dimiliki oleh pemain\n\n");
+    printf("UNDO - Membatalkan perintah terakhir(sampai command End Turn/Skill)\n\n");
+    printf("END_TURN - Mengakhiri giliran seorang pemain\n\n");
+    printf("MOVE - Memindahkan pasukan dari bangunan yang terhubung\n\n");
+    printf("SAVE - Menyimpan status permainan ke file eksternal\n\n");
+    printf("EXIT - Keluar dari permainan\n\n");
+}
+
+void CetakWarnaRed(Kata CKata)
+/* Untuk Mencetak warna merah CKata */
+{
+    for (int i = 1 ; i<= CKata.Length ; i++){
+        printf("%s%c", RED, CKata.TabKata[i]);
+        printf("%s", NORMAL);
+    }
+    printf("\n");
+}
+
+void CetakWarnaBlue(Kata CKata)
+/* Untuk Mencetak warna merah CKata */
+{
+    for (int i = 1 ; i<= CKata.Length ; i++){
+        printf("%s%c", BLUE, CKata.TabKata[i]);
+        printf("%s", NORMAL);
+    }
+    printf("\n");
 }

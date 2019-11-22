@@ -40,13 +40,34 @@ addresslist Alokasi (infotype X)
     }
 }
 
-void DealokasiList (addresslist *P)
+void DealokasiList (addresslist P)
 /* I.S. P terdefinisi */
 /* F.S. P dikembalikan ke sistem */
 /* Melakukan dealokasi/pengembalian addresslist P */
 {
-    free(*P);
+    free(P);
 }
+
+void DealokasiAllList (List ListP)
+// I.S. ListP terdifinisi
+// F.S. Seluruh element di list ListP dikembalikan ke sistem
+    {
+        // KAMUS
+        addresslist P, PNext;
+
+        // ALGORITMA
+        P = First(ListP);
+        PNext = Next(P);
+
+        while (P != NULL) {
+            DealokasiList(P);
+            P = PNext;
+            if (PNext != NULL) {
+                PNext = Next(PNext);
+            }
+        }
+        
+    }
 
 /****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
 addresslist Search (List L, infotype X)
@@ -162,7 +183,7 @@ void DelVFirst (List *L, infotype *X)
     Next(P) = NULL;
     *X = Info(P);
 
-    DealokasiList(&P);
+    DealokasiList(P);
 }
 
 void DelVLast (List *L, infotype *X)
@@ -190,7 +211,7 @@ void DelVLast (List *L, infotype *X)
     {
         Next(Prec) = NULL;
     }
-    DealokasiList(&Last);
+    DealokasiList(Last);
 }
 
 /****************** PRIMITIF BERDASARKAN ALAMAT ******************/
@@ -283,7 +304,7 @@ void DelP (List *L, infotype X)
             P = NULL;
         }
 
-        DealokasiList(&P);
+        DealokasiList(P);
     }
 }
 

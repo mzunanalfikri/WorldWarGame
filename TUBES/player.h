@@ -30,5 +30,10 @@ void PrintPlayer(Player P);
 void CopyPlayer(Player Pin, Player *Phsl);
 /* assign player Phsl dengan player Pin */
 
+void DealokasiPlayer(Player *P);
+// I.S. Player P terdefinisi
+// F.S. Memori yang digunakan player P dikembalikan ke sistem
+
+
 
 #endif

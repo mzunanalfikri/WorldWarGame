@@ -14,7 +14,6 @@ Bangunan MakeBangunanLv1 (char type, POINT P)
     Pertahanan(B) = false;
     Type(B) = type;
     Posisi(B) = P;
-    Netral(B) = true;
     Move(B) = false;
     if (type == 'C'){
         Pasukan(B) = 40;
@@ -131,7 +130,9 @@ void AddNextTurn (Bangunan * B)
     }
 }
 
-void CopyBangunan (Bangunan BIn, Bangunan * BHsl){
+void CopyBangunan (Bangunan BIn, Bangunan * BHsl)
+/*Melakukan assignment MHsl dgn MIn */
+{
     Type(*BHsl) = Type(BIn);
     Pasukan(*BHsl) = Pasukan(BIn);
     Level(*BHsl) = Level(BIn);
@@ -141,7 +142,6 @@ void CopyBangunan (Bangunan BIn, Bangunan * BHsl){
     Absis(Posisi(*BHsl)) = Absis(Posisi(BIn));
     Ordinat(Posisi(*BHsl)) = Ordinat(Posisi(BIn));
     Serang(*BHsl) = Serang(BIn);
-    Netral(*BHsl) = Netral(BIn); 
 }
 
 void PrintBangunan (Bangunan B)
@@ -231,7 +231,7 @@ void IU(Bangunan *B)
 
 void BackToLv1(Bangunan *B)
 /* I.S. Sembarang */
-/* F.S. Bangunan kembali ke level 1 */
+/* F.S. Bangunan kembali ke level 1 dengan jumlah bangunan tetap*/
 {
     Level(*B) = 1;
     Serang(*B) = false;
