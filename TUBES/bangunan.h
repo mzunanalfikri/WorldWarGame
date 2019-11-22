@@ -75,4 +75,6 @@ void IU(Bangunan *B);
 /* F.S. Bangunan naik level secara instant */
 
 void BackToLv1(Bangunan *B);
+/* I.S. Sembarang */
+/* F.S. Bangunan kembali ke level 1 dengan jumlah bangunan tetap*/
 #endif

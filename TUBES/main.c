@@ -17,6 +17,7 @@
 #include "mesinkata.h"
 #include "readfile.h"
 #include "welcome.h"
+#include "save_load.h"
 // #include "arraydin.c"
 // #include "bangunan.c"
 // #include "listlinier.c"
@@ -116,6 +117,8 @@ int main() {
             Help();
         } else if (IsEQCKataString("PRINT_GRAPH")) {
             PrintInfoGraph(G);
+        } else if (IsEQCKataString("SAVE")) {
+            //save(SStacks, Map, G, extraTurn, attackUp, "p.txt");
         } else{
             printf("COMMAND yang anda masukkan tidak tersedia, coba lagi!\n");
         }
