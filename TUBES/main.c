@@ -49,9 +49,32 @@ int main() {
     extraTurn = false;
     attackUp = false;
     endgame = false;
+    Kata player1, player2;
+
+    //welcome();
+    //tampilin rule game jugaa
+
+
+    printf("Masukkan Nama Player 1 : ");
+    ReadCmd();
+    CopyKata(&player1, CKata);
+    printf("Masukkan Nama Player 2 : ");
+    ReadCmd();
+    CopyKata(&player2, CKata);
+
+    printf("=======================================\n");
+    printf("          Player 1 (RED): ");
+    CetakWarnaRed(player1); 
+    printf("          Player 2 (BLUE): ");
+    CetakWarnaBlue(player2); 
+    printf("=======================================\n"); 
+
+    printf("Ready for Battle ? Tulis YES untuk memulai permainan !");
+    ReadCmd();
+    //dikasih asci simple disini sabii
+
     ReadKonfigurasiFile(&S, &Map, &G);
     Turn(Player1(S)) = true;
-    //welcome();
     printf("\n");
     printf("===================================\n");
     printf("======== Player 1's Turn ! ========\n");
