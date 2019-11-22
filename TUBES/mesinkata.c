@@ -149,6 +149,8 @@ boolean IsEQCKataString(char kata[20])
         if (CKata.TabKata[i] == kata[i-1]){
             count++;
             //return false;
+        }else{
+            return false;
         }
     }
     //return true;
