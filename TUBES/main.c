@@ -52,7 +52,7 @@ int main() {
     endgame = false;
     Kata player1, player2;
 
-    //welcome();
+    welcome();
     //tampilin rule game jugaa
 
 
