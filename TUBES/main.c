@@ -56,12 +56,14 @@ int main() {
     //tampilin rule game jugaa
 
 
-    printf("Masukkan Nama Player 1 : ");
+    printf("Masukkan Nama Komandan Negara Api (Player 1) : ");
     ReadCmd();
     CopyKata(&player1, CKata);
-    printf("Masukkan Nama Player 2 : ");
+    printf("Masukkan Nama Komandan Negara Air (Player 2) : ");
     ReadCmd();
     CopyKata(&player2, CKata);
+
+    
 
     printf("=======================================\n");
     printf("          Player 1 (RED): ");
@@ -70,6 +72,10 @@ int main() {
     CetakWarnaBlue(player2); 
     printf("=======================================\n"); 
 
+    printf("\n");
+    RuleGame();
+    printf("\n");
+    
     printf("Apakah KAMU SIAPPPP ? Tulis SIAPP untuk memulai permainan!\n");
     ReadCmd();
     while (!(IsEQCKataString("SIAPP"))){
@@ -95,9 +101,8 @@ int main() {
     CreateEmptyStackState(&SStacks);
     PushState(&SStacks, S);
     StatusPlayer(S, Map,player1,player2);
-    Help();
     while (!endgame){
-        
+        printf("\n");
         EnterCommad(S);
         ReadCmd();
         if (IsEQCKataString("ATTACK")){

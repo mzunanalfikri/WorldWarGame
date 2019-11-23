@@ -14,5 +14,7 @@ void winp1();
 
 void winp2();
 
+void RuleGame();
+
 
 #endif

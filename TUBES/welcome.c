@@ -239,22 +239,18 @@ void welcome(){
     printf("        _||_   |                                                                 __                                      __             _||_   |\n");
     printf("__ ----~    ~`---,              ___                     ___             ____--`~    '--~~__         ___         ____--`~    '--~~__    ~    ~`\n"); 
     printf("                  ~~----_____-~'   `~----~~-~--~_____-~'   `~----~~-~--~                   ~---__-~'   `~----~-~                   ~---       ---~-~\n");
-    delay(2);
+    
+
+
  
 
-    printf("Air, Api, Tanah, dan Udara, \n");
-    printf("dahulu keempat negara hidup dengan damai,\n");
-    printf("namun semuanya berubah saat negara api menyerang.\n");
-    printf("Hanya Avatar yang mampu mengendalikan keempat elemen yang dapat menghentikannya.\n");
-    printf("Namun saat dunia membutuhkannya dia menghilang.\n");
-    printf("Beratus tahun kemudian aku dan abangku menemukan seorang avatar muda yang baru.\n");
-    printf("Seorang pengendali udara bernama Aang.\n");
-    printf("Walaupun ilmu pengedalian udaranya sangat bagus,\n");
-    printf("namun dia masih memerlukan banyak waktu untuk menguasai semuanya,\n");
-    printf("Tapi aku yakin, Aang dapat menyelamatkan dunia.\n");
-
-
-    system("cls");
+    printf("                                             Pada Zaman dahulu kala, Negara Api dan Negara Air hidup dalam kedamaian.\n");
+    printf("                                                    Hingga pada suatu zaman, terjadi perang besar-besaran. \n");
+    printf("                                                  Namun, pada saat dibutuhkan, kedua Komandan perang hilang.\n");
+    printf("                                                            Siapkah kamu menjadi komandan perang ?\n");
+    printf("\n");
+    printf("\n");
+    delay(2);
 }
 
 void winp1(){
@@ -341,4 +337,19 @@ void winp2(){
     printf("    |__|     \\\______/   \\\______/         \\\__/  \\\__/     |__| |__| \\\__|    (__) (__) (__) \n");
     delay(2);
     
+}
+
+void RuleGame(){
+    printf("Pada Awal Permainan, kamu akan diberikan masing masing satu bangunan, Tujuan kamu adalah menghabisi bangunan lawan.\n");
+    printf("Jika lawan tidak memiliki bangunan, maka kamu menang! \n");
+    printf("Berikut ini COMMAND yang dapat kamu aktifkan :\n");
+    printf("ATTACK      - Memulai serangan ke bangunan lain\n");
+    printf("LEVEL_UP    - Menaikan level suatu bangunan dari pemain\n");
+    printf("SKILL       - Memakai skill yang dimiliki oleh pemain\n");
+    printf("UNDO        - Membatalkan perintah terakhir(sampai command End Turn/Skill)\n");
+    printf("STATUS      - Menampilkan info peta, bangunan dan skill yang pemain miliki\n");
+    printf("END_TURN    - Mengakhiri giliran seorang pemain\n");
+    printf("MOVE        - Memindahkan pasukan dari bangunan yang terhubung\n");
+    printf("SAVE        - Menyimpan status permainan ke file eksternal\n");
+    printf("EXIT        - Keluar dari permainan\n");
 }
