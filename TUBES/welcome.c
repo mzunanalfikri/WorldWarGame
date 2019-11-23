@@ -340,16 +340,16 @@ void winp2(){
 }
 
 void RuleGame(){
-    printf("Pada Awal Permainan, kamu akan diberikan masing masing satu bangunan, Tujuan kamu adalah menghabisi bangunan lawan.\n");
-    printf("Jika lawan tidak memiliki bangunan, maka kamu menang! \n");
-    printf("Berikut ini COMMAND yang dapat kamu aktifkan :\n");
-    printf("ATTACK      - Memulai serangan ke bangunan lain\n");
-    printf("LEVEL_UP    - Menaikan level suatu bangunan dari pemain\n");
-    printf("SKILL       - Memakai skill yang dimiliki oleh pemain\n");
-    printf("UNDO        - Membatalkan perintah terakhir(sampai command End Turn/Skill)\n");
-    printf("STATUS      - Menampilkan info peta, bangunan dan skill yang pemain miliki\n");
-    printf("END_TURN    - Mengakhiri giliran seorang pemain\n");
-    printf("MOVE        - Memindahkan pasukan dari bangunan yang terhubung\n");
-    printf("SAVE        - Menyimpan status permainan ke file eksternal\n");
-    printf("EXIT        - Keluar dari permainan\n");
+    printf("            Pada Awal Permainan, kamu akan diberikan masing masing satu bangunan, Tujuan kamu adalah menghabisi bangunan lawan.\n");
+    printf("            Jika lawan tidak memiliki bangunan, maka kamu menang! \n");
+    printf("            Berikut ini COMMAND yang dapat kamu aktifkan :\n");
+    printf("            ATTACK      - Memulai serangan ke bangunan lain\n");
+    printf("            LEVEL_UP    - Menaikan level suatu bangunan dari pemain\n");
+    printf("            SKILL       - Memakai skill yang dimiliki oleh pemain\n");
+    printf("            UNDO        - Membatalkan perintah terakhir(sampai command End Turn/Skill)\n");
+    printf("            STATUS      - Menampilkan info peta, bangunan dan skill yang pemain miliki\n");
+    printf("            END_TURN    - Mengakhiri giliran seorang pemain\n");
+    printf("            MOVE        - Memindahkan pasukan dari bangunan yang terhubung\n");
+    printf("            SAVE        - Menyimpan status permainan ke file eksternal\n");
+    printf("            EXIT        - Keluar dari permainan\n");
 }
