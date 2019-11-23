@@ -10,6 +10,8 @@ void delay(int number_of_seconds);
 
 void welcome();
 
+void tampilanExit();
+
 void winp1();
 
 void winp2();

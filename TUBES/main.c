@@ -53,6 +53,7 @@ int main() {
     Kata player1, player2;
 
     welcome();
+    
     //tampilin rule game jugaa
 
 
@@ -135,6 +136,7 @@ int main() {
             //push ke stack
             PushState(&SStacks, S);
         } else if (IsEQCKataString("EXIT")){
+            tampilanExit();
             endgame = true;
         } else if (IsEQCKataString("MAP")){
             CetakMatiksWarna(Map, S);
@@ -147,12 +149,12 @@ int main() {
         } else if (IsEQCKataString("PRINT_GRAPH")) {
             PrintInfoGraph(G);
         } else if (IsEQCKataString("SAVE")) {
-            save(SStacks, Map, G, extraTurn, attackUp, player1, player2);
+            //save(SStacks, Map, G, extraTurn, attackUp, player1, player2);
         } else if (IsEQCKataString("LOAD")) {
-            load(&SStacks, &Map, &G, &extraTurn, &attackUp, &player1, &player2);
-            CopyState(InfoTop(SStacks), &S);
-            StatusPlayer(S, Map,player1,player2);
-            //save(SStacks, Map, G, extraTurn, attackUp, "p.txt");
+            // load(&SStacks, &Map, &G, &extraTurn, &attackUp, &player1, &player2);
+            // CopyState(InfoTop(SStacks), &S);
+            // StatusPlayer(S, Map,player1,player2);
+            // save(SStacks, Map, G, extraTurn, attackUp, "p.txt");
         } else{
             printf("COMMAND yang anda masukkan tidak tersedia, coba lagi!\n");
         }
