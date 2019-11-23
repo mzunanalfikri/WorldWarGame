@@ -19,21 +19,6 @@
 #include "readfile.h"
 #include "welcome.h"
 #include "save_load.h"
-// #include "arraydin.c"
-// #include "bangunan.c"
-// #include "listlinier.c"
-// #include "matriks.c"
-// #include "player.c"
-// #include "point.c"
-// #include "queue.c"
-// #include "stackt.c"
-// #include "state.c"
-// #include "graph.c"
-// #include "pcolor.c"
-// #include "function.c"
-// #include "mesinkar.c"
-// #include "mesinkata.c"
-// #include "readfile.c"'
 
 
 int main() {
@@ -54,29 +39,56 @@ int main() {
 
     welcome();
     
-    //tampilin rule game jugaa
+    ReadKonfigurasiFile(&S, &Map, &G);
+    Turn(Player1(S)) = true;
+    CreateEmptyStackState(&SStacks);
+    PushState(&SStacks, S);
 
-
-    printf("Masukkan Nama Player 1 : ");
+    printf("            Opsi Memulai permainan : \n");
+    printf("            [MULAI] Mulai Game Baru\n");
+    printf("            [LOAD]  Load Game\n");
+    printf("\n");
+    printf("            Pilih Opsi : ");
     ReadCmd();
-    CopyKata(&player1, CKata);
-    printf("Masukkan Nama Player 2 : ");
-    ReadCmd();
-    CopyKata(&player2, CKata);
-
-    printf("=======================================\n");
-    printf("          Player 1 (RED): ");
-    CetakWarnaRed(player1); 
-    printf("          Player 2 (BLUE): ");
-    CetakWarnaBlue(player2); 
-    printf("=======================================\n"); 
-
-    printf("Apakah KAMU SIAPPPP ? Tulis SIAPP untuk memulai permainan!\n");
-    ReadCmd();
-    while (!(IsEQCKataString("SIAPP"))){
+    while (!IsEQCKataString("LOAD") && !IsEQCKataString("MULAI")) {
+        printf("            Opsi salah, masukkan opsi yang benar : ");
         ReadCmd();
     }
-    printf("Mari bersiap. Kita akan memulai sesuatu yang panjang!!");
+
+    
+    if (IsEQCKataString("LOAD")) {
+        load(&SStacks, &Map, &G, &extraTurn, &attackUp, &player1, &player2);
+        CopyState(InfoTop(SStacks), &S);
+    } else if (IsEQCKataString("MULAI")) {
+        printf("\n");
+        printf("            Masukkan Nama Komandan Negara Api (Player 1) : ");
+        ReadCmd();
+        CopyKata(&player1, CKata);
+        printf("            Masukkan Nama Komandan Negara Air (Player 2) : ");
+        ReadCmd();
+        CopyKata(&player2, CKata);
+    }
+    
+    printf("\n");
+    printf("            =====================================================================\n");
+    printf("                            Player 1 (RED): ");
+    CetakWarnaRed(player1); 
+    printf("                            Player 2 (BLUE): ");
+    CetakWarnaBlue(player2); 
+    printf("            =====================================================================\n"); 
+
+    printf("\n");
+    RuleGame();
+    printf("\n");
+    
+    printf("            Apakah KAMU SIAPPPP ? Tulis SIAPP untuk memulai permainan!\n");
+    printf("            ");
+    ReadCmd();
+    while (!(IsEQCKataString("SIAPP"))){
+        printf("            ");
+        ReadCmd();
+    }
+    printf("            Mari bersiap. Kita akan memulai sesuatu yang panjang!!");
     printf(".");
     delay(1);
     printf(".");
@@ -86,19 +98,23 @@ int main() {
     system("cls");
     //dikasih asci simple disini sabii
 
-    ReadKonfigurasiFile(&S, &Map, &G);
-    Turn(Player1(S)) = true;
-    printf("\n");
-    printf("===================================\n");
-    printf("======== Giliran Player 1! ========\n");
-    printf("===================================\n");
-    printf("\n");
-    CreateEmptyStackState(&SStacks);
-    PushState(&SStacks, S);
+    if (Turn(Player1(S))){
+        printf("\n");
+        printf("===================================\n");
+        printf("======== Giliran Player 1! ========\n");
+        printf("===================================\n");
+        printf("\n");
+    } else if (Turn(Player2(S))){
+        printf("\n");
+        printf("===================================\n");
+        printf("======== Giliran Player 2! ========\n");
+        printf("===================================\n");
+        printf("\n");
+    }
+    
     StatusPlayer(S, Map,player1,player2);
-    Help();
     while (!endgame){
-        
+        printf("\n");
         EnterCommad(S);
         ReadCmd();
         if (IsEQCKataString("ATTACK")){
@@ -121,6 +137,7 @@ int main() {
             Undo(&SStacks);
             CopyState(InfoTop(SStacks), &S);
         } else if (IsEQCKataString("END_TURN")){
+            system("cls");
             //cek dapet instant reinforcement
             AddIR(&S);
             //fungsi end turn
@@ -130,6 +147,7 @@ int main() {
             //push ke stack
             PushState(&SStacks, S);
             EndTurnState(&SStacks);
+            
         } else if (IsEQCKataString("MOVE")){
             //funsi pasukan
             MovePasukan(&S, G);
@@ -149,18 +167,17 @@ int main() {
         } else if (IsEQCKataString("PRINT_GRAPH")) {
             PrintInfoGraph(G);
         } else if (IsEQCKataString("SAVE")) {
-            //save(SStacks, Map, G, extraTurn, attackUp, player1, player2);
-        } else if (IsEQCKataString("LOAD")) {
-            // load(&SStacks, &Map, &G, &extraTurn, &attackUp, &player1, &player2);
-            // CopyState(InfoTop(SStacks), &S);
-            // StatusPlayer(S, Map,player1,player2);
-            // save(SStacks, Map, G, extraTurn, attackUp, "p.txt");
+            save(SStacks, Map, G, extraTurn, attackUp, player1, player2);
         } else{
             printf("COMMAND yang anda masukkan tidak tersedia, coba lagi!\n");
         }
         //delay(1);
         //system("cls");
         //Cek Kondisi Game Over
+        delay(1);
+        system("cls");
+        printf("\n");
+        StatusPlayer(S,Map,player1,player2);
         GameEnd(S, &endgame);
     }
 

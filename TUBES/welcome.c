@@ -39,7 +39,6 @@ void welcome(){
     printf("                              __                                          __                            _||_   |\n");
     printf("     ___             ____--`~    '--~~__         ___             ____--`~    '--~~__            __ ----~    ~`---,              ___             \n");
     printf("__-~'   `~----~~-~--~                   ~---__-~'   `~----~~-~--~                   ~---__ ,--~'                  ~~----_____-~'   `~----~~-~----~\n\n");
-    printf("Air, Api, Tanah, dan Udara. Dahulu keempat negara hidup dengan damai. Namun semuanya berubah saat negara api menyerang....\n");
     delay(1);
     system("cls");
 
@@ -63,7 +62,6 @@ void welcome(){
     printf("                    __                                          __                            _||_   |\n");
     printf("           ____--`~    '--~~__         ___             ____--`~    '--~~__            __ ----~    ~`---,              ___                    ___\n");
     printf("----~~-~--~                   ~---__-~'   `~----~~-~--~                   ~---__ ,--~'                  ~~----_____-~'   `~----~~-~----~__-~'   `~\n\n");
-    printf("Air, Api, Tanah, dan Udara. Dahulu keempat negara hidup dengan damai. Namun semuanya berubah saat negara api menyerang....\n");
     delay(1);
     system("cls");
  
@@ -87,7 +85,6 @@ void welcome(){
     printf("                 __                                          __                            _||_   |\n");
     printf("        ____--`~    '--~~__         ___             ____--`~    '--~~__            __ ----~    ~`---,              ___                     ___ \n"); 
     printf("-~~-~--~                   ~---__-~'   `~----~~-~--~                   ~---__ ,--~'                  ~~----_____-~'   `~----~~-~--~_____-~'   `~---\n\n");
-    printf("Air, Api, Tanah, dan Udara. Dahulu keempat negara hidup dengan damai. Namun semuanya berubah saat negara api menyerang....\n");
     delay(1);
     system("cls");
 
@@ -112,7 +109,6 @@ void welcome(){
     printf("         __                                          __                            _||_   |\n");
     printf("____--`~    '--~~__         ___             ____--`~    '--~~__            __ ----~    ~`---,              ___                     ___ \n"); 
     printf("                   ~---__-~'   `~----~~-~--~                   ~---__ ,--~'                  ~~----_____-~'   `~----~~-~--~_____-~'   `~----~~-~--~\n\n");
-    printf("Hanya Avatar yang mampu mengendalikan keempat elemen yang dapat menghentikannya..\n");
     delay(1);
     system("cls");
 
@@ -136,7 +132,6 @@ void welcome(){
     printf(" __                                         __                            _||_   |                                                                \n");
     printf("   '--~~__         ___             ____--`~    '--~~__            __ ----~    ~`---,              ___                     ___             ____--`~ \n"); 
     printf("          ~---__-~'   `~----~~-~--~                   ~---__ ,--~'                  ~~----_____-~'   `~----~~-~--~_____-~'   `~----~~-~--~         \n\n");
-    printf("Hanya Avatar yang mampu mengendalikan keempat elemen yang dapat menghentikannya..\n");
     delay(1);
     system("cls");
 
@@ -160,7 +155,6 @@ void welcome(){
     printf("                            __                            _||_   |                                                                 __  \n");
     printf("   ___             ____--`~    '--~~__            __ ----~    ~`---,              ___                     ___             ____--`~    '--~~__\n"); 
     printf("-~'   `~----~~-~--~                   ~---__ ,--~'                  ~~----_____-~'   `~----~~-~--~_____-~'   `~----~~-~--~                   ~---__\n\n");
-    printf("Namun saat dunia membutuhkannya dia menghilang...\n");
     delay(1);
     system("cls");
 
@@ -184,7 +178,6 @@ void welcome(){
     printf("                    _||_   |                                                                 __                                          __\n");
     printf("            __ ----~    ~`---,              ___                     ___             ____--`~    '--~~__         ___             ____--`~    '-\n"); 
     printf("~---__ ,--~'                  ~~----_____-~'   `~----~~-~--~_____-~'   `~----~~-~--~                   ~---__-~'   `~----~~-~--~              ~---~\n\n");
-    printf("Namun saat dunia membutuhkannya dia menghilang...\n");
     delay(1);
     system("cls");
 
@@ -208,7 +201,6 @@ void welcome(){
     printf("                    _||_   |                                                                 __                                          __\n");
     printf("            __ ----~    ~`---,              ___                     ___             ____--`~    '--~~__         ___             ____--`~    '-\n"); 
     printf("~---__ ,--~'                  ~~----_____-~'   `~----~~-~--~_____-~'   `~----~~-~--~                   ~---__-~'   `~----~~-~--~              -~--~\n\n");
-    printf("Beratus tahun kemudian, terdapat dua orang yang ingin menguasai keempat negara tersebut.\n");
     delay(1);
     system("cls");
 
@@ -232,7 +224,6 @@ void welcome(){
     printf("        _||_   |                                                                 __                                      __             _||_   |\n");
     printf("__ ----~    ~`---,              ___                     ___             ____--`~    '--~~__         ___         ____--`~    '--~~__    ~    ~`\n"); 
     printf("                  ~~----_____-~'   `~----~~-~--~_____-~'   `~----~~-~--~                   ~---__-~'   `~----~-~                   ~---       ---~-~\n\n");
-    printf("Siapakah yang mampu menaklukkan keempat negara beserta elemen di dalamnya ??\n");
     delay(1);
     system("cls");
 
@@ -256,6 +247,17 @@ void welcome(){
     printf("        _||_   |                                                                 __                                      __             _||_   |\n");
     printf("__ ----~    ~`---,              ___                     ___             ____--`~    '--~~__         ___         ____--`~    '--~~__    ~    ~`\n"); 
     printf("                  ~~----_____-~'   `~----~~-~--~_____-~'   `~----~~-~--~                   ~---__-~'   `~----~-~                   ~---       ---~-~\n\n");
+    delay(2);
+    
+
+ 
+
+    printf("                                             Pada Zaman dahulu kala, Negara Api dan Negara Air hidup dalam kedamaian.\n");
+    printf("                                                    Hingga pada suatu zaman, terjadi perang besar-besaran. \n");
+    printf("                                                  Namun, pada saat dibutuhkan, kedua Komandan perang hilang.\n");
+    printf("                                                            Siapkah kamu menjadi komandan perang ?\n");
+    printf("\n");
+    printf("\n");
     delay(2);
     system("cls");
 }
@@ -335,6 +337,7 @@ void tampilanExit(){
     printf("-~~-~--~                   ~---__-~'   `~----~~-~--~                   ~---__ ,--~'                  ~~----_____-~'   `~----~~-~--~_____-~'   `~---\n");
     delay(1);
     system("cls");
+    
 
     printf("\n\n");
     printf("                                                                                       |>>>\n");
@@ -609,4 +612,19 @@ void winp2(){
     delay(2);
     system("cls");
     
+}
+
+void RuleGame(){
+    printf("            Pada Awal Permainan, kamu akan diberikan masing masing satu bangunan, Tujuan kamu adalah menghabisi bangunan lawan.\n");
+    printf("            Jika lawan tidak memiliki bangunan, maka kamu menang! \n");
+    printf("            Berikut ini COMMAND yang dapat kamu aktifkan :\n");
+    printf("            ATTACK      - Memulai serangan ke bangunan lain\n");
+    printf("            LEVEL_UP    - Menaikan level suatu bangunan dari pemain\n");
+    printf("            SKILL       - Memakai skill yang dimiliki oleh pemain\n");
+    printf("            UNDO        - Membatalkan perintah terakhir(sampai command End Turn/Skill)\n");
+    printf("            STATUS      - Menampilkan info peta, bangunan dan skill yang pemain miliki\n");
+    printf("            END_TURN    - Mengakhiri giliran seorang pemain\n");
+    printf("            MOVE        - Memindahkan pasukan dari bangunan yang terhubung\n");
+    printf("            SAVE        - Menyimpan status permainan ke file eksternal\n");
+    printf("            EXIT        - Keluar dari permainan\n");
 }

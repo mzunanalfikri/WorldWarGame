@@ -573,6 +573,7 @@ void ChooseBangunanPlayerMove(State S,Graph G, int *pendonor, int*penerima, bool
     int temp;
 
     //Pilih bangunan pendonor
+    printf("\n");
     printf("Daftar Bangunan : \n");
     addresslist P;
     int count;
@@ -608,6 +609,7 @@ void ChooseBangunanPlayerMove(State S,Graph G, int *pendonor, int*penerima, bool
         *pendonor = donor[temp];
 
         //Pilih bangunan penerima
+        printf("\n");
         printf("Daftar bangunan terdekat : \n");
         P = First(ListIdxBangunan(Player2(S)));
         if (player1){
@@ -647,6 +649,7 @@ void MovePasukaB1B2(State *S, int pendonor, int penerima)
 /* Fungsi transisi untuk move pasukan */
 {
     int x;
+    printf("\n");
     printf("Jumlah pasukan : ");
     ReadCmd();
     x = KataToInt(CKata);
@@ -705,6 +708,7 @@ void ChooseBangunanPlayerAttack(State S, Graph G, int *serang, int *defend, bool
     int temp;
 
     //Pilih bangunan pendonor
+    printf("\n");
     printf("Daftar Bangunan : \n");
     addresslist P;
     int count;
@@ -740,6 +744,7 @@ void ChooseBangunanPlayerAttack(State S, Graph G, int *serang, int *defend, bool
         *serang = att[temp];
 
         //Pilih bangunan penerima
+        printf("\n");
         printf("Daftar bangunan yang dapat diserang : \n");
         List L;
         L = (ListIdxBangunan(Player2(S)));
@@ -785,6 +790,7 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP)
     akuisisi = false;
     direbut = false;
     int x;
+    printf("\n");
     printf("Jumlah pasukan : ");
     ReadCmd();
     x = KataToInt(CKata);
@@ -936,7 +942,7 @@ void Attack(State *S, Graph G, boolean * attackUP)
     int defend;
     if (Turn(Player1(*S))) {
         ChooseBangunanPlayerAttack(*S, G, &attack, &defend, true );
-        printf("Menyeerang  : %d | Bertahan : %d \n", attack, defend);
+        //printf("Menyeerang  : %d | Bertahan : %d \n", attack, defend);
         if (attack == 0 || defend == 0){
             printf("Serangan gagal.Pasukan Kamu Terbuang Sia-Sia!!\n");
         } else {
