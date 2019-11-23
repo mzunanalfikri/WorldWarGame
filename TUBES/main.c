@@ -60,6 +60,7 @@ int main() {
         load(&SStacks, &Map, &G, &extraTurn, &attackUp, &player1, &player2);
         CopyState(InfoTop(SStacks), &S);
     } else if (IsEQCKataString("MULAI")) {
+        printf("\n");
         printf("Masukkan Nama Komandan Negara Api (Player 1) : ");
         ReadCmd();
         CopyKata(&player1, CKata);
@@ -68,7 +69,7 @@ int main() {
         CopyKata(&player2, CKata);
     }
     
-
+    printf("\n");
     printf("=======================================\n");
     printf("          Player 1 (RED): ");
     CetakWarnaRed(player1); 
