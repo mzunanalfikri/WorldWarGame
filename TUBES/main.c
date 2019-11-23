@@ -44,14 +44,14 @@ int main() {
     CreateEmptyStackState(&SStacks);
     PushState(&SStacks, S);
 
-    printf("        Opsi Memulai permainan : \n");
-    printf("        [MULAI] Mulai Game Baru\n");
-    printf("        [LOAD]  Load Game\n");
+    printf("            Opsi Memulai permainan : \n");
+    printf("            [MULAI] Mulai Game Baru\n");
+    printf("            [LOAD]  Load Game\n");
     printf("\n");
-    printf("        Pilih Opsi : ");
+    printf("            Pilih Opsi : ");
     ReadCmd();
     while (!IsEQCKataString("LOAD") && !IsEQCKataString("MULAI")) {
-        printf("        Opsi salah, masukkan opsi yang benar : ");
+        printf("            Opsi salah, masukkan opsi yang benar : ");
         ReadCmd();
     }
 
@@ -61,10 +61,10 @@ int main() {
         CopyState(InfoTop(SStacks), &S);
     } else if (IsEQCKataString("MULAI")) {
         printf("\n");
-        printf("        Masukkan Nama Komandan Negara Api (Player 1) : ");
+        printf("            Masukkan Nama Komandan Negara Api (Player 1) : ");
         ReadCmd();
         CopyKata(&player1, CKata);
-        printf("        Masukkan Nama Komandan Negara Air (Player 2) : ");
+        printf("            Masukkan Nama Komandan Negara Air (Player 2) : ");
         ReadCmd();
         CopyKata(&player2, CKata);
     }

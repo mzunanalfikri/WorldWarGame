@@ -195,7 +195,7 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
         // ALGORITMA
         filepath = "s.txt"; // Need to make this dynamic but don't know how
 
-        printf("Lokasi save file : ");
+        printf("            Lokasi save file : ");
         scanf("%s", save_file_path);
 
         LoadFile(save_file_path);
@@ -203,10 +203,10 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
         // ** Basically reads the configuration file to create a base state
 
         if (IsEQCKataString("AVATARWORLDWARSAVE")) {
-            printf("Save file dikenali. Memulai loading...\n");
+            printf("            Save file dikenali. Memulai loading...\n");
             ADVKATA();
         } else {
-            printf("Save file salah atau rusak.\n");
+            printf("            Save file salah atau rusak.\n");
             return;
         }
 
@@ -382,7 +382,7 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
 
         //ADVKATA();
 
-        printf("Loading selesai.\n");
+        printf("            Loading selesai.\n");
         
         FINISH();
 
