@@ -252,9 +252,9 @@ void welcome(){
 
  
 
-    printf("                                             Pada Zaman dahulu kala, Negara Api dan Negara Air hidup dalam kedamaian.\n");
-    printf("                                                    Hingga pada suatu zaman, terjadi perang besar-besaran. \n");
-    printf("                                                  Namun, pada saat dibutuhkan, kedua Komandan perang hilang.\n");
+    printf("                                             Pada Zaman dahulu kala, Negara Api dan Negara Air hidup dalam kedamaian.\n");delay(2);
+    printf("                                                    Hingga pada suatu zaman, terjadi perang besar-besaran. \n");delay(2);
+    printf("                                                  Namun, pada saat dibutuhkan, kedua Komandan perang hilang.\n");delay(2);
     printf("                                                            Siapkah kamu menjadi komandan perang ?\n");
     printf("\n");
     printf("\n");
