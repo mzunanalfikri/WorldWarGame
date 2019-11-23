@@ -44,14 +44,14 @@ int main() {
     CreateEmptyStackState(&SStacks);
     PushState(&SStacks, S);
 
-    printf("Opsi Memulai permainan : \n");
-    printf("[MULAI] Mulai Game Baru\n");
-    printf("[LOAD]  Load Game\n");
+    printf("        Opsi Memulai permainan : \n");
+    printf("        [MULAI] Mulai Game Baru\n");
+    printf("        [LOAD]  Load Game\n");
     printf("\n");
-    printf("Pilih Opsi : ");
+    printf("        Pilih Opsi : ");
     ReadCmd();
     while (!IsEQCKataString("LOAD") && !IsEQCKataString("MULAI")) {
-        printf("Opsi salah, masukkan opsi yang benar : ");
+        printf("        Opsi salah, masukkan opsi yang benar : ");
         ReadCmd();
     }
 
@@ -61,32 +61,34 @@ int main() {
         CopyState(InfoTop(SStacks), &S);
     } else if (IsEQCKataString("MULAI")) {
         printf("\n");
-        printf("Masukkan Nama Komandan Negara Api (Player 1) : ");
+        printf("        Masukkan Nama Komandan Negara Api (Player 1) : ");
         ReadCmd();
         CopyKata(&player1, CKata);
-        printf("Masukkan Nama Komandan Negara Air (Player 2) : ");
+        printf("        Masukkan Nama Komandan Negara Air (Player 2) : ");
         ReadCmd();
         CopyKata(&player2, CKata);
     }
     
     printf("\n");
-    printf("=======================================\n");
-    printf("          Player 1 (RED): ");
+    printf("            =====================================================================\n");
+    printf("                            Player 1 (RED): ");
     CetakWarnaRed(player1); 
-    printf("          Player 2 (BLUE): ");
+    printf("                            Player 2 (BLUE): ");
     CetakWarnaBlue(player2); 
-    printf("=======================================\n"); 
+    printf("            =====================================================================\n"); 
 
     printf("\n");
     RuleGame();
     printf("\n");
     
-    printf("Apakah KAMU SIAPPPP ? Tulis SIAPP untuk memulai permainan!\n");
+    printf("            Apakah KAMU SIAPPPP ? Tulis SIAPP untuk memulai permainan!\n");
+    printf("            ");
     ReadCmd();
     while (!(IsEQCKataString("SIAPP"))){
+        printf("            ");
         ReadCmd();
     }
-    printf("Mari bersiap. Kita akan memulai sesuatu yang panjang!!");
+    printf("            Mari bersiap. Kita akan memulai sesuatu yang panjang!!");
     printf(".");
     delay(1);
     printf(".");
@@ -171,6 +173,10 @@ int main() {
         //delay(1);
         //system("cls");
         //Cek Kondisi Game Over
+        delay(1);
+        system("cls");
+        printf("\n");
+        StatusPlayer(S,Map,player1,player2);
         GameEnd(S, &endgame);
     }
 
