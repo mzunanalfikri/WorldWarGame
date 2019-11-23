@@ -240,6 +240,19 @@ void welcome(){
     printf("__ ----~    ~`---,              ___                     ___             ____--`~    '--~~__         ___         ____--`~    '--~~__    ~    ~`\n"); 
     printf("                  ~~----_____-~'   `~----~~-~--~_____-~'   `~----~~-~--~                   ~---__-~'   `~----~-~                   ~---       ---~-~\n");
     delay(2);
+ 
+
+    printf("Air, Api, Tanah, dan Udara, \n");
+    printf("dahulu keempat negara hidup dengan damai,\n");
+    printf("namun semuanya berubah saat negara api menyerang.\n");
+    printf("Hanya Avatar yang mampu mengendalikan keempat elemen yang dapat menghentikannya.\n");
+    printf("Namun saat dunia membutuhkannya dia menghilang.\n");
+    printf("Beratus tahun kemudian aku dan abangku menemukan seorang avatar muda yang baru.\n");
+    printf("Seorang pengendali udara bernama Aang.\n");
+    printf("Walaupun ilmu pengedalian udaranya sangat bagus,\n");
+    printf("namun dia masih memerlukan banyak waktu untuk menguasai semuanya,\n");
+    printf("Tapi aku yakin, Aang dapat menyelamatkan dunia.\n");
+
 
     system("cls");
 }
