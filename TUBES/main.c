@@ -37,8 +37,8 @@ int main() {
     endgame = false;
     Kata player1, player2;
 
-    //welcome();
-    //tampilin rule game jugaa
+    welcome();
+    
     ReadKonfigurasiFile(&S, &Map, &G);
     Turn(Player1(S)) = true;
     CreateEmptyStackState(&SStacks);
@@ -53,7 +53,6 @@ int main() {
     while (!IsEQCKataString("LOAD") && !IsEQCKataString("MULAI")) {
         printf("Opsi salah, masukkan opsi yang benar : ");
         ReadCmd();
-        
     }
 
     
