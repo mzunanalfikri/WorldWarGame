@@ -172,7 +172,7 @@ void save(StackState StackS, MATRIKS M, Graph G, boolean extraTurn, boolean atta
 
         fprintf(save_file, "_AVATARWORLDWARSAVE_");
 
-        printf("Save done\n");
+        printf("Save selesai.\n");
 
         fclose(save_file);
     }
@@ -236,9 +236,6 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
 
         // !! Configuration section ended, base state created
 
-        //printf("Current CKata is : ");
-        //TulisCKata(CKata);
-
         // Gets whose turn it is
         if(IsEQCKataInt(1)) {
             Turn(Player1(baseState)) = true;
@@ -252,9 +249,6 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
         
         ADVKATA();
 
-        //printf("Current CKata is : ");
-        //TulisCKata(CKata);
-
         // Gets attackUp state
         if (IsEQCKataString("aUy")) {
             *attackUp = true;
@@ -266,9 +260,6 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
 
         ADVKATA();
 
-        //printf("Current CKata is : ");
-        //TulisCKata(CKata);
-
         // Gets extraTurn state
         if (IsEQCKataString("eTy")) {
             *extraTurn = true;
@@ -279,9 +270,6 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
         }
 
         ADVKATA();
-
-        //printf("Current CKata is : ");
-        //TulisCKata(CKata);
 
         // Gets player names
         CopyKata(player1, CKata);
@@ -304,13 +292,9 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
 
         ADVKATA();
 
-        //printf("Current CKata is : ");
-        //TulisCKata(CKata);
-
         // Inserts bangunans
         for (i = 1; i <= num_of_banguns; ++i) {
-            //printf("Current CKata is : ");
-            //TulisCKata(CKata);
+            
             Pasukan(ElmtTab(ArrayBangunan(tempState), i)) = 999;
             tempInt = KataToInt(CKata);
             while (Level(ElmtTab(ArrayBangunan(tempState), i)) < tempInt && Level(ElmtTab(ArrayBangunan(tempState), i)) < 4) {
@@ -318,13 +302,9 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
             };
 
             ADVKATA();
-            //printf("Current CKata is : ");
-            //TulisCKata(CKata);
 
             Pasukan(ElmtTab(ArrayBangunan(tempState), i)) = KataToInt(CKata);
             ADVKATA();
-            //printf("Current CKata is : ");
-            //TulisCKata(CKata);
 
             if (IsEQCKataString("batdy")) {
                 Serang(ElmtTab(ArrayBangunan(tempState), i)) = true;
@@ -335,8 +315,6 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
             };
 
             ADVKATA();
-            //printf("Current CKata is : ");
-            //TulisCKata(CKata);
 
             if(IsEQCKataString("bmtdy")) {
                 Move(ElmtTab(ArrayBangunan(tempState), i)) = true;
@@ -347,12 +325,8 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
             }
 
             ADVKATA();
-            //printf("Current CKata is : ");
-            //TulisCKata(CKata);
-
         }
 
-        //printf("Adding player 1 bangunan list\n");
         // Gets PLayer 1's bangunan list
         while (!IsEQCKataString("p1s")) {
             InsVLast(&ListIdxBangunan(Player1(tempState)), KataToInt(CKata));
@@ -360,7 +334,6 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
         }
 
         ADVKATA();
-        //printf("Adding player 1 skill queue\n");
 
         // Gets player 1's skill queue
         CreateEmpty(&QSkill(Player1(tempState)), 10);
@@ -369,7 +342,6 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
             ADVKATA();
         }
 
-        //printf("Adding player 1 shield state\n");
         // Gets player 1's shield state
         if (IsEQCKataString("p1bs0")) {
             ShieldPlayer(Player1(tempState)) = 0;
@@ -382,7 +354,6 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
         }
 
         ADVKATA();
-        //printf("Adding player 2 bangunan list\n");
 
         // Gets PLayer 2's bangunan list
         while (!IsEQCKataString("p2s")) {
@@ -390,31 +361,14 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
             ADVKATA();
         }
 
-        //PrintState(tempState);
-
         ADVKATA();
-        //printf("Adding player 2 skill queue\n");
-
-        // Gets player 2's skill queue
-        //CreateEmpty(&tempQ, 10);
         
         CreateEmpty(&QSkill(Player2(tempState)), 10);
         while (!IsEQCKataString("p2bs0") && !IsEQCKataString("p2bs1") && !IsEQCKataString("p2bs2")) {
-            printf("Kurrent CKAta  :  ");
-            TulisCKata(CKata);
             Add(&QSkill(Player2(tempState)), KataToInt(CKata));
             ADVKATA();
-            printf("added a skill to player 2\n");
         }
-        //CopyQueue(tempQ, &QSkill(Player2(tempState)));
 
-
-        //printf("Kurrent CKAta  :  ");
-        //TulisCKata(CKata);
-        
-        //ADVKATA();
-
-        printf("Adding player 2 shield state\n");
         // Gets player 2's shield state
         if (IsEQCKataString("p2bs0")) {
             ShieldPlayer(Player2(tempState)) = 0;

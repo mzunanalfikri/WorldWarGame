@@ -38,10 +38,10 @@ T 10 3
 1
 aUn
 eTn
-Poki
-SUki
+Zaki
+Kuko
 cHn
-1 40 batdn bmtdn
+2 40 batdn bmtdn
 1 40 batdn bmtdn
 1 20 batdn bmtdn
 1 30 batdn bmtdn
@@ -60,7 +60,7 @@ cHn
 1 30 batdn bmtdn
 1 
 p1s
-1 
+
 p1bs0
 2 
 p2s
