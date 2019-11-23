@@ -23,6 +23,8 @@ void save(StackState StackS, MATRIKS M, Graph G, boolean extraTurn, boolean atta
         // KAMUS
         FILE * save_file;
         char* filepath;
+        Kata fpath;
+        char save_file_path[260];
         char* currCWD, neoPath;
         int i, j, num_of_banguns, tempInt;
         addressParent bangunode;
@@ -33,10 +35,22 @@ void save(StackState StackS, MATRIKS M, Graph G, boolean extraTurn, boolean atta
         //neoPath = strcat(currCWD, "\\");
         //neoPath = strcat(neoPath, filepath);
         //printf("Filepath is : %s\n", filepath);
+        printf("File path lokasi save file : ");
 
         filepath = "D:\\github\\TubesAlstrukdat1\\TUBES\\s.txt"; // Need to make this dynamic but don't know how
 
-        save_file = fopen(filepath, "w");
+        scanf("%s", save_file_path);
+
+        //ReadCmd();
+
+        //CopyKata(&fpath, CKata);
+        
+        printf("Save file akan di simpan di ");
+        printf("%s\n", save_file_path);
+        //TulisCKata(fpath);
+        //printf("\n");
+
+        save_file = fopen(save_file_path, "w");
 
         if (save_file == NULL) {
             printf("Tidak bisa membuat dan membuka file.\n");
@@ -170,6 +184,7 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
         // KAMUS
         FILE * save_file;
         char* filepath;
+        char save_file_path[260];
         int i, j, Mat_x, Mat_y, num_of_banguns, tempInt;
         State baseState, tempState;
         Queue tempQ;
@@ -180,15 +195,18 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
         // ALGORITMA
         filepath = "s.txt"; // Need to make this dynamic but don't know how
 
-        LoadFile("s.txt");
+        printf("Lokasi save file : ");
+        scanf("%s", save_file_path);
+
+        LoadFile(save_file_path);
 
         // ** Basically reads the configuration file to create a base state
 
         if (IsEQCKataString("AVATARWORLDWARSAVE")) {
-            printf("Save file recognized. Loading...\n");
+            printf("Save file dikenali. Memulai loading...\n");
             ADVKATA();
         } else {
-            printf("Save file invalid or corrupted.\n");
+            printf("Save file salah atau rusak.\n");
             return;
         }
 
@@ -218,8 +236,8 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
 
         // !! Configuration section ended, base state created
 
-        printf("Current CKata is : ");
-        TulisCKata(CKata);
+        //printf("Current CKata is : ");
+        //TulisCKata(CKata);
 
         // Gets whose turn it is
         if(IsEQCKataInt(1)) {
@@ -229,13 +247,13 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
             Turn(Player1(baseState)) = false;
             Turn(Player2(baseState)) = true;
         } else {
-            printf("Player turn state not recognized.\n");
+            printf("Player turn state tidak dikenali.\n");
         }
         
         ADVKATA();
 
-        printf("Current CKata is : ");
-        TulisCKata(CKata);
+        //printf("Current CKata is : ");
+        //TulisCKata(CKata);
 
         // Gets attackUp state
         if (IsEQCKataString("aUy")) {
@@ -243,13 +261,13 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
         } else if(IsEQCKataString("aUn")) {
             *attackUp = false;
         } else{
-            printf("Attack up state not recognized.\n");
+            printf("Attack up state tidak dikenali.\n");
         }
 
         ADVKATA();
 
-        printf("Current CKata is : ");
-        TulisCKata(CKata);
+        //printf("Current CKata is : ");
+        //TulisCKata(CKata);
 
         // Gets extraTurn state
         if (IsEQCKataString("eTy")) {
@@ -257,13 +275,13 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
         } else if(IsEQCKataString("eTn")) {
             *extraTurn = false;
         } else{
-            printf("Extra turn state not recognized.\n");
+            printf("Extra turn state tidak dikenali.\n");
         }
 
         ADVKATA();
 
-        printf("Current CKata is : ");
-        TulisCKata(CKata);
+        //printf("Current CKata is : ");
+        //TulisCKata(CKata);
 
         // Gets player names
         CopyKata(player1, CKata);
@@ -281,13 +299,13 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
         } else if(IsEQCKataString("cHn")) {
             CritHit(tempState) = false;
         } else{
-            printf("Ciritcal hit state not recognized.\n");
+            printf("Ciritcal hit state tidak dikenali.\n");
         }
 
         ADVKATA();
 
-        printf("Current CKata is : ");
-        TulisCKata(CKata);
+        //printf("Current CKata is : ");
+        //TulisCKata(CKata);
 
         // Inserts bangunans
         for (i = 1; i <= num_of_banguns; ++i) {
@@ -313,7 +331,7 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
             } else if (IsEQCKataString("batdn")) {
                 Serang(ElmtTab(ArrayBangunan(tempState), i)) = false;
             } else {
-                printf("Building attack state not recognized.\n");
+                printf("Building attack state tidak dikenali.\n");
             };
 
             ADVKATA();
@@ -325,7 +343,7 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
             } else if (IsEQCKataString("bmtdn")) {
                 Move(ElmtTab(ArrayBangunan(tempState), i)) = false;
             } else {
-                printf("Building move state not recognized.\n");
+                printf("Building move state tidak dikenali.\n");
             }
 
             ADVKATA();
@@ -334,7 +352,7 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
 
         }
 
-        printf("Adding player 1 bangunan list\n");
+        //printf("Adding player 1 bangunan list\n");
         // Gets PLayer 1's bangunan list
         while (!IsEQCKataString("p1s")) {
             InsVLast(&ListIdxBangunan(Player1(tempState)), KataToInt(CKata));
@@ -342,7 +360,7 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
         }
 
         ADVKATA();
-        printf("Adding player 1 skill queue\n");
+        //printf("Adding player 1 skill queue\n");
 
         // Gets player 1's skill queue
         CreateEmpty(&QSkill(Player1(tempState)), 10);
@@ -351,7 +369,7 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
             ADVKATA();
         }
 
-        printf("Adding player 1 shield state\n");
+        //printf("Adding player 1 shield state\n");
         // Gets player 1's shield state
         if (IsEQCKataString("p1bs0")) {
             ShieldPlayer(Player1(tempState)) = 0;
@@ -360,11 +378,11 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
         } else if (IsEQCKataString("p1bs2")) {
             ShieldPlayer(Player1(tempState)) = 2;
         } else {
-            printf("Player 1 shield state not recognized.\n");
+            printf("Player 1 shield state tidak dikenali.\n");
         }
 
         ADVKATA();
-        printf("Adding player 2 bangunan list\n");
+        //printf("Adding player 2 bangunan list\n");
 
         // Gets PLayer 2's bangunan list
         while (!IsEQCKataString("p2s")) {
@@ -372,10 +390,10 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
             ADVKATA();
         }
 
-        PrintState(tempState);
+        //PrintState(tempState);
 
         ADVKATA();
-        printf("Adding player 2 skill queue\n");
+        //printf("Adding player 2 skill queue\n");
 
         // Gets player 2's skill queue
         //CreateEmpty(&tempQ, 10);
@@ -391,8 +409,8 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
         //CopyQueue(tempQ, &QSkill(Player2(tempState)));
 
 
-        printf("Kurrent CKAta  :  ");
-        TulisCKata(CKata);
+        //printf("Kurrent CKAta  :  ");
+        //TulisCKata(CKata);
         
         //ADVKATA();
 
@@ -405,12 +423,12 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
         } else if (IsEQCKataString("p2bs2")) {
             ShieldPlayer(Player2(tempState)) = 2;
         } else {
-            printf("Player 2 shield state not recognized.\n");
+            printf("Player 2 shield state tidak dikenali.\n");
         }
 
         //ADVKATA();
 
-        printf("Finished loading.\n");
+        printf("Loading selesai.\n");
         
         FINISH();
 
