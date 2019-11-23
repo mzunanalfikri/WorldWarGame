@@ -1,0 +1,14 @@
+apa saja yang harus ditest
+dataset 1
+ukuran map 10x10
+bangunan ada 
+instant upgrade
+shield
+instant reinforcement
+mekanisme attack
+move
+level_up
+Undo
+end turn
+save
+exit

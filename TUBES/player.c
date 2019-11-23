@@ -20,7 +20,7 @@ void PrintPlayer(Player P)
 /* Untuk debugging */
 {
     PrintInfo(ListIdxBangunan(P));
-    PrintQSkill(QSkill(P));
+    PrintQSkill((QSkill(P)));
     //printf("Is player's turn? %s\n", (Turn(P)) ? "Yes" : "No");
 }
 

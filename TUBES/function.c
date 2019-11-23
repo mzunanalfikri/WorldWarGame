@@ -191,7 +191,7 @@ yang sama.
 */
 {
     (*ExtraTurn) = true;
-    printf("Extra Turn has been activated.\n");
+    printf("Extra Turn telah diaktifkan.\n");
 }
 
 
@@ -365,7 +365,7 @@ void StatusPlayer(State S, MATRIKS Map,Kata player1, Kata player2)
         }
 
         //PrintQSkill(QSkill(Player1(S)));
-        PrintQSkill(QSkill(Player1(S)));
+        PrintQSkill((QSkill(Player1(S))));
     } else if (Turn(Player2(S))) {
         CetakMatiksWarna(Map, S);
         
@@ -406,7 +406,7 @@ void StatusPlayer(State S, MATRIKS Map,Kata player1, Kata player2)
         }
 
         //PrintQSkill(QSkill(Player2(S)));
-        PrintQSkill(QSkill(Player2(S)));
+        PrintQSkill((QSkill(Player2(S))));
     }
 }
 
@@ -679,7 +679,7 @@ void MovePasukan(State *S, Graph G)
     int penerima;
     if (Turn(Player1(*S))) {
         ChooseBangunanPlayerMove(*S, G, &pendonor, &penerima, true );
-        printf("pendonor  : %d | penerima : %d \n", pendonor, penerima);
+        // printf("pendonor  : %d | penerima : %d \n", pendonor, penerima);
         if (pendonor == 0 || penerima == 0){
             printf("Move gagal.\n");
         } else {

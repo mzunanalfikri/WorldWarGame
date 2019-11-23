@@ -1,5 +1,4 @@
-gcc main.c arraydin.c bangunan.c listlinier.c matriks.c point.c queue.c stackt.c state.c player.c pcolor.c function.c mesinkar.c mesinkata.c readfile.c graph.c -o main
-
+gcc main.c arraydin.c bangunan.c listlinier.c matriks.c point.c queue.c stackt.c state.c player.c pcolor.c function.c mesinkar.c mesinkata.c readfile.c graph.c welcome.c save_load.c -w -o main
 BUat adt state
 infotype Q diisi apa?
 Adt Player?

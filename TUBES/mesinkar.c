@@ -19,7 +19,7 @@ void START() {
           EndPita=false*/
 
     /* Algoritma */
-    pita = fopen("konfigurasifile.txt", "r");
+    pita = fopen("datatest1.txt", "r");
     EOP=false;
     ADV();
 }
