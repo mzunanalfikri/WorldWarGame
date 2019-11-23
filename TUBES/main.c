@@ -125,6 +125,7 @@ int main() {
             Undo(&SStacks);
             CopyState(InfoTop(SStacks), &S);
         } else if (IsEQCKataString("END_TURN")){
+            system("cls");
             //cek dapet instant reinforcement
             AddIR(&S);
             //fungsi end turn
@@ -134,6 +135,7 @@ int main() {
             //push ke stack
             PushState(&SStacks, S);
             EndTurnState(&SStacks);
+            
         } else if (IsEQCKataString("MOVE")){
             //funsi pasukan
             MovePasukan(&S, G);
