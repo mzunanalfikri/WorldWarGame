@@ -10,5 +10,9 @@ void delay(int number_of_seconds);
 
 void welcome();
 
+void winp1();
+
+void winp2();
+
 
 #endif

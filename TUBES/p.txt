@@ -38,8 +38,8 @@ T 10 3
 1
 aUn
 eTn
-pOKI
-lUKI
+Poki
+SUki
 cHn
 1 40 batdn bmtdn
 1 40 batdn bmtdn

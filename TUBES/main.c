@@ -70,9 +70,12 @@ int main() {
     CetakWarnaBlue(player2); 
     printf("=======================================\n"); 
 
-    printf("Ready for Battle ? Tulis YES untuk memulai permainan!\n");
+    printf("Apakah KAMU SIAPPPP ? Tulis SIAPP untuk memulai permainan!\n");
     ReadCmd();
-    printf("Prepare yourself to enter the new world!");
+    while (!(IsEQCKataString("SIAPP"))){
+        ReadCmd();
+    }
+    printf("Mari bersiap. Kita akan memulai sesuatu yang panjang!!");
     printf(".");
     delay(1);
     printf(".");
@@ -86,7 +89,7 @@ int main() {
     Turn(Player1(S)) = true;
     printf("\n");
     printf("===================================\n");
-    printf("======== Player 1's Turn ! ========\n");
+    printf("======== Giliran Player 1! ========\n");
     printf("===================================\n");
     printf("\n");
     CreateEmptyStackState(&SStacks);
@@ -144,10 +147,11 @@ int main() {
         } else if (IsEQCKataString("PRINT_GRAPH")) {
             PrintInfoGraph(G);
         } else if (IsEQCKataString("SAVE")) {
-            //save(SStacks, Map, G, extraTurn, attackUp, "p.txt");
+            save(SStacks, Map, G, extraTurn, attackUp, player1, player2);
         } else if (IsEQCKataString("LOAD")) {
-            //load(&SStacks, &Map, &G, &extraTurn, &attackUp, "p.txt");
+            load(&SStacks, &Map, &G, &extraTurn, &attackUp, &player1, &player2);
             CopyState(InfoTop(SStacks), &S);
+            StatusPlayer(S, Map,player1,player2);
             //save(SStacks, Map, G, extraTurn, attackUp, "p.txt");
         } else{
             printf("COMMAND yang anda masukkan tidak tersedia, coba lagi!\n");

@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include "function.h"
 
-
 /* **** SKILL **** */
 
 /* ======================================
@@ -35,14 +34,14 @@ void Skill(State *S, boolean * ExtraTurn, boolean *AttackUP)
         //cek critical hit
         if (Skil == 3) {
             Add(&QSkill(Player2(*S)), 5);
-            printf("player 2 dapat critical hit\n");
+            printf("Pemain 2 mendapatkan Skill Critical Hit!\n");
         }
     } else if (Turn(Player2(*S))){
         Del(&QSkill(Player2(*S)), &Skil);
         //cek dapet critical hit
         if (Skil == 3) {
             Add(&QSkill(Player1(*S)), 5);
-            printf("player 1 dapat critical hit\n");
+            printf("Pemain 1 mendapatkan Skill Critical Hit!\n");
         }
     }
     if (Skil == 1){
@@ -80,16 +79,16 @@ Pemain tidak akan mendapat skill ini selain dari daftar skill awal.*/
             IU(&(ElmtTab(ArrayBangunan(*S),Info(P1))));
             P1=Next(P1);
         }
-        printf("Your Instant Upgrade Skill has been activated.\n");
-        printf("All of your building's level have been upgraded!\n");
+        printf("Kamu telah menggunakan Skill Instant Upgrade!.\n");
+        printf("Semua Bangunan Kamu telah naik Level!\n");
     }else if (Turn(Player2(*S))){
         P2 = First(ListIdxBangunan(Player2(*S)));
         while(P2 != NULL){
             IU(&(ElmtTab(ArrayBangunan(*S),Info(P2))));
             P2=Next(P2);
         }
-        printf("Your Instant Upgrade Skill has been activated.\n");
-        printf("All of your building's level have been upgraded!\n");
+        printf("Kamu telah menggunakan Skill Instant Upgrade!.\n");
+        printf("Semua Bangunan Kamu telah naik Level!\n");
     }
 }
 
@@ -102,10 +101,10 @@ bertambah, namun menjadi nilai maksimum.
 { //bonus
     if (Turn(Player1(*S))){
         ShieldPlayer(Player1(*S)) = 2;
-        printf("Your shield skill activated");
+        printf("Kamu telah menggunakan Skill Shield!.\n");
     } else if (Turn(Player2(*S))) {
         ShieldPlayer(Player2(*S)) = 2;
-        printf("Your shield skill activated");
+        printf("Kamu telah menggunakan Skill Shield!.\n");
     }
 }
 
@@ -139,14 +138,14 @@ void EndTurn (State *S, boolean *ExtraTurn, boolean *attackUP,Kata player1, Kata
              ShieldPlayer(Player2(*S)) -= 1;
          }
         if (*ExtraTurn){
-            printf("Extra Turn has been Activated, Player 1's Turn!\n ");
+            printf("Extra Turn telah diaktifkan! Giliran Player 1!\n ");
              (*ExtraTurn) = false;
         } else {
             delay(1);
             system("cls");
             printf("\n");
             printf("===================================\n");
-            printf("======== Player 2's Turn ! ========\n");
+            printf("======== Giliran Player 2! ========\n");
             printf("===================================\n");
             printf("\n");
         }
@@ -171,14 +170,14 @@ void EndTurn (State *S, boolean *ExtraTurn, boolean *attackUP,Kata player1, Kata
              ShieldPlayer(Player1(*S)) -= 1;
          }
          if (*ExtraTurn){
-            printf("Extra Turn has been Activated, Player 2's Turn!\n ");
+            printf("Extra Turn telah diaktifkan! Giliran Player 2!\n ");
              (*ExtraTurn) = false;
         } else {
             delay(1);
             system("cls");
             printf("\n");
             printf("===================================\n");
-            printf("======== Player 1's Turn ! ========\n");
+            printf("======== Giliran Player 1 ! ========\n");
             printf("===================================\n");
             printf("\n");
         }
@@ -203,7 +202,7 @@ Pemain mendapat skill ini jika pemain baru saja menyerang Tower lawan dan
 jumlah towernya menjadi 3.*/
 { //bonus
     (*AttackUp) = true;
-    printf("Attack Up has been activated\n");
+    printf("Skill Attack Up telah diaktifkan!\n");
 } 
 
 void CriticalHit (State *S)
@@ -215,7 +214,7 @@ Pemain mendapat skill ini jika lawan baru saja mengaktifkan skill Extra Turn.
 */
 { //bonus
     CritHit(*S) = true;
-    printf("Critical hit has been activated. \n");
+    printf("Skill Critical Hit telah diaktifkan! \n");
 }
 
 
@@ -240,16 +239,16 @@ void AddIR (State *S)
         if (Turn(Player1(*S))){
             if(NBElmt(QSkill(Player1(*S)))<10){
                 Add(&QSkill(Player1(*S)), 6);
-                printf("kamu dapat IR\n");
+                printf("KAmu mendapatkan Skill Instant Reinforcement!\n");
             }else{
-                printf("queue penuh\n");
+                printf("Kamu sudah memiliki terlalu banyak skill! \n");
             }
         } else if (Turn(Player2(*S))) {
             if(NBElmt(QSkill(Player2(*S)))<10){
                 Add(&QSkill(Player2(*S)), 6);
-                printf("kamu dapat IR\n");
+                printf("KAmu mendapatkan Skill Instant Reinforcement!\n");
             }else{
-                printf("queue penuh\n");
+                printf("Kamu sudah memiliki terlalu banyak skill! \n");
             }
            
         }
@@ -270,16 +269,16 @@ Seluruh bangunan mendapatkan tambahan 5 pasukan.
             Pasukan(ElmtTab(ArrayBangunan(*S),Info(P1)))+=5;
             P1=Next(P1);
         }
-        printf("Your Instant Reinforcement Skill has been used\n");
-        printf("All of your building's army have been increased by 5\n");
+        printf("Kamu menggunakan Skill Instant Reinforcement!\n");
+        printf("Semua Pasukan Bangunan milik musuh telah bertambah sebanyak 5 Pasukan!\n");
     }else if (Turn(Player2(*S))){
         P2 = First(ListIdxBangunan(Player2(*S)));
         while(P2 != NULL){
             Pasukan(ElmtTab(ArrayBangunan(*S),Info(P2)))+=5;
             P2=Next(P2);
         }
-        printf("Your Instant Reinforcement Skill has been used\n");
-        printf("All of your building's army have been increased by 5\n");
+        printf("Kamu menggunakan Skill Instant Reinforcement!\n");
+        printf("Semua Pasukan Bangunan milik Kamu telah bertambah sebanyak 5 Pasukan!\n");
     }
 }
 /*
@@ -298,8 +297,8 @@ void Barrage (State *S){
             P1=Next(P1);
         }
         
-        printf("Your Barrage Skill has been used\n");
-        printf("All of your enemy building's army have been decreased by 10\n");
+        printf("Kamu menggunakan Skill Barrage!\n");
+        printf("Semua Pasukan Bangunan milik musuh telah berkurang sebanyak 10!\n");
     }else if (!Turn(Player2(*S))){
         P2 = First(ListIdxBangunan(Player2(*S)));
         while(P2 != NULL){
@@ -310,8 +309,8 @@ void Barrage (State *S){
             P2=Next(P2);
         }
         
-        printf("Your Barrage Skill has been used\n");
-        printf("All of your enemy building's army have been decreased by 10\n");
+        printf("Kamu menggunakan Skill Barrage!\n");
+        printf("Semua Pasukan Bangunan milik musuh telah berkurang sebanyak 10!\n");
     }
 }
 /*Jumlah pasukan pada seluruh bangunan musuh akan berkurang sebanyak 10
@@ -345,7 +344,12 @@ void StatusPlayer(State S, MATRIKS Map,Kata player1, Kata player2)
         printf("%s", NORMAL);
         printf("%s%c", RED, '1');
         printf("%s", NORMAL);
-        printf(" : ");
+        printf("%s%c", RED, ' ');
+        printf("%s", NORMAL);
+        printf("%s%c", RED, ':');
+        printf("%s", NORMAL);
+        printf("%s%c", RED, ' ');
+        printf("%s", NORMAL);
         CetakWarnaRed(player1);
 
         printf("Daftar Bangunan : \n");
@@ -361,7 +365,7 @@ void StatusPlayer(State S, MATRIKS Map,Kata player1, Kata player2)
         }
 
         //PrintQSkill(QSkill(Player1(S)));
-        PrintTopQSkill(QSkill(Player1(S)));
+        PrintQSkill(QSkill(Player1(S)));
     } else if (Turn(Player2(S))) {
         CetakMatiksWarna(Map, S);
         
@@ -381,7 +385,12 @@ void StatusPlayer(State S, MATRIKS Map,Kata player1, Kata player2)
         printf("%s", NORMAL);
         printf("%s%c", BLUE, '2');
         printf("%s", NORMAL);
-        printf(" : ");
+        printf("%s%c", BLUE, ' ');
+        printf("%s", NORMAL);
+        printf("%s%c", BLUE, ':');
+        printf("%s", NORMAL);
+        printf("%s%c", BLUE, ' ');
+        printf("%s", NORMAL);
         CetakWarnaBlue(player2);
 
         printf("Daftar Bangunan : \n");
@@ -397,7 +406,7 @@ void StatusPlayer(State S, MATRIKS Map,Kata player1, Kata player2)
         }
 
         //PrintQSkill(QSkill(Player2(S)));
-        PrintTopQSkill(QSkill(Player2(S)));
+        PrintQSkill(QSkill(Player2(S)));
     }
 }
 
@@ -786,7 +795,7 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP)
     }
     //debug
     if (*attackUP) {
-        printf("Attack Up aktif untuk pengerangan.\n");
+        printf("Attack Up aktif untuk penyerangan.\n");
     }
 
     //cek bangunan yang di attack punya skill atau enggak
@@ -794,16 +803,16 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP)
     skillshield =false;
     if (SearchB(ListIdxBangunan(Player2(*S)), defend) && ShieldPlayer(Player2(*S))>0 ){
         skillshield = true;
-        printf("shield player 2 active\n");
+        printf("Player 2 memiliki Skill Shield\n");
     }
     if (SearchB(ListIdxBangunan(Player1(*S)), defend) && ShieldPlayer(Player1(*S))>0 ){
         skillshield = true;
-        printf("shield player 1 active\n");
+        printf("Player 1 memiliki Skill Shield\n");
     }
     //implementasi crithit if crithit ada kondisi lagi, trus crithit di off kan
 
     if (CritHit(*S)) {
-        printf("attack mode critical hit");
+        printf("Critical Hit digunakan!\n");
         if (x >= Pasukan(ElmtTab(ArrayBangunan(*S), defend))/2){
             Pasukan(ElmtTab(ArrayBangunan(*S), serang)) -= x;
             Pasukan(ElmtTab(ArrayBangunan(*S), defend)) = x - Pasukan(ElmtTab(ArrayBangunan(*S), defend))/2;
@@ -826,7 +835,7 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP)
         }
 
     } else if ( (Pertahanan(ElmtTab(ArrayBangunan(*S), defend)) || skillshield ) && !(*attackUP)){
-        printf("lawan ada pertahanan \n");
+        printf("Pertahanan musuh aktif! \n");
         if (x >= Pasukan(ElmtTab(ArrayBangunan(*S), defend))*4/3){
             Pasukan(ElmtTab(ArrayBangunan(*S), serang)) -= x;
             Pasukan(ElmtTab(ArrayBangunan(*S), defend)) = x - Pasukan(ElmtTab(ArrayBangunan(*S), defend))*4/3;
@@ -848,7 +857,6 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP)
             printf("Bangunan gagal direbut. \n");
         }
     } else {
-        printf("lawan ngga ada pertahanan\n");
         if (x >= Pasukan(ElmtTab(ArrayBangunan(*S), defend))){
             Pasukan(ElmtTab(ArrayBangunan(*S), serang)) -= x;
             Pasukan(ElmtTab(ArrayBangunan(*S), defend)) = x - Pasukan(ElmtTab(ArrayBangunan(*S), defend));
@@ -879,43 +887,43 @@ void PreAttack(State *S, int serang, int defend, boolean *attackUP)
             //Cek dapet extra turn
             if (Type(ElmtTab(ArrayBangunan(*S), defend)) == 'F' && direbut){
                 Add(&QSkill(Player2(*S)), 3);
-                printf("Player 2 mendapatkan Skill Extra Turn \n");
+                printf("Player 2 mendapatkan Skill Extra Turn1 \n");
             }
             //cek dapet barrage
             if (NbElmtList(ListIdxBangunan(Player1(*S))) == 10){
                 Add(&QSkill(Player2(*S)), 7);
-                printf("Player 2 mendatapkan Skill Barrage \n");
+                printf("Player 2 mendapatkan Skill Barrage! \n");
             }
-            //cek dapa shield
+            //cek dapa shields
             if (NbElmtList(ListIdxBangunan(Player2(*S))) == 2 && direbut){
                 Add(&QSkill(Player2(*S)), 2);
-                printf("Player 2 mendatapkan Skill Shield \n");
+                printf("Player 2 mendapatkan Skill Shield !\n");
             }
             //cek dapet attack up
             if (NBElmtTower(ListIdxBangunan(Player1(*S)), ArrayBangunan(*S)) == 3  && Type(ElmtTab(ArrayBangunan(*S), defend)) == 'T' && direbut ){
                 Add(&QSkill(Player1(*S)), 4);
-                printf("player 1 mendapatkan attack up\n");
+                printf("Player 1 mendapatkan Attack Up!\n");
             } 
         } else if(Turn(Player2(*S))) {
             //Cek dapet extra turn
             if (Type(ElmtTab(ArrayBangunan(*S), defend)) == 'F' && direbut){
                 Add(&QSkill(Player1(*S)), 3);
-                printf("Player 1 mendapatkan Skill Extra Turn \n");
+                printf("Player 1 mendapatkan Skill Extra Turn! \n");
             }
             //cek dapet barrage
             if (NbElmtList(ListIdxBangunan(Player2(*S))) == 10){
                 Add(&QSkill(Player1(*S)), 7);
-                printf("Player 1 mendatapkan Skill Barrage \n");
+                printf("Player 1 mendapatkan Skill Barrage! \n");
             }
             //cek shield
             if (NbElmtList(ListIdxBangunan(Player1(*S))) == 2 && direbut){
                 Add(&QSkill(Player1(*S)), 2);
-                printf("Player 1 mendatapkan Skill Shield \n");
+                printf("Player 1 mendapatkan Skill Shield! \n");
             }
             //cek penambahan attack up
             if (NBElmtTower(ListIdxBangunan(Player2(*S)), ArrayBangunan(*S) ) == 3  && Type(ElmtTab(ArrayBangunan(*S), defend)) == 'T' && direbut){
                 Add(&QSkill(Player2(*S)), 4);
-                printf("player 2 mendapatkan attack up\n");
+                printf("Player 2 mendapatkan Attack Up1\n");
             } 
         }
     }
@@ -928,18 +936,18 @@ void Attack(State *S, Graph G, boolean * attackUP)
     int defend;
     if (Turn(Player1(*S))) {
         ChooseBangunanPlayerAttack(*S, G, &attack, &defend, true );
-        printf("attack  : %d | defend : %d \n", attack, defend);
+        printf("Menyeerang  : %d | Bertahan : %d \n", attack, defend);
         if (attack == 0 || defend == 0){
-            printf("Attack gagal.\n");
+            printf("Serangan gagal.Pasukan Kamu Terbuang Sia-Sia!!\n");
         } else {
             PreAttack(S, attack, defend, attackUP);
         }
         //printf(" x : %d\n", x);
     } else if (Turn(Player2(*S))) {
         ChooseBangunanPlayerAttack(*S, G, &attack, &defend, false );
-        printf("attack  : %d | defend : %d \n", attack, defend);
+        printf("Menyerang  : %d | Bertahan : %d \n", attack, defend);
         if (attack == 0 || defend == 0){
-            printf("Attack gagal.\n");
+            printf("Serangan gagal.Pasukan Kamu Terbuang Sia-Sia!!\n");
         } else {
            PreAttack(S, attack, defend, attackUP);
         }
@@ -970,13 +978,13 @@ void GameEnd(State S, boolean *endgame)
 {
     if (IsEmptyList(ListIdxBangunan(Player1(S)))){
         // player 2 menang
-        printf("Selamat player 2 menang !!!\n");
+        winp2();
         printf("Tekan Enter ntuk keluar");
         STARTcmd();
         (*endgame) = true;
     } else if (IsEmptyList(ListIdxBangunan(Player2(S)))) {
         //player 1 menang
-        printf("Selamat player 1 menang !!!\n");
+        winp1();
         printf("Tekan Enter ntuk keluar");
         STARTcmd();
         (*endgame) = true;
