@@ -177,7 +177,7 @@ void EndTurn (State *S, boolean *ExtraTurn, boolean *attackUP,Kata player1, Kata
             system("cls");
             printf("\n");
             printf("===================================\n");
-            printf("======== Giliran Player 1 ! ========\n");
+            printf("======== Giliran Player 1 ! =======\n");
             printf("===================================\n");
             printf("\n");
         }

@@ -154,6 +154,7 @@ int main() {
             //push ke stack
             PushState(&SStacks, S);
         } else if (IsEQCKataString("EXIT")){
+            tampilanExit();
             endgame = true;
         } else if (IsEQCKataString("MAP")){
             CetakMatiksWarna(Map, S);
