@@ -17,7 +17,7 @@ Properti ADT Bangunan :
 #define BANGUNAN_H
 
 #include "boolean.h"
-#include "../ADT Point/point.h"
+#include "point.h"
 
 typedef struct {
     char Type;

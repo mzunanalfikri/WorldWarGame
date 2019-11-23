@@ -1,0 +1,15 @@
+ tolong test skill yaa:
+1. IU test ✔
+2. IU dapet ✔
+3.shield test
+4. Shield dapet
+5. Extra turn test ✔
+6. Extra turn dapet ✔
+7. attup test (Gagal kalau pilih Attack yang gagal terus-terusan dan di pilihan attack ke-sekian baru beneran bisa attak)
+8. attup dapet ✔
+9. crithit test ✔ (Tapi gagal Undo)
+10. crithit dapet ✔
+11. IR test ✔
+12 IR dapet ✔
+13 barrage test ✔ (kalimatnya salah)
+14 barrage dapet ✔

@@ -1,5 +1,8 @@
 {
     "files.associations": {
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "readfile.h": "c",
+        "mesinkar.h": "c",
+        "save_load.h": "c"
     }
 }
