@@ -573,6 +573,7 @@ void ChooseBangunanPlayerMove(State S,Graph G, int *pendonor, int*penerima, bool
     int temp;
 
     //Pilih bangunan pendonor
+    printf("\n");
     printf("Daftar Bangunan : \n");
     addresslist P;
     int count;
@@ -608,6 +609,7 @@ void ChooseBangunanPlayerMove(State S,Graph G, int *pendonor, int*penerima, bool
         *pendonor = donor[temp];
 
         //Pilih bangunan penerima
+        printf("\n");
         printf("Daftar bangunan terdekat : \n");
         P = First(ListIdxBangunan(Player2(S)));
         if (player1){
@@ -647,6 +649,7 @@ void MovePasukaB1B2(State *S, int pendonor, int penerima)
 /* Fungsi transisi untuk move pasukan */
 {
     int x;
+    printf("\n");
     printf("Jumlah pasukan : ");
     ReadCmd();
     x = KataToInt(CKata);
