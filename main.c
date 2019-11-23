@@ -40,6 +40,7 @@ int main() {
 
     welcome();
     
+
     ReadKonfigurasiFile(&S, &Map, &G);
     Turn(Player1(S)) = true;
     CreateEmptyStackState(&SStacks);
@@ -60,6 +61,7 @@ int main() {
     if (IsEQCKataString("LOAD")) {
         load(&SStacks, &Map, &G, &extraTurn, &attackUp, &player1, &player2);
         CopyState(InfoTop(SStacks), &S);
+        system("cls");
     } else if (IsEQCKataString("MULAI")) {
         printf("\n");
         printf("            Masukkan Nama Komandan Negara Api (Player 1) : ");
@@ -68,6 +70,7 @@ int main() {
         printf("            Masukkan Nama Komandan Negara Air (Player 2) : ");
         ReadCmd();
         CopyKata(&player2, CKata);
+        system("cls");
     }
     
     printf("\n");
@@ -155,6 +158,7 @@ int main() {
             //push ke stack
             PushState(&SStacks, S);
         } else if (IsEQCKataString("EXIT")){
+            tampilanExit();
             endgame = true;
         } else if (IsEQCKataString("MAP")){
             CetakMatiksWarna(Map, S);

@@ -16,5 +16,8 @@ void winp2();
 
 void RuleGame();
 
+void tampilanExit();
+
+
 
 #endif
