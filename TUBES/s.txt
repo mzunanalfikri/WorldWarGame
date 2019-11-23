@@ -38,6 +38,8 @@ T 10 3
 1
 aUn
 eTn
+pOKI
+lUKI
 cHn
 1 40 batdn bmtdn
 1 40 batdn bmtdn
@@ -64,3 +66,4 @@ p1bs0
 p2s
 1 
 p2bs0
+_AVATARWORLDWARSAVE_

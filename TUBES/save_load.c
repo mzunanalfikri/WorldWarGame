@@ -16,12 +16,13 @@ char* ask_file_name() {
 }
 
 
-void save(StackState StackS, MATRIKS M, Graph G, boolean extraTurn, boolean attackUp, char* filepath)
+void save(StackState StackS, MATRIKS M, Graph G, boolean extraTurn, boolean attackUp, Kata player1, Kata player2)
 // I.S. StackS, M, G, extraTurn, attackUp, filepath terdefinisi
 // F.S. Data pada StackS, M, G, extraTurn, attackUp disimpan pada file yang ada pada filepath
     {
         // KAMUS
         FILE * save_file;
+        char* filepath;
         char* currCWD, neoPath;
         int i, j, num_of_banguns, tempInt;
         addressParent bangunode;
@@ -97,6 +98,17 @@ void save(StackState StackS, MATRIKS M, Graph G, boolean extraTurn, boolean atta
         fprintf(save_file, "%s\n", (attackUp ? "aUy" : "aUn")); // Saves attackUp state
         fprintf(save_file, "%s\n", (extraTurn ? "eTy" : "eTn")); // Saves extraTurn state
 
+        // saves player names
+        for (i = 1; i <= player1.Length; ++i) {
+            fprintf(save_file, "%c", player1.TabKata[i]);
+        }
+        fprintf(save_file, "\n", player1.TabKata[i]);
+        for (i = 1; i <= player2.Length; ++i) {
+            fprintf(save_file, "%c", player2.TabKata[i]);
+        }
+        fprintf(save_file, "\n", player1.TabKata[i]);
+        
+
         // Now, on to saving the actual game states (in the stack)
 
         fprintf(save_file, "%s\n", (CritHit(InfoTop(StackS)) ? "cHy" : "cHn")); // Saves critical hit state
@@ -144,19 +156,23 @@ void save(StackState StackS, MATRIKS M, Graph G, boolean extraTurn, boolean atta
 
         fprintf(save_file, "\np2bs%d\n", ShieldPlayer(Player2(InfoTop(StackS))));
 
+        fprintf(save_file, "_AVATARWORLDWARSAVE_");
+
         printf("Save done\n");
 
         fclose(save_file);
     }
 
-void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean *attackUp, char* filepath)
+void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean *attackUp, Kata *player1, Kata *player2)
 // I.S. StackS, M, G, extraTurn, attackUp sembarang; filepath terdefinisi
 // F.S. Data pada StackS, M, G, extraTurn, attackUp sesuai data yang ada pada file yang ada pada filepath
     {
         // KAMUS
         FILE * save_file;
+        char* filepath;
         int i, j, Mat_x, Mat_y, num_of_banguns, tempInt;
         State baseState, tempState;
+        Queue tempQ;
         addressParent bangunode;
         addresslist bangbung;
         addresslist Pbangun;
@@ -178,7 +194,7 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
 
         Mat_x = KataToInt(CKata);
         ADVKATA();
-        //TulisCKata();
+        //TulisCKata(CKata);
         Mat_y = KataToInt(CKata);
 
         MakeMATRIKS(Mat_x, Mat_y, M);
@@ -203,7 +219,7 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
         // !! Configuration section ended, base state created
 
         printf("Current CKata is : ");
-        TulisCKata();
+        TulisCKata(CKata);
 
         // Gets whose turn it is
         if(IsEQCKataInt(1)) {
@@ -219,7 +235,7 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
         ADVKATA();
 
         printf("Current CKata is : ");
-        TulisCKata();
+        TulisCKata(CKata);
 
         // Gets attackUp state
         if (IsEQCKataString("aUy")) {
@@ -233,7 +249,7 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
         ADVKATA();
 
         printf("Current CKata is : ");
-        TulisCKata();
+        TulisCKata(CKata);
 
         // Gets extraTurn state
         if (IsEQCKataString("eTy")) {
@@ -247,7 +263,13 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
         ADVKATA();
 
         printf("Current CKata is : ");
-        TulisCKata();
+        TulisCKata(CKata);
+
+        // Gets player names
+        CopyKata(player1, CKata);
+        ADVKATA();
+        CopyKata(player2, CKata);
+        ADVKATA();
 
         // starts creating individual states
         MakeState(&tempState, num_of_banguns);
@@ -265,26 +287,26 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
         ADVKATA();
 
         printf("Current CKata is : ");
-        TulisCKata();
+        TulisCKata(CKata);
 
         // Inserts bangunans
         for (i = 1; i <= num_of_banguns; ++i) {
-            printf("Current CKata is : ");
-            TulisCKata();
+            //printf("Current CKata is : ");
+            //TulisCKata(CKata);
             Pasukan(ElmtTab(ArrayBangunan(tempState), i)) = 999;
             tempInt = KataToInt(CKata);
-            while (Level(ElmtTab(ArrayBangunan(tempState), i)) < tempInt) {
+            while (Level(ElmtTab(ArrayBangunan(tempState), i)) < tempInt && Level(ElmtTab(ArrayBangunan(tempState), i)) < 4) {
                 NaikLevel(&ElmtTab(ArrayBangunan(tempState), i));
             };
 
             ADVKATA();
-            printf("Current CKata is : ");
-            TulisCKata();
+            //printf("Current CKata is : ");
+            //TulisCKata(CKata);
 
             Pasukan(ElmtTab(ArrayBangunan(tempState), i)) = KataToInt(CKata);
             ADVKATA();
-            printf("Current CKata is : ");
-            TulisCKata();
+            //printf("Current CKata is : ");
+            //TulisCKata(CKata);
 
             if (IsEQCKataString("batdy")) {
                 Serang(ElmtTab(ArrayBangunan(tempState), i)) = true;
@@ -295,8 +317,8 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
             };
 
             ADVKATA();
-            printf("Current CKata is : ");
-            TulisCKata();
+            //printf("Current CKata is : ");
+            //TulisCKata(CKata);
 
             if(IsEQCKataString("bmtdy")) {
                 Move(ElmtTab(ArrayBangunan(tempState), i)) = true;
@@ -307,8 +329,8 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
             }
 
             ADVKATA();
-            printf("Current CKata is : ");
-            TulisCKata();
+            //printf("Current CKata is : ");
+            //TulisCKata(CKata);
 
         }
 
@@ -323,6 +345,7 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
         printf("Adding player 1 skill queue\n");
 
         // Gets player 1's skill queue
+        CreateEmpty(&QSkill(Player1(tempState)), 10);
         while (!IsEQCKataString("p1bs0") && !IsEQCKataString("p1bs1") && !IsEQCKataString("p1bs2")) {
             Add(&QSkill(Player1(tempState)), KataToInt(CKata));
             ADVKATA();
@@ -355,19 +378,24 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
         printf("Adding player 2 skill queue\n");
 
         // Gets player 2's skill queue
-        /*
+        //CreateEmpty(&tempQ, 10);
+        
         CreateEmpty(&QSkill(Player2(tempState)), 10);
         while (!IsEQCKataString("p2bs0") && !IsEQCKataString("p2bs1") && !IsEQCKataString("p2bs2")) {
             printf("Kurrent CKAta  :  ");
-            TulisCKata();
+            TulisCKata(CKata);
             Add(&QSkill(Player2(tempState)), KataToInt(CKata));
             ADVKATA();
             printf("added a skill to player 2\n");
-        } */
+        }
+        //CopyQueue(tempQ, &QSkill(Player2(tempState)));
+
 
         printf("Kurrent CKAta  :  ");
-            TulisCKata();
+        TulisCKata(CKata);
         
+        //ADVKATA();
+
         printf("Adding player 2 shield state\n");
         // Gets player 2's shield state
         if (IsEQCKataString("p2bs0")) {
