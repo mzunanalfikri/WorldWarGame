@@ -251,7 +251,7 @@ void welcome(){
     printf("Seorang pengendali udara bernama Aang.\n");
     printf("Walaupun ilmu pengedalian udaranya sangat bagus,\n");
     printf("namun dia masih memerlukan banyak waktu untuk menguasai semuanya,\n");
-    printf("Tapi aku yakin, Aang dapat menyelamatkan dunia".\n");
+    printf("Tapi aku yakin, Aang dapat menyelamatkan dunia.\n");
 
 
     system("cls");
