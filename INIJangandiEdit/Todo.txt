@@ -1,0 +1,22 @@
+gcc main.c arraydin.c bangunan.c listlinier.c matriks.c point.c queue.c stackt.c state.c player.c pcolor.c function.c mesinkar.c mesinkata.c readfile.c graph.c welcome.c save_load.c -w -o main
+BUat adt state
+infotype Q diisi apa?
+Adt Player?
+
+List ADT :
+1. ADT Point (point biasa) DONE
+2. ADT Array Dinamis Eksplisit (array of bangunan) copy belom kelar, sama test
+3. ADT matriks (buat cetak peta doang) DONE {kurang cetak warna playernya}
+4. ADT Mesin karakter dan mesin kata (belom)
+5. ADT Queue (queue of int di map ke skill) copy udahh
+6. ADT Stack (stack of state) state belom jadi, copy udahh
+7. ADT List (isinya indeks bangunan dari pemain) copy udah
+8. ADT Graph  (belom)
+9. ADT Bangunan (propertinya kyk di spek)
+10. ADT state 
+  Isinya : array bangunan
+           Player 1
+           Player 2
+
+11. ADT Player : 
+    Isinya (Q, List indeks bangunan, Turn (boolean))

@@ -7,17 +7,27 @@
 
 /* Ukuran minimum dan maksimum baris dan kolom */
 #define BrsMin 1
-#define BrsMax 100
+#define BrsMax 20
 #define KolMin 1
-#define KolMax 100
+#define KolMax 30
 
 typedef int indeks; /* indeks baris, kolom */
-typedef int ElType; 
+typedef struct {
+    char tipe;
+    int id;
+} IsiMatriks;
+
+typedef IsiMatriks ElTypeMatriks; 
+
 typedef struct { 
-	ElType Mem[BrsMax+1][KolMax+1];
+	ElTypeMatriks Mem[BrsMax+1][KolMax+1];
     int NBrsEff; /* banyaknya/ukuran baris yg terdefinisi */
 	int NKolEff; /* banyaknya/ukuran kolom yg terdefinisi */
 } MATRIKS;
+
+#define Id(S) (S).id
+#define Tipe(S) (S).tipe
+
 /* NBrsEff <= 1 dan NKolEff <= 1 */
 /* Indeks matriks yang digunakan: [BrsMin..BrsMax][KolMin..KolMax] */
 /* Memori matriks yang dipakai selalu di "ujung kiri atas" */
@@ -32,10 +42,10 @@ void MakeMATRIKS (int NB, int NK, MATRIKS * M);
 /* *** Selektor *** */
 #define NBrsEff(M) (M).NBrsEff
 #define NKolEff(M) (M).NKolEff
-#define Elmt(M,i,j) (M).Mem[(i)][(j)]
+#define ElmtMatriks(M,i,j) (M).Mem[(i)][(j)]
 
 /* *** Selektor "DUNIA MATRIKS" *** */
-boolean IsIdxValid (int i, int j);
+boolean IsIdxValidMatriks (int i, int j);
 /* Mengirimkan true jika i, j adalah indeks yang valid untuk matriks apa pun */
 
 /* *** Selektor: Untuk sebuah matriks M yang terdefinisi: *** */
@@ -47,9 +57,9 @@ indeks GetLastIdxBrs (MATRIKS M);
 /* Mengirimkan indeks baris terbesar M */
 indeks GetLastIdxKol (MATRIKS M);
 /* Mengirimkan indeks kolom terbesar M */
-boolean IsIdxEff (MATRIKS M, indeks i, indeks j);
+boolean IsIdxEffMatriks (MATRIKS M, indeks i, indeks j);
 /* Mengirimkan true jika i, j adalah indeks efektif bagi M */
-ElType GetElmtDiagonal (MATRIKS M, indeks i);
+ElTypeMatriks GetElmtMatriksDiagonal (MATRIKS M, indeks i);
 /* Mengirimkan elemen M(i,i) */
 
 /* ********** Assignment  MATRIKS ********** */
@@ -77,61 +87,4 @@ void TulisMATRIKS (MATRIKS M);
 4 5 6
 8 9 10
 */
-
-/* ********** KELOMPOK OPERASI ARITMATIKA TERHADAP TYPE ********** */                                  
-MATRIKS TambahMATRIKS (MATRIKS M1, MATRIKS M2);
-/* Prekondisi : M1  berukuran sama dengan M2 */
-/* Mengirim hasil penjumlahan matriks: M1 + M2 */ 
-MATRIKS KurangMATRIKS (MATRIKS M1, MATRIKS M2);
-/* Prekondisi : M berukuran sama dengan M */
-/* Mengirim hasil pengurangan matriks: salinan M1 – M2 */ 
-MATRIKS KaliMATRIKS (MATRIKS M1, MATRIKS M2);
-/* Prekondisi : Ukuran kolom efektif M1 = ukuran baris efektif M2 */
-/* Mengirim hasil perkalian matriks: salinan M1 * M2 */
-MATRIKS KaliKons (MATRIKS M, ElType X);
-/* Mengirim hasil perkalian setiap elemen M dengan X */
-void PKaliKons (MATRIKS * M, ElType K);
-/* I.S. M terdefinisi, K terdefinisi */
-/* F.S. Mengalikan setiap elemen M dengan K */
-
-/* ********** KELOMPOK OPERASI RELASIONAL TERHADAP MATRIKS ********** */
-boolean EQ (MATRIKS M1, MATRIKS M2);
-/* Mengirimkan true jika M1 = M2, yaitu NBElmt(M1) = NBElmt(M2) dan */
-/* untuk setiap i,j yang merupakan indeks baris dan kolom M1(i,j) = M2(i,j) */
-/* Juga merupakan strong EQ karena GetFirstIdxBrs(M1) = GetFirstIdxBrs(M2) 
-   dan GetLastIdxKol(M1) = GetLastIdxKol(M2) */
-boolean NEQ (MATRIKS M1, MATRIKS M2);
-/* Mengirimkan true jika M1 tidak sama dengan M2 */
-boolean EQSize (MATRIKS M1, MATRIKS M2);
-/* Mengirimkan true jika ukuran efektif matriks M1 sama dengan ukuran efektif M2 */
-/* yaitu GetBrsEff(M1) = GetNBrsEff (M2) dan GetNKolEff (M1) = GetNKolEff (M2) */
-
-/* ********** Operasi lain ********** */
-int NBElmt (MATRIKS M);
-/* Mengirimkan banyaknya elemen M */
-
-/* ********** KELOMPOK TEST TERHADAP MATRIKS ********** */
-boolean IsBujurSangkar (MATRIKS M);
-/* Mengirimkan true jika M adalah matriks dg ukuran baris dan kolom sama */
-boolean IsSimetri (MATRIKS M);
-/* Mengirimkan true jika M adalah matriks simetri : IsBujurSangkar(M) 
-   dan untuk setiap elemen M, M(i,j)=M(j,i) */
-boolean IsSatuan (MATRIKS M);
-/* Mengirimkan true jika M adalah matriks satuan: IsBujurSangkar(M) dan 
-   setiap elemen diagonal M bernilai 1 dan elemen yang bukan diagonal bernilai 0 */ 
-boolean IsSparse (MATRIKS M);
-/* Mengirimkan true jika M adalah matriks sparse: mariks “jarang” dengan definisi: 
-   hanya maksimal 5% dari memori matriks yang efektif bukan bernilai 0 */ 
-MATRIKS Inverse1 (MATRIKS M);
-/* Menghasilkan salinan M dengan setiap elemen "di-invers", yaitu dinegasikan (dikalikan -1) */
-float Determinan (MATRIKS M);
-/* Prekondisi: IsBujurSangkar(M) */
-/* Menghitung nilai determinan M */
-void PInverse1 (MATRIKS * M);
-/* I.S. M terdefinisi */
-/* F.S. M di-invers, yaitu setiap elemennya dinegasikan (dikalikan -1) */
-void Transpose (MATRIKS * M);
-/* I.S. M terdefinisi dan IsBujursangkar(M) */
-/* F.S. M "di-transpose", yaitu setiap elemen M(i,j) ditukar nilainya dengan elemen M(j,i) */
-
 #endif
