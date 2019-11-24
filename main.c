@@ -118,22 +118,38 @@ int main() {
             Attack(&S, G, &attackUp);
             //push ke stack
             PushState(&SStacks, S);
+            delay(1);
+            system("cls");
+            printf("\n");
+            StatusPlayer(S,Map,player1,player2);
         } else if (IsEQCKataString("LEVEL_UP")){
             //panggil fungsi levelup
             LevelUp(&S);
             PushState(&SStacks, S);
+            delay(1);
+            system("cls");
+            printf("\n");
+            StatusPlayer(S,Map,player1,player2);
         } else if (IsEQCKataString("SKILL")){
             //manggil fungsi skill
             Skill(&S, &extraTurn, &attackUp); 
             //push ke stack
             PushState(&SStacks, S);
             EndTurnState(&SStacks);
+            delay(1);
+            system("cls");
+            printf("\n");
+            StatusPlayer(S,Map,player1,player2);
         } else if (IsEQCKataString("UNDO")) {
             //printf("Undo \n");
             Undo(&SStacks);
             CopyState(InfoTop(SStacks), &S);
-        } else if (IsEQCKataString("END_TURN")){
+            delay(1);
             system("cls");
+            printf("\n");
+            StatusPlayer(S,Map,player1,player2);
+        } else if (IsEQCKataString("END_TURN")){
+            //system("cls");
             //cek dapet instant reinforcement
             AddIR(&S);
             //fungsi end turn
@@ -143,12 +159,19 @@ int main() {
             //push ke stack
             PushState(&SStacks, S);
             EndTurnState(&SStacks);
-            
+            delay(1);
+            system("cls");
+            printf("\n");
+            StatusPlayer(S,Map,player1,player2);
         } else if (IsEQCKataString("MOVE")){
             //funsi pasukan
             MovePasukan(&S, G);
             //push ke stack
             PushState(&SStacks, S);
+            delay(1);
+            system("cls");
+            printf("\n");
+            StatusPlayer(S,Map,player1,player2);
         } else if (IsEQCKataString("EXIT")){
             //tampilan untuk exit
             tampilanExit();
@@ -156,27 +179,51 @@ int main() {
         } else if (IsEQCKataString("MAP")){
             //fungsi untuk memudahkan testing
             CetakMatiksWarna(Map, S);
+            delay(2);
+            system("cls");
+            printf("\n");
+            StatusPlayer(S,Map,player1,player2);
         } else if(IsEQCKataString("PRINT_ALL_BANGUNAN")){
             //fungsi untuk memudahkan testing
             PrintAllBangunan(ArrayBangunan(S));
+            delay(1);
+            system("cls");
+            printf("\n");
+            StatusPlayer(S,Map,player1,player2);
         } else if (IsEQCKataString("STATUS")) {
             StatusPlayer(S, Map,player1,player2);
+            delay(2);
+            system("cls");
+            printf("\n");
+            StatusPlayer(S,Map,player1,player2);
         } else if (IsEQCKataString("HELP")){
             Help();
+            delay(2);
+            system("cls");
+            printf("\n");
+            StatusPlayer(S,Map,player1,player2);
         } else if (IsEQCKataString("PRINT_GRAPH")) {
             //fungsi untuk memudahkan testing
             PrintInfoGraph(G);
+            delay(1);
+            system("cls");
+            printf("\n");
+            StatusPlayer(S,Map,player1,player2);
         } else if (IsEQCKataString("SAVE")) {
             //save game
             save(SStacks, Map, G, extraTurn, attackUp, player1, player2);
+            delay(1);
+            system("cls");
+            printf("\n");
+            StatusPlayer(S,Map,player1,player2);
         } else{
             printf("COMMAND yang anda masukkan tidak tersedia, coba lagi!\n");
+            delay(1);
+            system("cls");
+            printf("\n");
+            StatusPlayer(S,Map,player1,player2);
         }
         
-        delay(1);
-        system("cls");
-        printf("\n");
-        StatusPlayer(S,Map,player1,player2);
         //cek kondisi akhir game
         GameEnd(S, &endgame);
     }
