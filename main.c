@@ -2,10 +2,10 @@
 #include<stdlib.h>
 #include<math.h>
 #include<conio.h>
-#include "./Modul Lain/readfile.h"
-#include "./Modul Lain/function.h"
-#include "./Modul Lain/welcome.h"
-#include "./Modul Lain/save_load.h"
+#include "./Modul Read File/readfile.h"
+#include "./Modul Function/function.h"
+#include "./Modul Function/welcome.h"
+#include "./Modul Save Load/save_load.h"
 
 
 int main() {
