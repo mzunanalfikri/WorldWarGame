@@ -32,7 +32,7 @@ void SetSkill(State *S){
             Add(&QSkill(Player1(*S)),2);
         } else if (IsEQCKataString("ExtraTurn")){
             Add(&QSkill(Player1(*S)),3);
-        } else if (IsEQCKataString("Attack Up ")) {
+        } else if (IsEQCKataString("Attack Up")) {
             Add(&QSkill(Player1(*S)),4);
         } else if (IsEQCKataString("Critical Hit")){
             Add(&QSkill(Player1(*S)),5);
