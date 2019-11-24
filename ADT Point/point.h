@@ -19,7 +19,8 @@ typedef struct {
 /* *** DEFINISI PROTOTIPE PRIMITIF *** */
 /* *** Konstruktor membentuk POINT *** */
 POINT MakePOINT (int X, int Y);
-/* Membentuk sebuah POINT dari komponen-komponennya */
+/* I.S. : X dan Y terdefinisi
+    F.S. : Membentuk sebuah POINT dari komponen-komponennya */
 
 /* *** KELOMPOK Interaksi dengan I/O device, BACA/TULIS  *** */                                                 
 void BacaPOINT (POINT * P); 
@@ -41,39 +42,57 @@ void TulisPOINT (POINT P);
 
 /* *** Kelompok operasi relasional terhadap POINT *** */
 boolean EQ (POINT P1, POINT P2);
-/* Mengirimkan true jika P1 = P2 : absis dan ordinatnya sama */
+/* I.S. : P1 dan P2 terdefinisi
+F.S. : Mengirimkan true jika P1 = P2 : absis dan ordinatnya sama */
 boolean NEQ (POINT P1, POINT P2);
-/* Mengirimkan true jika P1 tidak sama dengan P2 */
-
+/* I.S. : P1 dan P2 terdefinisi
+ F.S. : Mengirimkan true jika P1 tidak sama dengan P2 */
+    
 /* *** Kelompok menentukan di mana P berada *** */
 boolean IsOrigin (POINT P);
-/* Menghasilkan true jika P adalah titik origin */
+/* I.S. : P1 dan P2 terdefinisi
+F.S. : Menghasilkan true jika P adalah titik origin */
+
 boolean IsOnSbX (POINT P);
-/* Menghasilkan true jika P terletak Pada sumbu X */
+/* I.S. : P1 dan P2 terdefinisi
+F.S. : Menghasilkan true jika P terletak Pada sumbu X */
+
 boolean IsOnSbY (POINT P);
-/* Menghasilkan true jika P terletak pada sumbu Y */
+/* I.S. : P1 dan P2 terdefinisi
+ F.S. : Menghasilkan true jika P terletak Pada sumbu Y */
 int Kuadran (POINT P);
-/* Menghasilkan kuadran dari P: 1, 2, 3, atau 4 */
-/* Prekondisi : P bukan titik origin, */
-/*              dan P tidak terletak di salah satu sumbu */
+/* I.S : P bukan titik origindan P tidak terletak di salah satu sumbu 
+F.S. : Menghasilkan kuadran dari P: 1, 2, 3, atau 4 */
 
 /* *** KELOMPOK OPERASI LAIN TERHADAP TYPE *** */                           
 POINT NextX (POINT P);
-/* Mengirim salinan P dengan absis ditambah satu */              
+/* I.S : P terdefinisi 
+ F.S. : Mengirim salinan P dengan absis ditambah satu */
+
 POINT NextY (POINT P);
-/* Mengirim salinan P dengan ordinat ditambah satu */
+/* I.S : P terdefinisi 
+F.S. : Mengirim salinan P dengan ordinat ditambah satu */
+
 POINT PlusDelta (POINT P, int deltaX, int deltaY);
-/* Mengirim salinan P yang absisnya adalah Absis(P) + deltaX dan ordinatnya adalah Ordinat(P) + deltaY */
+/* I.S : P terdefinisi 
+F.S. : Mengirim salinan P yang absisnya adalah Absis(P) + deltaX dan ordinatnya adalah Ordinat(P) + deltaY */
+
 POINT MirrorOf (POINT P, boolean SbX);
-/* Menghasilkan salinan P yang dicerminkan terhadap salah satu sumbu */
-/* Jika SbX bernilai true, maka dicerminkan terhadap sumbu X */
-/* Jika SbX bernilai false, maka dicerminkan terhadap sumbu Y */
+/* I.S : P terdefinisi 
+ F.S. : Menghasilkan salinan P yang dicerminkan terhadap salah satu sumbu */
+    /* Jika SbX bernilai true, maka dicerminkan terhadap sumbu X */
+    /* Jika SbX bernilai false, maka dicerminkan terhadap sumbu Y */
+
 int Jarak0 (POINT P);
-/* Menghitung jarak P ke (0,0) */
+/* I.S : P terdefinisi 
+F.S. : Menghitung jarak P ke (0,0) */
+
 int Panjang (POINT P1, POINT P2);
-/* Menghitung panjang garis yang dibentuk P1 dan P2 */
-/* Perhatikanlah bahwa di sini spec fungsi kurang baik sebab menyangkut ADT Garis. */
-/* Tuliskan spec fungsi yang lebih tepat. */
+/* I.S : P terdefinisi 
+ F.S. : Menghitung panjang garis yang dibentuk P1 dan P2 */
+    /* Perhatikanlah bahwa di sini spec fungsi kurang baik sebab menyangkut ADT Garis. */
+    /* Tuliskan spec fungsi yang lebih tepat. */
+
 void Geser (POINT *P, int deltaX, int deltaY);
 /* I.S. P terdefinisi */
 /* F.S. P digeser, absisnya sebesar deltaX dan ordinatnya sebesar deltaY */
