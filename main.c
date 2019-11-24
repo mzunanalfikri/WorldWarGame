@@ -27,6 +27,7 @@ int main() {
 
     //tampilan awal
     //welcome();
+
     //read configurasi file dan inisiasi awal
     ReadKonfigurasiFile(&S, &Map, &G);
     Turn(Player1(S)) = true;
@@ -185,7 +186,7 @@ int main() {
                 delay(1);
                 printf(".");
                 delay(1);
-                printf(".\n");
+                printf(".\n\n");
                 delay(1);
                 printf("Save selesai.\n");
                 delay(1);
@@ -195,40 +196,42 @@ int main() {
                 tampilanExit();
                 endgame = true;
             }
-        } else if (IsEQCKataString("MAP")){
-            //fungsi untuk memudahkan testing
-            CetakMatiksWarna(Map, S);
-            delay(2);
-            system("cls");
-            printf("\n");
-            StatusPlayer(S,Map,player1,player2);
-        } else if(IsEQCKataString("PRINT_ALL_BANGUNAN")){
-            //fungsi untuk memudahkan testing
-            PrintAllBangunan(ArrayBangunan(S));
-            delay(1);
-            //system("cls");
-            TulisMATRIKS(Map);
-            printf("\n");
-            StatusPlayer(S,Map,player1,player2);
+        // } else if (IsEQCKataString("MAP")){
+        //     //fungsi untuk memudahkan testing
+        //     CetakMatiksWarna(Map, S);
+        //     delay(2);
+        //     system("cls");
+        //     printf("\n");
+        //     StatusPlayer(S,Map,player1,player2);
+        // } else if(IsEQCKataString("PRINT_ALL_BANGUNAN")){
+        //     //fungsi untuk memudahkan testing
+        //     PrintAllBangunan(ArrayBangunan(S));
+        //     delay(1);
+        //     //system("cls");
+        //     TulisMATRIKS(Map);
+        //     printf("\n");
+        //     StatusPlayer(S,Map,player1,player2);
         } else if (IsEQCKataString("STATUS")) {
+            system("cls");
             StatusPlayer(S, Map,player1,player2);
             delay(2);
             system("cls");
             printf("\n");
             StatusPlayer(S,Map,player1,player2);
         } else if (IsEQCKataString("HELP")){
+            system("cls");
             Help();
             delay(2);
             system("cls");
             printf("\n");
             StatusPlayer(S,Map,player1,player2);
-        } else if (IsEQCKataString("PRINT_GRAPH")) {
-            //fungsi untuk memudahkan testing
-            PrintInfoGraph(G);
-            delay(1);
-            system("cls");
-            printf("\n");
-            StatusPlayer(S,Map,player1,player2);
+        // } else if (IsEQCKataString("PRINT_GRAPH")) {
+        //     //fungsi untuk memudahkan testing
+        //     PrintInfoGraph(G);
+        //     delay(1);
+        //     system("cls");
+        //     printf("\n");
+        //     StatusPlayer(S,Map,player1,player2);
         } else if (IsEQCKataString("SAVE")) {
             //save game
             save(SStacks, Map, G, extraTurn, attackUp, player1, player2);
@@ -237,7 +240,7 @@ int main() {
             delay(1);
             printf(".");
             delay(1);
-            printf(".\n");
+            printf(".\n\n");
             delay(1);
             printf("Save selesai.\n");
             delay(1);

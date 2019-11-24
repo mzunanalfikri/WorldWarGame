@@ -200,20 +200,23 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
         LoadFile(save_file_path);
 
         // ** Basically reads the configuration file to create a base state
-
-        if (IsEQCKataString("AVATARWORLDWARSAVE")) {
-            printf("            Save file dikenali. Memulai loading");
-            printf(".");
-            delay(1);
-            printf(".");
-            delay(1);
-            printf(".\n");
-            delay(1);
-            ADVKATA();
-        } else {
-            printf("            Save file salah atau rusak.\n");
-            return;
+        
+        while(!IsEQCKataString("AVATARWORLDWARSAVE")){
+            printf("            Lokasi file salah atau rusak.\n\n");
+            printf("            Lokasi save file : ");
+            scanf("%s", save_file_path);   
+            LoadFile(save_file_path);
         }
+        
+        printf("            File dikenali. Memulai loading");
+        printf(".");
+        delay(1);
+        printf(".");
+        delay(1);
+        printf(".\n");
+        delay(1);
+        ADVKATA();
+       
 
         Mat_x = KataToInt(CKata);
         ADVKATA();

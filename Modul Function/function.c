@@ -141,8 +141,6 @@ void EndTurn (State *S, boolean *ExtraTurn, boolean *attackUP,Kata player1, Kata
             printf("Extra Turn telah diaktifkan! Giliran Player 1!\n ");
              (*ExtraTurn) = false;
         } else {
-            delay(1);
-            system("cls");
             printf("\n");
             printf("===================================\n");
             printf("======== Giliran Player 2! ========\n");
@@ -173,8 +171,6 @@ void EndTurn (State *S, boolean *ExtraTurn, boolean *attackUP,Kata player1, Kata
             printf("Extra Turn telah diaktifkan! Giliran Player 2!\n ");
              (*ExtraTurn) = false;
         } else {
-            delay(1);
-            system("cls");
             printf("\n");
             printf("===================================\n");
             printf("======== Giliran Player 1 ! ========\n");
@@ -239,14 +235,14 @@ void AddIR (State *S)
         if (Turn(Player1(*S))){
             if(NBElmt(QSkill(Player1(*S)))<10){
                 Add(&QSkill(Player1(*S)), 6);
-                printf("KAmu mendapatkan Skill Instant Reinforcement!\n");
+                printf("Player 1 mendapatkan Skill Instant Reinforcement!\n");
             }else{
                 printf("Kamu sudah memiliki terlalu banyak skill! \n");
             }
         } else if (Turn(Player2(*S))) {
             if(NBElmt(QSkill(Player2(*S)))<10){
                 Add(&QSkill(Player2(*S)), 6);
-                printf("KAmu mendapatkan Skill Instant Reinforcement!\n");
+                printf("Player 2 mendapatkan Skill Instant Reinforcement!\n");
             }else{
                 printf("Kamu sudah memiliki terlalu banyak skill! \n");
             }
