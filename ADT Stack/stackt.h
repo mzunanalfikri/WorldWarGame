@@ -58,9 +58,18 @@ void PopState (StackState * S, State* X);
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
 
 void CopyStackState(StackState Sin, StackState *Sout);
+/* Membuat copy dari Sin pada *Sout
+    I.S. Sin terdefisi, *Sout sembarang
+    F.S. StackState *Sout berisi salinan Sin */
 
 void EndTurnState(StackState* Sin);
+/* Menghapus semua state pada StackState Sin kecuali state paling atas
+    I.S. Sin tidak kosong
+    F.S. Sin hanya berisi State paling atas-nya saja */
 
 void Undo(StackState *S);
+/* Melakukan Undo (Mengahpus state teratas pada stack jika stack tidak menjadi kosong)
+    I.S. Stack S tidak kosong
+    F.S. State teratas Stack S dihapus jika jumlah elemen Stack S > 1, jika tidak maka Stack S tetap */
 
 #endif

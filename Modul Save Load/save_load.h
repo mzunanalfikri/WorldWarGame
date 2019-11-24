@@ -13,9 +13,6 @@
 #include "../Modul Function/welcome.h"
 
 
-
-char* ask_file_name();
-
 void save(StackState StackS, MATRIKS M, Graph G, boolean extraTurn, boolean attackUp, Kata player1, Kata player2);
 // I.S. StackS, M, G, extraTurn, attackUp, filepath terdefinisi
 // F.S. Data pada StackS, M, G, extraTurn, attackUp disimpan pada file yang ada pada filepath

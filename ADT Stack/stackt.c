@@ -53,6 +53,9 @@ void PopState (StackState * S, State* X)
 }
 
 void CopyStackState(StackState Sin, StackState *Sout){
+    /* Membuat copy dari Sin pada *Sout
+    I.S. Sin terdefisi, *Sout sembarang
+    F.S. StackState *Sout berisi salinan Sin */
     StackState Temp;
     State X,Y;
     CreateEmptyStackState(Sout);
@@ -68,6 +71,9 @@ void CopyStackState(StackState Sin, StackState *Sout){
 }
 
 void EndTurnState(StackState* Sin){
+    /* Menghapus semua state pada StackState Sin kecuali state paling atas
+    I.S. Sin tidak kosong
+    F.S. Sin hanya berisi State paling atas-nya saja */
     //StackState X;
     State Final = InfoTop(*Sin);
     State Final_Copy;
@@ -85,6 +91,9 @@ void EndTurnState(StackState* Sin){
 }
 
 void Undo(StackState *S){
+    /* Melakukan Undo (Mengahpus state teratas pada stack jika stack tidak menjadi kosong)
+    I.S. Stack S tidak kosong
+    F.S. State teratas Stack S dihapus jika jumlah elemen Stack S > 1, jika tidak maka Stack S tetap */
     State XTemp;
     PopState(S, &XTemp);
 
