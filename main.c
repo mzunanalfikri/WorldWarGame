@@ -26,7 +26,7 @@ int main() {
     Kata player1, player2;
 
     //tampilan awal
-    //welcome();
+    welcome();
 
     //read configurasi file dan inisiasi awal
     ReadKonfigurasiFile(&S, &Map, &G);

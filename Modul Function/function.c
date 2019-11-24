@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "function.h"
+#include "welcome.h"
 
 /* **** SKILL **** */
 
@@ -947,7 +948,7 @@ void Attack(State *S, Graph G, boolean * attackUP)
         //printf(" x : %d\n", x);
     } else if (Turn(Player2(*S))) {
         ChooseBangunanPlayerAttack(*S, G, &attack, &defend, false );
-        printf("Menyerang  : %d | Bertahan : %d \n", attack, defend);
+        //printf("Menyerang  : %d | Bertahan : %d \n", attack, defend);
         if (attack == 0 || defend == 0){
             printf("Serangan gagal.Pasukan Kamu Terbuang Sia-Sia!!\n");
         } else {
@@ -983,12 +984,14 @@ void GameEnd(State S, boolean *endgame)
         winp2();
         printf("Tekan Enter ntuk keluar");
         STARTcmd();
+        tampilanExit();
         (*endgame) = true;
     } else if (IsEmptyList(ListIdxBangunan(Player2(S)))) {
         //player 1 menang
         winp1();
         printf("Tekan Enter ntuk keluar");
         STARTcmd();
+        tampilanExit();
         (*endgame) = true;
     }
     
