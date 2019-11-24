@@ -41,6 +41,8 @@ void STARTKATA()
     }
 
 void ReadCmd(){
+/* I.S. : Input dari user terdefinisi
+   F.S. : Membaca masukan input dari user dan menyalinnya dalam CKata */
     STARTcmd();
         IgnoreBlank();
 
@@ -53,6 +55,8 @@ void ReadCmd(){
 }
 
 void LoadFile(char save_file[]){
+/* I.S. : File yang ingin di Load terdefinisi
+   F.S. : Membuka file dengan directory default  */
     STARTload(save_file);
         IgnoreBlank();
 
@@ -123,6 +127,8 @@ void CopyKata(Kata* clone, Kata ori){
 /* Operasi Mesinkata */
 	
 int KataToInt(Kata DefKata) {
+/* I.S. : DefKata terdefinisi
+   F.S. : Mengubah nilai pada DefKata menjadi bentuk integer */
 	int i;
 	int nilai,angka;
 	nilai = 0;
@@ -134,10 +140,14 @@ int KataToInt(Kata DefKata) {
 	return nilai; }
 
 char CommandToChar(Kata CKata) {
+/* I.S. : CKata terdefinisi
+   F.S. : Mengubah bentuk Kata pada CKata menjadi bentuk character */
 	return CKata.TabKata[1]; }
 
 
 void TulisCKata(Kata kataa) {
+/* I.S. : kataa terdefinisi
+   F.S. : Menulis kataa pada layar  */
     int i;
 
     for (i = 1; i <= kataa.Length; i++)
@@ -151,7 +161,8 @@ void TulisCKata(Kata kataa) {
 }
 
 boolean IsEQCKataString(char kata[20])
-/* mengembalikan true jika kata sama dengan CKata */
+/* I.S. : kata terdefinisi
+   F.S. : Mengembalikan true jika kata sama dengan CKata */
 {
     int i = 1;
     while (kata[i-1] != NULL){
@@ -165,7 +176,8 @@ boolean IsEQCKataString(char kata[20])
 }
 
 boolean IsEQCKataInt(int X)
-/* mengembalikan true jika X sama dengan CKATA */
+/* I.S. : kata terdefinisi
+   F.S. : Mengembalikan true jika nilai integer dari CKata sama dengan X */
 {
     int y = KataToInt(CKata);
     return (y == X);
