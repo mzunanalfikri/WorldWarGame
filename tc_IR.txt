@@ -30,7 +30,7 @@ cHn
 1 80 batdn bmtdn
 1 5 3 
 p1s
-6 
+ 
 p1bs0
 2 4 6 
 p2s

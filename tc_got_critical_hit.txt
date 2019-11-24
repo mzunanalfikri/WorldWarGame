@@ -21,16 +21,16 @@ eTn
 AYYUB
 GILLIAN
 cHn
-4 110 batdn bmtdn
-4 0 batdn bmtdn
-4 65 batdn bmtdn
-4 0 batdn bmtdn
+2 110 batdn bmtdn
+3 0 batdn bmtdn
+2 65 batdn bmtdn
+2 0 batdn bmtdn
 1 14 batdn bmtdn
 2 0 batdn bmtdn
 1 100 batdy bmtdn
 1 3 
 p1s
-3 6 2 
+3
 p1bs0
 2 4 6 7 5 
 p2s
