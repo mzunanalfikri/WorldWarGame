@@ -28,7 +28,6 @@ void baca_array_bangunan(TabBangunan *bangunans, int num_of_bangunan, MATRIKS *p
 
 		Tipe(ElmtMatriks(*peta, bangunan_X, bangunan_Y)) = tipe_bangunan;
 		Id(ElmtMatriks(*peta, bangunan_X, bangunan_Y)) = i;
-		
 		//printf("Bangunan %d : ", i);
 		//PrintBangunan(ElmtTab(*bangunans, i));
 		//printf("\n");

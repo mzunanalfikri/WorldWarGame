@@ -206,7 +206,8 @@ int main() {
             //fungsi untuk memudahkan testing
             PrintAllBangunan(ArrayBangunan(S));
             delay(1);
-            system("cls");
+            //system("cls");
+            TulisMATRIKS(Map);
             printf("\n");
             StatusPlayer(S,Map,player1,player2);
         } else if (IsEQCKataString("STATUS")) {
