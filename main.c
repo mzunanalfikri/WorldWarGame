@@ -79,9 +79,11 @@ int main() {
     printf("            ");
     ReadCmd();
     while (!(IsEQCKataString("SIAPP"))){
+        printf("            coba lagi, sepertinya kamu kurang siapp...\n");
         printf("            ");
         ReadCmd();
     }
+    printf("\n");
     printf("            Mari bersiap. Kita akan memulai sesuatu yang panjang!!");
     printf(".");
     delay(1);
@@ -174,8 +176,25 @@ int main() {
             StatusPlayer(S,Map,player1,player2);
         } else if (IsEQCKataString("EXIT")){
             //tampilan untuk exit
-            tampilanExit();
-            endgame = true;
+            printf("Apakah anda ingin menyimpan permainan ? Y/N\n");
+            ReadCmd();
+            if(IsEQCKataString("Y")){
+                save(SStacks, Map, G, extraTurn, attackUp, player1, player2);
+                printf("saving");
+                printf(".");
+                delay(1);
+                printf(".");
+                delay(1);
+                printf(".\n");
+                delay(1);
+                printf("Save selesai.\n");
+                delay(1);
+                tampilanExit();
+                endgame = true;
+            }else if (IsEQCKataString("N")){
+                tampilanExit();
+                endgame = true;
+            }
         } else if (IsEQCKataString("MAP")){
             //fungsi untuk memudahkan testing
             CetakMatiksWarna(Map, S);
@@ -212,6 +231,14 @@ int main() {
         } else if (IsEQCKataString("SAVE")) {
             //save game
             save(SStacks, Map, G, extraTurn, attackUp, player1, player2);
+            printf("saving");
+            printf(".");
+            delay(1);
+            printf(".");
+            delay(1);
+            printf(".\n");
+            delay(1);
+            printf("Save selesai.\n");
             delay(1);
             system("cls");
             printf("\n");
