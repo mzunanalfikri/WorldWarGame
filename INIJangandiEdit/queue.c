@@ -121,7 +121,21 @@ void Del (Queue * Q, infotype * X)
         Head(*Q) = 1;
     }
 }
-void PrintQSkill (Queue Q){
+void PrintQSkill (Queue Q)
+/* Proses: Menampilkan ke layar isi Q dengan aturan FIFO */
+/* I.S. Q sembarang */
+/* F.S. Semua isi Q ditampilkan ke layar dan dibatasi dengan "|" dengan aturan sebagai berikut: */
+/* ======================================
+INTEGER DIPETAKAN KE SKILL :
+1 --> Instant Upgrade
+2 --> shield 
+3 --> Extra Turn
+4 --> Attack Up 
+5 --> Critical Hit 
+6 --> Instant Reinforcement
+7 --> Barrage
+=========================================== */
+{
     infotype X;
     printf("Skill Avaible | ");
     while (!IsEmpty(Q)){
@@ -146,19 +160,34 @@ void PrintQSkill (Queue Q){
 }
 
 
-void CopyQueue (Queue Q1 ,Queue *Q2){
-    // printf("ini prosedur copy\n");
+void CopyQueue (Queue Q1 ,Queue *Q2)
+/* Proses: Melakukan assignment Q1 ke Q2 */
+/* I.S. Q sembarang */
+/* F.S. Q2 merupakan queue hasil copy dari Q1 */
+{
+    
     infotype X;
     CreateEmpty(Q2,10);
     while(!IsEmpty(Q1)){
         Del(&Q1,&X);
-        // printf("%d  ", X);
         Add(Q2,X);
     }
 }
 
 void PrintTopQSkill (Queue Q)
-/* menampilkan top skill */
+/* Proses: Menampilkan ke layar head Q */
+/* I.S. Q sembarang */
+/* F.S. Head dari Q ditampilkan ke layar dengan aturan sebagai berikut: */
+/* ======================================
+INTEGER DIPETAKAN KE SKILL :
+1 --> Instant Upgrade
+2 --> shield 
+3 --> Extra Turn
+4 --> Attack Up 
+5 --> Critical Hit 
+6 --> Instant Reinforcement
+7 --> Barrage
+=========================================== */
 {
     infotype X;
     printf("Skill Avaible : ");

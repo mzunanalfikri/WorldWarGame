@@ -202,7 +202,13 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
         // ** Basically reads the configuration file to create a base state
 
         if (IsEQCKataString("AVATARWORLDWARSAVE")) {
-            printf("            Save file dikenali. Memulai loading...\n");
+            printf("            Save file dikenali. Memulai loading");
+            printf(".");
+            delay(1);
+            printf(".");
+            delay(1);
+            printf(".\n");
+            delay(1);
             ADVKATA();
         } else {
             printf("            Save file salah atau rusak.\n");

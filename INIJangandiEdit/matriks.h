@@ -64,7 +64,9 @@ ElTypeMatriks GetElmtMatriksDiagonal (MATRIKS M, indeks i);
 
 /* ********** Assignment  MATRIKS ********** */
 void CopyMATRIKS (MATRIKS MIn, MATRIKS * MHsl);
-/* Melakukan assignment MHsl  MIn */
+/* Proses: Melakukan assignment MIn ke MHsl */
+/* I.S. MIn sembarang */
+/* F.S. MHsl merupakan matriks hasil copy dari MIn */
 
 /* ********** KELOMPOK BACA/TULIS ********** */ 
 void BacaMATRIKS (MATRIKS * M, int NB, int NK);

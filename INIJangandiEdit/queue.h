@@ -73,11 +73,37 @@ void Del (Queue * Q, infotype * X);
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer; 
         Q mungkin kosong */
 void CopyQueue (Queue Q1 ,Queue *Q2);
-/* I.S. Q2 Sembarang */
-/* F.S. Terbentuk Q2 sama persis dengan Q1 */
+/* Proses: Melakukan assignment Q1 ke Q2 */
+/* I.S. Q sembarang */
+/* F.S. Q2 merupakan queue hasil copy dari Q1 */
 void PrintQSkill (Queue Q);
+/* Proses: Menampilkan ke layar isi Q dengan aturan FIFO */
+/* I.S. Q sembarang */
+/* F.S. Semua isi Q ditampilkan ke layar dan dibatasi dengan "|" dengan aturan sebagai berikut: */
+/* ======================================
+INTEGER DIPETAKAN KE SKILL :
+1 --> Instant Upgrade
+2 --> shield 
+3 --> Extra Turn
+4 --> Attack Up 
+5 --> Critical Hit 
+6 --> Instant Reinforcement
+7 --> Barrage
+=========================================== */
 
 void PrintTopQSkill (Queue Q);
-/* menampilkan top skill */
+/* Proses: Menampilkan ke layar head Q */
+/* I.S. Q sembarang */
+/* F.S. Head dari Q ditampilkan ke layar dengan aturan sebagai berikut: */
+/* ======================================
+INTEGER DIPETAKAN KE SKILL :
+1 --> Instant Upgrade
+2 --> shield 
+3 --> Extra Turn
+4 --> Attack Up 
+5 --> Critical Hit 
+6 --> Instant Reinforcement
+7 --> Barrage
+=========================================== */
 
 #endif

@@ -26,7 +26,7 @@ int main() {
     Kata player1, player2;
 
     //tampilan awal
-    welcome();
+    //welcome();
     //read configurasi file dan inisiasi awal
     ReadKonfigurasiFile(&S, &Map, &G);
     Turn(Player1(S)) = true;
@@ -151,7 +151,7 @@ int main() {
             printf("\n");
             StatusPlayer(S,Map,player1,player2);
         } else if (IsEQCKataString("END_TURN")){
-            //system("cls");
+            system("cls");
             //cek dapet instant reinforcement
             AddIR(&S);
             //fungsi end turn
