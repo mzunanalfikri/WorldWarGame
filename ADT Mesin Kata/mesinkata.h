@@ -31,10 +31,12 @@ void STARTKATA();
           CC karakter pertama sesudah karakter terakhir kata */
 
 void ReadCmd();
-/* membaca kata dari cmd */
+/* I.S. : Input dari user terdefinisi
+   F.S. : Membaca masukan input dari user dan menyalinnya dalam CKata */
 
 void LoadFile(char save_file[]);
-/* membaca file pada path save_file untuk loading */
+/* I.S. : File yang ingin di Load terdefinisi
+   F.S. : Membuka file dengan directory default  */
 
 void ADVKATA();
 /* I.S. : CC adalah karakter pertama kata yang akan diakuisisi
@@ -60,19 +62,23 @@ void CopyKata(Kata* clone, Kata ori);
 /* Operasi Mesinkata */
 	
 int KataToInt(Kata DefKata);
-	/* Mengubah kata yang ada dalam CKata menjadi sebuah nilai dalam integer
-	 I.S : DefKata terdefinisi
-	 F.S : Nilai DefKata sudah dalam bentuk integer dan terdefinisi */
+/* I.S. : DefKata terdefinisi
+   F.S. : Mengubah nilai pada DefKata menjadi bentuk integer */
 	 
 char CommandToChar(Kata CKata);
+/* I.S. : CKata terdefinisi
+   F.S. : Mengubah bentuk Kata pada CKata menjadi bentuk character */
 
 void TulisCKata(Kata kataa);
-/* Untuk Mencetak Ckata */
+/* I.S. : kataa terdefinisi
+   F.S. : Menulis kataa pada layar  */
 
 boolean IsEQCKataString(char kata[20]);
-/* mengembalikan true jika kata sama dengan CKata */
+/* I.S. : kata terdefinisi
+   F.S. : Mengembalikan true jika kata sama dengan CKata */
 
 boolean IsEQCKataInt(int X);
-/* mengembalikan true jika X sama dengan CKATA */
-
+/* I.S. : kata terdefinisi
+   F.S. : Mengembalikan true jika nilai integer dari CKata sama dengan X */
+   
 #endif
