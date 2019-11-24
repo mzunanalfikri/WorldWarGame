@@ -5,50 +5,25 @@
 #include <string.h>
 
 
-char* ask_file_name() {
-    // KAMUS
-    char* file_path;
-
-    // ALGORITMA
-    scanf("%s", &file_path);
-
-    return file_path;
-}
-
-
 void save(StackState StackS, MATRIKS M, Graph G, boolean extraTurn, boolean attackUp, Kata player1, Kata player2)
 // I.S. StackS, M, G, extraTurn, attackUp, filepath terdefinisi
 // F.S. Data pada StackS, M, G, extraTurn, attackUp disimpan pada file yang ada pada filepath
     {
         // KAMUS
         FILE * save_file;
-        char* filepath;
-        Kata fpath;
         char save_file_path[260];
-        char* currCWD, neoPath;
         int i, j, num_of_banguns, tempInt;
         addressParent bangunode;
         addresslist bangbung;
         addresslist Pbangun;
 
         // ALGORITMA
-        //neoPath = strcat(currCWD, "\\");
-        //neoPath = strcat(neoPath, filepath);
-        //printf("Filepath is : %s\n", filepath);
         printf("File path lokasi save file : ");
 
-        filepath = "D:\\github\\TubesAlstrukdat1\\TUBES\\s.txt"; // Need to make this dynamic but don't know how
-
-        scanf("%s", save_file_path);
-
-        //ReadCmd();
-
-        //CopyKata(&fpath, CKata);
+        scanf("%s", save_file_path); // Gets the save file path from the user
         
         printf("Save file akan di simpan di ");
         printf("%s\n", save_file_path);
-        //TulisCKata(fpath);
-        //printf("\n");
 
         save_file = fopen(save_file_path, "w");
 
@@ -150,7 +125,6 @@ void save(StackState StackS, MATRIKS M, Graph G, boolean extraTurn, boolean atta
             Del(&QSkill(Player1(InfoTop(StackS))), &tempInt);
             fprintf(save_file, "%d ", tempInt);
         }
-        //fprintf(save_file, "\n");
 
         fprintf(save_file, "\np1bs%d\n", ShieldPlayer(Player1(InfoTop(StackS))));
 
@@ -166,11 +140,10 @@ void save(StackState StackS, MATRIKS M, Graph G, boolean extraTurn, boolean atta
             Del(&QSkill(Player2(InfoTop(StackS))), &tempInt);
             fprintf(save_file, "%d ", tempInt);
         }
-        //fprintf(save_file, "\n");
 
         fprintf(save_file, "\np2bs%d\n", ShieldPlayer(Player2(InfoTop(StackS))));
 
-        fprintf(save_file, "_AVATARWORLDWARSAVE_");
+        fprintf(save_file, "_AVATARWORLDWARSAVE_"); // Basically a footer
 
 
         fclose(save_file);
@@ -182,7 +155,6 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
     {
         // KAMUS
         FILE * save_file;
-        char* filepath;
         char save_file_path[260];
         int i, j, Mat_x, Mat_y, num_of_banguns, tempInt;
         State baseState, tempState;
@@ -192,8 +164,6 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
         addresslist Pbangun;
 
         // ALGORITMA
-        filepath = "s.txt"; // Need to make this dynamic but don't know how
-
         printf("            Lokasi save file : ");
         scanf("%s", save_file_path);
 
@@ -220,23 +190,23 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
         //TulisCKata(CKata);
         Mat_y = KataToInt(CKata);
 
-        MakeMATRIKS(Mat_x, Mat_y, M);
+        MakeMATRIKS(Mat_x, Mat_y, M); // Gets map size
 
         ADVKATA();
 
-        num_of_banguns = KataToInt(CKata);
+        num_of_banguns = KataToInt(CKata); // Gets amount of buildings
 
-        MakeState(&baseState, num_of_banguns);
+        MakeState(&baseState, num_of_banguns); // makes a basestate with num_of_banguns buildings
 
         ADVKATA();
 
-        baca_array_bangunan(&ArrayBangunan(baseState), num_of_banguns, M);
+        baca_array_bangunan(&ArrayBangunan(baseState), num_of_banguns, M); // reads the buildings position and puts them in the Map Matrix
 
         /* MAKE GRAF */
         CreateEmptyGraph(G);
 
         /* MAKE GRAF END */
-        BacaGraf(G,num_of_banguns);
+        BacaGraf(G,num_of_banguns); // Gets the buildings' connectivity
         ADVKATA();
 
         // !! Configuration section ended, base state created
@@ -282,7 +252,7 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
         CopyKata(player2, CKata);
         ADVKATA();
 
-        // starts creating individual states
+        // starts creating individual states, using baseState as a base of the new State
         MakeState(&tempState, num_of_banguns);
         CopyState(baseState, &tempState);
 
@@ -302,16 +272,18 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
             
             Pasukan(ElmtTab(ArrayBangunan(tempState), i)) = 999;
             tempInt = KataToInt(CKata);
+
+            // Levels the bangunan, using the internal NaikLevel procedure to ensure correct A and M data in the bangunan
             while (Level(ElmtTab(ArrayBangunan(tempState), i)) < tempInt && Level(ElmtTab(ArrayBangunan(tempState), i)) < 4) {
                 NaikLevel(&ElmtTab(ArrayBangunan(tempState), i));
             };
 
             ADVKATA();
 
-            Pasukan(ElmtTab(ArrayBangunan(tempState), i)) = KataToInt(CKata);
+            Pasukan(ElmtTab(ArrayBangunan(tempState), i)) = KataToInt(CKata); // Sets the correct pasukan data
             ADVKATA();
 
-            if (IsEQCKataString("batdy")) {
+            if (IsEQCKataString("batdy")) { // Sets whether the building has attacked on that turn or not
                 Serang(ElmtTab(ArrayBangunan(tempState), i)) = true;
             } else if (IsEQCKataString("batdn")) {
                 Serang(ElmtTab(ArrayBangunan(tempState), i)) = false;
@@ -321,7 +293,7 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
 
             ADVKATA();
 
-            if(IsEQCKataString("bmtdy")) {
+            if(IsEQCKataString("bmtdy")) { // Sets whether the building has moved pasukan on that turn or not
                 Move(ElmtTab(ArrayBangunan(tempState), i)) = true;
             } else if (IsEQCKataString("bmtdn")) {
                 Move(ElmtTab(ArrayBangunan(tempState), i)) = false;
@@ -368,6 +340,7 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
 
         ADVKATA();
         
+        // Gets Player 2's Skill Queue
         CreateEmpty(&QSkill(Player2(tempState)), 10);
         while (!IsEQCKataString("p2bs0") && !IsEQCKataString("p2bs1") && !IsEQCKataString("p2bs2")) {
             Add(&QSkill(Player2(tempState)), KataToInt(CKata));
@@ -393,6 +366,6 @@ void load(StackState *StackS, MATRIKS *M, Graph *G, boolean *extraTurn, boolean 
 
         PushState(StackS, tempState);
 
-        EndTurnState(StackS);
+        EndTurnState(StackS); // Since the game just loaded, destroy the state stack, preventing Undos
 
     }
