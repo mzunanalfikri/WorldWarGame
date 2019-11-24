@@ -44,14 +44,14 @@ typedef struct {
 
 /* ************** Prototype ************** */
 Bangunan MakeBangunanLv1 (char type, POINT P);
-/* I.S. Sembarane */
+/* I.S. Sembarang */
 /* F.S. Membuat sebuah bangunan default level 1 (digunakan pada awal load file) */
 
 boolean IsNaikLevel (Bangunan B);
 /* Mengirim True jika bangunan siap naik level */
 
 void NaikLevel (Bangunan *B);
-/* I.S Bangunan valid untuk naik level (bisa naik level) */
+/* I.S Sembarang */
 /* F.S Bangunan naik 1 level dengan pertambahan 
         pasukan sesuai dengan levelnya */
 

@@ -7,7 +7,8 @@
 
 
 void MakePlayer(Player *P)
-/* Membentuk Player Kosong yang siap diisi */
+/* I.S Sembarang */
+/* F.S. Membentuk Player Kosong yang siap diisi */
 {
     CreateEmptyList(&ListIdxBangunan(*P));
     CreateEmpty(&QSkill(*P), 10);
@@ -17,7 +18,7 @@ void MakePlayer(Player *P)
 }
 
 void PrintPlayer(Player P)
-/* Untuk debugging */
+/* Procedure untuk mencetak info player ke layar */
 {
     PrintInfo(ListIdxBangunan(P));
     PrintQSkill((QSkill(P)));
@@ -25,7 +26,8 @@ void PrintPlayer(Player P)
 }
 
 void CopyPlayer(Player Pin, Player *Phsl)
-/* assign player Phsl dengan player Pin */
+/*I.S. Pin terdefinisi, Phsl sembarang */
+/* F.S PHsl berisi sesuai dengan Pin */
 {
     MakePlayer(Phsl);
     CopyList(ListIdxBangunan(Pin), &ListIdxBangunan(*Phsl));
