@@ -11,10 +11,10 @@
 #include "../ADT Mesin Kata/mesinkar.h"
 #include "../ADT Mesin Kata/mesinkata.h"
 //#include "queue.h"
-#include "readfile.h"
+#include "../Modul Read File/readfile.h"
 #include "../ADT Stack/stackt.h"
 #include "../ADT State/state.h"
-#include "pcolor.h"
+#include "../Modul Pcolor/pcolor.h"
 #include<stdio.h>
 #include<stdlib.h>
 #include "welcome.h"
