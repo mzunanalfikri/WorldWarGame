@@ -141,7 +141,7 @@ int main() {
             Undo(&SStacks);
             CopyState(InfoTop(SStacks), &S);
         } else if (IsEQCKataString("END_TURN")){
-            system("cls");
+            //system("cls");
             //cek dapet instant reinforcement
             AddIR(&S);
             //fungsi end turn
