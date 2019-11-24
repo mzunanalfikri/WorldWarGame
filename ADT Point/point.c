@@ -3,7 +3,8 @@
 	#include "point.h"
 
 	POINT MakePOINT (int X, int Y)
-    /* Membentuk sebuah POINT dari komponen-komponennya */
+    /* I.S. : X dan Y terdefinisi
+    F.S. : Membentuk sebuah POINT dari komponen-komponennya */
     {
         /* Kamus Lokal */
         POINT P;
@@ -45,7 +46,8 @@
     }
 
     boolean EQ (POINT P1, POINT P2)
-    /* Mengirimkan true jika P1 = P2 : absis dan ordinatnya sama */
+    /* I.S. : P1 dan P2 terdefinisi
+     F.S. : Mengirimkan true jika P1 = P2 : absis dan ordinatnya sama */
     {
         /* Kamus Lokal */
         /* Algoritma */
@@ -53,7 +55,8 @@
     }
 
     boolean NEQ (POINT P1, POINT P2)
-    /* Mengirimkan true jika P1 tidak sama dengan P2 */
+    /* I.S. : P1 dan P2 terdefinisi
+     F.S. : Mengirimkan true jika P1 tidak sama dengan P2 */
     {
         /* Kamus Lokal */
         /* Algoritma */
@@ -61,7 +64,8 @@
     }
 
     boolean IsOrigin (POINT P)
-    /* Menghasilkan true jika P adalah titik origin */
+    /* I.S. : P1 dan P2 terdefinisi
+     F.S. : Menghasilkan true jika P adalah titik origin */
     {
         /* Kamus Lokal */
         /* Algoritma */
@@ -69,7 +73,8 @@
     }
 
     boolean IsOnSbX (POINT P)
-    /* Menghasilkan true jika P terletak Pada sumbu X */
+    /* I.S. : P1 dan P2 terdefinisi
+     F.S. : Menghasilkan true jika P terletak Pada sumbu X */
     {
         /* Kamus Lokal */
         /* Algoritma */
@@ -77,7 +82,8 @@
     }
 
     boolean IsOnSbY (POINT P)
-    /* Menghasilkan true jika P terletak pada sumbu Y */
+    /* I.S. : P1 dan P2 terdefinisi
+     F.S. : Menghasilkan true jika P terletak pada sumbu Y */
     {
         /* Kamus Lokal */
         /* Algoritma */
@@ -85,10 +91,8 @@
     }
 
     int Kuadran (POINT P)
-    /* Menghasilkan kuadran dari P: 1, 2, 3, atau 4 */
-    /* Prekondisi : P bukan titik origin, */
-    /*              dan P tidak terletak di salah satu sumbu */
-
+    /* I.S : P bukan titik origindan P tidak terletak di salah satu sumbu 
+     F.S. : Menghasilkan kuadran dari P: 1, 2, 3, atau 4 */
     {
            if ((Absis(P)>0) && (Ordinat(P)>0))
            {
@@ -109,7 +113,8 @@
     }
 
     POINT NextX (POINT P)
-    /* Mengirim salinan P dengan absis ditambah satu */
+    /* I.S : P terdefinisi 
+     F.S. : Mengirim salinan P dengan absis ditambah satu */
     {
         /* Kamus Lokal */
         /* Algoritma */
@@ -117,7 +122,8 @@
     }
 
     POINT NextY (POINT P)
-    /* Mengirim salinan P dengan ordinat ditambah satu */
+    /* I.S : P terdefinisi 
+     F.S. : Mengirim salinan P dengan ordinat ditambah satu */
     {
         /* Kamus Lokal */
         /* Algoritma */
@@ -125,7 +131,8 @@
     }
 
     POINT PlusDelta (POINT P, int deltaX, int deltaY)
-    /* Mengirim salinan P yang absisnya adalah Absis(P) + deltaX dan ordinatnya adalah Ordinat(P) + deltaY */
+    /* I.S : P terdefinisi 
+     F.S. : Mengirim salinan P yang absisnya adalah Absis(P) + deltaX dan ordinatnya adalah Ordinat(P) + deltaY */
     {
         /* Kamus Lokal */
         /* Algoritma */
@@ -135,7 +142,8 @@
     }
 
     POINT MirrorOf (POINT P, boolean SbX)
-    /* Menghasilkan salinan P yang dicerminkan terhadap salah satu sumbu */
+    /* I.S : P terdefinisi 
+     F.S. : Menghasilkan salinan P yang dicerminkan terhadap salah satu sumbu */
     /* Jika SbX bernilai true, maka dicerminkan terhadap sumbu X */
     /* Jika SbX bernilai false, maka dicerminkan terhadap sumbu Y */
     {
@@ -152,7 +160,8 @@
     }
 
     int Jarak0 (POINT P)
-    /* Menghitung jarak P ke (0,0) */
+    /* I.S : P terdefinisi 
+     F.S. : Menghitung jarak P ke (0,0) */
     {
         /* Kamus Lokal */
         /* Algoritma */
@@ -160,7 +169,8 @@
     }
 
     int Panjang (POINT P1, POINT P2)
-    /* Menghitung panjang garis yang dibentuk P1 dan P2 */
+    /* I.S : P terdefinisi 
+     F.S. : Menghitung panjang garis yang dibentuk P1 dan P2 */
     /* Perhatikanlah bahwa di sini spec fungsi kurang baik sebab menyangkut ADT Garis. */
     /* Tuliskan spec fungsi yang lebih tepat. */
     {

@@ -14,23 +14,31 @@ void MakeState(State *S, int JumlahBangunan)
     CritHit(*S) = false;
 }
 
-void CopyState(State Sin, State * Sout){
+void CopyState(State Sin, State * Sout)
+/* I.S. State Sout sembarang */
+/* F.S. State Sout terisi salinan state Sin */
+{
     CopyTab(ArrayBangunan(Sin),&ArrayBangunan(*Sout));
     CopyPlayer(Player1(Sin),&Player1(*Sout));
     CopyPlayer(Player2(Sin),&Player2(*Sout));
     CritHit(*Sout) = CritHit(Sin); 
 }
-/* I.S. State Sout sembarang */
-/* F.S. State Sout terisi salinan state Sin */
 
 
-void PrintState(State S){
+
+void PrintState(State S)
+/* I.S State S terdefinisi */
+/* F.S tercetak info state S ke layar */
+{
     PrintAllBangunan(ArrayBangunan(S));
     PrintPlayer(Player1(S));
     PrintPlayer(Player2(S));
 }
 
-void DealokState(State *S) {
+void DealokState(State *S)
+// I.S. State S terdefinisi
+// F.S. Memori yang digunakan State S dikembalikan ke sistem
+ {
     DealokasiArray(&ArrayBangunan(*S));
     DealokasiPlayer(&Player1(*S));
     DealokasiPlayer(&Player2(*S));

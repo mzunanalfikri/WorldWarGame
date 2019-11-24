@@ -23,10 +23,13 @@ void START();
           EOP=false*/
 
 void STARTcmd();
-/* membaca file dari stdin */
+/* I.S. : Input user terdefinisi
+   F.S. : Memulai membaca input user pada layar */
 
 void STARTload(char save_file[]);
-/* membaca file pada path save_file */
+/* I.S. : File yang ingin di load terdefinisi
+   F.S. : Memulai load file pada file yang dipilih */
+
 
 void ADV();
 /* Pita dimajukan satu karakter.

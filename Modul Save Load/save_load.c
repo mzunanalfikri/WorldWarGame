@@ -172,7 +172,6 @@ void save(StackState StackS, MATRIKS M, Graph G, boolean extraTurn, boolean atta
 
         fprintf(save_file, "_AVATARWORLDWARSAVE_");
 
-        printf("Save selesai.\n");
 
         fclose(save_file);
     }

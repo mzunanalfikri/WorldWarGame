@@ -22,13 +22,15 @@ typedef struct{
 #define ShieldPlayer(P) (P).ShieldPlayer
 
 void MakePlayer(Player *P);
-/* Membentuk Player Kosong yang siap diisi */
+/* I.S Sembarang */
+/* F.S. Membentuk Player Kosong yang siap diisi */
 
 void PrintPlayer(Player P);
-/* Untuk debugging */
+/* Procedure untuk mencetak info player ke layar */
 
 void CopyPlayer(Player Pin, Player *Phsl);
-/* assign player Phsl dengan player Pin */
+/*I.S. Pin terdefinisi, Phsl sembarang */
+/* F.S PHsl berisi sesuai dengan Pin */
 
 void DealokasiPlayer(Player *P);
 // I.S. Player P terdefinisi

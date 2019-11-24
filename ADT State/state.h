@@ -26,12 +26,14 @@ void CopyState(State Sin, State * Sout);
 /* I.S. State Sout sembarang */
 /* F.S. State Sout terisi salinan state Sin */
 
-//pop
-
-//push
 
 void PrintState(State S);
+/* I.S State S terdefinisi */
+/* F.S tercetak info state S ke layar */
 
 void DealokState(State *S);
+// I.S. State S terdefinisi
+// F.S. Memori yang digunakan State S dikembalikan ke sistem
+
 
 #endif

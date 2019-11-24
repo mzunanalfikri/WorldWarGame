@@ -25,6 +25,7 @@ addressParent AlokasiParent (infotype X)
 /* Jika alokasi gagal, mengirimkan Nil */
 {
     addressParent P;
+    //alokasi parent
     P = (addressParent) malloc (sizeof(ElmtParent));
     if (P != NULL){
         InfoParent(P) = X;
@@ -151,7 +152,8 @@ void PrintInfoGraph (Graph G)
 /* Jika list kosong : menulis [] */
 {
     addressParent P;
-    P = FirstParent(G);
+    P = FirstParent(G); //inisiasi first
+    //loop setiap elemen dan di print
     if (!IsEmptyGraph(G)){
         while (P != NULL) {
             printf("indeks bangunan %d terhubung dengan : ", InfoParent(P));
@@ -168,7 +170,7 @@ boolean IsTerhubung (Graph G, int Bangunan1, int Bangunan2)
 {
     addressParent P;
     List L;
-
+    //cek di setiap parent dan child
     P = SearchParent(G, Bangunan1);
     L = Child(P);
     return (SearchB(L, Bangunan2));    

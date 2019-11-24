@@ -15,6 +15,7 @@ Bangunan MakeBangunanLv1 (char type, POINT P)
     Type(B) = type;
     Posisi(B) = P;
     Move(B) = false;
+    //percabangan untuk masing masing tipe
     if (type == 'C'){
         Pasukan(B) = 40;
         A(B) = 10;
@@ -39,14 +40,16 @@ Bangunan MakeBangunanLv1 (char type, POINT P)
 boolean IsNaikLevel (Bangunan B)
 /* Mengirim True jika bangunan siap naik level */
 {
+    //cek apakah bisa naik level atau enggak
     return (Pasukan(B) >= M(B)/2 && Level(B)<4);
 }
 
 void NaikLevel (Bangunan *B)
-/* I.S Bangunan valid untuk naik level (bisa naik level) */
+/* I.S Sembarang */
 /* F.S Bangunan naik 1 level dengan pertambahan 
         pasukan sesuai dengan levelnya */
 {
+    //cek bisa naik level, kalau bisa, naik level sesuai dengan tipenya
     if (IsNaikLevel(*B)){
         if (Type(*B) == 'C'){
             if (Level(*B) == 1) {
@@ -125,6 +128,7 @@ void AddNextTurn (Bangunan * B)
 /* I.S Bangunan terdefinisi */
 /* F.S Bangunan betambah pasukannya sesuai level seteah turn */
 {
+    //penambahan pasukan setiap turn baru
     if (Pasukan(*B) < M(*B)){
         Pasukan(*B) += A(*B);
     }
@@ -133,6 +137,7 @@ void AddNextTurn (Bangunan * B)
 void CopyBangunan (Bangunan BIn, Bangunan * BHsl)
 /*Melakukan assignment MHsl dgn MIn */
 {
+    //untuk melakukan copy (memudahkan saat push state)
     Type(*BHsl) = Type(BIn);
     Pasukan(*BHsl) = Pasukan(BIn);
     Level(*BHsl) = Level(BIn);
@@ -148,6 +153,7 @@ void PrintBangunan (Bangunan B)
 /* I.S Sembarang */
 /* F.S Tercetak di layar info bangunannya */
 {
+    //mencetak bangunan sesuai dengan tipenya
     if (Type(B) == 'C' ) {
         printf("Castle (%d,%d) %d lv. %d\n", Absis(Posisi(B)), Ordinat(Posisi(B)), Pasukan(B), Level(B));
     } else if (Type(B) == 'T') {
@@ -162,7 +168,8 @@ void PrintBangunan (Bangunan B)
 void PrintTipeBangunan (char C)
 /* I.S. Sembarang */
 /* F.S. Tercetak bangunan sesuai TIpenya */
-{
+{   
+    //mencetak hanya tipe bangunannya saja
     if (C == 'C'){
         printf("Castle");
     } else if (C == 'V') {
@@ -178,6 +185,8 @@ void IU(Bangunan *B)
 /* I.S. Sembarang */
 /* F.S. Bangunan naik level secara instant */
 {
+    //percabangan untuk instant upgrade masing2 tipe,
+    //level naik 1 tetapi pasukan tidak berkurang
     if (Level(*B)<4){
         if (Type(*B) == 'C'){
             if (Level(*B) == 1) {
@@ -233,10 +242,12 @@ void BackToLv1(Bangunan *B)
 /* I.S. Sembarang */
 /* F.S. Bangunan kembali ke level 1 dengan jumlah bangunan tetap*/
 {
+    //prosedur ini digunakan saat musuh berhasil mengakuisisi bangunan lawan
     Level(*B) = 1;
     Serang(*B) = false;
     Pertahanan(*B) = false;
     Move(*B) = false;
+    //percabangan level satu sesuai tipenya
     if (Type(*B) == 'C'){
         A(*B) = 10;
         M(*B) = 40;

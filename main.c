@@ -2,24 +2,10 @@
 #include<stdlib.h>
 #include<math.h>
 #include<conio.h>
-// #include "./ADT Array Implisit/arraydin.h"
-// #include "bangunan.h"
-// #include "listlinier.h"
-// #include "matriks.h"
-// #include "player.h"
-// #include "point.h"
-// #include "queue.h"
-// #include "stackt.h"
-// #include "state.h"
-// #include "graph.h"
-// #include "pcolor.h"
-// #include "function.h"
-// #include "mesinkar.h"
-// #include "mesinkata.h"
-#include "./Modul Lain/readfile.h"
-#include "./Modul Lain/function.h"
-#include "./Modul Lain/welcome.h"
-#include "./Modul Lain/save_load.h"
+#include "./Modul Read File/readfile.h"
+#include "./Modul Function/function.h"
+#include "./Modul Function/welcome.h"
+#include "./Modul Save Load/save_load.h"
 
 
 int main() {
@@ -28,23 +14,26 @@ int main() {
     StackState SStacks;
     MATRIKS Map;
     Graph G;
-    
+    //Deklarasi Variabel Global
     boolean endgame;
     boolean extraTurn;
     boolean attackUp;
     
+    /*** ALGORITMA ***/
     extraTurn = false;
     attackUp = false;
     endgame = false;
     Kata player1, player2;
 
+    //tampilan awal
     welcome();
-    
+    //read configurasi file dan inisiasi awal
     ReadKonfigurasiFile(&S, &Map, &G);
     Turn(Player1(S)) = true;
     CreateEmptyStackState(&SStacks);
     PushState(&SStacks, S);
 
+    //opsi load game atau mulai
     printf("            Opsi Memulai permainan : \n");
     printf("            [MULAI] Mulai Game Baru\n");
     printf("            [LOAD]  Load Game\n");
@@ -60,7 +49,9 @@ int main() {
     if (IsEQCKataString("LOAD")) {
         load(&SStacks, &Map, &G, &extraTurn, &attackUp, &player1, &player2);
         CopyState(InfoTop(SStacks), &S);
+        system("cls");
     } else if (IsEQCKataString("MULAI")) {
+        //memasukkan nama pemain jika mulai dari awal
         printf("\n");
         printf("            Masukkan Nama Komandan Negara Api (Player 1) : ");
         ReadCmd();
@@ -68,8 +59,10 @@ int main() {
         printf("            Masukkan Nama Komandan Negara Air (Player 2) : ");
         ReadCmd();
         CopyKata(&player2, CKata);
+        system("cls");
     }
     
+    //menampilkan nama pemain
     printf("\n");
     printf("            =====================================================================\n");
     printf("                            Player 1 (RED): ");
@@ -86,9 +79,11 @@ int main() {
     printf("            ");
     ReadCmd();
     while (!(IsEQCKataString("SIAPP"))){
+        printf("            coba lagi, sepertinya kamu kurang siapp...\n");
         printf("            ");
         ReadCmd();
     }
+    printf("\n");
     printf("            Mari bersiap. Kita akan memulai sesuatu yang panjang!!");
     printf(".");
     delay(1);
@@ -97,8 +92,8 @@ int main() {
     printf(".");
     delay(1);
     system("cls");
-    //dikasih asci simple disini sabii
-
+    
+    //turn pemain saat memulai permainan
     if (Turn(Player1(S))){
         printf("\n");
         printf("===================================\n");
@@ -112,8 +107,10 @@ int main() {
         printf("===================================\n");
         printf("\n");
     }
-    
+    //menampilkan status game
     StatusPlayer(S, Map,player1,player2);
+
+    //main loop game
     while (!endgame){
         printf("\n");
         EnterCommad(S);
@@ -123,22 +120,38 @@ int main() {
             Attack(&S, G, &attackUp);
             //push ke stack
             PushState(&SStacks, S);
+            delay(1);
+            system("cls");
+            printf("\n");
+            StatusPlayer(S,Map,player1,player2);
         } else if (IsEQCKataString("LEVEL_UP")){
             //panggil fungsi levelup
             LevelUp(&S);
             PushState(&SStacks, S);
+            delay(1);
+            system("cls");
+            printf("\n");
+            StatusPlayer(S,Map,player1,player2);
         } else if (IsEQCKataString("SKILL")){
             //manggil fungsi skill
             Skill(&S, &extraTurn, &attackUp); 
             //push ke stack
             PushState(&SStacks, S);
             EndTurnState(&SStacks);
+            delay(1);
+            system("cls");
+            printf("\n");
+            StatusPlayer(S,Map,player1,player2);
         } else if (IsEQCKataString("UNDO")) {
             //printf("Undo \n");
             Undo(&SStacks);
             CopyState(InfoTop(SStacks), &S);
-        } else if (IsEQCKataString("END_TURN")){
+            delay(1);
             system("cls");
+            printf("\n");
+            StatusPlayer(S,Map,player1,player2);
+        } else if (IsEQCKataString("END_TURN")){
+            //system("cls");
             //cek dapet instant reinforcement
             AddIR(&S);
             //fungsi end turn
@@ -148,36 +161,97 @@ int main() {
             //push ke stack
             PushState(&SStacks, S);
             EndTurnState(&SStacks);
-            
+            // delay(1);
+            // system("cls");
+            // printf("\n");
+            // StatusPlayer(S,Map,player1,player2);
         } else if (IsEQCKataString("MOVE")){
             //funsi pasukan
             MovePasukan(&S, G);
             //push ke stack
             PushState(&SStacks, S);
+            delay(1);
+            system("cls");
+            printf("\n");
+            StatusPlayer(S,Map,player1,player2);
         } else if (IsEQCKataString("EXIT")){
-            endgame = true;
+            //tampilan untuk exit
+            printf("Apakah anda ingin menyimpan permainan ? Y/N\n");
+            ReadCmd();
+            if(IsEQCKataString("Y")){
+                save(SStacks, Map, G, extraTurn, attackUp, player1, player2);
+                printf("saving");
+                printf(".");
+                delay(1);
+                printf(".");
+                delay(1);
+                printf(".\n");
+                delay(1);
+                printf("Save selesai.\n");
+                delay(1);
+                tampilanExit();
+                endgame = true;
+            }else if (IsEQCKataString("N")){
+                tampilanExit();
+                endgame = true;
+            }
         } else if (IsEQCKataString("MAP")){
+            //fungsi untuk memudahkan testing
             CetakMatiksWarna(Map, S);
+            delay(2);
+            system("cls");
+            printf("\n");
+            StatusPlayer(S,Map,player1,player2);
         } else if(IsEQCKataString("PRINT_ALL_BANGUNAN")){
+            //fungsi untuk memudahkan testing
             PrintAllBangunan(ArrayBangunan(S));
+            delay(1);
+            system("cls");
+            printf("\n");
+            StatusPlayer(S,Map,player1,player2);
         } else if (IsEQCKataString("STATUS")) {
             StatusPlayer(S, Map,player1,player2);
+            delay(2);
+            system("cls");
+            printf("\n");
+            StatusPlayer(S,Map,player1,player2);
         } else if (IsEQCKataString("HELP")){
             Help();
+            delay(2);
+            system("cls");
+            printf("\n");
+            StatusPlayer(S,Map,player1,player2);
         } else if (IsEQCKataString("PRINT_GRAPH")) {
+            //fungsi untuk memudahkan testing
             PrintInfoGraph(G);
+            delay(1);
+            system("cls");
+            printf("\n");
+            StatusPlayer(S,Map,player1,player2);
         } else if (IsEQCKataString("SAVE")) {
+            //save game
             save(SStacks, Map, G, extraTurn, attackUp, player1, player2);
+            printf("saving");
+            printf(".");
+            delay(1);
+            printf(".");
+            delay(1);
+            printf(".\n");
+            delay(1);
+            printf("Save selesai.\n");
+            delay(1);
+            system("cls");
+            printf("\n");
+            StatusPlayer(S,Map,player1,player2);
         } else{
             printf("COMMAND yang anda masukkan tidak tersedia, coba lagi!\n");
+            delay(1);
+            system("cls");
+            printf("\n");
+            StatusPlayer(S,Map,player1,player2);
         }
-        //delay(1);
-        //system("cls");
-        //Cek Kondisi Game Over
-        delay(1);
-        system("cls");
-        printf("\n");
-        StatusPlayer(S,Map,player1,player2);
+        
+        //cek kondisi akhir game
         GameEnd(S, &endgame);
     }
 
