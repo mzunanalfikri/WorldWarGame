@@ -159,10 +159,10 @@ int main() {
             //push ke stack
             PushState(&SStacks, S);
             EndTurnState(&SStacks);
-            delay(1);
-            system("cls");
-            printf("\n");
-            StatusPlayer(S,Map,player1,player2);
+            // delay(1);
+            // system("cls");
+            // printf("\n");
+            // StatusPlayer(S,Map,player1,player2);
         } else if (IsEQCKataString("MOVE")){
             //funsi pasukan
             MovePasukan(&S, G);
